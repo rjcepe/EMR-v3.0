@@ -1,0 +1,308 @@
+:root{
+    --lightgreen: #5eba7a;
+    --green: #126638;
+    --dgreen: #1e3f27;
+    --darkgreen: #192a1e;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+body{
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    
+}
+.main{
+    background-color: #126638;
+    height: 100vh;
+    display: flex;
+    transition: 0.8s;
+    
+}
+.main-filter{
+    filter:brightness(50%) saturate(80%) blur(4px);
+    scale: 1.1;
+}
+.main1{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+.cont1{
+    height: 400px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.logform input{
+    padding-left: 25px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.input-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.icon {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #ccc;
+}
+
+/* side nav */
+.z{
+    border: 1px solid white;
+    width: 90%;
+    text-align: center;
+}
+.header{
+    border: 1px solid white;
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    top: 5%;
+    background-color: #2c945b;
+}
+.logo{
+    height: 10vh;
+    width: 90%;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav{
+    height: 70%;
+    width: 90%;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.nav button{
+    height: 30px;
+    width: 150px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    border: none;
+}
+.nav h5{
+    margin-bottom: 20px;
+}
+.activebutt{
+    background-color: #126638;
+    color: white;
+}
+.user{
+    border: 1px solid white;
+    display: flex;
+    height: 10vh;
+    width: 90%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* findpatients */
+.cont1b{
+    top: 170px;
+    /* border: 1px solid white; */
+    height: auto;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.results{
+    /* border: 1px solid white; */
+    height: 80%;
+    width: 95%;
+}
+.tablee{
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(6, 62, 23);
+    border-radius: 10px;
+    display: flex;
+    align-items: start;
+    justify-content: space-around;
+    padding: 30px 0px 50px 0px;
+    color: white;
+    border-spacing: 4px;
+}
+.row{
+    border: 3px solid rgb(255, 255, 255);
+    border-radius: 5px;
+}
+.res{
+    transition: .3s;
+}
+.res:hover{
+    background-color: #2c945b;
+}
+.idcol{
+    padding: 5px 60px 5px 60px;
+}
+.namecol{
+    padding: 5px 110px 5px 110px;
+}
+.timecol{
+    padding: 5px 50px 5px 50px;
+}
+.coursecol{
+    padding: 5px 50px 5px 50px;
+}
+.buttscol{
+    border: px solid white;
+    border-radius: 5px;
+}
+.viewbutt{
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+}
+
+
+
+
+/* patient profile */
+.cont1c{
+    position: absolute;
+    top: 170px;
+    border: 1px solid white;
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.patprof{
+    border: 1px solid white;
+    height: 500px;
+    width: 90%;
+}
+
+/* view file */
+.main2{
+    top: 0;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    transition: .4s ease;
+}
+.vfile{
+    position: relative;
+    height: 95vh;
+    width: 64vw;
+    background-color: #192a1e;
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.xfile{
+    width: 50vw;
+    height: 98%;
+}
+.hidevfile{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.hidev{
+    transform: translateX(2000px);
+}
+.showv{
+    transform: translateX(0px);
+}
+
+/* add patients */
+/* insert medform */
+.adders{
+    position: relative;
+    background-color: #192a1e;
+    border: 1px solid white;
+    width: 30vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center; 
+}
+.addp{
+    color: white;
+    top: 0;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;  
+    transition: .4s ease;
+}
+.uploadmedform1, .uploadmedform2{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    border: 1px solid white;
+    height: 300px;
+    width: auto;
+    position: absolute;
+}
+
+.uploadmedform label{
+    margin-top: 20px;
+}
+
+.uploadmedform button{
+    margin-top: 10px;
+}
+
+.cont1a{
+    border: 1px solid white;
+    height: 400px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden{
+    transform: translateY(500%);
+    transition: transform 1s ease;
+    
+}
+.shown{
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+
+}
+.hideaddp{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}

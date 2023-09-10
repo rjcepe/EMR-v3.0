@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <title>Medical Certificates</title>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <div class="logo">
+                <img src="" alt="DLSUD logo">
+            </div>
+            <div class="nav">
+                <h5>Records</h5>
+                <button class="navbutt" onclick="ToMedRec()">Medical Records</button>
+                <button class="navbutt" onclick="ToDenRec()">Dental Records</button>
+                <button class="navbutt" onclick="ToXray()">X-ray Images</button>
+                <button class="navbutt" onclick="ToAccRec()">Accident Records</button>
+                <button class="navbutt" onclick="ToConRec()">Consultation Records</button>
+                <h5>Reports</h5>
+                <button class="navbutt activebutt">Medical Certificates</button>
+                <button class="navbutt">Accident Census</button>
+                <button class="navbutt">Prescription?</button>
+            </div>
+            <div class="user">
+                <div class="userpic">
+                    <img src="" alt="userpic">
+                </div>
+                <div class="username">
+                    <h4>username</h4>
+                    <h6>userid</h6>
+                </div>
+                <div class="burger">
+                    <button>burger</button>
+                </div>
+            </div>
+        </div>
+        <!-- <embed src="1.pdf" type="application/pdf" width="50%" height="90%" /> -->
+        <div class="cont1b">
+            <div class="headline">
+                <h1>Medical Certificates</h1>
+            </div>
+            <div class="inputs">
+                <input type="text" placeholder="Search by Username or ID...">
+                <button>Search</button>
+                <button>Add Patients +</button>
+            </div>
+            <div class="results">
+                <table class="tablee" id="table1">
+                    <tr>
+                        <th class="row idcol">ID</th>
+                        <th class="row namecol">Name</th>
+                        <th class="row timecol">Time Created</th>
+                        <th class="row coursecol">Course & Section</th>
+                    </tr>
+                    <tr class="res">
+                        <th class="row">202030642</th>
+                        <th class="row">Rizjan Nathaniel A. Cepe</th>
+                        <th class="row">08-23-2023</th>
+                        <th class="row">BIT43</th>
+                        <th class="buttscol">
+                            <button class="viewbutt">View</button>
+                        </th>
+                    </tr>
+                    
+                </table>
+            </div>
+            <button id="printButton">Print Container</button>
+        </div>
+    </div>
+
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

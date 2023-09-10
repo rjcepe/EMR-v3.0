@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Medical Records</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <div class="logo">
+                <img src="" alt="DLSUD logo">
+            </div>
+            <div class="nav">
+                <h5>Records</h5>
+                <button class="navbutt activebutt" onclick="ToMedRec()" id="mr">Medical Records</button>
+                <button class="navbutt" onclick="ToDenRec()">Dental Records</button>
+                <button class="navbutt" onclick="ToXray()">X-ray Images</button>
+                <button class="navbutt" onclick="ToAccRec()">Accident Records</button>
+                <button class="navbutt" onclick="ToConRec()">Consultation Records</button>
+                <h5>Reports</h5>
+                <button class="navbutt">Medical Certificates</button>
+                <button class="navbutt">Accident Census</button>
+                <button class="navbutt">Prescription?</button>
+            </div>
+            <div class="user">
+                <div class="userpic">
+                    <img src="" alt="userpic">
+                </div>
+                <div class="username">
+                    <h4>username</h4>
+                    <h6>userid</h6>
+                </div>
+            </div>
+            <div class="z">
+                <h4>lorem ipsum</h4>
+            </div>
+        </div>
+
+        <div class="cont1b">
+            <div class="headline">
+                <h1>Medical Records</h1>
+            </div>
+            <div class="inputs">
+                <input type="text" placeholder="Search by Username or ID...">
+                <button>Search</button>
+                <button onclick="showp()">Add Record +</button>
+                <br>
+                <label for="sort">Sort by:</label>
+                <select name="sort" id="sort1">
+                    <option value="Time">Time</option>
+                    <option value="Name">Name</option>
+                    <option value="ID">ID</option>
+                    <option value="CS">Course & Section</option>
+                </select>
+            </div>
+            <div class="results">
+                <table class="tablee" id="table1">
+                    <tr>
+                        <th class="row idcol">ID</th>
+                        <th class="row namecol">Name</th>
+                        <th class="row timecol">Time Created</th>
+                        <th class="row coursecol">Course & Section</th>
+                    </tr>
+                    <tr class="res">
+                        <th class="row">202030642</th>
+                        <th class="row">Rizjan Nathaniel A. Cepe</th>
+                        <th class="row">08-23-2023</th>
+                        <th class="row">BIT43</th>
+                        <th class="buttscol">
+                            <button class="viewbutt" onclick="showv()">View</button>
+                        </th>
+                    </tr>
+
+                </table>
+            </div>
+            <button id="printButton">Print Container</button>
+        </div>
+    </div>
+    <div class="main2 hidev">
+        <div class="vfile">
+            <button class="hidevfile" onclick="hidev()">go back</button>
+            <embed src="1.pdf" type="application/pdf" class="xfile"" />
+        </div>
+    </div>
+    <div class=" addp hidev">
+            <div class="adders">
+                <button class="hideaddp" onclick="hidep()">go back</button>
+                <h1>Add Patient</h1>
+                <div class="patienttypebutt">
+                    <button id="studupbutt" onclick="stud()">Student</button>
+                    <button id="empupbutt" onclick="emp()">Emloyee</button>
+                </div>
+                <div class="cont1a">
+                    <form id="insertstudmedform" class="uploadmedform1">
+                        <input type="text" id="uname" placeholder="Enter Student's Name...">
+                        <input type="text" id="uname" placeholder="Enter Student's ID...">
+                        <input type="text" id="uname" placeholder="Course & Section...">
+
+                        <label for="medform">Upload Medical Form</label>
+                        <input type="file" id="medform" name="medform" multiple>
+
+                        <button>Submit</button>
+                    </form>
+
+                    <form id="insertempmedform" class="uploadmedform2 hidden">
+                        <input type="text" id="uname" placeholder="Enter Emloyee's Name...">
+                        <input type="text" id="uname" placeholder="Enter Emloyee's ID...">
+
+                        <label for="medform">Upload Medical Form</label>
+                        <input type="file" id="medform" name="medform" multiple>
+
+                        <button>Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="ui.js"></script>
+        <script src="app.js"></script>
+</body>
+
+</html>

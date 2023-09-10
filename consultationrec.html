@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <title>Consultation Records</title>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <div class="logo">
+                <img src="" alt="DLSUD logo">
+            </div>
+            <div class="nav">
+                <h5>Records</h5>
+                <button class="navbutt" onclick="ToMedRec()">Medical Records</button>
+                <button class="navbutt" onclick="ToDenRec()">Dental Records</button>
+                <button class="navbutt" onclick="ToXray()">X-ray Images</button>
+                <button class="navbutt" onclick="ToAccRec()">Accident Records</button>
+                <button class="navbutt activebutt" onclick="ToConRec()">Consultation Records</button>
+                <h5>Reports</h5>
+                <button class="navbutt">Medical Certificates</button>
+                <button class="navbutt">Accident Census</button>
+                <button class="navbutt">Prescription?</button>
+            </div>
+            <div class="user">
+                <div class="userpic">
+                    <img src="" alt="userpic">
+                </div>
+                <div class="username">
+                    <h4>username</h4>
+                    <h6>userid</h6>
+                </div>
+            </div>
+            <div class="z">
+                <h4>lorem ipsum</h4>
+            </div>
+        </div>
+        <!-- <embed src="1.pdf" type="application/pdf" width="50%" height="90%" /> -->
+        <div class="cont1b">
+            <div class="headline">
+                <h1>Consultation Records</h1>
+            </div>
+            <div class="inputs">
+                <input type="text" placeholder="Search by Username or ID...">
+                <button>Search</button>
+                <button onclick="showp()">Add Record +</button>
+            </div>
+            <div class="results">
+                <table class="tablee" id="table1">
+                    <tr>
+                        <th class="row idcol">ID</th>
+                        <th class="row namecol">Name</th>
+                        <th class="row timecol">Time Created</th>
+                        <th class="row coursecol">Course & Section</th>
+                    </tr>
+                    <tr class="res">
+                        <th class="row">202030642</th>
+                        <th class="row">Rizjan Nathaniel A. Cepe</th>
+                        <th class="row">08-23-2023</th>
+                        <th class="row">BIT43</th>
+                        <th class="buttscol">
+                            <button class="viewbutt" onclick="showv()">View</button>
+                        </th>
+                    </tr>
+                    
+                </table>
+            </div>
+            <button id="printButton">Print Container</button>
+        </div>
+    </div>
+    <div class="main2 hidev">
+        <div class="vfile">
+            <button class="hidevfile" onclick="hidev()">go back</button>
+            <embed src="1.pdf" type="application/pdf" class="xfile"" />
+        </div>
+    </div>
+    <div class="addp hidev">
+        <div class="adders">
+            <button class="hideaddp" onclick="hidep()">go back</button>
+            <h1>Add Record</h1>
+            <div class="patienttypebutt">
+                <button id="studupbutt" onclick="stud()" >Student</button>
+                <button id="empupbutt" onclick="emp()">Emloyee</button>
+            </div>
+            <div class="cont1a">
+                <form id="insertstudmedform" class="uploadmedform1">
+                        <input type="text" id="uname" placeholder="Student's Name...">
+                        <input type="text" id="uname" placeholder="Student's ID...">
+                        <input type="text" id="uname" placeholder="Course & Section...">
+    
+                        <label for="medform">Upload Consultation Record</label>
+                        <input type="file" id="medform" name="medform" multiple>
+
+                    <button>Submit</button>
+                </form>
+    
+                <form id="insertempmedform" class="uploadmedform2 hidden">
+                        <input type="text" id="uname" placeholder="Emloyee's Name...">
+                        <input type="text" id="uname" placeholder="Emloyee's ID...">
+    
+                        <label for="medform">Upload Consultation Record</label>
+                        <input type="file" id="medform" name="medform" multiple>
+                   
+                    <button>Submit</button>
+                </form> 
+            </div>
+        </div>
+    </div>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
