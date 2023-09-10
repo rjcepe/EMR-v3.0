@@ -1,4 +1,4 @@
-document.getElementById("printButton").addEventListener("click", function() {
+function printres() {
     var containerContents = document.querySelector(".results").innerHTML;
     var originalContents = document.body.innerHTML;
 
@@ -6,7 +6,7 @@ document.getElementById("printButton").addEventListener("click", function() {
     window.print();
 
     document.body.innerHTML = originalContents;
-});
+};
 
 //nav functions
 function ToMedRec() {
