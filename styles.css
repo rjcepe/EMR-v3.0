@@ -102,6 +102,11 @@ body{
     border-radius: 5px;
     margin-bottom: 30px;
     border: none;
+    transition: 0.3s;
+}
+.nav button:hover{
+    background-color: var(--green);
+    color: white;
 }
 .nav h5{
     margin-bottom: 20px;
@@ -117,8 +122,11 @@ body{
     width: 90%;
     align-items: center;
     justify-content: space-around;
+    transition: 0.3s;
 }
-
+.user:hover{
+    border: 1px solid rgb(255, 0, 0);
+}
 /* findpatients */
 .cont1b{
     top: 170px;
