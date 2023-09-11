@@ -51,7 +51,7 @@
                 <h1>Medical Records</h1>
             </div>
             <div class="inputs">
-                <input type="text" placeholder="Search by Username or ID...">
+                <input type="text" placeholder="Search ID...">
                 <button>Search</button>
                 <button onclick="showp()">Add Record +</button>
                 <br>
@@ -69,22 +69,25 @@
                         <th class="row idcol">ID</th>
                         <th class="row namecol">Name</th>
                         <th class="row timecol">Time Created</th>
-                        <th class="row coursecol">Course & Section</th>
+                        <!-- <th class="row timecol">Last Updated</th> -->
+                        <th class="row coursecol">College</th>
                     </tr>
                     <tr class="res">
                         <th class="row">202030642</th>
                         <th class="row">Rizjan Nathaniel A. Cepe</th>
                         <th class="row">08-23-2023</th>
-                        <th class="row">BIT43</th>
+                        <!-- <th class="row">08-23-2023</th> -->
+                        <th class="row">CSCS</th>
                         <th class="buttscol">
                             <button class="viewbutt" onclick="showv()">View</button>
                         </th>
                     </tr>
                     <tr class="res">
                         <th class="row">202030642</th>
-                        <th class="row">Rizjan Nathaniel A. Cepe</th>
+                        <th class="row">Renz Luigi C. Gonzales</th>
                         <th class="row">08-23-2023</th>
-                        <th class="row">BIT43</th>
+                        <!-- <th class="row">08-23-2023</th> -->
+                        <th class="row">CEAT</th>
                         <th class="buttscol">
                             <button class="viewbutt" onclick="showv()">View</button>
                         </th>
@@ -95,12 +98,16 @@
             <!-- <button onclick="printres()">Print Container</button> -->
         </div>
     </div>
+
+    <!-- sample medform view -->
     <div class="main2 hidev">
         <div class="vfile">
             <button class="hidevfile" onclick="hidev()">go back</button>
             <embed src="1.pdf" type="application/pdf" class="xfile"" />
         </div>
     </div>
+
+
     <div class=" addp hidev">
             <div class="adders">
                 <button class="hideaddp" onclick="hidep()">go back</button>
@@ -113,7 +120,7 @@
                     <form id="insertstudmedform" class="uploadmedform1">
                         <input type="text" id="uname" placeholder="Enter Student's Name...">
                         <input type="text" id="uname" placeholder="Enter Student's ID...">
-                        <input type="text" id="uname" placeholder="Course & Section...">
+                        <input type="text" id="uname" placeholder="Enter College...">
 
                         <label for="medform">Upload Medical Form</label>
                         <input type="file" id="medform" name="medform" multiple>
