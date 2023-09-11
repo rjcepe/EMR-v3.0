@@ -16,13 +16,13 @@
             </div>
             <div class="nav">
                 <h5>Records</h5>
-                <button class="navbutt">Medical Records</button>
-                <button class="navbutt">Dental Records</button>
-                <button class="navbutt">X-ray Images</button>
-                <button class="navbutt">Accident Records</button>
-                <button class="navbutt">Consultation Records</button>
+                <button class="navbutt" onclick="ToMedRec()" id="mr">Medical Records</button>
+                <button class="navbutt" onclick="ToDenRec()">Dental Records</button>
+                <button class="navbutt" onclick="ToXray()">X-ray Images</button>
+                <button class="navbutt " onclick="ToAccRec()">Accident Records</button>
+                <button class="navbutt" onclick="ToConRec()">Consultation Records</button>
                 <h5>Reports</h5>
-                <button class="navbutt">Medical Certificates</button>
+                <button class="navbutt" onclick="ToMedCert()">Medical Certificates</button>
                 <button class="navbutt activebutt">Accident Census</button>
                 <button class="navbutt">Prescription?</button>
             </div>
@@ -33,10 +33,10 @@
                 <div class="username">
                     <h4>username</h4>
                     <h6>userid</h6>
-                </div>
-                <div class="burger">
-                    <button>burger</button>
-                </div>
+                </div> 
+            </div>
+            <div class="z">
+                <h4>lorem ipsum</h4>
             </div>
         </div>
         <!-- <embed src="1.pdf" type="application/pdf" width="50%" height="90%" /> -->
@@ -55,13 +55,17 @@
                         <th class="row idcol">ID</th>
                         <th class="row namecol">Name</th>
                         <th class="row timecol">Time Created</th>
-                        <th class="row coursecol">Course & Section</th>
+                        <th class="row coursecol">College</th>
+                        <th class="row timecol">Location</th>
+                        <th class="row timecol">Added by</th>
                     </tr>
                     <tr class="res">
                         <th class="row">202030642</th>
                         <th class="row">Rizjan Nathaniel A. Cepe</th>
                         <th class="row">08-23-2023</th>
-                        <th class="row">BIT43</th>
+                        <th class="row">CSCS</th>
+                        <th class="row">West Clinic</th>
+                        <th class="row">Renziboi</th>
                         <th class="buttscol">
                             <button class="viewbutt">View</button>
                         </th>
@@ -69,7 +73,7 @@
                     
                 </table>
             </div>
-            <button id="printButton">Print Container</button>
+            <!-- <button id="printButton">Print Container</button> -->
         </div>
     </div>
 

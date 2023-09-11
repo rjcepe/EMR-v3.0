@@ -179,6 +179,8 @@ body{
     padding: 5px 30px 5px 30px;
 }
 .diagcol{
+  text-align: left;
+  padding: 5px 30px 5px 30px;
   max-width: 400px;
 }
 .buttscol{

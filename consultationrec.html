@@ -22,8 +22,8 @@
                 <button class="navbutt" onclick="ToAccRec()">Accident Records</button>
                 <button class="navbutt activebutt" onclick="ToConRec()">Consultation Records</button>
                 <h5>Reports</h5>
-                <button class="navbutt">Medical Certificates</button>
-                <button class="navbutt">Accident Census</button>
+                <button class="navbutt" onclick="ToMedCert()">Medical Certificates</button>
+                <button class="navbutt" onclick="ToAccCen()">Accident Census</button>
                 <button class="navbutt">Prescription?</button>
             </div>
             <div class="user">
@@ -56,12 +56,20 @@
                         <th class="row namecol">Name</th>
                         <th class="row timecol">Date/Time</th>
                         <th class="row coursecol">Diagnosis</th>
+                        <th class="row coursecol">Notes</th>
+                        <th class="row timecol">Location</th>
+                        <th class="row timecol">Added by</th>
                     </tr>
                     <tr class="res">
                         <th class="row">202030642</th>
                         <th class="row">Rizjan Nathaniel A. Cepe</th>
                         <th class="row">08-23-2023</th>
-                        <th class="row diagcol">BIT43asdadagafsadfasdadada asfafasfa dfasd ad ashdladha laksdhladha alkdhladhkla</th>
+                        <th class="row">BP chec<br>
+                        Weight</th>
+                        <th class="row diagcol">bp: 120/80 <br>
+                        Weight: 300kg</th>
+                        <th class="row">West Clinic</th>
+                        <th class="row">Renziboi</th>
                         <!-- <th class="buttscol">
                             <button class="viewbutt" onclick="showv()">View</button>
                         </th> -->
@@ -93,7 +101,9 @@
                         <input type="text" id="uname" placeholder="Course & Section...">
     
                         <label for="consform">Diagnosis:</label>
-                        <input type="text" id="medform" name="consform">
+                        <textarea name="consform" id="" cols="30" rows="4"></textarea>
+                        <label for="consform">Notes:</label>
+                        <textarea name="consform" id="" cols="30" rows="5"></textarea>
 
                     <button>Submit</button>
                 </form>
@@ -102,8 +112,10 @@
                         <input type="text" id="uname" placeholder="Emloyee's Name...">
                         <input type="text" id="uname" placeholder="Emloyee's ID...">
     
-                        <label for="medform">Upload Consultation Record</label>
-                        <input type="file" id="medform" name="medform" multiple>
+                        <label for="consform">Diagnosis:</label>
+                        <textarea name="consform" id="" cols="30" rows="4"></textarea>
+                        <label for="consform">Notes:</label>
+                        <textarea name="consform" id="" cols="30" rows="5"></textarea>
                    
                     <button>Submit</button>
                 </form> 

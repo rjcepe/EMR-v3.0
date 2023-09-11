@@ -24,3 +24,12 @@ function ToAccRec() {
 function ToConRec() {
     window.location.href = 'consultationrec.html';
 }
+function ToMedCert() {
+    window.location.href = 'medcerts.html';
+}
+function ToAccCen() {
+    window.location.href = 'accidentcensus.html';
+}
+// function ToConRec() {
+//     window.location.href = 'consultationrec.html';
+// }
