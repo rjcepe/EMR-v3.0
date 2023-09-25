@@ -12,7 +12,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="animations.css">
-    <title>Medical Records</title>
+    <title>Dental Records</title>
 </head>
 
 <body>
@@ -30,6 +30,8 @@
                     <button class="navbutt" onclick="ToAccRec()"><img src="/navicons/arrow.png" alt="">Accident Records</button>
                     <button class="navbutt" onclick="ToConRec()"><img src="/navicons/arrow.png" alt="">Consultation Records</button>
                 </div>
+            </div>
+            <div class="nav navrep">
                 <div class="reps">
                     <h5>Reports</h5>
                     <button class="navbutt" onclick="ToMedCert()"><img src="/navicons/arrow.png" alt="">Medical Certificates</button>
@@ -37,18 +39,14 @@
                     <button class="navbutt"><img src="/navicons/arrow.png" alt="">Prescription?</button>
                 </div>
             </div>
-            <div class="user">
-                
-                    <img src="/navicons/userpic.jpg" alt="userpic">
-               
-                <div class="username">
-                    <h4>Rizjan Cepe</h4>
-                    <h6>202030642</h6>
-                </div>
+            <div class="logout" onclick="logout()">
+                <img src="/navicons/logout.png" alt="">
+                <p>Logout</p>
             </div>
             <div class="z">
                 <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved   </p>
             </div>
+            
         </div>
         <div class="arw" onclick="sideshow()">
             <div class="burger">
@@ -63,6 +61,13 @@
         <div class="cont1b">
             <div class="headline">
                 <h1>Dental Records</h1>
+                <div class="user">
+                    <img src="/navicons/userpic.jpg" alt="userpic">
+                <div class="username">
+                    <h4>Rizjan Cepe</h4>
+                    <h6>202030642</h6>
+                </div>
+            </div>
             </div>
             <div class="inputs">
                 <div class="search">
@@ -137,7 +142,8 @@
     <div class="main2 hidev">
         <div class="vfile">
             <button class="hidevfile" onclick="hidev()">go back</button>
-            <embed src="1.pdf" type="application/pdf" class="xfile"" />
+            <embed src="1.pdf" type="application/pdf" class="xfile" />
+            <p>202030642</p>
         </div>
     </div>
 
@@ -150,7 +156,7 @@
                 </div>
                 <div class="patienttypebutt">
                     <button class="ptbutt activeptb" id="studupbutt" onclick="stud()">Student</button>
-                    <button class="ptbutt" id="empupbutt" onclick="emp()">Emloyee</button>
+                    <button class="ptbutt" id="empupbutt" onclick="emp()">Employee</button>
                 </div>
                 <div class="cont1a">
                     <form id="insertstudmedform" class="uploadmedform1">
@@ -165,8 +171,8 @@
                             <option value="#">West Clinic</option>
                             <option value="#">SHS Clinic</option>
                         </select>
-
-                        <label for="medform">Upload Medical Form</label>
+                        <hr>
+                        <label for="medform">Upload Dental Form</label>
                         <input type="file" id="medform" name="medform" multiple>
 
                         <button class="submitp">Submit</button>
@@ -175,7 +181,7 @@
                     <form id="insertempmedform" class="uploadmedform2 hidden">
                         <input type="text" id="uname" placeholder="Enter Emloyee's Name...">
                         <input type="text" id="uname" placeholder="Enter Emloyee's ID...">
-
+                        
                         <label for="loc">Location:</label>
                         <select name="loc" id="locsel">
                             <option disabled selected value> -- Select Location -- </option>
@@ -183,8 +189,8 @@
                             <option value="#">West Clinic</option>
                             <option value="#">SHS Clinic</option>
                         </select>
-
-                        <label for="medform">Upload Medical Form</label>
+                        <hr>
+                        <label for="medform">Upload Dental Form</label>
                         <input type="file" id="medform" name="medform" multiple>
 
                         <button class="submitp">Submit</button>

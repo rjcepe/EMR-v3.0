@@ -30,6 +30,6 @@ function ToMedCert() {
 function ToAccCen() {
     window.location.href = 'accidentcensus.html';
 }
-// function ToConRec() {
-//     window.location.href = 'consultationrec.html';
-// }
+function logout() {
+    window.location.href = 'index.html';
+}

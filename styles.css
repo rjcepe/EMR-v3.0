@@ -29,6 +29,113 @@ button{
 button{
     cursor: pointer;
 }
+
+.login-cont{
+    /* background-color: #126638; */
+    background-image: url("/samplebg.jpg");
+    background-size: cover;
+    background-position: 200px 0px;
+    height: 100vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;  
+
+}
+.cont1{
+    background-color: white;
+    height: 100%;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    /* border: 1px solid white; */
+}
+.cont1 img{
+    margin: 50px 0px 80px 0px;
+    height: 90px;
+}
+.cont1 h4{
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    /* border: 1px solid black; */
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.logform{
+    width: 100%;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logform input{
+    height: 100%;
+    width: 100%;
+    padding-left: 50px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.input-container {
+    width: 300px;
+    height: 50px;
+    /* padding: 5px; */
+    /* border: 1px solid gray; */
+    background-color: rgb(228, 228, 228);
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 15px;
+}
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #285849;
+    height: 100%;
+    width: 40px;
+}
+.loginbutt{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--green);
+    color: white;
+    transition: 0.3s;
+}
+.loginbutt:hover{
+    background-color: rgb(33, 72, 60);
+}
+.botlog{
+    /* border: var(--gborder); */
+    /* border: 1px solid black; */
+    margin-top: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    color: white;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    background-color: var(--green);
+}
+.botlog b{
+    color: var(--lightgreen);
+}
+
+/* ============= */
 .main{
     background-color: #126638;
     height: 100vh;
@@ -38,47 +145,10 @@ button{
     transition: 0.8s;
     background-image: url("/samplebg.jpg");
     background-size: auto;
-    
 }
 .main-filter{
     filter:brightness(70%) saturate(80%) blur(4px);
     scale: 1.1;
-}
-.main1{
-    background-color: #126638;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;  
-
-}
-.cont1{
-    height: 400px;
-    width: 350px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border: 1px solid white;
-}
-
-.logform input{
-    padding-left: 25px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-.input-container {
-    position: relative;
-    margin-bottom: 15px;
-}
-
-.icon {
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 16px;
-    color: #ccc;
 }
 
 /* side nav */
@@ -587,22 +657,48 @@ select option:hover{
 }
 .vfile{
     position: relative;
-    height: 95vh;
-    width: 64vw;
-    background-color: #192a1e;
-    border: 1px solid white;
+    height: 95%;
+    width: auto;
+    background-color: var(--green50);
+    border: var(--blurborder);
+    border-radius: 10px;
+    backdrop-filter: var(--blur);
+    /* border: 1px solid white; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+.vfile p{
+    font-weight: 600;
+    font-size: 30px;
+    padding-left: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 10%;
+    color: white;
+    /* border: var(--gborder); */
 }
 .xfile{
     width: 50vw;
-    height: 98%;
+    height: 90%;
 }
 .hidevfile{
     position: absolute;
-    top: 20px;
+    bottom: 20px;
     right: 20px;
+    background-color: white;
+    border: none;
+    width: 70px;
+    height: 30px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.hidevfile:hover{
+    background-color: var(--lightgreen);
+    color: white;
+    text-shadow: var(--txtshadow);
 }
 .hidev{
     transform: translateX(2000px);
@@ -668,7 +764,8 @@ select option:hover{
 }
 .uploadmedform1, .uploadmedform2{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-top: 20px;
     align-items: center;
     flex-direction: column;
     /* border: 1px solid white; */
@@ -676,7 +773,8 @@ select option:hover{
     width: 450px;
     position: absolute;
     border-radius: 10px;
-    background-color: var(--lgreen50);
+    background-color: none;
+    backdrop-filter: blur(10px) brightness(120%);
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.07),
             0px 2px 4px 0px rgba(0, 0, 0, 0.07),
             0px 4px 8px 0px rgba(0, 0, 0, 0.07),
@@ -685,19 +783,31 @@ select option:hover{
             0px 32px 64px 0px rgba(0, 0, 0, 0.07);
 }
 .uploadmedform1 input[type="text"], .uploadmedform2 input[type="text"]{
-    width: 200px;
+    width: 80%;
     height: 30px;
     border-radius: 10px;
     border: none;
     padding-left: 10px;
 }
-
-.submitp{
-    width: 100px;
-    height: 30px;
+.uploadmedform1 hr, .uploadmedform2 hr{
+    width: 80%;
+    border: 1px solid white;
     border-radius: 10px;
+}
+.submitp{
+    background-color: white;
+    width: 80%;
+    height: 30px;
+    border-radius: 10px 10px 0px 0px;
     border: none;
-} 
+    transition: 0.3s;
+}
+.submitp:hover{
+    background-color: var(--lgreen50);
+    color: white;
+    text-shadow: var(--txtshadow);
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+}
 
 
 
