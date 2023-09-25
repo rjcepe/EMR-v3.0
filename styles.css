@@ -1,8 +1,15 @@
 :root{
-    --lightgreen: #5eba7a;
-    --green: #126638;
+    --lightgreen: #19d89f;
+    --green: #285849;
     --dgreen: #1e3f27;
     --darkgreen: #192a1e;
+    --txtshadow: 0px 0px 3px var(--darkgreen);
+    --green50: rgba(40, 88, 73, 50%);
+    --lgreen50: rgba(25, 216, 159, 0.5);
+    --blur: blur(5px);
+    --gborder: 1px solid white;
+    --blurborder: 3px solid rgba(14, 83, 61, 0.2);
+    --headlinebg: linear-gradient(90deg, rgba(40,88,73,0.5) 0%, rgba(25,216,159,0) 40%);
 }
 
 *{
@@ -14,25 +21,36 @@
 }
 body{
     min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    
+    font-family: 'Poppins', sans-serif;  
+}
+button{
+    font-family: inherit;
+}
+button{
+    cursor: pointer;
 }
 .main{
     background-color: #126638;
     height: 100vh;
     display: flex;
+    justify-content: center;
+    /* align-items: center; */
     transition: 0.8s;
+    background-image: url("/samplebg.jpg");
+    background-size: auto;
     
 }
 .main-filter{
-    filter:brightness(50%) saturate(80%) blur(4px);
+    filter:brightness(70%) saturate(80%) blur(4px);
     scale: 1.1;
 }
 .main1{
+    background-color: #126638;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;  
+
 }
 .cont1{
     height: 400px;
@@ -41,6 +59,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border: 1px solid white;
 }
 
 .logform input{
@@ -63,76 +82,362 @@ body{
 }
 
 /* side nav */
-.z{
-    border: 1px solid white;
-    width: 90%;
-    text-align: center;
+.sidehide{
+    transform: translateX(-250px);
 }
-.header{
-    border: 1px solid white;
-    height: 100%;
-    width: 20%;
+.sideshow{
+    transform: translateX(0px);
+
+    .line1{
+        transform: rotate(-45deg) translate(-5px,8px);
+    }
+    .line2{
+        opacity: 0;
+    }
+    .line3{
+        transform: rotate(45deg) translate(-5px,-8px);  
+    }
+}
+.z{
+    /* border: var(--gborder); */
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    color: white;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    background-color: var(--green50);
+    backdrop-filter: var(--blur);
+}
+.z b{
+    color: var(--lightgreen);
+}
+.arw{
+    position: relative;
+    top: 10px;
+    height: 40px;
+    width: 45px;
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--green);
+    transition: 0.3s;
+}
+.arw:hover{
+    background-color: var(--lightgreen);
+    cursor: pointer;
+        .line1, .line2, .line3{
+            background-color: white;
+        }
+}
+.burger{
+    display:flex ;
     align-items: center;
     flex-direction: column;
-    top: 5%;
-    background-color: #2c945b;
+    justify-content: center;
+}
+.line1, .line2, .line3{
+    border-radius: 10px;
+    transition: 0.3s;
+    height: 3px;
+    width: 25px;
+    margin: 3px 0px 3px 0px;
+    background-color: white;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 20%);
+}
+.sidecont{
+    z-index: 10;
+    transition: 0.3s;
+    position: absolute;
+    height: 100vh;
+    width: 300px;
+    /* border: 1px solid blue; */
+    display: flex ;
+}
+.sidenav{
+    background-image: url(/navicons/sidebg2.JPG);
+    background-size: cover;
+    left: 0px;
+    position: relative;
+    box-shadow: 0px 0px 30px 1px rgba(135, 152, 147, 0.3);
+    height: 100%;
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    /* background-color: var(--darkgreen); */
+}
+.logout{
+    width: 90%;
+    background-color: var(--green50);
+    backdrop-filter: var(--blur);
+    border: var(--blurborder);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: white;
+    height: 50px;
+    transition: 0.3s;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.logout img{
+    height: 25px;
+    margin-right: 10px;
+}
+.logout:hover{
+    background-color: var(--lgreen50);
 }
 .logo{
-    height: 10vh;
+    margin-top: 10px;
+    height: 80px;
     width: 90%;
-    border: 1px solid white;
+    border: var(--blurborder);
+    background-color: var(--green50);
+    backdrop-filter: var(--blur);   
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 .nav{
-    height: 70%;
+    height: 290px;
     width: 90%;
-    border: 1px solid white;
+    border: var(--blurborder);
+    border-radius: 10px;
+    backdrop-filter: var(--blur);
+    background-color: var(--green50);
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: column;
 }
 .nav button{
-    height: 30px;
-    width: 150px;
-    border-radius: 5px;
-    margin-bottom: 30px;
+    height: 40px;
+    width: 90%;
+    border-radius: 10px;
+    margin-bottom: 5px;
     border: none;
-    transition: 0.3s;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+.navbutt{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: white;
+    background-color: rgba(18, 18, 18, 0.2);
+    cursor: pointer;
+    text-align: left;
+    padding-left: 10px;
 }
 .nav button:hover{
-    background-color: var(--green);
+    scale: 1.1;
+    background-color: var(--lgreen50);
+    /* background: linear-gradient(90deg, rgba(25,216,159,0.8) 0%, rgba(40,88,73,0)100%);  */
     color: white;
+    text-shadow: var(--txtshadow);
 }
 .nav h5{
-    margin-bottom: 20px;
+    /* text-align: center; */
+    /* border: var(--gborder); */
+    /* border-radius: 10px; */
+    padding: 10px 0px 10px 10px;
+    margin-bottom: 10px;
+    color: var(--green);
+    background-color: white;
+    width: 100%;
+    text-transform: uppercase;
 }
 .activebutt{
-    background-color: #126638;
+    text-shadow: var(--txtshadow);
+    background-color: var(--lightgreen);
     color: white;
 }
-.user{
-    border: 1px solid white;
+.recs img, .reps img{
+    /* width: 20px; */
+    height: 25px;
+    margin-right: 5px;
+}
+.recs, .reps{
+    width: 100%;
+    /* border: 1px solid white; */
     display: flex;
-    height: 10vh;
-    width: 90%;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
+}
+.navrep{
+    height: 200px;
+}
+
+.behindsn{
+    z-index: 7;
+    position: absolute;
+    height: 100vh;
+    /* border: var(--gborder); */
+    width: 100vw;
+    transition: all 0.3s;
+    transform: translateY(0%); 
+}
+.bsn{
+    transform: translateY(100%);
+}
+
+
+
+/* findpatients */
+.headline{
+    /* border: 1px solid white; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+    margin-bottom: 5px;
+    background: var(--green50);
+    backdrop-filter: var(--blur);
+    border: var(--blurborder);
+    border-radius: 10px;
+    padding-left: 10px;
+}
+.headline h1{
+    color: white;
+    font-weight: 800;
+    font-size: 45px;
+}
+.inputs img{
+    display: block;
+    height: 15px;
+    margin-right: 5px;
+    /* background-color: white; */
+}
+.user{
+    border: var(--blurborder);
+    height: 70px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
     transition: 0.3s;
+    color: white;
+    backdrop-filter: var(--blur);
+    background-color: var(--green);
+    border-radius: 40px 10px 10px 40px;
+    cursor: pointer;
+    /* margin-right: 10px; */
 }
 .user:hover{
-    border: 1px solid rgb(255, 0, 0);
+    /* scale: 1.03; */
+    background-color: rgba(25, 216, 159, 0.3);
+    /* background: linear-gradient(90deg, rgba(25,216,159,0.5) 0%, rgba(40,88,73,0)100%); */
+    border: 3px solid rgba(27, 137, 102, 0.2);
 }
-/* findpatients */
+.user img{
+    margin-left: 9px;
+    /* border: 1px solid white; */
+    height: 50px;
+    border-radius: 40px;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+}
+.username{
+    /* border: 1px solid white; */
+    margin-left: 9px;
+    width: auto;
+}
+.inputs{
+    /* border: 1px solid white; */
+    width: 100%;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+.inputs input[type="text"]{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    padding-left: 10px;
+    outline: none;
+}
+.search{
+    display: flex;
+}
+.searchbutt{
+    text-shadow: var(--txtshadow);
+    color: white;
+    border-radius: 10px;
+    background-color: var(--green);
+    backdrop-filter: var(--blur);
+    border: none;
+    width: 85px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    transition: 0.3s;
+}
+.searchbutt:hover{
+    background-color: #1c3b31;
+}
+.filters{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    font-weight: 300;
+    font-size: smaller;
+}
+.filters select{
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    padding-left: 5px;
+    font-weight: 700;
+    color: white;
+    background-color: var(--green50);
+    backdrop-filter: var(--blur);
+}
+.filters option{
+    background-color: var(--green50);
+    font-weight: 700;
+}
+select option:hover{
+    background-color: var(--lightgreen);
+    color: var(--green);
+}
+.addrecbutt{
+    margin-left: 5px;
+    color: var(--green);
+    font-weight: 800;
+    border: none;
+    background-color: white;
+    width: 130px;
+    height: 30px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.addrecbutt:hover{
+    text-shadow: var(--txtshadow);
+    background-color: var(--lightgreen);
+    color: white;
+}
 .cont1b{
     top: 170px;
     /* border: 1px solid white; */
     height: auto;
-    width: 80%;
+    width: 85%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,64 +446,112 @@ body{
 .results{
     /* border: 1px solid white; */
     height: 80%;
-    width: 95%;
-}
-.tablee{
-    overflow-y: auto;
-    height: 100%;
     width: 100%;
-    background-color: rgb(6, 62, 23);
     border-radius: 10px;
     display: flex;
-    align-items: start;
-    justify-content: space-around;
-    padding: 30px 0px 50px 0px;
-    color: white;
+    flex-direction: column;
+    justify-content: start;
+    /* overflow-x: auto; */
+}
+.tablee{
+    backdrop-filter: blur(20px);
+    background-color: var(--green50);
+    overflow-y: auto;
+    overflow-x: auto;
+    display: flex;
+    height: 92%;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px 25px 20px 25px;
+    color: var(--darkgreen);
     border-spacing: 4px;
+    border: var(--blurborder);
 }
 .row{
-    border: 3px solid rgb(255, 255, 255);
+    /* border: 1px solid rgb(188, 4, 255); */
     border-radius: 5px;
 }
 .res{
+    background-color: white;
     transition: .3s;
 }
 .res:hover{
-    background-color: #2c945b;
+    background-color: var(--green);
+    color: white;
+    text-shadow: var(--txtshadow);
 }
 .idcol{
-    padding: 5px 60px 5px 60px;
+    /* padding: 5px 100px 5px 100px; */
+    min-width: 150px;
 }
 .namecol{
-    padding: 5px 110px 5px 110px;
+    /* padding: 5px 110px 5px 110px; */
+    min-width: 300px;
 }
 .timecol{
-    padding: 5px 20px 5px 20px;
+    /* padding: 5px 10px 5px 10px; */
+    min-width: 170px;
 }
 .coursecol{
-    padding: 5px 30px 5px 30px;
+    /* padding: 5px 30px 5px 30px; */
+    min-width: 140px;
 }
 .diagcol{
   text-align: left;
   padding: 5px 30px 5px 30px;
   max-width: 400px;
 }
+.buttscol1{
+    min-width: 100px;
+    /* background-color: #19d89f; */
+}
 .buttscol{
-    border: px solid white;
+    /* border: 1px solid white; */
     border-radius: 5px;
+    width: 100px;
+    background-color: var(--lightgreen);
+    transition: 0.3s;
+    cursor: pointer;
+
+}
+.buttscol:hover{
+    background-color: var(--lgreen50);
+    
 }
 .viewbutt{
-    height: 30px;
+    cursor: pointer;
+    /* background-color: var(--lightgreen); */
+    background-color: rgba(18, 102, 56, 0);
+    min-height: 30px;
     width: 100px;
     border-radius: 5px;
     border: none;
     transition: 0.3s;
+    color: white;
+    font-weight: 800;
 }
 .viewbutt:hover{
-    background-color: var(--green);
-    color: white;
+    .txt{
+        text-shadow: none;
+    }
 }
-
+.txt, .frow{
+    text-shadow: var(--txtshadow);
+}
+.toprow{
+    margin-bottom: 5px;
+    width: 100%;
+    height: 7%;
+    /* border: 1px solid rgb(116, 255, 10); */
+    background-color: rgba(31, 59, 50, 0.7);
+    backdrop-filter: var(--blur);
+    border: var(--blurborder);
+    color: white;
+    border-radius: 10px;
+    border-spacing: 4px;
+    padding: 0px 25px 0px 25px;
+    /* display: inline-flex; */
+}
 
 
 
@@ -222,6 +575,7 @@ body{
 
 /* view file */
 .main2{
+    z-index: 30;
     top: 0;
     position: absolute;
     height: 100vh;
@@ -259,18 +613,8 @@ body{
 
 /* add patients */
 /* insert medform */
-.adders{
-    position: relative;
-    background-color: #192a1e;
-    border: 1px solid white;
-    width: 30vw;
-    height: 70vh;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center; 
-}
-.addp{
+.addp-cont{
+    z-index: 30;
     color: white;
     top: 0;
     position: absolute;
@@ -280,33 +624,95 @@ body{
     justify-content: center;
     flex-direction: column;
     align-items: center;  
-    transition: .4s ease;
+    transition: .3s ease;
+}
+.adders{
+    position: relative;
+    /* background-color: blue; */
+    /* border: 1px solid white; */
+    width: 800px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center; 
+    border-radius: 10px;
+}
+.headbar{
+    /* border: var(--gborder); */
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--green);
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+.hideaddp{
+    background-color: white;
+    margin-right: 10px;
+    border: none;
+    width: 70px;
+    height: 30px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.hideaddp:hover{
+    background-color: var(--lightgreen);
+    color: white;
+    text-shadow: var(--txtshadow);
+}
+.headbar h1{
+    /* border: var(--gborder); */
+    padding-left: 10px;
 }
 .uploadmedform1, .uploadmedform2{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     flex-direction: column;
-    border: 1px solid white;
-    height: 300px;
-    width: auto;
+    /* border: 1px solid white; */
+    height: 400px;
+    width: 450px;
     position: absolute;
+    border-radius: 10px;
+    background-color: var(--lgreen50);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.07),
+            0px 2px 4px 0px rgba(0, 0, 0, 0.07),
+            0px 4px 8px 0px rgba(0, 0, 0, 0.07),
+            0px 8px 16px 0px rgba(0, 0, 0, 0.07),
+            0px 16px 32px 0px rgba(0, 0, 0, 0.07),
+            0px 32px 64px 0px rgba(0, 0, 0, 0.07);
+}
+.uploadmedform1 input[type="text"], .uploadmedform2 input[type="text"]{
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    padding-left: 10px;
 }
 
-.uploadmedform label{
-    margin-top: 20px;
-}
+.submitp{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+} 
 
-.uploadmedform button{
-    margin-top: 10px;
-}
+
 
 .cont1a{
-    border: 1px solid white;
-    height: 400px;
-    width: 350px;
+    border-radius: 0px 10px 10px 10px;
+    /* border: 1px solid white; */
+    height: 80%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background-color: var(--green); */
+    background: linear-gradient(170deg, rgba(40,88,73,1) 30%, rgba(25,216,159,0.42712077506783963) 80%);
+    /* border: var(--blurborder); */
+    backdrop-filter: var(--blur);
 }
 
 .hidden{
@@ -317,10 +723,29 @@ body{
 .shown{
     transform: translateY(0);
     transition: transform 0.3s ease;
-
+    
 }
-.hideaddp{
-    position: absolute;
-    top: 20px;
-    right: 20px;
+.patienttypebutt{
+    display: flex;
+    /* border: var(--gborder); */
+    width: 90%;
+}
+.patienttypebutt button{
+    border-radius: 10px 10px 0px 0px;
+    height: 25px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.ptbutt{
+    background-color: rgb(33, 69, 58);
+    color: rgba(255, 255, 255, 0.4);
+    width: 85px;
+}
+.activeptb{
+    color: white;
+    background-color: var(--green);
+    /* box-shadow: 15px 15px 10px 1px black; */
+    width: 100px;
+    
 }

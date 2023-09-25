@@ -1,131 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <title>X-ray Files</title>
+    <link rel="stylesheet" href="animations.css">
+    <title>Medical Records</title>
 </head>
+
 <body>
-    <div class="main">
-        <div class="header">
+    <div class="sidecont sidehide">
+        <div class="sidenav">
             <div class="logo">
-                <img src="" alt="DLSUD logo">
+                <img src="/navicons/logo.png" alt="DLSUD logo">
             </div>
             <div class="nav">
-                <h5>Records</h5>
-                <button class="navbutt" onclick="ToMedRec()">Medical Records</button>
-                <button class="navbutt" onclick="ToDenRec()">Dental Records</button>
-                <button class="navbutt activebutt" onclick="ToXray()">X-ray Images</button>
-                <button class="navbutt" onclick="ToAccRec()">Accident Records</button>
-                <button class="navbutt" onclick="ToConRec()">Consultation Records</button>
-                <h5>Reports</h5>
-                <button class="navbutt" onclick="ToMedCert()">Medical Certificates</button>
-                <button class="navbutt" onclick="ToAccCen()">Accident Census</button>
-                <button class="navbutt">Prescription?</button>
+                <div class="recs">
+                    <h5>Records</h5>
+                    <button class="navbutt " onclick="ToMedRec()" id="mr">  <img src="/navicons/arrow.png" alt="">Medical Records</button>
+                    <button class="navbutt " onclick="ToDenRec()"><img src="/navicons/arrow.png" alt="">Dental Records</button>
+                    <button class="navbutt activebutt" onclick="ToXray()"><img src="/navicons/arrow.png" alt="">X-ray Images</button>
+                    <button class="navbutt" onclick="ToAccRec()"><img src="/navicons/arrow.png" alt="">Accident Records</button>
+                    <button class="navbutt" onclick="ToConRec()"><img src="/navicons/arrow.png" alt="">Consultation Records</button>
+                </div>
+                <div class="reps">
+                    <h5>Reports</h5>
+                    <button class="navbutt" onclick="ToMedCert()"><img src="/navicons/arrow.png" alt="">Medical Certificates</button>
+                    <button class="navbutt" onclick="ToAccCen()"><img src="/navicons/arrow.png" alt="">Accident Census</button>
+                    <button class="navbutt"><img src="/navicons/arrow.png" alt="">Prescription?</button>
+                </div>
             </div>
             <div class="user">
-                <div class="userpic">
-                    <img src="" alt="userpic">
-                </div>
+                
+                    <img src="/navicons/userpic.jpg" alt="userpic">
+               
                 <div class="username">
-                    <h4>username</h4>
-                    <h6>userid</h6>
+                    <h4>Rizjan Cepe</h4>
+                    <h6>202030642</h6>
                 </div>
             </div>
             <div class="z">
-                <h4>lorem ipsum</h4>
+                <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved   </p>
             </div>
         </div>
-        <!-- <embed src="1.pdf" type="application/pdf" width="50%" height="90%" /> -->
-        <div class="cont1b">
-            <div class="headline">
-                <h1>X-ray Files</h1>
+        <div class="arw" onclick="sideshow()">
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
             </div>
-            <div class="inputs">
-                <input type="text" placeholder="Search by Username or ID...">
-                <button>Search</button>
-                <button onclick="showp()">Add Record +</button>
-            </div>
-            <div class="results">
-                <table class="tablee" id="table1">
-                    <tr>
-                        <th class="row idcol">ID</th>
-                        <th class="row namecol">Name</th>
-                        <th class="row timecol">Time Created</th>
-                        <th class="row coursecol">College</th>
-                        <th class="row timecol">Location</th>
-                        <th class="row timecol">Added by</th>
-                    </tr>
-                    <tr class="res">
-                        <th class="row">202030642</th>
-                        <th class="row">Rizjan Nathaniel A. Cepe</th>
-                        <th class="row">08-23-2023</th>
-                        <th class="row">CSCS</th>
-                        <th class="row">West Clinic</th>
-                        <th class="row">Renziboi</th>
-                        <th class="buttscol">
-                            <button class="viewbutt" onclick="showv()">View</button>
-                        </th>
-                    </tr>
-                    <tr class="res">
-                        <th class="row">202030642</th>
-                        <th class="row">Rizjan Nathaniel A. Cepe</th>
-                        <th class="row">08-23-2023</th>
-                        <th class="row">CSCS</th>
-                        <th class="row">West Clinic</th>
-                        <th class="row">Renziboi</th>
-                        <th class="buttscol">
-                            <button class="viewbutt" onclick="showv()">View</button>
-                        </th>
-                    </tr>
-                    
-                </table>
-            </div>
-            <!-- <button id="printButton">Print Container</button> -->
         </div>
     </div>
+    <div class="behindsn bsn"></div>
+    <div class="main">
+        <div class="cont1b">
+            <div class="headline">
+                <h1>X-Ray Files</h1>
+            </div>
+            <div class="inputs">
+                <div class="search">
+                    <input type="text" placeholder="Search ID...">
+                    <button class="searchbutt"><img src="/navicons/search.png" alt="">Search</button>
+                </div>
+                <div class="filters">
+                    <label for="sort">Sort by:</label>
+                    <select name="sort" id="sort1">
+                        <option value="ID">ID</option>
+                        <option value="TimeLate">Latest</option>
+                        <option value="TimeOld">Oldest</option>
+                        <option value="Name">Name</option>
+                        <option value="CS">College</option>
+                    </select>
+                    <button class="addrecbutt" onclick="showp()">Add Record +</button> 
+                </div>
+            </div>
+            <div class="results">
+                <table class="toprow">
+                    <tr class="frow">
+                        <th class="idcol">ID</th>
+                        <th class="namecol">Name</th>
+                        <th class="timecol">Time Created</th>
+                        <th class="coursecol">College</th>
+                        <th class="timecol">Location</th>
+                        <th class="timecol">Added by</th>
+                        <th class="buttscol1"></th>
+                    </tr>
+                </table>
+                <table class="tablee" id="table1">
+                    <tr class="res">
+                        <th class="row idcol">202030642</th>
+                        <th class="row namecol">Rizjan Nathaniel A. Cepe</th>
+                        <th class="row timecol">08-23-2023</th>
+                        <th class="row coursecol">CSCS</th>
+                        <th class="row timecol">West Clinic</th>
+                        <th class="row timecol">Renziboi</th>
+                        <th class="buttscol">
+                            <button class="viewbutt" onclick="showv()"><p class="txt">View</p></button>
+                        </th>
+                    </tr>
+                    <tr class="res">
+                        <th class="row">202030642</th>
+                        <th class="row">Rizjan Nathaniel A. Cepe</th>
+                        <th class="row">08-23-2023</th>
+                        <th class="row">CSCS</th>
+                        <th class="row">West Clinic</th>
+                        <th class="row">Renziboi</th>
+                        <th class="buttscol">
+                            <button class="viewbutt" onclick="showv()"><p class="txt">View</p></button>
+                        </th>
+                    </tr>
+                    <tr class="res">
+                        <th class="row">202030642</th>
+                        <th class="row">Rizjan Nathaniel A. Cepe</th>
+                        <th class="row">08-23-2023</th>
+                        <th class="row">CSCS</th>
+                        <th class="row">West Clinic</th>
+                        <th class="row">Renziboi</th>
+                        <th class="buttscol">
+                            <button class="viewbutt" onclick="showv()"><p class="txt">View</p></button>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <!-- <button onclick="printres()">Print Container</button> -->
+        </div>
+    </div>
+
+    <!-- sample medform view -->
     <div class="main2 hidev">
         <div class="vfile">
             <button class="hidevfile" onclick="hidev()">go back</button>
             <embed src="1.pdf" type="application/pdf" class="xfile"" />
         </div>
     </div>
-    <div class="addp hidev">
-        <div class="adders">
-            <button class="hideaddp" onclick="hidep()">go back</button>
-            <h1>Add Record</h1>
-            <div class="patienttypebutt">
-                <button id="studupbutt" onclick="stud()" >Student</button>
-                <button id="empupbutt" onclick="emp()">Emloyee</button>
-            </div>
-            <div class="cont1a">
-                <form id="insertstudmedform" class="uploadmedform1">
-                        <input type="text" id="uname" placeholder="Student's Name...">
-                        <input type="text" id="uname" placeholder="Student's ID...">
-                        <input type="text" id="uname" placeholder="Course & Section...">
-    
-                        <label for="medform">Upload X-ray Images</label>
+
+
+    <div class="addp-cont hidev">
+            <div class="adders">
+                <div class="headbar">
+                    <h1>Add Patient</h1>
+                    <button class="hideaddp" onclick="hidep()">Go Back</button>
+                </div>
+                <div class="patienttypebutt">
+                    <button class="ptbutt activeptb" id="studupbutt" onclick="stud()">Student</button>
+                    <button class="ptbutt" id="empupbutt" onclick="emp()">Employee</button>
+                </div>
+                <div class="cont1a">
+                    <form id="insertstudmedform" class="uploadmedform1">
+                        <input type="text" id="uname" placeholder="Enter Student's Name...">
+                        <input type="text" id="uname" placeholder="Enter Student's ID...">
+                        <input type="text" id="uname" placeholder="Enter College...">
+
+                        <label for="loc">Location:</label>
+                        <select name="loc" id="locsel">
+                            <option disabled selected value> -- Select Location -- </option>
+                            <option value="#">East Clinic</option>
+                            <option value="#">West Clinic</option>
+                            <option value="#">SHS Clinic</option>
+                        </select>
+
+                        <label for="medform">Upload Medical Form</label>
                         <input type="file" id="medform" name="medform" multiple>
 
-                    <button>Submit</button>
-                </form>
-    
-                <form id="insertempmedform" class="uploadmedform2 hidden">
-                        <input type="text" id="uname" placeholder="Emloyee's Name...">
-                        <input type="text" id="uname" placeholder="Emloyee's ID...">
-    
-                        <label for="medform">Upload X-ray Images</label>
+                        <button class="submitp">Submit</button>
+                    </form>
+
+                    <form id="insertempmedform" class="uploadmedform2 hidden">
+                        <input type="text" id="uname" placeholder="Enter Emloyee's Name...">
+                        <input type="text" id="uname" placeholder="Enter Emloyee's ID...">
+
+                        <label for="loc">Location:</label>
+                        <select name="loc" id="locsel">
+                            <option disabled selected value> -- Select Location -- </option>
+                            <option value="#">East Clinic</option>
+                            <option value="#">West Clinic</option>
+                            <option value="#">SHS Clinic</option>
+                        </select>
+
+                        <label for="medform">Upload Medical Form</label>
                         <input type="file" id="medform" name="medform" multiple>
-                   
-                    <button>Submit</button>
-                </form> 
+
+                        <button class="submitp">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <script src="ui.js"></script>
-    <script src="app.js"></script>
+        <script src="ui.js"></script>
+        <script src="app.js"></script>
 </body>
+
 </html>
