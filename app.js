@@ -1,12 +1,3 @@
-// function printres() {
-//     var containerContents = document.querySelector(".results").innerHTML;
-//     var originalContents = document.body.innerHTML;
-
-//     document.body.innerHTML = containerContents;
-//     window.print();
-
-//     document.body.innerHTML = originalContents;
-// };
 
 //nav functions
 function ToMedRec() {
