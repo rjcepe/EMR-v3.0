@@ -76,16 +76,20 @@ button{
 .cont1{
     background-color: white;
     height: 100%;
-    width: 350px;
+    width: 23%;
+    min-width: 350px;
+    max-width: 400px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    /* border: 1px solid white; */
+    border: 1px solid black;
 }
 .cont1 img{
-    margin: 50px 0px 80px 0px;
-    height: 120px;
+    margin: 50px 0px 50px 0px;
+    min-height: 100px;
+    max-height: 100px;
+    
 }
 .cont1 h4{
     text-align: center;
@@ -94,11 +98,23 @@ button{
     font-size: 20px;
     margin-bottom: 10px;
 }
-.logform{
+.intz{
+    /* border:  2px solid blue; */
+    height: 100%;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+}
+.logform{
+    /* border: 1px solid black; */
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100px;
 }
 .logform input{
     height: 100%;
@@ -113,12 +129,13 @@ button{
 
 .input-container {
     width: 250px;
-    height: 50px;
+    height: 40px;
     background-color: rgb(228, 228, 228);
     border-radius: 10px;
     position: relative;
     margin-bottom: 15px;
 }
+
 .icon {
     display: flex;
     justify-content: center;
@@ -131,31 +148,38 @@ button{
     color: #ffffff;
     background-color: #285849;
     height: 100%;
-    width: 40px;
+    width: 15%;
 }
 .loginbutt{
-    width: 100px;
-    height: 40px;
+    width: 120px;
+    height: 30px;
     border-radius: 10px;
     border: none;
     background-color: var(--green);
     color: white;
     transition: 0.3s;
+    font-weight: 700;
+    border: 2px solid var(--green);
+    letter-spacing: 1px;
 }
 .loginbutt:hover{
-    background-color: rgb(33, 72, 60);
+    background-color: rgba(25, 42, 30, 0);
+    border: 2px solid var(--green);
+    color: var(--green);
 }
 .botlog{
-    margin-top: 350px;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 10px;
     color: white;
-    width: 100%;
+    min-width: 350px;
+    max-width: 400px;
     height: 30px;
     text-align: center;
     background-color: var(--green);
+    bottom: 0px;
 }
 .botlog b{
     color: var(--lightgreen);
