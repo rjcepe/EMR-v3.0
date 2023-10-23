@@ -53,7 +53,7 @@ async function loadTableData() {
     console.log("Error loading table data:", error.message);
     return;
   }
-
+  console.log("hello");
   const tableBody = document.getElementById("medform_table");
   // Call the table
 
