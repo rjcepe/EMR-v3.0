@@ -54,7 +54,7 @@ async function loadTableData() {
     return;
   }
 
-  const tableBody = document.querySelector("#medform_table tbody");
+  const tableBody = document.getElementById("medform_table");
   // Call the table
 
   if (tableData.length === 0) {
@@ -82,3 +82,5 @@ async function loadTableData() {
     });
   }
 }
+
+loadTableData()
