@@ -17,5 +17,5 @@ model med_forms {
   course_section String?   @db.VarChar
   location       String?   @db.VarChar
   added_by       String?   @db.VarChar
-  med_file       Json?
+  med_file       String?   @db.VarChar
 }
