@@ -1,3 +1,5 @@
+import { createClient } from '@supabase/supabase-js';
+
 //nav functions
 function ToMedRec() {
   window.location.href = "medicalrecords.html";

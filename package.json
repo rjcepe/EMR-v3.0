@@ -1,8 +1,8 @@
 {
   "dependencies": {
     "@prisma/client": "^5.4.2",
-    "@supabase/supabase-js": "^2.38.2"
+    "@supabase/supabase-js": "^2.38.2",
+    "create-html-project": "^1.0.1",
+    "node": "^21.0.0"
   }
-  
 }
-
