@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+
 
 //nav functions
 function ToMedRec() {
