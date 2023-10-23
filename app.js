@@ -83,4 +83,4 @@ async function loadTableData() {
   }
 }
 
-loadTableData()
+loadTableData();
