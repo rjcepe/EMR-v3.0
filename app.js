@@ -65,6 +65,7 @@ async function loadTableData() {
              <th class="row" colspan="7" ">No data available</td>
          `;
     tableBody.appendChild(newRow);
+    console.log("no zata");
   } else {
     tableData.forEach((row) => {
       const newRow = document.createElement("tr");
@@ -80,6 +81,7 @@ async function loadTableData() {
                  <th class="buttscol"><button class="viewbutt" onclick="showv()"><p class="txt">View</p></button></th>
                  `;
       tableBody.appendChild(newRow);
+      console.log("yes zata");
     });
   }
 }
