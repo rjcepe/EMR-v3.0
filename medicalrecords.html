@@ -229,56 +229,8 @@
             </div>
         </div>
         <script src="ui.js"></script>
-        <script src="app.js"></script>
-        <script src="server.js"></script>
-        <script>
-            // supabase connection
-
-
-import { createClient } from '@supabase/supabase-js';
-
-    const SUPABASE_URL = 'https://yspyqlodogzmrqsifbww.supabase.co'
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk'
-
-    const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // Load data to table
-    async function loadTableData() {
-        const { data: tableData, error } = await _supabase.from('med_forms').select('*')
-
-        if (error) {
-            console.log('Error loading table data:', error.message);
-            return;
-        }
-
-        const tableBody = document.querySelector('#medform_table tbody'); 
-        // Call the table
-
-        if (tableData.length === 0) { // If no data in Supabase
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td colspan="7" style="text-align: center;">No data available</td>
-            `;
-            tableBody.appendChild(newRow);
-        } else {
-            tableData.forEach((row) => {
-                const newRow = document.createElement('tr');
-                newRow.classList.add("res");
-
-                newRow.innerHTML = `
-                    <th class="row idcol">${row.patient_id}</th>
-                    <th class="row namecol">${row.patient_name}</th>
-                    <th class="row timecol">${row.date_created}</th>
-                    <th class="row coursecol">${row.course_section}</th>
-                    <th class="row timecol">${row.location}</th>
-                    <th class="row timecol">${row.added_by}</th>
-                    <th class="buttscol"><button class="viewbutt" onclick="showv()"><p class="txt">View</p></button></th>
-                    `;
-                tableBody.appendChild(newRow);
-            });
-        }
-    }
-        </script>
+        <script type="module" src="app.js"></script>
+        <script type="module" src="server.js"></script>
 </body>
 
 </html>
