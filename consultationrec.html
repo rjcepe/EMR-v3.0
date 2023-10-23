@@ -24,19 +24,26 @@
             <div class="nav">
                 <div class="recs">
                     <h5>Records</h5>
-                    <button class="navbutt " onclick="ToMedRec()" id="mr">  <img src="/navicons/arrow.png" alt="">Medical Records</button>
-                    <button class="navbutt" onclick="ToDenRec()"><img src="/navicons/arrow.png" alt="">Dental Records</button>
-                    <button class="navbutt" onclick="ToXray()"><img src="/navicons/arrow.png" alt="">X-ray Images</button>
-                    <button class="navbutt" onclick="ToAccRec()"><img src="/navicons/arrow.png" alt="">Accident Records</button>
-                    <button class="activebutt" onclick="ToConRec()"><img src="/navicons/arrow.png" alt="">Consultation Records</button>
+                    <button class="navbutt " onclick="ToMedRec()" id="mr"> <img src="/navicons/arrow.png" alt="">Medical
+                        Records</button>
+                    <button class="navbutt" onclick="ToDenRec()"><img src="/navicons/arrow.png" alt="">Dental
+                        Records</button>
+                    <button class="navbutt" onclick="ToXray()"><img src="/navicons/arrow.png" alt="">X-ray
+                        Images</button>
+                    <button class="navbutt" onclick="ToAccRec()"><img src="/navicons/arrow.png" alt="">Accident
+                        Records</button>
+                    <button class="activebutt" onclick="ToConRec()"><img src="/navicons/arrow.png" alt="">Consultation
+                        Records</button>
                 </div>
             </div>
             <div class="nav navrep">
                 <div class="reps">
                     <h5>Reports</h5>
-                    <button class="navbutt" onclick="ToMedCert()"><img src="/navicons/arrow.png" alt="">Medical Certificates</button>
-                    <button class="navbutt" onclick="ToAccCen()"><img src="/navicons/arrow.png" alt="">Accident Census</button>
-                    <button class="navbutt"><img src="/navicons/arrow.png" alt="">Prescription?</button>
+                    <button class="navbutt" onclick="ToMedCert()"><img src="/navicons/arrow.png" alt="">Medical
+                        Certificates</button>
+                    <button class="navbutt" onclick="ToAccCen()"><img src="/navicons/arrow.png" alt="">Accident
+                        Census</button>
+                    <!-- <button class="navbutt" onclick="ToPresc()"><img src="/navicons/arrow.png" alt="">Prescription?</button> -->
                 </div>
             </div>
             <div class="logout" onclick="logout()">
@@ -44,9 +51,9 @@
                 <p>Logout</p>
             </div>
             <div class="z">
-                <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved   </p>
+                <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved </p>
             </div>
-            
+
         </div>
         <div class="arw" onclick="sideshow()">
             <div class="burger">
@@ -63,11 +70,11 @@
                 <h1>Consultation Records</h1>
                 <div class="user">
                     <img src="/navicons/userpic.jpg" alt="userpic">
-                <div class="username">
-                    <h4>Rizjan Cepe</h4>
-                    <h6>202030642</h6>
+                    <div class="username">
+                        <h4>Rizjan Cepe</h4>
+                        <h6>202030642</h6>
+                    </div>
                 </div>
-            </div>
             </div>
             <div class="inputs">
                 <div class="search">
@@ -83,7 +90,7 @@
                         <option value="Name">Name</option>
                         <option value="CS">College</option>
                     </select>
-                    <button class="addrecbutt" onclick="showp1()">Add Record +</button> 
+                    <button class="addrecbutt" onclick="showp1()">Add Record +</button>
                 </div>
             </div>
             <div class="results1">
@@ -102,18 +109,18 @@
                 <table class="botrow">
                     <tr class="res1">
                         <th class="row1 idcol1">202030642</th>
-                        <th class="row1 namecol1">Rizjan Nathaniel  A. Cepe</th>
+                        <th class="row1 namecol1">Rizjan Nathaniel A. Cepe</th>
                         <th class="row1 timecol1">08-23-2023</th>
                         <th class="row1 coursecol1">BSIT43</th>
                         <th class="row1 diagcol1">BP check = 100/120, weight check = 70kg,
-                            Height check =  177cm, headache, small wound, 
+                            Height check = 177cm, headache, small wound,
                         </th>
                         <th class="row1 notescol"> Lorem ipsum dolor sit amet.</th>
                         <th class="row1 timecol1">West Clinic</th>
                         <th class="row1 timecol1">Renziboi</th>
                     </tr>
-                    
-                    
+
+
                 </table>
             </div>
             <!-- <button onclick="printres()">Print Container</button> -->
@@ -131,70 +138,72 @@
 
 
     <div class="addp-cont1 hidev">
-            <div class="adders1">
-                <div class="headbar">
-                    <h1>Add Record</h1>
-                    <button class="hideaddp" onclick="hidep1()">Go Back</button>
-                </div>
-                <div class="patienttypebutt">
-                    <button class="ptbutt activeptb" id="studupbutt" onclick="stud1()">Student</button>
-                    <button class="ptbutt" id="empupbutt" onclick="emp1()">Employee</button>
-                </div>
-                <div class="cont1a">
-                    <form id="insertstudmedform" class="uploadconsform1">
-                        <h2>Student Information:</h2>
+        <div class="adders1">
+            <div class="headbar">
+                <h1>Add Record</h1>
+                <button class="hideaddp" onclick="hidep1()">Go Back</button>
+            </div>
+            <div class="patienttypebutt">
+                <button class="ptbutt activeptb" id="studupbutt" onclick="stud1()">Student</button>
+                <button class="ptbutt" id="empupbutt" onclick="emp1()">Employee</button>
+            </div>
+            <div class="cont1a">
+                <form id="insertstudmedform" class="uploadconsform1">
+                    <h2>Student Information:</h2>
 
-                        <input type="text" id="uname" placeholder="Enter Student's Name...">
-                        <input type="text" id="uname" placeholder="Enter Student's ID...">
-                        <input type="text" id="uname" placeholder="Enter Course & Section...">
+                    <input type="text" id="uname" placeholder="Enter Student's Name...">
+                    <input type="text" id="uname" placeholder="Enter Student's ID...">
+                    <input type="text" id="uname" placeholder="Enter Course & Section...">
 
-                        <div class="location1">
-                            <label for="loc">Location:</label>
-                            <select name="loc" id="locsel">
-                                <option disabled selected value> -- Select Location -- </option>
-                                <option value="#">East Clinic</option>
-                                <option value="#">West Clinic</option>
-                                <option value="#">SHS Clinic</option>
-                            </select>
-                        </div>
+                    <div class="location1">
+                        <label for="loc">Location:</label>
+                        <select name="loc" id="locsel">
+                            <option disabled selected value> -- Select Location -- </option>
+                            <option value="#">East Clinic</option>
+                            <option value="#">West Clinic</option>
+                            <option value="#">SHS Clinic</option>
+                        </select>
+                    </div>
 
-                        <hr>
+                    <hr>
 
-                        <textarea name="" id="" placeholder="Enter Diagnosis (Ex. BP Check = 120/100, Weight = 70kg, etc..)"></textarea>
-                        <textarea name="" id="" placeholder="Enter Notes..."></textarea>
+                    <textarea name="" id=""
+                        placeholder="Enter Diagnosis (Ex. BP Check = 120/100, Weight = 70kg, etc..)"></textarea>
+                    <textarea name="" id="" placeholder="Enter Notes..."></textarea>
 
-                        <button class="submitp">Submit</button>
-                    </form>
+                    <button class="submitp">Submit</button>
+                </form>
 
-                    <form id="insertempmedform" class="uploadconsform2 hidden">
-                        <h2>Employee Information:</h2>
+                <form id="insertempmedform" class="uploadconsform2 hidden">
+                    <h2>Employee Information:</h2>
 
-                        <input type="text" id="uname" placeholder="Enter Emloyee's Name...">
-                        <input type="text" id="uname" placeholder="Enter Emloyee's ID...">
-                        
-                        <div class="location1">
-                            <label for="loc">Location:</label>
-                            <select name="loc" id="locsel">
-                                <option disabled selected value> -- Select Location -- </option>
-                                <option value="#">East Clinic</option>
-                                <option value="#">West Clinic</option>
-                                <option value="#">SHS Clinic</option>
-                            </select>
-                        </div>
+                    <input type="text" id="uname" placeholder="Enter Emloyee's Name...">
+                    <input type="text" id="uname" placeholder="Enter Emloyee's ID...">
 
-                        <hr>
+                    <div class="location1">
+                        <label for="loc">Location:</label>
+                        <select name="loc" id="locsel">
+                            <option disabled selected value> -- Select Location -- </option>
+                            <option value="#">East Clinic</option>
+                            <option value="#">West Clinic</option>
+                            <option value="#">SHS Clinic</option>
+                        </select>
+                    </div>
 
-                        <textarea name="" id="" placeholder="Enter Diagnosis (Ex. BP Check = 120/100, Weight = 70kg, etc..)"></textarea>
-                        <textarea name="" id="" placeholder="Enter Notes..."></textarea>
+                    <hr>
+
+                    <textarea name="" id=""
+                        placeholder="Enter Diagnosis (Ex. BP Check = 120/100, Weight = 70kg, etc..)"></textarea>
+                    <textarea name="" id="" placeholder="Enter Notes..."></textarea>
 
 
-                        <button class="submitp">Submit</button>
-                    </form>
-                </div>
+                    <button class="submitp">Submit</button>
+                </form>
             </div>
         </div>
-        <script src="ui.js"></script>
-        <script src="app.js"></script>
+    </div>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>

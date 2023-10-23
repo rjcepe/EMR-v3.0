@@ -83,7 +83,7 @@ button{
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 .cont1 img{
     margin: 50px 0px 50px 0px;
@@ -168,15 +168,14 @@ button{
     color: var(--green);
 }
 .botlog{
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 10px;
     color: white;
-    min-width: 350px;
-    max-width: 400px;
-    height: 30px;
+    width: 100%;
+    height: 40px;
     text-align: center;
     background-color: var(--green);
     bottom: 0px;
@@ -291,7 +290,7 @@ button{
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    /* background-color: var(--darkgreen); */
+    
 }
 .logout{
     width: 90%;
@@ -402,7 +401,7 @@ button{
     align-items: center;
 }
 .navrep{
-    height: 200px;
+    height: 160px;
 }
 
 .behindsn{
@@ -771,10 +770,14 @@ select option:hover{
     right: 20px;
     background-color: white;
     border: none;
-    width: 70px;
+    width: 90px;
     height: 30px;
     border-radius: 10px;
     transition: 0.3s;
+    text-transform: capitalize;
+    font-family: inherit;
+    font-weight: 600;
+    color: var(--green);
 }
 .hidevfile:hover{
     background-color: var(--lightgreen);

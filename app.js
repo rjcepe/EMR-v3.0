@@ -24,3 +24,6 @@ function ToAccCen() {
 function logout() {
     window.location.href = 'index.html';
 }
+function ToPresc() {
+    window.location.href = 'presc.html';
+}
