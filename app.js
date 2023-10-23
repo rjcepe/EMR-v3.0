@@ -55,7 +55,7 @@ async function loadTableData() {
   }
   console.log("hello");
 
-  const tableBody = document.querySelector("medform_table");
+  const tableBody = document.querySelector("#medform_table");
   // Call the table
 
   if (tableData.length === 0) {
