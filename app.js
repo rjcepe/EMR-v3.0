@@ -55,14 +55,14 @@ async function loadTableData() {
   }
   console.log("hello");
 
-  const tableBody = document.querySelector("#medform_table");
+  const tableBody = document.querySelector("#medform_table tbody");
   // Call the table
 
   if (tableData.length === 0) {
     // If no data in Supabase
     const newRow = document.createElement("tr");
     newRow.innerHTML = `
-             <td colspan="7" style="text-align: center;">No data available</td>
+             <th class="row" colspan="7" ">No data available</td>
          `;
     tableBody.appendChild(newRow);
   } else {
