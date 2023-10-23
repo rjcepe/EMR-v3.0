@@ -35,6 +35,11 @@ const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
 
 const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const test = () => {
+    console.log(supabase);
+    console.log("connection is tagumpay, laro ka na muna ulit :)");
+}
+test();
 
 // Load data to table
 async function loadTableData() {
