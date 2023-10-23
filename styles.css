@@ -636,6 +636,9 @@ select option:hover{
     display: flex;
     /* justify-content: center; */
 }
+.inv{
+    display: none;
+}
 .res:hover{
     .row{
         background-color: var(--green);
