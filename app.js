@@ -44,7 +44,8 @@ function ToPresc() {
             return;
         }
 
-        const tableBody = document.querySelector('#medform_table tbody'); // Call the table
+        const tableBody = document.querySelector('#medform_table tbody'); 
+        // Call the table
 
         if (tableData.length === 0) { // If no data in Supabase
             const newRow = document.createElement('tr');
