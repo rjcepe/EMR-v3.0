@@ -30,6 +30,9 @@ function ToPresc() {
 
 
 // supabase connection
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
 import { createClient } from '@supabase/supabase-js';
 
     const SUPABASE_URL = 'https://yspyqlodogzmrqsifbww.supabase.co'
