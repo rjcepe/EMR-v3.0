@@ -36,7 +36,7 @@ const SUPABASE_URL = "https://yspyqlodogzmrqsifbww.supabase.co";
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const test = () => {
     console.log(supabase);
@@ -46,7 +46,7 @@ test();
 
 // Load data to table
 async function loadTableData() {
-  const { data: tableData1, error } = await supabase.from('med_forms1').select("*");
+  const { data: tableData1, error } = await _supabase.from('med_forms1').select("*");
 
   if (error) {
     console.log("Error loading table data:", error.message);
