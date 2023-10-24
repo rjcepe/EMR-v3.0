@@ -60,7 +60,7 @@ async function loadTableData() {
     // If no data in Supabase
     const newRow = document.createElement("tr");
     newRow.innerHTML = `
-             <th class="row" colspan="7" ">No data available</td>
+             <th class="row" colspan="7" ">No zata available</td>
          `;
     tableBody.appendChild(newRow);
     console.log("no zata");
