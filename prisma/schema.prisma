@@ -12,10 +12,10 @@ datasource db {
 model med_forms {
   row_id         BigInt    @id @default(autoincrement())
   patient_id     Int
-  patient_name   String?   @db.VarChar
+  patient_name   String?   @db.VarChar(255)
   date_created   DateTime? @db.Date
-  course_section String?   @db.VarChar
-  location       String?   @db.VarChar
-  added_by       String?   @db.VarChar
-  med_file       String?   @db.VarChar
+  course_section String?   @db.VarChar(255)
+  location       String?   @db.VarChar(255)
+  added_by       String?   @db.VarChar(255)
+  med_file       String?   @db.VarChar(255)
 }
