@@ -45,7 +45,7 @@ test();
 
 // Load data to table
 async function loadTableData() {
-  const { data: tableData, error } = await _supabase.from("med_forms").select("*");
+  const { data: tableData1, error } = await _supabase.from("med_forms").select("*");
 
   if (error) {
     console.log("Error loading table data:", error.message);
@@ -56,7 +56,7 @@ async function loadTableData() {
   const tableBody = document.querySelector("#medform_table tbody");
   // Call the table
 
-  if (tableData.length === 0) {
+  if (tableData1.length === 0) {
     // If no data in Supabase
     const newRow = document.createElement("tr");
     newRow.innerHTML = `
@@ -65,12 +65,11 @@ async function loadTableData() {
     tableBody.appendChild(newRow);
     console.log("no zata");
   } else {
-    tableData.forEach((row) => {
+    tableData1.forEach((row) => {
       const newRow = document.createElement("tr");
       newRow.classList.add("res");
 
       newRow.innerHTML = `
-                 <th class="row idcol">${row.row_id}</th>
                  <th class="row idcol">${row.patient_id}</th>
                  <th class="row namecol">${row.patient_name}</th>
                  <th class="row timecol">${row.date_created}</th>
