@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+    <title>Add Patients</title>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <div class="logo">
+                <img src="" alt="DLSUD logo">
+            </div>
+            <div class="user">
+                <div class="userpic">
+                    <img src="" alt="userpic">
+                </div>
+                <div class="username">
+                    <h4>username</h4>
+                    <h6>userid</h6>
+                </div>
+                <div class="burger">
+                    <button>burger</button>
+                </div>
+            </div>
+        </div>
+        <div class="addp">
+            <h1>Add Patient</h1>
+            <div class="patienttypebutt">
+                <button id="studupbutt" onclick="stud()" >Student</button>
+                <button id="empupbutt" onclick="emp()">Emloyee</button>
+            </div>
+            <div class="cont1a">
+                <form id="insertstudmedform" class="uploadmedform1">
+                        <input type="text" id="uname" placeholder="Enter Student's Name...">
+                        <input type="text" id="uname" placeholder="Enter Student's ID...">
+    
+                        <label for="medform">Upload Medical Form</label>
+                        <input type="file" id="medform" name="medform" multiple>
+    
+                        <label for="dentalrec">Upload Dental Record</label>
+                        <input type="file" id="dentalrec" name="dentalrec" multiple>
+    
+                        <label for="xray">Upload X-ray Image</label>
+                        <input type="file" id="xray" name="xray" multiple>
+                   
+                    <button>Submit</button>
+                </form>
+    
+                <form id="insertempmedform" class="uploadmedform2 hidden">
+                        <input type="text" id="uname" placeholder="Enter Emloyee's Name...">
+                        <input type="text" id="uname" placeholder="Enter Emloyee's ID...">
+    
+                        <label for="medform">Upload Medical Form</label>
+                        <input type="file" id="medform" name="medform" multiple>
+    
+                        <label for="dentalrec">Upload Dental Record</label>
+                        <input type="file" id="dentalrec" name="dentalrec" multiple>
+    
+                        <label for="xray">Upload X-ray Image</label>
+                        <input type="file" id="xray" name="xray" multiple>
+                   
+                    <button>Submit</button>
+                </form> 
+            </div>
+        </div>
+    </div>
+
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

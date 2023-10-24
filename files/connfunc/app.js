@@ -2,7 +2,7 @@
 
 //nav functions
 function ToMedRec() {
-  window.location.href = "medicalrecords.html";
+  window.location.href = "/webpages/medicalrecords.html";
 }
 function ToDenRec() {
   window.location.href = "dentalrecords.html";
