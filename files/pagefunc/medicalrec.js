@@ -20,7 +20,7 @@ $('#insertstudmedform').submit(async function (event) {
 
     try {
         // Check if the 'name' already exists in the 'med_forms1' table
-        const { data: existingData, error } = await _supabase.from('med_forms1').select('*').eq('name', name);
+        const { data: existingData, error } = await _supabase.from('med_forms1').select('*').eq('patient_name', name);
 
         if (error) {
             console.log("Error checking existing data:", error.message);
@@ -43,13 +43,14 @@ $('#insertstudmedform').submit(async function (event) {
             return;
         }
 
-        const medformURL = `${SUPABASE_URL}/storage/v1/object/public/records/${fileName}`;
+        const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
 
         const medformInfo = {
-            name: name,
-            id: id,
+            patient_name: name,
+            patient_id: id,
             course_section: cs,
             location: loc,
+            added_by: "(depends on login)",
             med_form: medformURL,
         };
 
