@@ -52,7 +52,7 @@ $('#insertstudmedform').submit(async function (event) {
             course_section: cs,
             location: loc,
             added_by: "(depends on login)",
-            med_form: mf,
+            med_file: mf,
         };
 
         // Insert data into the 'med_forms1' table
