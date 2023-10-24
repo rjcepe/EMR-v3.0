@@ -14,9 +14,10 @@ $('#insertstudmedform').submit(async function (event) {
     const id = $('#studid').val();
     const cs = $('#studcs').val();
     const loc = $('#locsel').val();
+    const mf = $('#medform').val();
 
-    const medformInput = document.getElementById('medform');
-    const medformFile = medformInput.files[0];
+    // const medformInput = document.getElementById('medform');
+    // const medformFile = medformInput.files[0];
 
     try {
         // // Check if the 'name' already exists in the 'med_forms1' table
@@ -33,17 +34,17 @@ $('#insertstudmedform').submit(async function (event) {
         // }
 
         // Change the filename to "(name inputted)_medform"
-        const fileName = `${name}_medform.${medformFile.name.split('.').pop()}`;
+        // const fileName = `${name}_medform.${medformFile.name.split('.').pop()}`;
 
         // Upload the file to Supabase storage with the modified filename
-        const { data, error: uploadError } = await _supabase.storage.from('records').upload(fileName, medformFile);
+        // const { data, error: uploadError } = await _supabase.storage.from('medicalrecords').upload(fileName, medformFile);
 
-        if (uploadError) {
-            console.error('Error uploading file:', uploadError.message);
-            return;
-        }
+        // if (uploadError) {
+        //     console.error('Error uploading file:', uploadError.message);
+        //     return;
+        // }
 
-        const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
+        // const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
 
         const medformInfo = {
             patient_name: name,
@@ -51,7 +52,7 @@ $('#insertstudmedform').submit(async function (event) {
             course_section: cs,
             location: loc,
             added_by: "(depends on login)",
-            med_form: medformURL,
+            med_form: mf,
         };
 
         // Insert data into the 'med_forms1' table

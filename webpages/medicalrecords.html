@@ -139,14 +139,15 @@
                             <label for="loc">Location:</label>
                             <select name="loc" id="locsel">
                                 <option disabled selected value> -- Select Location -- </option>
-                                <option value="#">East Clinic</option>
-                                <option value="#">West Clinic</option>
-                                <option value="#">SHS Clinic</option>
+                                <option value="East Clinic">East Clinic</option>
+                                <option value="West Clinic">West Clinic</option>
+                                <option value="SHS Clinic">SHS Clinic</option>
                             </select>
                         </div>
                         <hr>
                         <label for="medform">Upload Medical Record</label>
-                        <input type="file" id="medform" name="medform" multiple>
+                        <input type="text" id="medform" name="medform" multiple>
+                        <!-- <input type="file" id="medform" name="medform" multiple> -->
 
                         <button class="submitp">Submit</button>
                     </form>
