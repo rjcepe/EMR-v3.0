@@ -12,7 +12,7 @@ $('#insertstudmedform').submit(async function (event) {
     const name = $('#studname').val();
     const id = $('#studid').val();
     const cs = $('#studcs').val();
-    const loc = $('#locsel').val();
+    const loc1 = $('#locsel').val();
     const mf = $('#medform').val();
     
     // const medformInput = document.getElementById('medform');
@@ -47,16 +47,16 @@ $('#insertstudmedform').submit(async function (event) {
         // const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
 
         const medformInfo = {
-            patient_name: name,
             patient_id: id,
+            patient_name: name,
             course_section: cs,
-            location: loc,
+            location: loc1,
             added_by: "(depends on login)",
             med_file: mf,
         };
 
         // Insert data into the 'med_forms1' table
-        const { data: insertData, error: insertError } = await _supabase.from('med_forms1').insert(medformInfo);
+        const { data: insertData, error: insertError } = await _supabase.from('med_forms').insert(medformInfo);
 
         if (insertError) {
             console.error('Error inserting data:', insertError.message);

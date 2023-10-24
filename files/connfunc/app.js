@@ -41,7 +41,7 @@ test();
 
 ///////////////////////////////////// Load data to table
 async function loadTableData() {
-  const { data: tableData1, error } = await _supabase.from('med_forms1').select("*");
+  const { data: tableData1, error } = await _supabase.from('med_forms').select("*");
 
   if (error) {
     console.log("Error loading table data:", error.message);
