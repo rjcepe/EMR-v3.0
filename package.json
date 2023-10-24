@@ -4,5 +4,16 @@
     "@supabase/supabase-js": "^2.38.2",
     "create-html-project": "^1.0.1",
     "node": "^21.0.0"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "emr-v3.0",
+  "description": "",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
