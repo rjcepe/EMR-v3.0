@@ -279,7 +279,7 @@ button{
     display: flex ;
 }
 .sidenav{
-    background-image: url(/navicons/sidebg2.JPG);
+    background-image: url(/files/images/sidebg2.JPG);
     background-size: cover;
     left: 0px;
     position: relative;
