@@ -8,7 +8,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 $('#insertstudmedform').submit(async function (event) {
     event.preventDefault();
-
+    console.log("sssss");
     // Get form field values
     const name = $('#studname').val();
     const id = $('#studid').val();
