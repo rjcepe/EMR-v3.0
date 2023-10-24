@@ -8,18 +8,18 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 $('#insertstudmedform').submit(async function (event) {
     event.preventDefault();
-    console.log("sssss");
     // Get form field values
     const name = $('#studname').val();
     const id = $('#studid').val();
     const cs = $('#studcs').val();
     const loc = $('#locsel').val();
     const mf = $('#medform').val();
-
+    
     // const medformInput = document.getElementById('medform');
     // const medformFile = medformInput.files[0];
-
+    
     try {
+        console.log("sssss");
         // // Check if the 'name' already exists in the 'med_forms1' table
         // const { data: existingData, error } = await _supabase.from('med_forms1').select('*').eq('patient_name', name);
 
@@ -68,3 +68,5 @@ $('#insertstudmedform').submit(async function (event) {
         console.error('Error:', error.message);
     }
 });
+
+console.log("ssss2343asdadas");
