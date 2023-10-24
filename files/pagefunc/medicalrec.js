@@ -19,18 +19,18 @@ $('#insertstudmedform').submit(async function (event) {
     const medformFile = medformInput.files[0];
 
     try {
-        // Check if the 'name' already exists in the 'med_forms1' table
-        const { data: existingData, error } = await _supabase.from('med_forms1').select('*').eq('patient_name', name);
+        // // Check if the 'name' already exists in the 'med_forms1' table
+        // const { data: existingData, error } = await _supabase.from('med_forms1').select('*').eq('patient_name', name);
 
-        if (error) {
-            console.log("Error checking existing data:", error.message);
-            return;
-        }
+        // if (error) {
+        //     console.log("Error checking existing data:", error.message);
+        //     return;
+        // }
 
-        if (existingData.length > 0) {
-            console.log("Data already exists for this name:", existingData);
-            return;
-        }
+        // if (existingData.length > 0) {
+        //     console.log("Data already exists for this name:", existingData);
+        //     return;
+        // }
 
         // Change the filename to "(name inputted)_medform"
         const fileName = `${name}_medform.${medformFile.name.split('.').pop()}`;
