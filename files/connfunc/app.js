@@ -5,28 +5,25 @@ function ToMedRec() {
   window.location.href = "/webpages/medicalrecords.html";
 }
 function ToDenRec() {
-  window.location.href = "dentalrecords.html";
+  window.location.href = "/webpages/dentalrecords.html";
 }
 function ToXray() {
-  window.location.href = "xray.html";
+  window.location.href = "/webpages/xray.html";
 }
 function ToAccRec() {
-  window.location.href = "accidentrec.html";
+  window.location.href = "/webpages/accidentrec.html";
 }
 function ToConRec() {
-  window.location.href = "consultationrec.html";
+  window.location.href = "/webpages/consultationrec.html";
 }
 function ToMedCert() {
-  window.location.href = "medcerts.html";
+  window.location.href = "/webpages/medcerts.html";
 }
 function ToAccCen() {
-  window.location.href = "accidentcensus.html";
+  window.location.href = "/webpages/accidentcensus.html";
 }
 function logout() {
-  window.location.href = "index.html";
-}
-function ToPresc() {
-  window.location.href = "presc.html";
+  window.location.href = "/webpages/index.html";
 }
 
 // supabase connection
