@@ -45,9 +45,7 @@ test();
 
 // Load data to table
 async function loadTableData() {
-  const { data: tableData, error } = await _supabase
-    .from("med_forms")
-    .select("*");
+  const { data: tableData, error } = await _supabase.from("med_forms").select("*");
 
   if (error) {
     console.log("Error loading table data:", error.message);
@@ -72,6 +70,7 @@ async function loadTableData() {
       newRow.classList.add("res");
 
       newRow.innerHTML = `
+                 <th class="row idcol">${row.row_id}</th>
                  <th class="row idcol">${row.patient_id}</th>
                  <th class="row namecol">${row.patient_name}</th>
                  <th class="row timecol">${row.date_created}</th>
