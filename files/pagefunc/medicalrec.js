@@ -36,7 +36,7 @@ $('#insertstudmedform').submit(async function (event) {
         const fileName = `${name}_medform.${medformFile.name.split('.').pop()}`;
 
         // Upload the file to Supabase storage with the modified filename
-        const { data: uploadData, error: uploadError } = await _supabase.storage.from('records').upload(fileName, medformFile);
+        const { data, error: uploadError } = await _supabase.storage.from('records').upload(fileName, medformFile);
 
         if (uploadError) {
             console.error('Error uploading file:', uploadError.message);
@@ -55,13 +55,13 @@ $('#insertstudmedform').submit(async function (event) {
         };
 
         // Insert data into the 'med_forms1' table
-        const { data: insertData, error: insertError } = await _supabase.from('med_forms1').insert([medformInfo]);
+        const { data: insertData, error: insertError } = await _supabase.from('med_forms1').insert(medformInfo);
 
         if (insertError) {
             console.error('Error inserting data:', insertError.message);
         } else {
             console.log('Data inserted successfully:', insertData);
-            location.reload();
+            // location.reload();
         }
     } catch (error) {
         console.error('Error:', error.message);
