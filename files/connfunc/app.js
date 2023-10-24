@@ -68,7 +68,7 @@ async function loadTableData() {
       newRow.innerHTML = `
                  <th class="row idcol">${row.patient_id}</th>
                  <th class="row namecol">${row.patient_name}</th>
-                 <th class="row timecol">${row.date_created}</th>
+                 <th class="row timecol">${row.created_date}</th>
                  <th class="row coursecol">${row.course_section}</th>
                  <th class="row timecol">${row.location}</th>
                  <th class="row timecol">${row.added_by}</th>
