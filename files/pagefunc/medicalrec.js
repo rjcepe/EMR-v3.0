@@ -66,7 +66,10 @@ $("#insertstudmedform").submit(async function (event) {
     const medformInput = document.getElementById('medform');
     const medformFile = medformInput.files[0];
 
-    // Perform the insert operation with both name and medform
+    const user = "(default value)";
+
+    // Initialize the 'user' variable outside the try-catch block
+
     try {
         // Change the filename to "(name inputted)_medform"
         const fileName = `${id}_medform.${medformFile.name.split('.').pop()}`;
@@ -89,8 +92,9 @@ $("#insertstudmedform").submit(async function (event) {
             console.error("Error fetching username:", error.message);
         } else {
             if (data1 && data1.length > 0) {
-                const username1 = data1[0].username; // Use 'data1' instead of 'data'
-                const user = username1; // Now, 'user' will contain the exact value of the username
+                const user = data1[0].username;
+                 // Assign the value to 'user'
+                return user;
             } else {
                 console.log("User not found with ID:", id1);
             }
@@ -101,7 +105,7 @@ $("#insertstudmedform").submit(async function (event) {
             patient_name: name,
             course_section: cs,
             location: loc1,
-            added_by: user, // Use 'user' variable here
+            added_by: user, // Now, 'user' is defined in the same scope
             med_file: medformURL,
         };
 
@@ -120,6 +124,7 @@ $("#insertstudmedform").submit(async function (event) {
         console.error("Error:", error.message);
     }
 });
+
 
 
 
