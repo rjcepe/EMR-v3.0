@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="/files/styles.css">
     <title>Login</title>
 </head>
@@ -17,15 +17,16 @@
                 <form id="loginform" class="logform">
                     <div class="input-container">
                         <i class="icon fas fa-user"></i>
-                        <input type="text" id="uname" placeholder="Enter User ID...">
+                        <input type="text" id="uid" placeholder="Enter User ID...">
                     </div>
                     <div class="input-container">
                         <i class="icon fas fa-lock"></i>
                         <input type="password" id="pw" placeholder="Enter Password...">
                     </div>
-                    <!-- <button class="loginbutt" onclick="ToMedRec()">LOGIN</button> -->
+                    <button class="loginbutt">LOGIN</button>
                 </form>
-                    <button class="loginbutt" onclick="ToMedRec()">LOGIN</button>
+                    <p id="message"></p>
+                    <!-- <button class="loginbutt" onclick="ToMedRec()">LOGIN</button> -->
             </div>
             <div class="botlog">
                 <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved   </p>
@@ -33,5 +34,6 @@
         </div>
     </div>
     <script src="/files/connfunc/app.js"></script>
+    <script src="/files/pagefunc/login.js"></script>
 </body>
 </html>
