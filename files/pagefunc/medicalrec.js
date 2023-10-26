@@ -126,6 +126,22 @@ async function fetchUsername() {
         const username = data[0].username;
         console.log(username);
 
+        const usertab = document.querySelector(".username");
+
+    if (usertab) {
+        h4 = document.createElement('h4');
+        h4.innerHTML = username;
+
+        h6 = document.createElement('h6');
+        h6.innerHTML = id1;
+
+        usertab.appendChild(h4);
+        usertab.appendChild(h6);
+    } else {
+        console.error("Element with class 'vfile' not found.");
+    }
+
+
         // Now, you can use the 'username' variable as needed.
     } else {
         console.log("User not found with ID:", id);
