@@ -8,14 +8,21 @@ datasource db {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model med_forms1 {
-  row_id         BigInt    @id(map: "med_forms_pkey") @default(autoincrement())
+model med_forms {
+  row_id         BigInt    @id @default(autoincrement())
   patient_id     Int
   patient_name   String?
-  date_created   DateTime? @db.Date
   course_section String?
   location       String?
   added_by       String?
   med_file       String?
+  created_date   DateTime? @db.Date
+  yim            DateTime? @db.Timestamptz(6)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user_accs {
+  id       BigInt  @id @default(autoincrement())
+  username String
+  password String?
 }

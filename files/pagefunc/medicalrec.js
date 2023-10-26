@@ -55,121 +55,142 @@ async function loadTableData() {
 loadTableData();
 
 $("#insertstudmedform").submit(async function (event) {
-    event.preventDefault();
-    // Get form field values
-    const name = $("#studname").val();
-    const id = $("#studid").val();
-    const cs = $("#studcs").val();
-    const loc1 = $("#locsel").val();
-    var id1 = localStorage.getItem('uid1');
+  event.preventDefault();
+  // Get form field values
+  const name = $("#studname").val();
+  const id = $("#studid").val();
+  const cs = $("#studcs").val();
+  const loc1 = $("#locsel").val();
 
-    const medformInput = document.getElementById('medform');
-    const medformFile = medformInput.files[0];
+  const medformInput = document.getElementById("medform");
+  const medformFile = medformInput.files[0];
 
-    const user = "(default value)";
+  // Initialize the 'user' variable outside the try-catch block
 
-    // Initialize the 'user' variable outside the try-catch block
+  try {
+    // Change the filename to "(name inputted)_medform"
+    const fileName = `${id}_medform.${medformFile.name.split(".").pop()}`;
 
-    try {
-        // Change the filename to "(name inputted)_medform"
-        const fileName = `${id}_medform.${medformFile.name.split('.').pop()}`;
-                
-        // Upload the file to Supabase storage with the modified filename
-        const { data, error: uploadError } = await _supabase.storage.from('medicalrecords').upload(fileName, medformFile);
+    // Upload the file to Supabase storage with the modified filename
+    const { data, error: uploadError } = await _supabase.storage
+      .from("medicalrecords")
+      .upload(fileName, medformFile);
 
-        if (uploadError) {
-            console.error('Error uploading file:', uploadError);
-            return;
-        }
-                
-        const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;  // Fixed the URL formation
-
-        console.log("sssss");
-
-        const { data1, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
-
-        if (error) {
-            console.error("Error fetching username:", error.message);
-        } else {
-            if (data1 && data1.length > 0) {
-                const user = data1[0].username;
-                 // Assign the value to 'user'
-                console.log("user", user);
-            } else {
-                console.log("User not found with ID:", id1);
-            }
-        }
-
-        const medformInfo = {
-            patient_id: id,
-            patient_name: name,
-            course_section: cs,
-            location: loc1,
-            added_by: user,
-            med_file: medformURL,
-        };
-
-        // Insert data into the 'med_forms1' table
-        const { data: insertData, error: insertError } = await _supabase
-            .from("med_forms")
-            .insert(medformInfo);
-
-        if (insertError) {
-            console.error("Error inserting data:", insertError.message);
-        } else {
-            console.log("Data inserted successfully:", insertData);
-            location.reload();
-        }
-    } catch (error) {
-        console.error("Error:", error.message);
+    if (uploadError) {
+      console.error("Error uploading file:", uploadError);
+      return;
     }
+
+    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
+
+    console.log("sssss");
+
+    const medformInfo = {
+      patient_id: id,
+      patient_name: name,
+      course_section: cs,
+      location: loc1,
+      med_file: medformURL,
+    };
+
+    // Insert data into the 'med_forms1' table
+    const { data: insertData, error: insertError } = await _supabase
+      .from("med_forms")
+      .insert(medformInfo);
+
+    if (insertError) {
+      console.error("Error inserting data:", insertError.message);
+    } else {
+      console.log("Data inserted successfully:", insertData);
+      location.reload();
+    }
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
 });
 
+$("#insertstudmedform").submit(async function (event) {
+  event.preventDefault();
 
+  var id1 = localStorage.getItem("uid1");
+  // Initialize the 'user' variable outside the try-catch block
 
+  try {
+    const { data1, error } = await _supabase.from("user_accs").select("username").eq("id", id1);
 
+    if (error) {
+      console.error("Error fetching username:", error.message);
+    } else {
+      if (data1 && data1.length > 0) {
+        const user = data1[0].username;
+        // Assign the value to 'user'
+        console.log("user", user);
+
+        const medformInfo = {
+          added_by: user,
+        };
+        const { data: insertData, error: insertError } = await _supabase
+          .from("med_forms")
+          .insert(medformInfo);
+
+        if (insertError) {
+          console.error("Error inserting data:", insertError.message);
+        } else {
+          console.log("Data inserted successfully:", insertData);
+          location.reload();
+        }
+      } else {
+        console.log("User not found with ID:", id1);
+      }
+    }
+
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+});
 
 // Define an async function to fetch the username
 async function fetchUsername() {
-    var id1 = localStorage.getItem('uid1');
+  var id1 = localStorage.getItem("uid1");
 
-    const { data, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
+  const { data, error } = await _supabase
+    .from("user_accs")
+    .select("username")
+    .eq("id", id1);
 
-    if (error) {
-        console.error("Error fetching username:", error.message);
-        return;
-    }
+  if (error) {
+    console.error("Error fetching username:", error.message);
+    return;
+  }
 
-    // Check if data is not empty
-    if (data && data.length > 0) {
-        const username = data[0].username;
-        console.log(username);
+  // Check if data is not empty
+  if (data && data.length > 0) {
+    const username = data[0].username;
+    console.log(username);
 
-        const usertab = document.querySelector(".username");
+    const usertab = document.querySelector(".username");
 
-        if (usertab) {
-            h4 = document.createElement('h4');
-            h4.innerHTML = username;
+    if (usertab) {
+      h4 = document.createElement("h4");
+      h4.innerHTML = username;
 
-            h6 = document.createElement('h6');
-            h6.innerHTML = id1;
+      h6 = document.createElement("h6");
+      h6.innerHTML = id1;
 
-            usertab.appendChild(h4);
-            usertab.appendChild(h6);
+      usertab.appendChild(h4);
+      usertab.appendChild(h6);
     } else {
-        console.error("Element with class 'vfile' not found.");
+      console.error("Element with class 'vfile' not found.");
     }
 
-
-        // Now, you can use the 'username' variable as needed.
-    } else {
-        console.log("User not found with ID:", id);
-    }
+    // Now, you can use the 'username' variable as needed.
+  } else {
+    console.log("User not found with ID:", id);
+  }
 }
 
 // Call the async function to fetch the username
 fetchUsername();
-
 
 //show results
 // Define filec and name1 in a broader scope
@@ -177,43 +198,42 @@ let filec;
 let name1;
 
 function showv(url, name) {
-    const vfile = document.querySelector(".main2");
-    const main = document.querySelector(".main");
-    const file = document.querySelector(".vfile");
+  const vfile = document.querySelector(".main2");
+  const main = document.querySelector(".main");
+  const file = document.querySelector(".vfile");
 
-    if (file) {
-        filec = document.createElement('embed');
-        filec.classList.add('xfile');
-        filec.setAttribute('src', url);
+  if (file) {
+    filec = document.createElement("embed");
+    filec.classList.add("xfile");
+    filec.setAttribute("src", url);
 
-        name1 = document.createElement('p');
-        name1.id = "dispname";
-        name1.innerHTML = name;
+    name1 = document.createElement("p");
+    name1.id = "dispname";
+    name1.innerHTML = name;
 
-        file.appendChild(filec);
-        file.appendChild(name1);
-    } else {
-        console.error("Element with class 'vfile' not found.");
-    }
+    file.appendChild(filec);
+    file.appendChild(name1);
+  } else {
+    console.error("Element with class 'vfile' not found.");
+  }
 
-    main.classList.add("main-filter");
-    vfile.classList.add("showv");
-    vfile.classList.remove("hidev");
+  main.classList.add("main-filter");
+  vfile.classList.add("showv");
+  vfile.classList.remove("hidev");
 }
 
 function hidev() {
-    const vfile = document.querySelector(".main2");
-    const main = document.querySelector(".main");
-    const file = document.querySelector(".vfile");
+  const vfile = document.querySelector(".main2");
+  const main = document.querySelector(".main");
+  const file = document.querySelector(".vfile");
 
-    // Check if filec and name1 are defined before removing them
-    if (filec && name1) {
-        file.removeChild(filec);
-        file.removeChild(name1);
-    }
+  // Check if filec and name1 are defined before removing them
+  if (filec && name1) {
+    file.removeChild(filec);
+    file.removeChild(name1);
+  }
 
-    main.classList.remove("main-filter");
-    vfile.classList.add("hidev");
-    vfile.classList.remove("showv");
+  main.classList.remove("main-filter");
+  vfile.classList.add("hidev");
+  vfile.classList.remove("showv");
 }
-
