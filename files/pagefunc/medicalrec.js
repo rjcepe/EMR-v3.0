@@ -83,19 +83,36 @@ $("#insertstudmedform").submit(async function (event) {
 
         console.log("sssss");
     
-    var id1 = localStorage.getItem('uid1');
+        var id1 = localStorage.getItem('uid1');
 
-    const { username1, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
-
-
-        const medformInfo = {
-            patient_id: id,
-            patient_name: name,
-            course_section: cs,
-            location: loc1,
-            added_by: username1,
-            med_file: medformURL,
-        };
+        try {
+            const { data, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
+        
+            if (error) {
+                console.error("Error fetching username:", error.message);
+            } else {
+                // Check if data is not empty
+                if (data && data.length > 0) {
+                    const username1 = data[0].username;
+        
+                    const medformInfo = {
+                        patient_id: id,
+                        patient_name: name,
+                        course_section: cs,
+                        location: loc1,
+                        added_by: username1,
+                        med_file: medformURL,
+                    };
+        
+                    // Now, you can use the 'username1' in 'medformInfo' as needed.
+                } else {
+                    console.log("User not found with ID:", id1);
+                }
+            }
+        } catch (error) {
+            console.error("Error:", error.message);
+        }
+        
 
         // Insert data into the 'med_forms1' table
         const { data: insertData, error: insertError } = await _supabase
