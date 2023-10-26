@@ -108,10 +108,14 @@ $("#insertstudmedform").submit(async function (event) {
     }
 });
 
-// const { data: usernameData, error: usernameError } = await _supabase.from('user_accs').select('username').eq('id', idInput);
 
 var gg = localStorage.getItem('uname');
+
+const usernameData = await _supabase.from('user_accs').select('username').eq('id', gg);
+
 console.log(gg);
+console.log(usernameData);
+
 
 //show results
 // Define filec and name1 in a broader scope
