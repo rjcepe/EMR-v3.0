@@ -7,7 +7,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const test = () => {
     console.log(supabase);
-    console.log("connection is tagumpay, laro ka na muna ulit :)");
+    console.log("Supabase Connected");
 }
 test();
 
@@ -30,7 +30,7 @@ loginForm.addEventListener("submit", async function (event) {
 
         if (data.length === 0) {
             console.log("User ID not found");
-            message.innerText = "Invalid credentials";
+            message.innerText = "!! User ID not found !!";
             return;
         }
 
@@ -41,8 +41,8 @@ loginForm.addEventListener("submit", async function (event) {
             // Redirect to the desired webpage upon successful login
             window.location.href = "/webpages/medicalrecords.html";
         } else {
-            console.log("Invalid credentials");
+            console.log("Password Incorrect");
             message.classList.add("loginfailed");
-            message.innerText = "Login failed. Please check your credentials.";
+            message.innerText = "!! Password Incorrect !!";
         }
     });
