@@ -54,6 +54,7 @@ async function loadTableData() {
 
 loadTableData();
 
+/////////////////////////////////// Upload student info
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
   // Get form field values
@@ -111,6 +112,62 @@ $("#insertstudmedform").submit(async function (event) {
   }
 });
 
+/////////////////////////////////////////// Upload employee info
+$("#insertempmedform").submit(async function (event) {
+    event.preventDefault();
+    // Get form field values
+    const name = $("#empname").val();
+    const id = $("#empid").val();
+    const loc1 = $("#locsel").val();
+    const add1 = $("#addedby").val();
+  
+    const medformInput = document.getElementById("medform");
+    const medformFile = medformInput.files[0];
+  
+    // Initialize the 'user' variable outside the try-catch block
+  
+    try {
+      // Change the filename to "(name inputted)_medform"
+      const fileName = `${id}_medform.${medformFile.name.split(".").pop()}`;
+  
+      // Upload the file to Supabase storage with the modified filename
+      const { data, error: uploadError } = await _supabase.storage
+        .from("medicalrecords")
+        .upload(fileName, medformFile);
+  
+      if (uploadError) {
+        console.error("Error uploading file:", uploadError);
+        return;
+      }
+  
+      const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
+  
+      console.log("sssss");
+  
+      const medformInfo = {
+        patient_id: id,
+        patient_name: name,
+        course_section: "Employee",
+        location: loc1,
+        added_by: add1,
+        med_file: medformURL,
+      };
+  
+      // Insert data into the 'med_forms1' table
+      const { data: insertData, error: insertError } = await _supabase
+        .from("med_forms")
+        .insert(medformInfo);
+  
+      if (insertError) {
+        console.error("Error inserting data:", insertError.message);
+      } else {
+        console.log("Data inserted successfully:", insertData);
+        location.reload();
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  });
 
 // Define an async function to fetch the username
 async function fetchUsername() {
