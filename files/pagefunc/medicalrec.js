@@ -44,7 +44,7 @@ async function loadTableData() {
                  <th class="row coursecol">${row.course_section}</th>
                  <th class="row timecol">${row.location}</th>
                  <th class="row timecol">${row.added_by}</th>
-                 <th class="buttscol"><button class="viewbutt" onclick="showv()"><p class="txt">View</p></button></th>
+                 <th class="buttscol"><button class="viewbutt" onclick="showv('${row.med_file}')"><p class="txt">View</p></button></th>
                  `;
       tableBody.appendChild(newRow);
       console.log("yes zata");
@@ -63,7 +63,35 @@ $("#insertstudmedform").submit(async function (event) {
   const cs = $("#studcs").val();
   const loc1 = $("#locsel").val();
 
-  generateAndUploadPDF();
+  const medformInput = document.getElementById('medform');
+const medformFile = medformInput.files[0];
+
+            // Perform the insert operation with both name and medform
+            try {
+                const { data: existingData, error } = await _supabase.from('table_name').select('*').eq('name', name);
+
+                if (error) {
+                    console.log("errorrr", error.message);
+                    return;
+                }
+
+                if (existingData.length > 1) {
+                    console.log("Already Existing", existingData);
+                    return;
+                }
+
+                // Change the filename to "(name inputted)_medform"
+                const fileName = `${name}_medform.${medformFile.name.split('.').pop()}`;
+                
+                // Upload the file to Supabase storage with the modified filename
+                const { data, error: uploadError } = await _supabase.storage.from('medicalrecords').upload(fileName, medformFile);
+
+                if (uploadError) {
+                    console.error('Error uploading file:', uploadError);
+                    return;
+                }
+                
+                const medformURL = SUPABASE_URL + "/storage/v1/object/public/records/"+ fileName; //improvised link
 
   try {
     console.log("sssss");
@@ -74,6 +102,7 @@ $("#insertstudmedform").submit(async function (event) {
       course_section: cs,
       location: loc1,
       added_by: "(depends on login)",
+      med_file: medformURL,
     };
 
     // Insert data into the 'med_forms1' table
@@ -92,54 +121,22 @@ $("#insertstudmedform").submit(async function (event) {
   }
 });
 
-// Function to generate PDF from an uploaded file
-
-async function generateAndUploadPDF() {
-    const medformFileInput = document.getElementById("medform");
-    const medformFile = medformFileInput.files[0]; // Assuming you're dealing with a single file
-  
-    if (!medformFile) {
-      console.error("No file selected.");
-      return;
-    }
-  
-    try {
-      // Generate a new PDF instance
-      const pdf = new jsPDF();
-  
-      // You would need to adjust this part based on how you want to convert the uploaded file to PDF.
-      // For example, if it's an image, you might use a library like "html2canvas" or "pdf-lib" to add the image to the PDF.
-      // Below is a simple example assuming it's an image.
-      const image = new Image();
-      image.src = URL.createObjectURL(medformFile);
-      await image.decode();
-  
-      pdf.addImage(image, "JPEG", 10, 10, 100, 100); // Adjust position and size as needed
-  
-      // Save the generated PDF to a data URL
-      const pdfDataUri = pdf.output("datauristring");
-  
-      // Upload the PDF to Supabase storage
-      const { data, error: uploadError } = await _supabase.storage.from("medicalrecords").upload("generated.pdf", pdfDataUri);
-  
-      if (uploadError) {
-        console.error("Error uploading PDF to Supabase:", uploadError);
-        return;
-      }
-  
-      console.log("PDF uploaded successfully to Supabase.");
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-    }
-  }
-
 
 console.log("ssss2343asdadas");
 
 //show results
-function showv() {
+function showv(url) {
   const vfile = document.querySelector(".main2");
   const main = document.querySelector(".main");
+  const file = document.querySelector(".vifle")
+
+  const filec = document.createElement('embed');
+  filec.classList.add('xfile');
+  filec.setAttribute('src', url);
+
+
+  file.appendChild(filec);
+
 
   main.classList.add("main-filter");
   vfile.classList.add("showv");
