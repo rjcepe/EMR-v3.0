@@ -82,13 +82,18 @@ $("#insertstudmedform").submit(async function (event) {
         const medformURL = SUPABASE_URL + "/storage/v1/object/public/medicalrecords/" + fileName;  // Fix this line
 
         console.log("sssss");
+    
+    var id1 = localStorage.getItem('uid1');
+
+    const { username1, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
+
 
         const medformInfo = {
             patient_id: id,
             patient_name: name,
             course_section: cs,
             location: loc1,
-            added_by: "(depends on login)",
+            added_by: username1,
             med_file: medformURL,
         };
 
@@ -128,15 +133,15 @@ async function fetchUsername() {
 
         const usertab = document.querySelector(".username");
 
-    if (usertab) {
-        h4 = document.createElement('h4');
-        h4.innerHTML = username;
+        if (usertab) {
+            h4 = document.createElement('h4');
+            h4.innerHTML = username;
 
-        h6 = document.createElement('h6');
-        h6.innerHTML = id1;
+            h6 = document.createElement('h6');
+            h6.innerHTML = id1;
 
-        usertab.appendChild(h4);
-        usertab.appendChild(h6);
+            usertab.appendChild(h4);
+            usertab.appendChild(h6);
     } else {
         console.error("Element with class 'vfile' not found.");
     }
