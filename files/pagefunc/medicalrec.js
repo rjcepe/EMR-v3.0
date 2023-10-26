@@ -93,7 +93,6 @@ $("#insertstudmedform").submit(async function (event) {
 });
 
 // Function to generate PDF from an uploaded file
-import { jsPDF } from "jspdf";
 
 async function generateAndUploadPDF() {
     const medformFileInput = document.getElementById("medform");
