@@ -87,15 +87,16 @@ $("#insertstudmedform").submit(async function (event) {
 
     console.log("sssss");
 
-    let uzer;
 
     const { data1 } = await _supabase.from("user_accs").select("username").eq("id", id1);
 
     if (data1 && data1.length > 0) {
         const username = data[0].username;
+
         console.log(username);
-        uzer = username;
+        localStorage.setItem('uname1', username);
     }
+    const uzer = localStorage.getItem("uname1");
 
     const medformInfo = {
       patient_id: id,
