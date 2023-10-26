@@ -118,8 +118,8 @@ $("#insertempmedform").submit(async function (event) {
     // Get form field values
     const name1 = $("#empname").val();
     const id1 = $("#empid").val();
-    const loc1 = $("#locsel").val();
-    const add1 = $("#addedby").val();
+    const loc1 = $("#locsel1").val();
+    const add1 = $("#addedby1").val();
   
     const medformInput = document.getElementById("medform2");
     const medformFile = medformInput.files[0];
