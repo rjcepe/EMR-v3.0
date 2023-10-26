@@ -5,75 +5,78 @@ const SUPABASE_ANON_KEY =
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 ///////////////////////////////////// Load data to table
-async function loadTableData() {
-    const { data: tableData1, error } = await _supabase.from('med_forms').select("*");
-  
-    if (error) {
-      console.log("Error loading table data:", error.message);
-      return;
-    }
-    console.log("hello");
-  
+// Define a variable to store the current sort column and order
+let currentSortColumn = 'ID'; // Default sorting by ID
+let currentSortOrder = 1; // 1 for ascending, -1 for descending
+
+// Function to update the table with sorted data
+function updateTableWithSortedData(tableData, sortColumn, sortOrder) {
     const tableBody = document.querySelector("#medform_table tbody");
-    // Call the table
-  
-    if (tableData1.length === 0) {
-      // If no data in Supabase
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-               <th class="row" colspan="7" ">No zata available</td>
-           `;
-      tableBody.appendChild(newRow);
-      console.log("no zata");
-    } else {
-      tableData1.forEach((row) => {
+
+    // Clear the table
+    tableBody.innerHTML = '';
+
+    // Sort the data based on the selected column and order
+    tableData.sort((a, b) => {
+        const valueA = a[sortColumn];
+        const valueB = b[sortColumn];
+        return sortOrder * (valueA.localeCompare(valueB)); // Use localeCompare for string comparison
+    });
+
+    // Rebuild the table with the sorted data
+    tableData.forEach((row) => {
         const newRow = document.createElement("tr");
         newRow.classList.add("res");
-  
+
         newRow.innerHTML = `
-                   <th class="row idcol">${row.patient_id}</th>
-                   <th class="row namecol">${row.patient_name}</th>
-                   <th class="row timecol">${row.created_date}</th>
-                   <th class="row coursecol">${row.course_section}</th>
-                   <th class="row timecol">${row.location}</th>
-                   <th class="row timecol">${row.added_by}</th>
-                   <th class="buttscol"><button class="viewbutt" onclick="showv()"><p class="txt">View</p></button></th>
-                   `;
+            <th class="row idcol">${row.patient_id}</th>
+            <th class="row namecol">${row.patient_name}</th>
+            <th class="row timecol">${row.created_date}</th>
+            <th class="row coursecol">${row.course_section}</th>
+            <th class="row timecol">${row.location}</th>
+            <th class="row timecol">${row.added_by}</th>
+            <th class="buttscol"><button class="viewbutt" onclick="showv()"><p class="txt">View</p></button></th>
+        `;
         tableBody.appendChild(newRow);
-        console.log("yes zata");
-      });
-    }
-  }
-  
-  loadTableData()
+    });
+}
 
-///////////////////////////////////// sort data
-const sortSelect = document.getElementById('sort1');
-
-sortSelect.addEventListener('change', () => {
-  const selectedOption = sortSelect.value;
-  sortTable(selectedOption);
+// Event listener for the sorting select element
+document.querySelector("#sort1").addEventListener("change", function () {
+    currentSortColumn = this.value;
+    // Toggle the sort order if the same column is selected again
+    currentSortOrder = currentSortOrder * -1;
+    // Reload the table with sorted data
+    updateTableWithSortedData(tableData1, currentSortColumn, currentSortOrder);
 });
 
-function sortTable(selectedOption) {
-    // Clone the table data to prevent modifying the original array
-    const sortedData = [...tableData1];
-  
-    if (selectedOption === 'ID') {
-      sortedData.sort((a, b) => a.patient_id - b.patient_id);
-    } else if (selectedOption === 'TimeLate') {
-      sortedData.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
-    } else if (selectedOption === 'TimeOld') {
-      sortedData.sort((a, b) => new Date(a.created_date) - new Date(b.created_date));
-    } else if (selectedOption === 'Name') {
-      sortedData.sort((a, b) => a.patient_name.localeCompare(b.patient_name));
-    } else if (selectedOption === 'CS') {
-      sortedData.sort((a, b) => a.course_section.localeCompare(b.course_section));
+// Load the initial table data
+async function loadTableData() {
+    const { data: tableData1, error } = await _supabase.from('med_forms').select("*");
+
+    if (error) {
+        console.log("Error loading table data:", error.message);
+        return;
     }
-  
-    // Call the loadTableData function with the sorted data
-    loadTableData(sortedData);
-  }
+
+    // Call the table
+    const tableBody = document.querySelector("#medform_table tbody");
+
+    if (tableData1.length === 0) {
+        // If no data in Supabase
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+            <th class="row" colspan="7">No data available</td>
+        `;
+        tableBody.appendChild(newRow);
+    } else {
+        // Display the initial data
+        updateTableWithSortedData(tableData1, currentSortColumn, currentSortOrder);
+    }
+}
+
+loadTableData();
+
   
 
 
