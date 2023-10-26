@@ -51,4 +51,13 @@ loginForm.addEventListener("submit", async function (event) {
             message.classList.add("loginfailed");
             message.innerText = "!! Password Incorrect !!";
         }
+
+        const { data1 } = await _supabase.from("user_accs").select("username").eq("id", id1);
+
+            if (data1 && data1.length > 0) {
+                var username = data[0].username;
+
+                console.log(username);
+                localStorage.setItem('uname1', username);
+            }
     });
