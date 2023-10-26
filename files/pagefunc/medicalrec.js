@@ -26,6 +26,9 @@ async function loadTableData() {
     tableBody.appendChild(newRow);
     console.log("no zata");
   } else {
+    // Sort the data by the created_date in descending order (latest first)
+    tableData1.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
+    
     tableData1.forEach((row) => {
       const newRow = document.createElement("tr");
       newRow.classList.add("res");
