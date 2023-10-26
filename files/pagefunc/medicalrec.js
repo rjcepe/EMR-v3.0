@@ -54,6 +54,7 @@ async function loadTableData() {
 
 loadTableData();
 
+///////////////////////////////////// insert student medform data to table
 $("#insertstudmedform").submit(async function (event) {
     event.preventDefault();
     // Get form field values
@@ -64,14 +65,6 @@ $("#insertstudmedform").submit(async function (event) {
 
     const medformInput = document.getElementById('medform');
     const medformFile = medformInput.files[0];
-
-    // Define medformInfo here before the try block
-    const medformInfo = {
-        patient_id: id,
-        patient_name: name,
-        course_section: cs,
-        location: loc1,
-    };
 
     // Perform the insert operation with both name and medform
     try {
@@ -86,11 +79,18 @@ $("#insertstudmedform").submit(async function (event) {
             return;
         }
                 
-        const medformURL = SUPABASE_URL + "/storage/v1/object/public/medicalrecords/" + fileName;
+        const medformURL = SUPABASE_URL + "/storage/v1/object/public/medicalrecords/" + fileName;  // Fix this line
 
-        // Update medformInfo with added_by and med_file
-        medformInfo.added_by = username1;
-        medformInfo.med_file = medformURL;
+        console.log("sssss");
+    
+        const medformInfo = {
+            patient_id: id,
+            patient_name: name,
+            course_section: cs,
+            location: loc1,
+            added_by: username1,
+            med_file: medformURL,
+        };
 
         // Insert data into the 'med_forms1' table
         const { data: insertData, error: insertError } = await _supabase
@@ -106,8 +106,32 @@ $("#insertstudmedform").submit(async function (event) {
     } catch (error) {
         console.error("Error:", error.message);
     }
-});
 
+    try {
+    var id1 = localStorage.getItem('uid1');
+    const { username1, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
+    
+    const medformInfo = {
+        added_by: username1,
+    };
+
+    // Insert data into the 'med_forms1' table
+    const { data: insertData, error: insertError } = await _supabase
+        .from("med_forms")
+        .insert(medformInfo);
+
+    if (insertError) {
+        console.error("Error inserting data:", insertError.message);
+    } else {
+        console.log("Data inserted successfully:", insertData);
+        location.reload();
+    }
+
+    }
+    catch (error) {
+    console.error("Error:", error.message);
+}
+});
 
 
 
