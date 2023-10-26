@@ -30,7 +30,7 @@ async function loadTableData() {
   } else {
     // Sort the data by the created_date in descending order (latest first)
     tableData1.sort(
-      (a, b) => new rowid(b.row_id) - new rowid(a.row_id)
+      (a, b) => new Date(b.row_id) - new Date(a.row_id)
     );
 
     tableData1.forEach((row) => {
