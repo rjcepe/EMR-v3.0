@@ -5,7 +5,7 @@ function ToMedRec() {
   window.location.href = "/webpages/medicalrecords.html";
 }
 function ToDenRec() {
-  window.location.href = "/webpages/dentalrecords.html";
+  window.location.href = "dentalrecords.html";
 }
 function ToXray() {
   window.location.href = "/webpages/xray.html";
