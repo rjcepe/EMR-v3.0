@@ -62,6 +62,7 @@ $("#insertstudmedform").submit(async function (event) {
     const id = $("#studid").val();
     const cs = $("#studcs").val();
     const loc1 = $("#locsel").val();
+    var id1 = localStorage.getItem('uid1');
 
     const medformInput = document.getElementById('medform');
     const medformFile = medformInput.files[0];
@@ -82,7 +83,10 @@ $("#insertstudmedform").submit(async function (event) {
         const medformURL = SUPABASE_URL + "/storage/v1/object/public/medicalrecords/" + fileName;  // Fix this line
 
         console.log("sssss");
-    
+        
+        const { data: username1, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
+
+
         const medformInfo = {
             patient_id: id,
             patient_name: name,
@@ -107,30 +111,6 @@ $("#insertstudmedform").submit(async function (event) {
         console.error("Error:", error.message);
     }
 
-    try {
-    var id1 = localStorage.getItem('uid1');
-    const { username1, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
-    
-    const medformInfo = {
-        added_by: username1,
-    };
-
-    // Insert data into the 'med_forms1' table
-    const { data: insertData, error: insertError } = await _supabase
-        .from("med_forms")
-        .insert(medformInfo);
-
-    if (insertError) {
-        console.error("Error inserting data:", insertError.message);
-    } else {
-        console.log("Data inserted successfully:", insertData);
-        location.reload();
-    }
-
-    }
-    catch (error) {
-    console.error("Error:", error.message);
-}
 });
 
 
