@@ -56,70 +56,70 @@ loadTableData();
 
 ///////////////////////////////////// insert student medform data to table
 $("#insertstudmedform").submit(async function (event) {
-  event.preventDefault();
-  // Get form field values
-  const name = $("#studname").val();
-  const id = $("#studid").val();
-  const cs = $("#studcs").val();
-  const loc1 = $("#locsel").val();
+    event.preventDefault();
+    // Get form field values
+    const name = $("#studname").val();
+    const id = $("#studid").val();
+    const cs = $("#studcs").val();
+    const loc1 = $("#locsel").val();
 
-  const medformInput = document.getElementById('medform');
-const medformFile = medformInput.files[0];
+    const medformInput = document.getElementById('medform');
+    const medformFile = medformInput.files[0];
 
-            // Perform the insert operation with both name and medform
-            try {
-                const { data: existingData, error } = await _supabase.from('table_name').select('*').eq('name', name);
+    // Perform the insert operation with both name and medform
+    try {
+        const { data: existingData, error } = await _supabase.from('table_name').select('*').eq('name', name);
 
-                if (error) {
-                    console.log("errorrr", error.message);
-                    return;
-                }
+        if (error) {
+             console.log("errorrr", error.message);
+            return;
+        }
 
-                if (existingData.length > 1) {
-                    console.log("Already Existing", existingData);
-                    return;
-                }
+        if (existingData.length > 1) {
+            console.log("Already Existing", existingData);
+            return;
+        }
 
-                // Change the filename to "(name inputted)_medform"
-                const fileName = `${name}_medform.${medformFile.name.split('.').pop()}`;
+        // Change the filename to "(name inputted)_medform"
+        const fileName = `${name}_medform.${medformFile.name.split('.').pop()}`;
                 
-                // Upload the file to Supabase storage with the modified filename
-                const { data, error: uploadError } = await _supabase.storage.from('medicalrecords').upload(fileName, medformFile);
+        // Upload the file to Supabase storage with the modified filename
+        const { data, error: uploadError } = await _supabase.storage.from('medicalrecords').upload(fileName, medformFile);
 
-                if (uploadError) {
-                    console.error('Error uploading file:', uploadError);
-                    return;
-                }
+        if (uploadError) {
+            console.error('Error uploading file:', uploadError);
+            return;
+        }
                 
-                const medformURL = SUPABASE_URL + "/storage/v1/object/public/records/"+ fileName; //improvised link
+        const medformURL = SUPABASE_URL + "/storage/v1/object/public/records/" + fileName;  // Fix this line
 
-  try {
-    console.log("sssss");
+        console.log("sssss");
 
-    const medformInfo = {
-      patient_id: id,
-      patient_name: name,
-      course_section: cs,
-      location: loc1,
-      added_by: "(depends on login)",
-      med_file: medformURL,
-    };
+        const medformInfo = {
+            patient_id: id,
+            patient_name: name,
+            course_section: cs,
+            location: loc1,
+            added_by: "(depends on login)",
+            med_file: medformURL,
+        };
 
-    // Insert data into the 'med_forms1' table
-    const { data: insertData, error: insertError } = await _supabase
-      .from("med_forms")
-      .insert(medformInfo);
+        // Insert data into the 'med_forms1' table
+        const { data: insertData, error: insertError } = await _supabase
+            .from("med_forms")
+            .insert(medformInfo);
 
-    if (insertError) {
-      console.error("Error inserting data:", insertError.message);
-    } else {
-      console.log("Data inserted successfully:", insertData);
-      location.reload();
+        if (insertError) {
+            console.error("Error inserting data:", insertError.message);
+        } else {
+            console.log("Data inserted successfully:", insertData);
+            location.reload();
+        }
+    } catch (error) {
+        console.error("Error:", error.message);
     }
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
 });
+
 
 
 console.log("ssss2343asdadas");
