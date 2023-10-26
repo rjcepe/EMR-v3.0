@@ -111,7 +111,7 @@ $("#insertstudmedform").submit(async function (event) {
 
 var gg = localStorage.getItem('uname');
 
-const usernameData = await _supabase.from('user_accs').select('username').eq('id', gg);
+const usernameData = _supabase.from('user_accs').select('username').eq('id', gg);
 
 console.log(gg);
 console.log(usernameData);
