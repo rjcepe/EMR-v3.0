@@ -47,12 +47,12 @@ document.querySelector("#sort1").addEventListener("change", function () {
     // Toggle the sort order if the same column is selected again
     currentSortOrder = currentSortOrder * -1;
     // Reload the table with sorted data
-    updateTableWithSortedData(tableData1, currentSortColumn, currentSortOrder);
+    updateTableWithSortedData(tableData, currentSortColumn, currentSortOrder);
 });
 
 // Load the initial table data
 async function loadTableData() {
-    const { data: tableData1, error } = await _supabase.from('med_forms').select("*");
+    const { data: tableData, error } = await _supabase.from('med_forms').select("*");
 
     if (error) {
         console.log("Error loading table data:", error.message);
@@ -62,7 +62,7 @@ async function loadTableData() {
     // Call the table
     const tableBody = document.querySelector("#medform_table tbody");
 
-    if (tableData1.length === 0) {
+    if (tableData.length === 0) {
         // If no data in Supabase
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
