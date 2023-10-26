@@ -44,7 +44,8 @@ loginForm.addEventListener("submit", async function (event) {
 
             const { data: usernameData, error: usernameError } = await _supabase.from('user_accs').select('username').eq('id', idInput);
             if (usernameData) {
-            localStorage.setItem('uname', username);
+            var gg = usernameData;
+            localStorage.setItem('uname', gg);
             }
 
         } else {
