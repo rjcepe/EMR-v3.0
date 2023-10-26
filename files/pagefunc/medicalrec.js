@@ -93,7 +93,8 @@ $("#insertstudmedform").submit(async function (event) {
       patient_id: id,
       patient_name: name,
       course_section: cs,
-      location: data1,
+      location: loc1,
+      added_by: data1,
       med_file: medformURL,
     };
 
