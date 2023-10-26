@@ -108,6 +108,7 @@ $("#insertstudmedform").submit(async function (event) {
     }
 });
 
+// const { data: usernameData, error: usernameError } = await _supabase.from('user_accs').select('username').eq('id', idInput);
 
 var gg = localStorage.getItem('uname');
 console.log(gg);

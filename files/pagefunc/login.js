@@ -42,11 +42,9 @@ loginForm.addEventListener("submit", async function (event) {
             // Redirect to the desired webpage upon successful login
             window.location.href = "/webpages/medicalrecords.html";
 
-            const { data: usernameData, error: usernameError } = await _supabase.from('user_accs').select('username').eq('id', idInput);
-            if (usernameData) {
-            var gg = usernameData;
+            var gg =  document.getElementById('uid').value;
             localStorage.setItem('uname', gg);
-            }
+
 
         } else {
             console.log("Password Incorrect");
