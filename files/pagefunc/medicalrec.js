@@ -195,7 +195,7 @@ function hidev() {
     setTimeout(() => {
         file.removeChild(filec);
         file.removeChild(name1);
-      }, 2000); // Adjust the delay time as needed
+      }, 2000); // 2s delay time 
     }
 
   main.classList.remove("main-filter");
