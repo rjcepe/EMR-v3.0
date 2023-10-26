@@ -30,7 +30,7 @@ async function loadTableData() {
   } else {
     // Sort the data by the created_date in descending order (latest first)
     tableData1.sort(
-      (a, b) => new Date(b.created_date) - new Date(a.created_date)
+      (a, b) => new rowid(b.row_id) - new rowid(a.row_id)
     );
 
     tableData1.forEach((row) => {
@@ -61,8 +61,7 @@ $("#insertstudmedform").submit(async function (event) {
   const id = $("#studid").val();
   const cs = $("#studcs").val();
   const loc1 = $("#locsel").val();
-
-  var id1 = localStorage.getItem("uid1");
+  const add1 = $("#addedby").val();
 
   const medformInput = document.getElementById("medform");
   const medformFile = medformInput.files[0];
@@ -87,22 +86,12 @@ $("#insertstudmedform").submit(async function (event) {
 
     console.log("sssss");
 
-
-    const { data1 } = await _supabase.from("user_accs").select("username").eq("id", id1);
-
-    let uzer = ""; // Initialize addedByValue with an empty string
-
-    if (data1 && data1.length > 0) {
-        uzer = data1[0].username; // Assign the username value to addedByValue
-    }
-
-
     const medformInfo = {
       patient_id: id,
       patient_name: name,
       course_section: cs,
       location: loc1,
-      added_by: uzer,
+      added_by: add1,
       med_file: medformURL,
     };
 
