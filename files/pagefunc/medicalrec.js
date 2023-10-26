@@ -86,7 +86,7 @@ $("#insertstudmedform").submit(async function (event) {
         
         const { data1, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
         
-        const username1 = data1.username; // Get the value of the "username" field
+        const username1 = data1; // Get the value of the "username" field
         const user = username1; // Now, 'user' will contain the exact value of the cell
         console.log("user");
         console.log("username1");
