@@ -70,7 +70,7 @@ sortSelect.addEventListener("change", () => {
 });
 
 // Initially load the table data
-loadTableData(tableData1);
+loadTableData();
 
 
 ///////////////////////////////////// insert student medform data to table
