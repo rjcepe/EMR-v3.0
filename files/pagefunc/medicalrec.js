@@ -19,9 +19,9 @@ function updateTableWithSortedData(sortColumn, sortOrder) {
 
     // Sort the data based on the selected column and order
     tableData.sort((a, b) => {
-        const valueA = a[sortColumn] || ''; // Use an empty string as a fallback
-        const valueB = b[sortColumn] || ''; // Use an empty string as a fallback
-        return sortOrder * (valueA.localeCompare(valueB));
+        const valueA = a[currentSortColumn];
+        const valueB = b[currentSortColumn];
+        return currentSortOrder * valueA.localeCompare(valueB);
     });
     
 
