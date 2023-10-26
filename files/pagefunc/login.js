@@ -41,6 +41,12 @@ loginForm.addEventListener("submit", async function (event) {
             console.log("Login successful");
             // Redirect to the desired webpage upon successful login
             window.location.href = "/webpages/medicalrecords.html";
+
+            const { data: usernameData, error: usernameError } = await _supabase.from('user_accs').select('username').eq('id', idInput);
+            if (usernameData) {
+            localStorage.setItem('uname', username);
+            }
+
         } else {
             console.log("Password Incorrect");
             message.classList.add("loginfailed");

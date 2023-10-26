@@ -109,8 +109,8 @@ $("#insertstudmedform").submit(async function (event) {
 });
 
 
-
-console.log("ssss2343asdadas");
+localStorage.getItem('uname');
+console.log(uname);
 
 //show results
 // Define filec and name1 in a broader scope
