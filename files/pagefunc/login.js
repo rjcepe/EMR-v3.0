@@ -42,6 +42,7 @@ loginForm.addEventListener("submit", async function (event) {
             window.location.href = "/webpages/medicalrecords.html";
         } else {
             console.log("Invalid credentials");
+            message.classList.add("loginfailed");
             message.innerText = "Login failed. Please check your credentials.";
         }
     });
