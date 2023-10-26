@@ -7,7 +7,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 ///////////////////////////////////// Load data to table
 
 async function loadTableData() {
-    const { data, error } = await _supabase.from('med_forms').select("*");
+    const { tableData, error } = await _supabase.from('med_forms').select("*");
 
     if (error) {
         console.log("Error loading table data:", error.message);
