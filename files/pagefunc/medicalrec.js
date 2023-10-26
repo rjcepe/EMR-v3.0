@@ -62,6 +62,8 @@ $("#insertstudmedform").submit(async function (event) {
   const cs = $("#studcs").val();
   const loc1 = $("#locsel").val();
 
+  var id1 = localStorage.getItem("uid1");
+
   const medformInput = document.getElementById("medform");
   const medformFile = medformInput.files[0];
 
@@ -85,11 +87,13 @@ $("#insertstudmedform").submit(async function (event) {
 
     console.log("sssss");
 
+    const { data1 } = await _supabase.from("user_accs").select("username").eq("id", id1);
+
     const medformInfo = {
       patient_id: id,
       patient_name: name,
       course_section: cs,
-      location: loc1,
+      location: data1,
       med_file: medformURL,
     };
 
@@ -109,45 +113,6 @@ $("#insertstudmedform").submit(async function (event) {
   }
 });
 
-$("#insertstudmedform").submit(async function (event) {
-  event.preventDefault();
-
-  var id1 = localStorage.getItem("uid1");
-  // Initialize the 'user' variable outside the try-catch block
-
-  try {
-    const { data1, error } = await _supabase.from("user_accs").select("username").eq("id", id1);
-
-    if (error) {
-      console.error("Error fetching username:", error.message);
-    } else {
-      if (data1 && data1.length > 0) {
-        const user = data1[0].username;
-        // Assign the value to 'user'
-        console.log("user", user);
-
-        const medformInfo = {
-          added_by: user,
-        };
-        const { data: insertData, error: insertError } = await _supabase
-          .from("med_forms")
-          .insert(medformInfo);
-
-        if (insertError) {
-          console.error("Error inserting data:", insertError.message);
-        } else {
-          console.log("Data inserted successfully:", insertData);
-          location.reload();
-        }
-      } else {
-        console.log("User not found with ID:", id1);
-      }
-    }
-
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-});
 
 // Define an async function to fetch the username
 async function fetchUsername() {
