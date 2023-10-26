@@ -121,7 +121,7 @@ $("#insertempmedform").submit(async function (event) {
     const loc1 = $("#locsel").val();
     const add1 = $("#addedby").val();
   
-    const medformInput = document.getElementById("medform");
+    const medformInput = document.getElementById("medform2");
     const medformFile = medformInput.files[0];
   
     // Initialize the 'user' variable outside the try-catch block
