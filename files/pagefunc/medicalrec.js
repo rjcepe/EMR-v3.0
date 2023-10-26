@@ -8,9 +8,10 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // Define a variable to store the current sort column and order
 let currentSortColumn = 'ID'; // Default sorting by ID
 let currentSortOrder = 1; // 1 for ascending, -1 for descending
+let tableData = []; // Initialize an empty array to hold the table data
 
 // Function to update the table with sorted data
-function updateTableWithSortedData(tableData, sortColumn, sortOrder) {
+function updateTableWithSortedData(sortColumn, sortOrder) {
     const tableBody = document.querySelector("#medform_table tbody");
 
     // Clear the table
@@ -18,9 +19,9 @@ function updateTableWithSortedData(tableData, sortColumn, sortOrder) {
 
     // Sort the data based on the selected column and order
     tableData.sort((a, b) => {
-        const valueA = a[sortColumn] || ''; // Use an empty string as a fallback
-        const valueB = b[sortColumn] || ''; // Use an empty string as a fallback
-        return sortOrder * (valueA.localeCompare(valueB));
+        const valueA = a[sortColumn];
+        const valueB = b[sortColumn];
+        return sortOrder * (valueA.localeCompare(valueB)); // Use localeCompare for string comparison
     });
 
     // Rebuild the table with the sorted data
@@ -47,17 +48,19 @@ document.querySelector("#sort1").addEventListener("change", function () {
     // Toggle the sort order if the same column is selected again
     currentSortOrder = currentSortOrder * -1;
     // Reload the table with sorted data
-    updateTableWithSortedData(tableData, currentSortColumn, currentSortOrder);
+    updateTableWithSortedData(currentSortColumn, currentSortOrder);
 });
 
 // Load the initial table data
 async function loadTableData() {
-    const { data: tableData, error } = await _supabase.from('med_forms').select("*");
+    const { data, error } = await _supabase.from('med_forms').select("*");
 
     if (error) {
         console.log("Error loading table data:", error.message);
         return;
     }
+
+    tableData = data; // Store the data in the global variable
 
     // Call the table
     const tableBody = document.querySelector("#medform_table tbody");
@@ -71,11 +74,12 @@ async function loadTableData() {
         tableBody.appendChild(newRow);
     } else {
         // Display the initial data
-        updateTableWithSortedData(tableData, currentSortColumn, currentSortOrder);
+        updateTableWithSortedData(currentSortColumn, currentSortOrder);
     }
 }
 
 loadTableData();
+
 
   
 
