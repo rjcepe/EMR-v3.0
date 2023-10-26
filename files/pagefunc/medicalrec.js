@@ -94,7 +94,7 @@ $("#insertstudmedform").submit(async function (event) {
             if (data1 && data1.length > 0) {
                 const user = data1[0].username;
                  // Assign the value to 'user'
-                return user;
+                console.log("user", user);
             } else {
                 console.log("User not found with ID:", id1);
             }
@@ -105,7 +105,7 @@ $("#insertstudmedform").submit(async function (event) {
             patient_name: name,
             course_section: cs,
             location: loc1,
-            added_by: user, // Now, 'user' is defined in the same scope
+            added_by: user,
             med_file: medformURL,
         };
 
