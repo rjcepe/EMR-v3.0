@@ -30,6 +30,7 @@ loginForm.addEventListener("submit", async function (event) {
 
         if (data.length === 0) {
             console.log("User ID not found");
+            message.classList.add("loginfailed");
             message.innerText = "!! User ID not found !!";
             return;
         }

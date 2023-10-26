@@ -5,6 +5,7 @@ Login Page
 <!-- -Verify User ID & PW -->
 <!-- -Login button -->
 -Make other webpages inaccessible before login
+-send uid and uname to be displayed in other webpages
 
 ====================================
 
