@@ -63,8 +63,7 @@ $("#insertstudmedform").submit(async function (event) {
   const loc1 = $("#locsel").val();
 
   var id1 = localStorage.getItem("uid1");
-  var uzer = localStorage.getItem("uname1");
-    
+
   const medformInput = document.getElementById("medform");
   const medformFile = medformInput.files[0];
 
@@ -88,7 +87,11 @@ $("#insertstudmedform").submit(async function (event) {
 
     console.log("sssss");
 
-    
+
+    const { data1 } = await _supabase.from("user_accs").select("username").eq("id", id1);
+
+    const uzer = data1.val();
+
 
     const medformInfo = {
       patient_id: id,
