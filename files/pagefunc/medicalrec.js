@@ -44,7 +44,7 @@ async function loadTableData() {
                  <th class="row coursecol">${row.course_section}</th>
                  <th class="row timecol">${row.location}</th>
                  <th class="row timecol">${row.added_by}</th>
-                 <th class="buttscol"><button class="viewbutt" onclick="showv('${row.med_file}, ${row.patient_name}')"><p class="txt">View</p></button></th>
+                 <th class="buttscol"><button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')"><p class="txt">View</p></button></th>
                  `;
       tableBody.appendChild(newRow);
       console.log("yes zata");
@@ -116,7 +116,7 @@ console.log("ssss2343asdadas");
 function filec(){
     
 }
-function showv(url,name) {
+function showv(url, name) {
     const vfile = document.querySelector(".main2");
     const main = document.querySelector(".main");
     const file = document.querySelector(".vfile");
