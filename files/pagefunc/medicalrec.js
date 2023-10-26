@@ -116,8 +116,8 @@ $("#insertstudmedform").submit(async function (event) {
 $("#insertempmedform").submit(async function (event) {
     event.preventDefault();
     // Get form field values
-    const name = $("#empname").val();
-    const id = $("#empid").val();
+    const name1 = $("#empname").val();
+    const id1 = $("#empid").val();
     const loc1 = $("#locsel").val();
     const add1 = $("#addedby").val();
   
@@ -145,8 +145,8 @@ $("#insertempmedform").submit(async function (event) {
       console.log("sssss");
   
       const medformInfo = {
-        patient_id: id,
-        patient_name: name,
+        patient_id: id1,
+        patient_name: name1,
         course_section: "Employee",
         location: loc1,
         added_by: add1,
