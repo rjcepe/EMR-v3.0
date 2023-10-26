@@ -113,39 +113,48 @@ $("#insertstudmedform").submit(async function (event) {
 console.log("ssss2343asdadas");
 
 //show results
-function filec(){
-    
-}
+// Define filec and name1 in a broader scope
+let filec;
+let name1;
+
 function showv(url, name) {
     const vfile = document.querySelector(".main2");
     const main = document.querySelector(".main");
     const file = document.querySelector(".vfile");
-  
-    if (file) {
-      const filec = document.createElement('embed');
-      filec.classList.add('xfile');
-      filec.setAttribute('src', url);
-      
-      const name1 = document.createElement('p');
-      name1.innerHTML = name;
 
-      file.appendChild(filec);
-      file.appendChild(name1);
+    if (file) {
+        filec = document.createElement('embed');
+        filec.classList.add('xfile');
+        filec.setAttribute('src', url);
+
+        name1 = document.createElement('p');
+        name1.id = "dispname";
+        name1.innerHTML = name;
+
+        file.appendChild(filec);
+        file.appendChild(name1);
     } else {
-      console.error("Element with class 'vifle' not found.");
+        console.error("Element with class 'vfile' not found.");
     }
-  
+
     main.classList.add("main-filter");
     vfile.classList.add("showv");
     vfile.classList.remove("hidev");
-  }
-  
+}
 
 function hidev() {
-  const vfile = document.querySelector(".main2");
-  const main = document.querySelector(".main");
+    const vfile = document.querySelector(".main2");
+    const main = document.querySelector(".main");
+    const file = document.querySelector(".vfile");
 
-  main.classList.remove("main-filter");
-  vfile.classList.add("hidev");
-  vfile.classList.remove("showv");
+    // Check if filec and name1 are defined before removing them
+    if (filec && name1) {
+        file.removeChild(filec);
+        file.removeChild(name1);
+    }
+
+    main.classList.remove("main-filter");
+    vfile.classList.add("hidev");
+    vfile.classList.remove("showv");
 }
+
