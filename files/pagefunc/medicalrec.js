@@ -68,20 +68,8 @@ $("#insertstudmedform").submit(async function (event) {
 
     // Perform the insert operation with both name and medform
     try {
-        const { data: existingData, error } = await _supabase.from('med_forms').select('*').eq('patient_name', name);
-
-        if (error) {
-             console.log("errorrr", error.message);
-            return;
-        }
-
-        if (existingData.length > 1) {
-            console.log("Already Existing", existingData);
-            return;
-        }
-
         // Change the filename to "(name inputted)_medform"
-        const fileName = `${name}_medform.${medformFile.name.split('.').pop()}`;
+        const fileName = `${id}_medform.${medformFile.name.split('.').pop()}`;
                 
         // Upload the file to Supabase storage with the modified filename
         const { data, error: uploadError } = await _supabase.storage.from('medicalrecords').upload(fileName, medformFile);
@@ -130,12 +118,14 @@ function showv(url) {
   const main = document.querySelector(".main");
   const file = document.querySelector(".vifle")
 
-  const filec = document.createElement('embed');
-  filec.classList.add('xfile');
-  filec.setAttribute('src', url);
-
-
-  file.appendChild(filec);
+  if (file) {
+    const filec = document.createElement('embed');
+    filec.classList.add('xfile');
+    filec.setAttribute('src', url);
+    file.appendChild(filec);
+  } else {
+    console.error("Element with class 'vifle' not found.");
+  }
 
 
   main.classList.add("main-filter");
