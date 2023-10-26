@@ -5,75 +5,7 @@ const SUPABASE_ANON_KEY =
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 ///////////////////////////////////// Load data to table
-// Define a variable to store the current sort column and order
-let currentSortColumn = 'ID'; // Default sorting by ID
-let currentSortOrder = 1; // 1 for ascending, -1 for descending
-let tableData = []; // Initialize an empty array to hold the table data
 
-// Function to update the table with sorted data
-function updateTableWithSortedData(sortColumn, sortOrder) {
-    const tableBody = document.querySelector("#medform_table tbody");
-
-    // Clear the table
-    tableBody.innerHTML = '';
-
-    // Sort the data based on the selected column and order
-    tableData.sort((a, b) => {
-        const valueA = a[currentSortColumn];
-        const valueB = b[currentSortColumn];
-        return currentSortOrder * valueA.localeCompare(valueB);
-    });
-    
-
-    // Rebuild the table with the sorted data
-    tableData.forEach((row) => {
-        const newRow = document.createElement("tr");
-        newRow.classList.add("res");
-
-        newRow.innerHTML = `
-            <th class="row idcol">${row.patient_id}</th>
-            <th class="row namecol">${row.patient_name}</th>
-            <th class="row timecol">${row.created_date}</th>
-            <th class="row coursecol">${row.course_section}</th>
-            <th class="row timecol">${row.location}</th>
-            <th class="row timecol">${row.added_by}</th>
-            <th class="buttscol"><button class="viewbutt" onclick="showv()"><p class="txt">View</p></button></th>
-        `;
-        tableBody.appendChild(newRow);
-    });
-}
-
-function disp(){
-    currentSortColumn = document.querySelector("#sort1").value;
-
-    if (currentSortColumn == "def") {
-        // If nothing is selected, display unsorted data
-        loadTableData(); // Call your initial data loading function
-    } else {
-        // Toggle the sort order if the same column is selected again
-        currentSortOrder = currentSortOrder * -1;
-        // Sort and update the table with sorted data
-        updateTableWithSortedData(currentSortColumn, currentSortOrder);
-    }
-}
-
-
-// // Event listener for the sorting select element
-// document.querySelector("#sort1").addEventListener("change", function () {
-//     currentSortColumn = this.value;
-//     // Reload the table with sorted data
-//     if (currentSortColumn === "1") {
-//         // If nothing is selected, display unsorted data
-//         loadTableData(); // Call your initial data loading function
-//     } else {
-//         // Toggle the sort order if the same column is selected again
-//         currentSortOrder = currentSortOrder * -1;
-//         // Sort and update the table with sorted data
-//         updateTableWithSortedData(currentSortColumn, currentSortOrder);
-//     }
-// });
-
-// Load the initial table data
 async function loadTableData() {
     const { data, error } = await _supabase.from('med_forms').select("*");
 
@@ -81,8 +13,6 @@ async function loadTableData() {
         console.log("Error loading table data:", error.message);
         return;
     }
-
-    tableData = data; // Store the data in the global variable
 
     // Call the table
     const tableBody = document.querySelector("#medform_table tbody");
@@ -95,12 +25,25 @@ async function loadTableData() {
         `;
         tableBody.appendChild(newRow);
     } else {
-        // Display the initial data
-        updateTableWithSortedData(currentSortColumn, currentSortOrder);
+        tableData.forEach((row) => {
+            const newRow = document.createElement("tr");
+            newRow.classList.add("res");
+    
+            newRow.innerHTML = `
+                <th class="row idcol">${row.patient_id}</th>
+                <th class="row namecol">${row.patient_name}</th>
+                <th class="row timecol">${row.created_date}</th>
+                <th class="row coursecol">${row.course_section}</th>
+                <th class="row timecol">${row.location}</th>
+                <th class="row timecol">${row.added_by}</th>
+                <th class="buttscol"><button class="viewbutt" onclick="showv()"><p class="txt">View</p></button></th>
+            `;
+            tableBody.appendChild(newRow);
+        });
     }
 }
 
-disp();
+loadTableData();
 
   
 
