@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/files/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <title>Medical Records</title>
 </head>
 
@@ -147,7 +148,7 @@
                         </div>
                         <hr>
                         <label for="medform">Upload Medical Record</label>
-                        <input type="text" id="medform" name="medform" multiple>
+                        <input type="file" id="medform" name="medform" multiple>
                         <!-- <input type="file" id="medform" name="medform" multiple> -->
 
                         <button class="submitp">Submit</button>

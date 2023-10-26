@@ -6,7 +6,9 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 ///////////////////////////////////// Load data to table
 async function loadTableData() {
-  const { data: tableData1, error } = await _supabase.from('med_forms').select("*");
+  const { data: tableData1, error } = await _supabase
+    .from("med_forms")
+    .select("*");
 
   if (error) {
     console.log("Error loading table data:", error.message);
@@ -27,8 +29,10 @@ async function loadTableData() {
     console.log("no zata");
   } else {
     // Sort the data by the created_date in descending order (latest first)
-    tableData1.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
-    
+    tableData1.sort(
+      (a, b) => new Date(b.created_date) - new Date(a.created_date)
+    );
+
     tableData1.forEach((row) => {
       const newRow = document.createElement("tr");
       newRow.classList.add("res");
@@ -48,70 +52,105 @@ async function loadTableData() {
   }
 }
 
-loadTableData()
+loadTableData();
 
 ///////////////////////////////////// insert student medform data to table
-$('#insertstudmedform').submit(async function (event) {
-    event.preventDefault();
-    // Get form field values
-    const name = $('#studname').val();
-    const id = $('#studid').val();
-    const cs = $('#studcs').val();
-    const loc1 = $('#locsel').val();
-    const mf = $('#medform').val();
-    
-    // const medformInput = document.getElementById('medform');
-    // const medformFile = medformInput.files[0];
-    
-    try {
-        console.log("sssss");
-        // // Check if the 'name' already exists in the 'med_forms1' table
-        // const { data: existingData, error } = await _supabase.from('med_forms1').select('*').eq('patient_name', name);
+$("#insertstudmedform").submit(async function (event) {
+  event.preventDefault();
+  // Get form field values
+  const name = $("#studname").val();
+  const id = $("#studid").val();
+  const cs = $("#studcs").val();
+  const loc1 = $("#locsel").val();
 
-        // if (error) {
-        //     console.log("Error checking existing data:", error.message);
-        //     return;
-        // }
+  generateAndUploadPDF();
 
-        // if (existingData.length > 0) {
-        //     console.log("Data already exists for this name:", existingData);
-        //     return;
-        // }
+  try {
+    console.log("sssss");
 
-        // Change the filename to "(name inputted)_medform"
-        // const fileName = `${name}_medform.${medformFile.name.split('.').pop()}`;
+    const medformInfo = {
+      patient_id: id,
+      patient_name: name,
+      course_section: cs,
+      location: loc1,
+      added_by: "(depends on login)",
+    };
 
-        // Upload the file to Supabase storage with the modified filename
-        // const { data, error: uploadError } = await _supabase.storage.from('medicalrecords').upload(fileName, medformFile);
+    // Insert data into the 'med_forms1' table
+    const { data: insertData, error: insertError } = await _supabase
+      .from("med_forms")
+      .insert(medformInfo);
 
-        // if (uploadError) {
-        //     console.error('Error uploading file:', uploadError.message);
-        //     return;
-        // }
-
-        // const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
-
-        const medformInfo = {
-            patient_id: id,
-            patient_name: name,
-            course_section: cs,
-            location: loc1,
-            added_by: "(depends on login)",
-            med_file: mf,
-        };
-
-        // Insert data into the 'med_forms1' table
-        const { data: insertData, error: insertError } = await _supabase.from('med_forms').insert(medformInfo);
-
-        if (insertError) {
-            console.error('Error inserting data:', insertError.message);
-        } else {
-            console.log('Data inserted successfully:', insertData);
-            location.reload();
-        }
-    } catch (error) {
-        console.error('Error:', error.message);
+    if (insertError) {
+      console.error("Error inserting data:", insertError.message);
+    } else {
+      console.log("Data inserted successfully:", insertData);
+      location.reload();
     }
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
 });
 
+// Function to generate PDF from an uploaded file
+import { jsPDF } from "jspdf";
+
+async function generateAndUploadPDF() {
+    const medformFileInput = document.getElementById("medform");
+    const medformFile = medformFileInput.files[0]; // Assuming you're dealing with a single file
+  
+    if (!medformFile) {
+      console.error("No file selected.");
+      return;
+    }
+  
+    try {
+      // Generate a new PDF instance
+      const pdf = new jsPDF();
+  
+      // You would need to adjust this part based on how you want to convert the uploaded file to PDF.
+      // For example, if it's an image, you might use a library like "html2canvas" or "pdf-lib" to add the image to the PDF.
+      // Below is a simple example assuming it's an image.
+      const image = new Image();
+      image.src = URL.createObjectURL(medformFile);
+      await image.decode();
+  
+      pdf.addImage(image, "JPEG", 10, 10, 100, 100); // Adjust position and size as needed
+  
+      // Save the generated PDF to a data URL
+      const pdfDataUri = pdf.output("datauristring");
+  
+      // Upload the PDF to Supabase storage
+      const { data, error: uploadError } = await _supabase.storage.from("medicalrecords").upload("generated.pdf", pdfDataUri);
+  
+      if (uploadError) {
+        console.error("Error uploading PDF to Supabase:", uploadError);
+        return;
+      }
+  
+      console.log("PDF uploaded successfully to Supabase.");
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    }
+  }
+
+
 console.log("ssss2343asdadas");
+
+//show results
+function showv() {
+  const vfile = document.querySelector(".main2");
+  const main = document.querySelector(".main");
+
+  main.classList.add("main-filter");
+  vfile.classList.add("showv");
+  vfile.classList.remove("hidev");
+}
+function hidev() {
+  const vfile = document.querySelector(".main2");
+  const main = document.querySelector(".main");
+
+  main.classList.remove("main-filter");
+  vfile.classList.add("hidev");
+  vfile.classList.remove("showv");
+}
