@@ -8,17 +8,11 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let tableData1 = []; // Initialize as an empty array to store the table data
 
 // Function to load table data
-async function loadTableData() {
-  const { data, error } = await _supabase.from("med_forms").select("*");
-
-  if (error) {
-    console.log("Error loading table data:", error.message);
-    return;
-  }
-
-  tableData1 = data; // Update the tableData1 variable with the loaded data
-
+async function loadTableData(data) {
   const tableBody = document.querySelector("#medform_table tbody");
+
+  // Clear the table before populating it with data
+  tableBody.innerHTML = '';
 
   if (data.length === 0) {
     // If no data in Supabase
@@ -55,13 +49,9 @@ function sortTable(selectedOption) {
   if (selectedOption === "ID") {
     sortedData.sort((a, b) => a.patient_id - b.patient_id);
   } else if (selectedOption === "TimeLate") {
-    sortedData.sort(
-      (a, b) => new Date(b.created_date) - new Date(a.created_date)
-    );
+    sortedData.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
   } else if (selectedOption === "TimeOld") {
-    sortedData.sort(
-      (a, b) => new Date(a.created_date) - new Date(b.created_date)
-    );
+    sortedData.sort((a, b) => new Date(a.created_date) - new Date(b.created_date));
   } else if (selectedOption === "Name") {
     sortedData.sort((a, b) => a.patient_name.localeCompare(b.patient_name));
   } else if (selectedOption === "CS") {
@@ -80,7 +70,8 @@ sortSelect.addEventListener("change", () => {
 });
 
 // Initially load the table data
-loadTableData();
+loadTableData(tableData1);
+
 
 ///////////////////////////////////// insert student medform data to table
 $("#insertstudmedform").submit(async function (event) {
