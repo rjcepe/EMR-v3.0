@@ -192,9 +192,11 @@ function hidev() {
 
   // Check if filec and name1 are defined before removing them
   if (filec && name1) {
-    file.removeChild(filec);
-    file.removeChild(name1);
-  }
+    setTimeout(() => {
+        file.removeChild(filec);
+        file.removeChild(name1);
+      }, 2000); // Adjust the delay time as needed
+    }
 
   main.classList.remove("main-filter");
   vfile.classList.add("hidev");
