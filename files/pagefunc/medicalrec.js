@@ -5,83 +5,82 @@ const SUPABASE_ANON_KEY =
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 ///////////////////////////////////// Load data to table
+let tableData1 = []; // Initialize as an empty array to store the table data
+
+// Function to load table data
 async function loadTableData() {
-  const { data: tableData1, error } = await _supabase
-    .from("med_forms")
-    .select("*");
+  const { data, error } = await _supabase.from("med_forms").select("*");
 
   if (error) {
     console.log("Error loading table data:", error.message);
     return;
   }
-  console.log("hello");
+
+  tableData1 = data; // Update the tableData1 variable with the loaded data
 
   const tableBody = document.querySelector("#medform_table tbody");
-  // Call the table
 
-  if (tableData1.length === 0) {
+  if (data.length === 0) {
     // If no data in Supabase
     const newRow = document.createElement("tr");
     newRow.innerHTML = `
-               <th class="row" colspan="7" ">No zata available</td>
-           `;
+      <th class="row" colspan="7" ">No data available</td>
+    `;
     tableBody.appendChild(newRow);
-    console.log("no zata");
+    console.log("No data available");
   } else {
-    tableData1.forEach((row) => {
+    data.forEach((row) => {
       const newRow = document.createElement("tr");
       newRow.classList.add("res");
 
       newRow.innerHTML = `
-                   <th class="row idcol">${row.patient_id}</th>
-                   <th class="row namecol">${row.patient_name}</th>
-                   <th class="row timecol">${row.created_date}</th>
-                   <th class="row coursecol">${row.course_section}</th>
-                   <th class="row timecol">${row.location}</th>
-                   <th class="row timecol">${row.added_by}</th>
-                   <th class="buttscol"><button class="viewbutt" onclick="showv()"><p class="txt">View</p></button></th>
-                   `;
+        <th class="row idcol">${row.patient_id}</th>
+        <th class="row namecol">${row.patient_name}</th>
+        <th class="row timecol">${row.created_date}</th>
+        <th class="row coursecol">${row.course_section}</th>
+        <th class="row timecol">${row.location}</th>
+        <th class="row timecol">${row.added_by}</th>
+        <th class="buttscol"><button class="viewbutt" onclick="showv()"><p class="txt">View</p></button></th>
+      `;
       tableBody.appendChild(newRow);
-      console.log("yes zata");
     });
-  }
-  loadTableData();
-  const sortSelect = document.getElementById("sort1");
-
-  sortSelect.addEventListener("change", () => {
-    const selectedOption = sortSelect.value;
-    sortTable(selectedOption);
-  });
-
-  function sortTable(selectedOption) {
-    // Clone the table data to prevent modifying the original array
-    const sortedData = [...tableData1];
-
-    if (selectedOption === "ID") {
-      sortedData.sort((a, b) => a.patient_id - b.patient_id);
-    } else if (selectedOption === "TimeLate") {
-      sortedData.sort(
-        (a, b) => new Date(b.created_date) - new Date(a.created_date)
-      );
-    } else if (selectedOption === "TimeOld") {
-      sortedData.sort(
-        (a, b) => new Date(a.created_date) - new Date(b.created_date)
-      );
-    } else if (selectedOption === "Name") {
-      sortedData.sort((a, b) => a.patient_name.localeCompare(b.patient_name));
-    } else if (selectedOption === "CS") {
-      sortedData.sort((a, b) =>
-        a.course_section.localeCompare(b.course_section)
-      );
-    }
-
-    // Call the loadTableData function with the sorted data
-    loadTableData(sortedData);
+    console.log("Data loaded");
   }
 }
 
+// Function to sort the table data
+function sortTable(selectedOption) {
+  const sortedData = [...tableData1]; // Clone the table data to prevent modifying the original array
 
+  if (selectedOption === "ID") {
+    sortedData.sort((a, b) => a.patient_id - b.patient_id);
+  } else if (selectedOption === "TimeLate") {
+    sortedData.sort(
+      (a, b) => new Date(b.created_date) - new Date(a.created_date)
+    );
+  } else if (selectedOption === "TimeOld") {
+    sortedData.sort(
+      (a, b) => new Date(a.created_date) - new Date(b.created_date)
+    );
+  } else if (selectedOption === "Name") {
+    sortedData.sort((a, b) => a.patient_name.localeCompare(b.patient_name));
+  } else if (selectedOption === "CS") {
+    sortedData.sort((a, b) => a.course_section.localeCompare(b.course_section));
+  }
 
+  // Call the loadTableData function with the sorted data
+  loadTableData(sortedData);
+}
+
+// Add event listener for sorting
+const sortSelect = document.getElementById("sort1");
+sortSelect.addEventListener("change", () => {
+  const selectedOption = sortSelect.value;
+  sortTable(selectedOption);
+});
+
+// Initially load the table data
+loadTableData();
 
 ///////////////////////////////////// insert student medform data to table
 $("#insertstudmedform").submit(async function (event) {
