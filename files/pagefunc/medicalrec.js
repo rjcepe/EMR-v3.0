@@ -109,12 +109,31 @@ $("#insertstudmedform").submit(async function (event) {
 });
 
 
-var gg = localStorage.getItem('uname');
+// Retrieve the ID from local storage
+var id = localStorage.getItem('uid1');
 
-const usernameData = _supabase.from('user_accs').select('username').eq('id', gg);
+// Define an async function to fetch the username
+async function fetchUsername() {
+    const { data, error } = await _supabase.from('user_accs').select('username').eq('id', id);
 
-console.log(gg);
-console.log(usernameData);
+    if (error) {
+        console.error("Error fetching username:", error.message);
+        return;
+    }
+
+    // Check if data is not empty
+    if (data && data.length > 0) {
+        const username = data[0].username;
+        console.log(username);
+
+        // Now, you can use the 'username' variable as needed.
+    } else {
+        console.log("User not found with ID:", id);
+    }
+}
+
+// Call the async function to fetch the username
+fetchUsername();
 
 
 //show results

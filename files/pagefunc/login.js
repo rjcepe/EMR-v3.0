@@ -43,7 +43,7 @@ loginForm.addEventListener("submit", async function (event) {
             window.location.href = "/webpages/medicalrecords.html";
 
             var gg =  document.getElementById('uid').value;
-            localStorage.setItem('uname', gg);
+            localStorage.setItem('uid1', gg);
 
 
         } else {
