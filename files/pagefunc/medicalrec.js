@@ -54,7 +54,6 @@ async function loadTableData() {
 
 loadTableData();
 
-///////////////////////////////////// insert student medform data to table
 $("#insertstudmedform").submit(async function (event) {
     event.preventDefault();
     // Get form field values
@@ -79,24 +78,30 @@ $("#insertstudmedform").submit(async function (event) {
             console.error('Error uploading file:', uploadError);
             return;
         }
-        
-         const medformURL = SUPABASE_URL + "/storage/v1/object/public/medicalrecords/" + fileName;  // Fix this line
-    
+                
+        const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;  // Fixed the URL formation
+
         console.log("sssss");
-        
+
         const { data1, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
-        
-        const username1 = data1; // Get the value of the "username" field
-        const user = username1; // Now, 'user' will contain the exact value of the cell
-        console.log("user");
-        console.log("username1");
-        
+
+        if (error) {
+            console.error("Error fetching username:", error.message);
+        } else {
+            if (data1 && data1.length > 0) {
+                const username1 = data1[0].username; // Use 'data1' instead of 'data'
+                const user = username1; // Now, 'user' will contain the exact value of the username
+            } else {
+                console.log("User not found with ID:", id1);
+            }
+        }
+
         const medformInfo = {
             patient_id: id,
             patient_name: name,
             course_section: cs,
             location: loc1,
-            added_by: username1,
+            added_by: user, // Use 'user' variable here
             med_file: medformURL,
         };
 
@@ -114,8 +119,8 @@ $("#insertstudmedform").submit(async function (event) {
     } catch (error) {
         console.error("Error:", error.message);
     }
-
 });
+
 
 
 
