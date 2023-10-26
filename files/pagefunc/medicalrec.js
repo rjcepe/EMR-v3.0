@@ -89,12 +89,15 @@ $("#insertstudmedform").submit(async function (event) {
 
     const { data1 } = await _supabase.from("user_accs").select("username").eq("id", id1);
 
+    const uzer = data1;
+    console.log(uzer);
+
     const medformInfo = {
       patient_id: id,
       patient_name: name,
       course_section: cs,
       location: loc1,
-      added_by: data1,
+      added_by: uzer,
       med_file: medformURL,
     };
 
