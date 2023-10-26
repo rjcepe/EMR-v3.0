@@ -44,7 +44,7 @@ async function loadTableData() {
                  <th class="row coursecol">${row.course_section}</th>
                  <th class="row timecol">${row.location}</th>
                  <th class="row timecol">${row.added_by}</th>
-                 <th class="buttscol"><button class="viewbutt" onclick="showv('${row.med_file}')"><p class="txt">View</p></button></th>
+                 <th class="buttscol"><button class="viewbutt" onclick="showv('${row.med_file}, ${row.patient_name}')"><p class="txt">View</p></button></th>
                  `;
       tableBody.appendChild(newRow);
       console.log("yes zata");
@@ -79,7 +79,7 @@ $("#insertstudmedform").submit(async function (event) {
             return;
         }
                 
-        const medformURL = SUPABASE_URL + "/storage/v1/object/public/records/" + fileName;  // Fix this line
+        const medformURL = SUPABASE_URL + "/storage/v1/object/public/medicalrecords/" + fileName;  // Fix this line
 
         console.log("sssss");
 
@@ -113,7 +113,10 @@ $("#insertstudmedform").submit(async function (event) {
 console.log("ssss2343asdadas");
 
 //show results
-function showv(url) {
+function filec(){
+    
+}
+function showv(url,name) {
     const vfile = document.querySelector(".main2");
     const main = document.querySelector(".main");
     const file = document.querySelector(".vfile");
@@ -122,7 +125,12 @@ function showv(url) {
       const filec = document.createElement('embed');
       filec.classList.add('xfile');
       filec.setAttribute('src', url);
+      
+      const name1 = document.createElement('p');
+      name1.innerHTML = name;
+
       file.appendChild(filec);
+      file.appendChild(name1);
     } else {
       console.error("Element with class 'vifle' not found.");
     }
