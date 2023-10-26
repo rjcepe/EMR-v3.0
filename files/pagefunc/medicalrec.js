@@ -48,6 +48,13 @@ function updateTableWithSortedData(sortColumn, sortOrder) {
 // Event listener for the sorting select element
 document.querySelector("#sort1").addEventListener("change", function () {
     currentSortColumn = this.value;
+});
+
+// Add a "Sort" button
+const sortButton = document.querySelector("#sortButton");
+
+// Event listener for the "Sort" button
+sortButton.addEventListener("click", function () {
     // Toggle the sort order if the same column is selected again
     currentSortOrder = currentSortOrder * -1;
     // Reload the table with sorted data
