@@ -61,6 +61,19 @@ button{
 }
 
 /* login page */
+.loginfailed{
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 100px;
+    background-color: rgb(211, 89, 89);
+    width: 250px;
+    color: white;
+    font-size: .7rem;
+    font-weight: 700;
+    padding: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 .login-cont{
     /* background-color: #126638; */
     background-image: url("/files/images/samplebg.jpg");
