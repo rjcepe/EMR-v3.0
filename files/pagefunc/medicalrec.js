@@ -43,10 +43,10 @@ function updateTableWithSortedData(sortColumn, sortOrder) {
     });
 }
 
-// Event listener for the sorting select element
-document.querySelector("#sort1").addEventListener("change", function () {
+function disp(){
+    document.querySelector("#sort1");
     currentSortColumn = this.value;
-    // Reload the table with sorted data
+
     if (currentSortColumn === "1") {
         // If nothing is selected, display unsorted data
         loadTableData(); // Call your initial data loading function
@@ -56,7 +56,23 @@ document.querySelector("#sort1").addEventListener("change", function () {
         // Sort and update the table with sorted data
         updateTableWithSortedData(currentSortColumn, currentSortOrder);
     }
-});
+}
+
+
+// // Event listener for the sorting select element
+// document.querySelector("#sort1").addEventListener("change", function () {
+//     currentSortColumn = this.value;
+//     // Reload the table with sorted data
+//     if (currentSortColumn === "1") {
+//         // If nothing is selected, display unsorted data
+//         loadTableData(); // Call your initial data loading function
+//     } else {
+//         // Toggle the sort order if the same column is selected again
+//         currentSortOrder = currentSortOrder * -1;
+//         // Sort and update the table with sorted data
+//         updateTableWithSortedData(currentSortColumn, currentSortOrder);
+//     }
+// });
 
 // Load the initial table data
 async function loadTableData() {
@@ -85,7 +101,7 @@ async function loadTableData() {
     }
 }
 
-
+disp();
 
   
 
