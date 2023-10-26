@@ -114,24 +114,25 @@ console.log("ssss2343asdadas");
 
 //show results
 function showv(url) {
-  const vfile = document.querySelector(".main2");
-  const main = document.querySelector(".main");
-  const file = document.querySelector(".vifle")
-
-  if (file) {
-    const filec = document.createElement('embed');
-    filec.classList.add('xfile');
-    filec.setAttribute('src', url);
-    file.appendChild(filec);
-  } else {
-    console.error("Element with class 'vifle' not found.");
+    const vfile = document.querySelector(".main2");
+    const main = document.querySelector(".main");
+    const file = document.querySelector(".vfile");
+  
+    if (file) {
+      const filec = document.createElement('embed');
+      filec.classList.add('xfile');
+      filec.setAttribute('src', url);
+      file.appendChild(filec);
+    } else {
+      console.error("Element with class 'vifle' not found.");
+    }
+  
+    main.classList.add("main-filter");
+    vfile.classList.add("showv");
+    vfile.classList.remove("hidev");
   }
+  
 
-
-  main.classList.add("main-filter");
-  vfile.classList.add("showv");
-  vfile.classList.remove("hidev");
-}
 function hidev() {
   const vfile = document.querySelector(".main2");
   const main = document.querySelector(".main");
