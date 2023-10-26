@@ -21,7 +21,7 @@ loginForm.addEventListener("submit", async function (event) {
     const idInput = document.getElementById("uid").value;
     const passwordInput = document.getElementById("pw").value;
 
-    const { data, error } = await supabase.from('user_accs').select('*').eq('id', idInput);
+    const { data, error } = await _supabase.from('user_accs').select('*').eq('id', idInput);
 
         if (error) {
             console.error("Error querying the database:", error.message);
