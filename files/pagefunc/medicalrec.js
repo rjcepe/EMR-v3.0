@@ -71,7 +71,7 @@ async function loadTableData() {
         tableBody.appendChild(newRow);
     } else {
         // Display the initial data
-        updateTableWithSortedData(tableData1, currentSortColumn, currentSortOrder);
+        updateTableWithSortedData(tableData, currentSortColumn, currentSortOrder);
     }
 }
 
