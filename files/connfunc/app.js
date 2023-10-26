@@ -1,28 +1,29 @@
 
+
 //nav functions
 function ToMedRec() {
   window.location.href = "/webpages/medicalrecords.html";
 }
 function ToDenRec() {
-  window.location.href = "https://emr3.netlify.app/webpages/dentalrecords.html";
+  window.location.href = "/webpages/dentalrecords.html";
 }
 function ToXray() {
-  window.location.href = "https://emr3.netlify.app/webpages/xray.html";
+  window.location.href = "/webpages/xray.html";
 }
 function ToAccRec() {
-  window.location.href = "https://emr3.netlify.app/webpages/accidentrec.html";
+  window.location.href = "/webpages/accidentrec.html";
 }
 function ToConRec() {
-  window.location.href = "https://emr3.netlify.app/webpages/consultationrec.html";
+  window.location.href = "/webpages/consultationrec.html";
 }
 function ToMedCert() {
-  window.location.href = "https://emr3.netlify.app/webpages/medcerts.html";
+  window.location.href = "/webpages/medcerts.html";
 }
 function ToAccCen() {
-  window.location.href = "https://emr3.netlify.app/webpages/accidentcensus.html";
+  window.location.href = "/webpages/accidentcensus.html";
 }
 function logout() {
-  window.location.href = "https://emr3.netlify.app/webpages/index.html";
+  window.location.href = "/webpages/index.html";
 }
 
 
