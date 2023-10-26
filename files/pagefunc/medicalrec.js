@@ -68,7 +68,7 @@ $("#insertstudmedform").submit(async function (event) {
 
     // Perform the insert operation with both name and medform
     try {
-        const { data: existingData, error } = await _supabase.from('med_forms').select('*').eq('name', name);
+        const { data: existingData, error } = await _supabase.from('med_forms').select('*').eq('patient_name', name);
 
         if (error) {
              console.log("errorrr", error.message);
