@@ -90,7 +90,11 @@ $("#insertstudmedform").submit(async function (event) {
 
     const { data1 } = await _supabase.from("user_accs").select("username").eq("id", id1);
 
-    const uzer = data1.val();
+    let uzer = ""; // Initialize addedByValue with an empty string
+
+    if (data1 && data1.length > 0) {
+        uzer = data1[0].username; // Assign the username value to addedByValue
+    }
 
 
     const medformInfo = {
