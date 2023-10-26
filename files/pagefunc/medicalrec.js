@@ -109,12 +109,12 @@ $("#insertstudmedform").submit(async function (event) {
 });
 
 
-// Retrieve the ID from local storage
-var id = localStorage.getItem('uid1');
 
 // Define an async function to fetch the username
 async function fetchUsername() {
-    const { data, error } = await _supabase.from('user_accs').select('username').eq('id', id);
+    var id1 = localStorage.getItem('uid1');
+
+    const { data, error } = await _supabase.from('user_accs').select('username').eq('id', id1);
 
     if (error) {
         console.error("Error fetching username:", error.message);
