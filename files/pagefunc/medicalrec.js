@@ -44,8 +44,7 @@ function updateTableWithSortedData(sortColumn, sortOrder) {
 }
 
 function disp(){
-    document.querySelector("#sort1");
-    currentSortColumn = this.value;
+    currentSortColumn = document.querySelector("#sort1").value;
 
     if (currentSortColumn === "1") {
         // If nothing is selected, display unsorted data
