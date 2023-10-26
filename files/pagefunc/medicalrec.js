@@ -200,3 +200,58 @@ function hidev() {
   vfile.classList.add("hidev");
   vfile.classList.remove("showv");
 }
+
+
+//////////////////////////////////search function
+document.getElementById("searchpatient").addEventListener("click", async function() {
+    // Get the patient ID entered in the input field
+    const searchID = document.getElementById("searchInput").value;
+  
+    // Fetch the patient data based on the search ID
+    const { data: patientData, error } = await _supabase
+      .from("med_forms")
+      .select("*")
+      .eq("patient_id", searchID);
+  
+    if (error) {
+      console.error("Error fetching patient data:", error.message);
+      return;
+    }
+  
+    const tableBody = document.querySelector("#medform_table tbody");
+  
+    // Clear the current table
+    tableBody.innerHTML = "";
+  
+    if (patientData && patientData.length > 0) {
+      // Patient data found, update the table
+      patientData.forEach((row) => {
+        const newRow = document.createElement("tr");
+        newRow.classList.add("res");
+  
+        newRow.innerHTML = `
+          <th class="row idcol">${row.patient_id}</th>
+          <th class="row namecol">${row.patient_name}</th>
+          <th class="row timecol">${row.created_date}</th>
+          <th class="row coursecol">${row.course_section}</th>
+          <th class="row timecol">${row.location}</th>
+          <th class="row timecol">${row.added_by}</th>
+          <th class="buttscol">
+            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
+              <p class="txt">View</p>
+            </button>
+          </th>
+        `;
+  
+        tableBody.appendChild(newRow);
+      });
+    } else {
+      // Patient not found
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <th class="row" colspan="7">Patient not found</td>
+      `;
+      tableBody.appendChild(newRow);
+    }
+  });
+  
