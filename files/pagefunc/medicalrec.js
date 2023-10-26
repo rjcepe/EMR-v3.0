@@ -128,7 +128,7 @@ $("#insertempmedform").submit(async function (event) {
   
     try {
       // Change the filename to "(name inputted)_medform"
-      const fileName = `${id}_medform.${medformFile.name.split(".").pop()}`;
+      const fileName = `${id1}_medform.${medformFile.name.split(".").pop()}`;
   
       // Upload the file to Supabase storage with the modified filename
       const { data, error: uploadError } = await _supabase.storage
