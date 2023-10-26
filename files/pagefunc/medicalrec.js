@@ -91,7 +91,7 @@ $("#insertstudmedform").submit(async function (event) {
     const { data1 } = await _supabase.from("user_accs").select("username").eq("id", id1);
 
     if (data1 && data1.length > 0) {
-        const username = data[0].username;
+        var username = data[0].username;
 
         console.log(username);
         localStorage.setItem('uname1', username);
