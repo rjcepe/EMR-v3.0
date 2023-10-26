@@ -45,6 +45,7 @@ async function loadTableData() {
       console.log("yes zata");
     });
   }
+  loadTableData();
   const sortSelect = document.getElementById("sort1");
 
   sortSelect.addEventListener("change", () => {
@@ -79,39 +80,8 @@ async function loadTableData() {
   }
 }
 
-loadTableData();
 
-///////////////////////////////////// sort data
-const sortSelect = document.getElementById("sort1");
 
-sortSelect.addEventListener("change", () => {
-  const selectedOption = sortSelect.value;
-  sortTable(selectedOption);
-});
-
-function sortTable(selectedOption) {
-  // Clone the table data to prevent modifying the original array
-  const sortedData = [...tableData1];
-
-  if (selectedOption === "ID") {
-    sortedData.sort((a, b) => a.patient_id - b.patient_id);
-  } else if (selectedOption === "TimeLate") {
-    sortedData.sort(
-      (a, b) => new Date(b.created_date) - new Date(a.created_date)
-    );
-  } else if (selectedOption === "TimeOld") {
-    sortedData.sort(
-      (a, b) => new Date(a.created_date) - new Date(b.created_date)
-    );
-  } else if (selectedOption === "Name") {
-    sortedData.sort((a, b) => a.patient_name.localeCompare(b.patient_name));
-  } else if (selectedOption === "CS") {
-    sortedData.sort((a, b) => a.course_section.localeCompare(b.course_section));
-  }
-
-  // Call the loadTableData function with the sorted data
-  loadTableData(sortedData);
-}
 
 ///////////////////////////////////// insert student medform data to table
 $("#insertstudmedform").submit(async function (event) {
