@@ -24,7 +24,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       return;
     }
   
-    const tableBody = document.querySelector("#mdental_table tbody");
+    const tableBody = document.querySelector("#dental_table tbody");
   
     if (tableData1.length === 0) {
       const newRow = document.createElement("tr");
