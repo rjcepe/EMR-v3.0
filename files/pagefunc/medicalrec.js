@@ -5,68 +5,68 @@ const SUPABASE_ANON_KEY =
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 ///////////////////////////////////// Load data to table
-async function loadTableData() {
-  const { data: tableData1, error } = await _supabase
-    .from("med_forms")
-    .select("*");
+// async function loadTableData() {
+//   const { data: tableData1, error } = await _supabase
+//     .from("med_forms")
+//     .select("*");
 
-  if (error) {
-    console.log("Error loading table data:", error.message);
-    return;
-  }
-  console.log("hello");
+//   if (error) {
+//     console.log("Error loading table data:", error.message);
+//     return;
+//   }
+//   console.log("hello");
 
-  const tableBody = document.querySelector("#medform_table tbody");
-  // Call the table
+//   const tableBody = document.querySelector("#medform_table tbody");
+//   // Call the table
 
-  if (tableData1.length === 0) {
-    // If no data in Supabase
-    const newRow = document.createElement("tr");
-    newRow.innerHTML = `
-             <th class="row" colspan="7" ">No zata available</td>
-         `;
-    tableBody.appendChild(newRow);
-    console.log("no zata");
-  } else {
-    // Sort the data by the created_date in descending order (latest first)
-    tableData1.sort(
-      (a, b) => new Date(b.row_id) - new Date(a.row_id)
-    );
+//   if (tableData1.length === 0) {
+//     // If no data in Supabase
+//     const newRow = document.createElement("tr");
+//     newRow.innerHTML = `
+//              <th class="row" colspan="7" ">No zata available</td>
+//          `;
+//     tableBody.appendChild(newRow);
+//     console.log("no zata");
+//   } else {
+//     // Sort the data by the created_date in descending order (latest first)
+//     tableData1.sort(
+//       (a, b) => new Date(b.row_id) - new Date(a.row_id)
+//     );
 
-    tableData1.forEach((row) => {
-      const newRow = document.createElement("tr");
-      newRow.classList.add("res");
+//     tableData1.forEach((row) => {
+//       const newRow = document.createElement("tr");
+//       newRow.classList.add("res");
 
-      newRow.innerHTML = `
-                 <th class="row idcol">${row.patient_id}</th>
-                 <th class="row namecol">${row.patient_name}</th>
-                 <th class="row timecol">${row.created_date}</th>
-                 <th class="row coursecol">${row.course_section}</th>
-                 <th class="row timecol">${row.location}</th>
-                 <th class="row timecol">${row.added_by}</th>
-                 <th class="buttscol"><button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')"><p class="txt">View</p></button></th>
-                 `;
-      tableBody.appendChild(newRow);
-      console.log("yes zata");
-    });
-  }
-}
+//       newRow.innerHTML = `
+//                  <th class="row idcol">${row.patient_id}</th>
+//                  <th class="row namecol">${row.patient_name}</th>
+//                  <th class="row timecol">${row.created_date}</th>
+//                  <th class="row coursecol">${row.course_section}</th>
+//                  <th class="row timecol">${row.location}</th>
+//                  <th class="row timecol">${row.added_by}</th>
+//                  <th class="buttscol"><button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')"><p class="txt">View</p></button></th>
+//                  `;
+//       tableBody.appendChild(newRow);
+//       console.log("yes zata");
+//     });
+//   }
+// }
 
 //////////////////////////////// sort function
   // Add an event listener to the select element to detect changes
-  function checksort() {
-    const selectedOption = document.getElementById("sort1").value;
+  // function checksort() {
+  //   const selectedOption = document.getElementById("sort1").value;
 
-    if (selectedOption === "Default") {
-      // Call another function when the default option is selected
-      loadTableData();
-    } else {
-      loadTableDatasorted(); // Reload the table data when a sorting option is selected
-    } 
-  };
+  //   if (selectedOption === "Default") {
+  //     // Call another function when the default option is selected
+  //     loadTableData();
+  //   } else {
+  //     loadTableDatasorted(); // Reload the table data when a sorting option is selected
+  //   } 
+  // };
 
-  checksort()
-  
+  // checksort()
+  loadTableDatasorted();
   // Modify the loadTableData function to sort the table data
   async function loadTableDatasorted() {
     const selectedOption = document.getElementById("sort1").value;
@@ -93,6 +93,8 @@ async function loadTableData() {
       } else if (selectedOption === "TimeLate") {
         tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
       } else if (selectedOption === "TimeOld") {
+        tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+      } else if (selectedOption === "Default") {
         tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
       } else if (selectedOption === "Name") {
         tableData1.sort((a, b) => new Date(b.patient_name) - new Date(a.patient_name));
