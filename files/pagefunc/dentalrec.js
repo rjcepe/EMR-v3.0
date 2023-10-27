@@ -25,6 +25,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
   
     const tableBody = document.querySelector("#dental_table tbody");
+    tableBody.innerHTML = ""; // Clear the current table
   
     if (tableData1.length === 0) {
       const newRow = document.createElement("tr");
