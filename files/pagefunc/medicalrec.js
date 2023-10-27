@@ -54,14 +54,18 @@ async function loadTableData() {
 
 //////////////////////////////// sort function
   // Add an event listener to the select element to detect changes
-  document.getElementById("sort1").addEventListener("change", function () {
-    if (selectedOption === "def") {
+  function checksort() {
+    const selectedOption = document.getElementById("sort1").value;
+
+    if (selectedOption === "Default") {
       // Call another function when the default option is selected
       loadTableData();
     } else {
       loadTableDatasorted(); // Reload the table data when a sorting option is selected
     } 
-  });
+  };
+
+  checksort();
   
   // Modify the loadTableData function to sort the table data
   async function loadTableDatasorted() {
