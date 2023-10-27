@@ -17,14 +17,14 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   async function loadTableData() {
     const selectedOption = document.getElementById("sort1").value;
   
-    const { data: tableData1, error } = await _supabase.from("med_forms").select("*");
+    const { data: tableData1, error } = await _supabase.from("dental_forms").select("*");
   
     if (error) {
       console.log("Error loading table data:", error.message);
       return;
     }
   
-    const tableBody = document.querySelector("#medform_table tbody");
+    const tableBody = document.querySelector("#mdental_table tbody");
     tableBody.innerHTML = ""; // Clear the current table
   
     if (tableData1.length === 0) {
@@ -62,7 +62,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
           <th class="row timecol">${row.location}</th>
           <th class="row timecol">${row.added_by}</th>
           <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
+            <button class="viewbutt" onclick="showv('${row.dental_file}', '${row.patient_name}')">
               <p class="txt">View</p>
             </button>
           </th>
@@ -110,7 +110,7 @@ getusername();
 
 
 /////////////////////////////////// Upload student info
-$("#insertstudmedform").submit(async function (event) {
+$("#insertstuddentalform").submit(async function (event) {
   event.preventDefault();
   // Get form field values
   const name = $("#studname").val();
@@ -120,42 +120,41 @@ $("#insertstudmedform").submit(async function (event) {
 
   var username = localStorage.getItem("x")
 
-  const medformInput = document.getElementById("medform");
-  const medformFile = medformInput.files[0];
+  const dentalformInput = document.getElementById("dentalform");
+  const dentalformFile = dentalformInput.files[0];
 
   // Initialize the 'user' variable outside the try-catch block
 
   try {
-    // Change the filename to "(name inputted)_medform"
-    const fileName = `${id}_medform.${medformFile.name.split(".").pop()}`;
+    const fileName = `${id}_dentalform.${dentalformFile.name.split(".").pop()}`;
 
     // Upload the file to Supabase storage with the modified filename
     const { data, error: uploadError } = await _supabase.storage
-      .from("medicalrecords")
-      .upload(fileName, medformFile);
+      .from("dentalrecords")
+      .upload(fileName, dentalformFile);
 
     if (uploadError) {
       console.error("Error uploading file:", uploadError);
       return;
     }
 
-    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
+    const dentalformURL = `${SUPABASE_URL}/storage/v1/object/public/dentalrecords/${fileName}`; // Fixed the URL formation
 
     console.log("sssss");
 
-    const medformInfo = {
+    const dentalformInfo = {
       patient_id: id,
       patient_name: name,
       course_section: cs,
       location: loc1,
       added_by: username,
-      med_file: medformURL,
+      med_file: dentalformURL,
     };
 
     // Insert data into the 'med_forms1' table
     const { data: insertData, error: insertError } = await _supabase
       .from("med_forms")
-      .insert(medformInfo);
+      .insert(dentalformInfo);
 
     if (insertError) {
       console.error("Error inserting data:", insertError.message);
@@ -169,7 +168,7 @@ $("#insertstudmedform").submit(async function (event) {
 });
 
 /////////////////////////////////////////// Upload employee info
-$("#insertempmedform").submit(async function (event) {
+$("#insertempdentalform").submit(async function (event) {
     event.preventDefault();
     // Get form field values
     const name1 = $("#empname").val();
@@ -178,42 +177,42 @@ $("#insertempmedform").submit(async function (event) {
 
     var username = localStorage.getItem("x")
 
-    const medformInput = document.getElementById("medform2");
-    const medformFile = medformInput.files[0];
+    const dentalformInput = document.getElementById("dentalform2");
+  const dentalformFile = dentalformInput.files[0];
   
     // Initialize the 'user' variable outside the try-catch block
   
     try {
       // Change the filename to "(name inputted)_medform"
-      const fileName = `${id1}_medform.${medformFile.name.split(".").pop()}`;
-  
-      // Upload the file to Supabase storage with the modified filename
-      const { data, error: uploadError } = await _supabase.storage
-        .from("medicalrecords")
-        .upload(fileName, medformFile);
-  
-      if (uploadError) {
-        console.error("Error uploading file:", uploadError);
-        return;
-      }
-  
-      const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
+      const fileName = `${id}_dentalform.${dentalformFile.name.split(".").pop()}`;
+
+    // Upload the file to Supabase storage with the modified filename
+    const { data, error: uploadError } = await _supabase.storage
+      .from("dentalrecords")
+      .upload(fileName, dentalformFile);
+
+    if (uploadError) {
+      console.error("Error uploading file:", uploadError);
+      return;
+    }
+
+    const dentalformURL = `${SUPABASE_URL}/storage/v1/object/public/dentalrecords/${fileName}`; // Fixed the URL formation
   
       console.log("sssss");
   
-      const medformInfo = {
+      const dentalformInfo = {
         patient_id: id1,
         patient_name: name1,
         course_section: "Employee",
         location: loc1,
         added_by: username,
-        med_file: medformURL,
+        med_file: dentalformURL,
       };
   
       // Insert data into the 'med_forms1' table
       const { data: insertData, error: insertError } = await _supabase
         .from("med_forms")
-        .insert(medformInfo);
+        .insert(dentalformInfo);
   
       if (insertError) {
         console.error("Error inserting data:", insertError.message);
@@ -341,14 +340,14 @@ document.getElementById("searchpatient").addEventListener("click", async functio
     const searchID = document.getElementById("searchInput").value;
   
     // Fetch the patient data based on the search ID
-    const { data: patientData, error } = await _supabase.from("med_forms").select("*").eq("patient_id", searchID);
+    const { data: patientData, error } = await _supabase.from("dental_forms").select("*").eq("patient_id", searchID);
   
     if (error) {
       console.error("Error fetching patient data:", error.message);
       return;
     }
   
-    const tableBody = document.querySelector("#medform_table tbody");
+    const tableBody = document.querySelector("#dentalform_table tbody");
   
     // Clear the current table
     tableBody.innerHTML = "";
@@ -367,7 +366,7 @@ document.getElementById("searchpatient").addEventListener("click", async functio
           <th class="row timecol">${row.location}</th>
           <th class="row timecol">${row.added_by}</th>
           <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
+            <button class="viewbutt" onclick="showv('${row.dental_file}', '${row.patient_name}')">
               <p class="txt">View</p>
             </button>
           </th>
