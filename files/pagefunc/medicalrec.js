@@ -33,15 +33,15 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     } else {
       // Sort the data based on the selected option
       if (selectedOption === "ID") {
-        tableData1.sort((a, b) => a.patient_id.localeCompare(b.patient_id));
+        tableData1.sort((a, b) => new Date(b.patient_id) - new Date(a.patient_id));
       } else if (selectedOption === "TimeLate") {
-        tableData1.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
+        tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
       } else if (selectedOption === "TimeOld") {
-        tableData1.sort((a, b) => new Date(a.created_date) - new Date(b.created_date));
+        tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
       } else if (selectedOption === "Name") {
-        tableData1.sort((a, b) => a.patient_name.localeCompare(b.patient_name));
+        tableData1.sort((a, b) => new Date(b.patient_name) - new Date(a.patient_name));
       } else if (selectedOption === "CS") {
-        tableData1.sort((a, b) => a.course_section.localeCompare(b.course_section));
+        tableData1.sort((a, b) => new Date(b.course_section) - new Date(a.course_section));
       }
   
       tableData1.forEach((row) => {
