@@ -148,7 +148,7 @@ $("#insertstuddentalform").submit(async function (event) {
       course_section: cs,
       location: loc1,
       added_by: username,
-      med_file: dentalformURL,
+      dental_file: dentalformURL,
     };
 
     // Insert data into the 'med_forms1' table
@@ -206,7 +206,7 @@ $("#insertempdentalform").submit(async function (event) {
         course_section: "Employee",
         location: loc1,
         added_by: username,
-        med_file: dentalformURL,
+        dental_file: dentalformURL,
       };
   
       // Insert data into the 'med_forms1' table
