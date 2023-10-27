@@ -7,6 +7,8 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 ///////////////////////////////////// Load data to table
 //////////////////////////////// sort function
   // Add an event listener to the select element to detect changes
+  loadTableData();
+
   document.getElementById("sort1").addEventListener("change", function () {
     loadTableData(); // Reload the table data when the sorting option changes
   });
@@ -39,9 +41,9 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       } else if (selectedOption === "TimeOld") {
         tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
       } else if (selectedOption === "Name") {
-        tableData1.sort((a, b) => new Date(b.patient_name) - new Date(a.patient_name));
+        tableData1.sort((a, b) => new Date(a.patient_name) - new Date(b.patient_name));
       } else if (selectedOption === "CS") {
-        tableData1.sort((a, b) => new Date(b.course_section) - new Date(a.course_section));
+        tableData1.sort((a, b) => new Date(a.course_section) - new Date(b.course_section));
       }
   
       tableData1.forEach((row) => {
