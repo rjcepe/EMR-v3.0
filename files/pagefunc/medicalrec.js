@@ -42,8 +42,10 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
       } else if (selectedOption === "def") {
         tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
-      } else if (selectedOption === "Name") {
+      } else if (selectedOption === "Nameaz") {
         tableData1.sort((a, b) => a.patient_name.toString().localeCompare(b.patient_name));
+      } else if (selectedOption === "Nameza") {
+        tableData1.sort((a, b) => b.patient_name.toString().localeCompare(a.patient_name));
       } else if (selectedOption === "CS") {
         tableData1.sort((a, b) => a.course_section.toString().localeCompare(b.course_section));
       }
