@@ -81,6 +81,8 @@ loadTableData();
   }
 }
 
+getusername();
+
 
 
 /////////////////////////////////// Upload student info
