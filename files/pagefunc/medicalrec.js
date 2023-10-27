@@ -248,7 +248,7 @@ async function fetchUsername() {
     console.log("User not found with ID:", id);
   }
 
-  
+////////// display corresponding user pic  
 const { imgdata } = await _supabase.storage.from('public-bucket').getPublicUrl('userimages/' + id1 + '.png');
 
   if (imgdata){
@@ -257,7 +257,7 @@ const { imgdata } = await _supabase.storage.from('public-bucket').getPublicUrl('
 
     console.log(imgdata);
 
-    img = document.createElement('img');
+    const img = document.createElement('img');
     img.setAttribute("src", imgdata);
 
     usertab.insertBefore(img, usertab1);
