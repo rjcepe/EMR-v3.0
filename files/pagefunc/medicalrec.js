@@ -43,10 +43,11 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       } else if (selectedOption === "def") {
         tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
       } else if (selectedOption === "Name") {
-        tableData1.sort((a, b) => new Date(a.patient_name) - new Date(b.patient_name));
+        tableData1.sort((a, b) => a.patient_name.toString().localeCompare(b.patient_name));
       } else if (selectedOption === "CS") {
-        tableData1.sort((a, b) => new Date(a.course_section) - new Date(b.course_section));
+        tableData1.sort((a, b) => a.course_section.toString().localeCompare(b.course_section));
       }
+      
   
       tableData1.forEach((row) => {
         const newRow = document.createElement("tr");
