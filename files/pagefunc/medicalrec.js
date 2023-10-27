@@ -74,11 +74,18 @@ loadTableData();
     console.log(username);
     console.log("------");
     
+    getusername1(username);
 
     // Now, you can use the 'username' variable as needed.
   } else {
     console.log("User not found with ID:", id);
   }
+}
+
+function getusername1(username){
+  console.log("======");
+  console.log(username);
+  console.log("======");
 }
 
 getusername();
