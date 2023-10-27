@@ -253,6 +253,8 @@ async function fetchUsername() {
 ////////// display corresponding user pic  
 async function fetchUserPic() {
   var id1 = localStorage.getItem("uid1");
+  const piclink = id1 + '.png';
+  console.log(piclink);
 
   const { imgdata } = await _supabase.storage.from('public-bucket').getPublicUrl('userimages/' + id1 + '.png');
 
