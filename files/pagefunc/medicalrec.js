@@ -52,8 +52,74 @@ async function loadTableData() {
   }
 }
 
-loadTableData();
+//////////////////////////////// sort function
+  // Add an event listener to the select element to detect changes
+  document.getElementById("sort1").addEventListener("change", function () {
+    if (selectedOption === "def") {
+      // Call another function when the default option is selected
+      loadTableData();
+    } else {
+      loadTableDatasorted(); // Reload the table data when a sorting option is selected
+    } 
+  });
+  
+  // Modify the loadTableData function to sort the table data
+  async function loadTableDatasorted() {
+    const selectedOption = document.getElementById("sort1").value;
+  
+    const { data: tableData1, error } = await _supabase.from("med_forms").select("*");
+  
+    if (error) {
+      console.log("Error loading table data:", error.message);
+      return;
+    }
+  
+    const tableBody = document.querySelector("#medform_table tbody");
+    tableBody.innerHTML = ""; // Clear the current table
+  
+    if (tableData1.length === 0) {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `<th class="row" colspan="7">No data available</td>`;
+      tableBody.appendChild(newRow);
+      console.log("No data");
+    } else {
+      // Sort the data based on the selected option
+      if (selectedOption === "ID") {
+        tableData1.sort((a, b) => new Date(b.patient_id) - new Date(a.patient_id));
+      } else if (selectedOption === "TimeLate") {
+        tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+      } else if (selectedOption === "TimeOld") {
+        tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+      } else if (selectedOption === "Name") {
+        tableData1.sort((a, b) => new Date(b.patient_name) - new Date(a.patient_name));
+      } else if (selectedOption === "CS") {
+        tableData1.sort((a, b) => new Date(b.course_section) - new Date(a.course_section));
+      }
+  
+      tableData1.forEach((row) => {
+        const newRow = document.createElement("tr");
+        newRow.classList.add("res");
+        newRow.innerHTML = `
+          <th class="row idcol">${row.patient_id}</th>
+          <th class="row namecol">${row.patient_name}</th>
+          <th class="row timecol">${row.created_date}</th>
+          <th class="row coursecol">${row.course_section}</th>
+          <th class="row timecol">${row.location}</th>
+          <th class="row timecol">${row.added_by}</th>
+          <th class="buttscol">
+            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
+              <p class="txt">View</p>
+            </button>
+          </th>
+        `;
+        tableBody.appendChild(newRow);
+      });
+    }
+  }
 
+
+
+////////////////////////////// fetch username
  async function getusername(){
   var id1 = localStorage.getItem("uid1");
 
@@ -268,29 +334,12 @@ async function fetchUserPic() {
 
     userTab.insertBefore(img, usernameDiv);
 
-  // const { imgdata} = await _supabase.storage.from('userimages').getPublicUrl(piclink);
-
-  // if (imgdata) {
-  //   const userTab = document.querySelector(".user");
-  //   const usernameDiv = document.querySelector(".username");
-
-  //   console.log(imgdata);
-
-  //   const img = document.createElement('img');
-  //   img.setAttribute("src", imgdata);
-
-  //   userTab.insertBefore(img, usernameDiv);
-  // }
-  // else {
-  //   console.log("yaw gumana ya");
-  // }
 }
 
 fetchUserPic();
 fetchUsername();
 
 //////////////////////////////////////show results
-// Define filec and name1 in a broader scope
 let filec;
 let name1;
 
@@ -387,4 +436,66 @@ document.getElementById("searchpatient").addEventListener("click", async functio
       tableBody.appendChild(newRow);
     }
   });
+
+
+//////////////////////////////// sort function
+  // Add an event listener to the select element to detect changes
+document.getElementById("sort1").addEventListener("change", function () {
+  loadTableData(); // Reload the table data when the sorting option changes
+});
+
+// Modify the loadTableData function to sort the table data
+async function loadTableData() {
+  const selectedOption = document.getElementById("sort1").value;
+
+  const { data: tableData1, error } = await _supabase.from("med_forms").select("*");
+
+  if (error) {
+    console.log("Error loading table data:", error.message);
+    return;
+  }
+
+  const tableBody = document.querySelector("#medform_table tbody");
+  tableBody.innerHTML = ""; // Clear the current table
+
+  if (tableData1.length === 0) {
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `<th class="row" colspan="7">No data available</td>`;
+    tableBody.appendChild(newRow);
+    console.log("No data");
+  } else {
+    // Sort the data based on the selected option
+    if (selectedOption === "ID") {
+      tableData1.sort((a, b) => a.patient_id.localeCompare(b.patient_id));
+    } else if (selectedOption === "TimeLate") {
+      tableData1.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
+    } else if (selectedOption === "TimeOld") {
+      tableData1.sort((a, b) => new Date(a.created_date) - new Date(b.created_date));
+    } else if (selectedOption === "Name") {
+      tableData1.sort((a, b) => a.patient_name.localeCompare(b.patient_name));
+    } else if (selectedOption === "CS") {
+      tableData1.sort((a, b) => a.course_section.localeCompare(b.course_section));
+    }
+
+    tableData1.forEach((row) => {
+      const newRow = document.createElement("tr");
+      newRow.classList.add("res");
+      newRow.innerHTML = `
+        <th class="row idcol">${row.patient_id}</th>
+        <th class="row namecol">${row.patient_name}</th>
+        <th class="row timecol">${row.created_date}</th>
+        <th class="row coursecol">${row.course_section}</th>
+        <th class="row timecol">${row.location}</th>
+        <th class="row timecol">${row.added_by}</th>
+        <th class="buttscol">
+          <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
+            <p class="txt">View</p>
+          </button>
+        </th>
+      `;
+      tableBody.appendChild(newRow);
+    });
+  }
+}
+
   
