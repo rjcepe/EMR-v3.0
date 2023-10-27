@@ -256,7 +256,7 @@ async function fetchUserPic() {
   const piclink = id1 + '.png';
   console.log(piclink);
 
-  const { imgdata, error: err } = await _supabase.storage.from('public-bucket').getPublicUrl('userimages/' + piclink);
+  const { imgdata} = await _supabase.storage.from('userimages').getPublicUrl(piclink);
 
   if (imgdata) {
     const userTab = document.querySelector(".user");
