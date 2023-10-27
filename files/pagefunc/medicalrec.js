@@ -248,23 +248,28 @@ async function fetchUsername() {
     console.log("User not found with ID:", id);
   }
 
-////////// display corresponding user pic  
-const { imgdata } = await _supabase.storage.from('public-bucket').getPublicUrl('userimages/' + id1 + '.png');
+}
 
-  if (imgdata){
-    const usertab = document.querySelector(".user");
-    const usertab1 = document.querySelector(".username");
+////////// display corresponding user pic  
+async function fetchUserPic() {
+  var id1 = localStorage.getItem("uid1");
+
+  const { imgdata } = await _supabase.storage.from('public-bucket').getPublicUrl('userimages/' + id1 + '.png');
+
+  if (imgdata) {
+    const userTab = document.querySelector(".user");
+    const usernameDiv = document.querySelector(".username");
 
     console.log(imgdata);
 
     const img = document.createElement('img');
     img.setAttribute("src", imgdata);
 
-    usertab.insertBefore(img, usertab1);
+    userTab.insertBefore(img, usernameDiv);
   }
 }
 
-
+fetchUserPic();
 fetchUsername();
 
 //////////////////////////////////////show results
