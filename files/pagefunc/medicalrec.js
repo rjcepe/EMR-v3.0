@@ -267,6 +267,9 @@ async function fetchUserPic() {
 
     userTab.insertBefore(img, usernameDiv);
   }
+  else {
+    console.error(error.message);
+  }
 }
 
 fetchUserPic();
