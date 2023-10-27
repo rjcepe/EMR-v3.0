@@ -156,73 +156,61 @@ $("#insertstudmedform").submit(async function (event) {
 
 /////////////////////////////////////////// Upload employee info
 $("#insertempmedform").submit(async function (event) {
-  event.preventDefault();
-  // Get form field values
-  const name1 = $("#empname").val();
-  const id1 = $("#empid").val();
-  const loc1 = $("#locsel1").val();
+    event.preventDefault();
+    // Get form field values
+    const name1 = $("#empname").val();
+    const id1 = $("#empid").val();
+    const loc1 = $("#locsel1").val();
 
-  var username = localStorage.getItem("x");
+    var username = localStorage.getItem("x")
 
-  const medformInput = document.getElementById("medform2");
-  const medformFile = medformInput.files[0];
-
-  // Initialize the 'user' variable outside the try-catch block
-
-  try {
-    // Initialize a counter for appending numbers to filenames
-    let filenameCounter = 0;
-    let fileName = `${id1}_medform.${medformFile.name.split(".").pop()}`;
-    let filedir = ("public/" + fileName);
-
-    // Check if the filename already exists in the storage
-    while (await checkFileExists(filedir)) {
-      filenameCounter++;
-      fileName = `${id1}_medform (${filenameCounter}).${medformFile.name.split(".").pop()}`;
+    const medformInput = document.getElementById("medform2");
+    const medformFile = medformInput.files[0];
+  
+    // Initialize the 'user' variable outside the try-catch block
+  
+    try {
+      // Change the filename to "(name inputted)_medform"
+      const fileName = `${id1}_medform.${medformFile.name.split(".").pop()}`;
+  
+      // Upload the file to Supabase storage with the modified filename
+      const { data, error: uploadError } = await _supabase.storage
+        .from("medicalrecords")
+        .upload(fileName, medformFile);
+  
+      if (uploadError) {
+        console.error("Error uploading file:", uploadError);
+        return;
+      }
+  
+      const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
+  
+      console.log("sssss");
+  
+      const medformInfo = {
+        patient_id: id1,
+        patient_name: name1,
+        course_section: "Employee",
+        location: loc1,
+        added_by: username,
+        med_file: medformURL,
+      };
+  
+      // Insert data into the 'med_forms1' table
+      const { data: insertData, error: insertError } = await _supabase
+        .from("med_forms")
+        .insert(medformInfo);
+  
+      if (insertError) {
+        console.error("Error inserting data:", insertError.message);
+      } else {
+        console.log("Data inserted successfully:", insertData);
+        location.reload();
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
     }
-
-    // Upload the file to Supabase storage with the modified filename
-    const { data, error: uploadError } = await _supabase.storage.from("medicalrecords").upload(fileName, medformFile);
-
-    if (uploadError) {
-      console.error("Error uploading file:", uploadError);
-      return;
-    }
-
-    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
-
-    const medformInfo = {
-      patient_id: id1,
-      patient_name: name1,
-      course_section: "Employee",
-      location: loc1,
-      added_by: username,
-      med_file: medformURL,
-    };
-
-    // Insert data into the 'med_forms1' table
-    const { data: insertData, error: insertError } = await _supabase
-      .from("med_forms")
-      .insert(medformInfo);
-
-    if (insertError) {
-      console.error("Error inserting data:", insertError.message);
-    } else {
-      console.log("Data inserted successfully:", insertData);
-      location.reload();
-    }
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-});
-
-async function checkFileExists(filedir) {
-  // Check if the file exists in Supabase storage
-  const { data, error } = await _supabase.storage.from("medicalrecords").select(filedir);
-
-  return !error && data;
-}
-
+  });
 
 //////////////////////////////////// user display
 async function fetchUsername() {
