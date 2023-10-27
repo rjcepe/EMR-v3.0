@@ -173,17 +173,16 @@ $("#insertempmedform").submit(async function (event) {
     // Initialize a counter for appending numbers to filenames
     let filenameCounter = 0;
     let fileName = `${id1}_medform.${medformFile.name.split(".").pop()}`;
+    let filedir = ("public/" + fileName);
 
     // Check if the filename already exists in the storage
-    while (await checkFileExists(fileName)) {
+    while (await checkFileExists(filedir)) {
       filenameCounter++;
       fileName = `${id1}_medform (${filenameCounter}).${medformFile.name.split(".").pop()}`;
     }
 
     // Upload the file to Supabase storage with the modified filename
-    const { data, error: uploadError } = await _supabase.storage
-      .from("medicalrecords")
-      .upload(fileName, medformFile);
+    const { data, error: uploadError } = await _supabase.storage.from("medicalrecords").upload(fileName, medformFile);
 
     if (uploadError) {
       console.error("Error uploading file:", uploadError);
@@ -217,11 +216,9 @@ $("#insertempmedform").submit(async function (event) {
   }
 });
 
-async function checkFileExists(fileName) {
+async function checkFileExists(filedir) {
   // Check if the file exists in Supabase storage
-  const { data, error } = await _supabase.storage
-    .from("medicalrecords")
-    .getMetadata(fileName);
+  const { data, error } = await _supabase.storage.from("medicalrecords").select(filedir);
 
   return !error && data;
 }
