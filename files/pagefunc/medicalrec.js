@@ -156,54 +156,34 @@ $("#insertstudmedform").submit(async function (event) {
 
 /////////////////////////////////////////// Upload employee info
 $("#insertempmedform").submit(async function (event) {
-  event.preventDefault();
-  // Get form field values
-  const name1 = $("#empname").val();
-  const id1 = $("#empid").val();
-  const loc1 = $("#locsel1").val();
+    event.preventDefault();
+    // Get form field values
+    const name1 = $("#empname").val();
+    const id1 = $("#empid").val();
+    const loc1 = $("#locsel1").val();
 
-  var username = localStorage.getItem("x");
+    var username = localStorage.getItem("x")
 
-  const medformInput = document.getElementById("medform2");
-  const medformFile = medformInput.files[0];
-
-  // Initialize the 'user' variable outside the try-catch block
-
-  try {
-    // Change the filename to "(name inputted)_medform"
-    const fileName = `${id1}_medform.${medformFile.name.split(".").pop()}`;
-
-    // Check if the file is an image (e.g., JPEG or PNG)
-    if (medformFile.type.startsWith("image/")) {
-      // Compile the image into a PDF
-      const pdfDoc = await compileImagesToPDF([medformFile]);
-      // Upload the compiled PDF to the database
-      const { data, error: uploadError } = await _supabase.storage
-        .from("medicalrecords")
-        .upload(fileName, new Blob([await pdfDoc.save()]));
-
-      if (uploadError) {
-        console.error("Error uploading file:", uploadError);
-        return;
-      }
-    } else if (medformFile.type === "application/pdf") {
-      // If it's already a PDF, upload it directly to the database
+    const medformInput = document.getElementById("medform2");
+    const medformFile = medformInput.files[0];
+  
+    // Initialize the 'user' variable outside the try-catch block
+  
+    try {
+      // Change the filename to "(name inputted)_medform"
+      const fileName = `${id1}_medform.${medformFile.name.split(".").pop()}`;
+  
+      // Upload the file to Supabase storage with the modified filename
       const { data, error: uploadError } = await _supabase.storage
         .from("medicalrecords")
         .upload(fileName, medformFile);
-
+  
       if (uploadError) {
         console.error("Error uploading file:", uploadError);
         return;
       }
-    } else {
-      // Handle unsupported file types or provide an error message
-      console.error("Unsupported file type:", medformFile.type);
-      return;
-    }
-
-    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
-    // Further processing or saving the URL as needed
+  
+      const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
   
       console.log("sssss");
   
@@ -231,29 +211,6 @@ $("#insertempmedform").submit(async function (event) {
       console.error("Error:", error.message);
     }
   });
-
-  /////////// convert images to pdf
-  async function compileImagesToPDF(imageFiles) {
-    const { PDFDocument, rgb, degrees } = PDFLib;
-  
-    const pdfDoc = await PDFDocument.create();
-    for (const imageFile of imageFiles) {
-      const imageBytes = await fetch(URL.createObjectURL(imageFile)).then((res) =>
-        res.arrayBuffer()
-      );
-      const image = await pdfDoc.embedJpg(imageBytes);
-  
-      const page = pdfDoc.addPage([image.width, image.height]);
-      const { width, height } = page.getSize();
-      page.drawImage(image, {
-        x: 0,
-        y: 0,
-        width,
-        height,
-      });
-    }
-    return pdfDoc;
-  }
 
 //////////////////////////////////// user display
 async function fetchUsername() {
