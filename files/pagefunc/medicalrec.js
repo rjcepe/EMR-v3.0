@@ -86,6 +86,9 @@ function getusername1(username){
   console.log("======");
   console.log(username);
   console.log("======");
+
+  var bb = username;
+  localStorage.setItem("jj", bb);
 }
 
 getusername();
@@ -101,6 +104,8 @@ $("#insertstudmedform").submit(async function (event) {
   const cs = $("#studcs").val();
   const loc1 = $("#locsel").val();
   const add1 = $("#addedby").val();
+
+  var kk = localStorage.getItem("jj")
 
   const medformInput = document.getElementById("medform");
   const medformFile = medformInput.files[0];
@@ -130,7 +135,7 @@ $("#insertstudmedform").submit(async function (event) {
       patient_name: name,
       course_section: cs,
       location: loc1,
-      added_by: add1,
+      added_by: kk,
       med_file: medformURL,
     };
 
