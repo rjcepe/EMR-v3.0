@@ -65,7 +65,7 @@ async function loadTableData() {
     } 
   };
 
-  checksort();
+  checksort()
   
   // Modify the loadTableData function to sort the table data
   async function loadTableDatasorted() {
