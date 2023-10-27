@@ -54,6 +54,35 @@ async function loadTableData() {
 
 loadTableData();
 
+ async function getusername(){
+  var id1 = localStorage.getItem("uid1");
+
+  const { data, error } = await _supabase
+    .from("user_accs")
+    .select("username")
+    .eq("id", id1);
+
+  if (error) {
+    console.error("Error fetching username:", error.message);
+    return;
+  }
+
+  // Check if data is not empty
+  if (data && data.length > 0) {
+    const username = data[0].username;
+    console.log("------");
+    console.log(username);
+    console.log("------");
+    
+
+    // Now, you can use the 'username' variable as needed.
+  } else {
+    console.log("User not found with ID:", id);
+  }
+}
+
+
+
 /////////////////////////////////// Upload student info
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
