@@ -153,7 +153,7 @@ $("#insertstuddentalform").submit(async function (event) {
 
     // Insert data into the 'med_forms1' table
     const { data: insertData, error: insertError } = await _supabase
-      .from("med_forms")
+      .from("dental_forms")
       .insert(dentalformInfo);
 
     if (insertError) {
@@ -211,7 +211,7 @@ $("#insertempdentalform").submit(async function (event) {
   
       // Insert data into the 'med_forms1' table
       const { data: insertData, error: insertError } = await _supabase
-        .from("med_forms")
+        .from("dental_forms")
         .insert(dentalformInfo);
   
       if (insertError) {
