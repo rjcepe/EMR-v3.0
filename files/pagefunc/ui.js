@@ -50,24 +50,6 @@ function emp() {
     vfile.classList.remove('showv');
   }
 
-  //show results
-  function showv() {
-    const vfile = document.querySelector('.main2');
-    const main = document.querySelector('.main');
-    
-    main.classList.add('main-filter');
-    vfile.classList.add('showv');
-    vfile.classList.remove('hidev');
-
-  }
-  function hidev() {
-    const vfile = document.querySelector('.main2');
-    const main = document.querySelector('.main');
-    
-    main.classList.remove('main-filter');
-    vfile.classList.add('hidev');
-    vfile.classList.remove('showv');
-  }
 
 //show sidebar
   function sideshow(){
