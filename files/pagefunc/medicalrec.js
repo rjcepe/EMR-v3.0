@@ -48,6 +48,8 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         tableData1.sort((a, b) => b.patient_name.toString().localeCompare(a.patient_name));
       } else if (selectedOption === "CS") {
         tableData1.sort((a, b) => a.course_section.toString().localeCompare(b.course_section));
+      } else if (selectedOption === "EMP") {
+        tableData1.sort((a, b) => b.course_section.toString().localeCompare(a.course_section));
       }
       
   
