@@ -216,10 +216,7 @@ $("#insertempmedform").submit(async function (event) {
 async function fetchUsername() {
   var id1 = localStorage.getItem("uid1");
 
-  const { data, error } = await _supabase
-    .from("user_accs")
-    .select("username")
-    .eq("id", id1);
+  const { data, error } = await _supabase.from("user_accs").select("username").eq("id", id1);
 
   if (error) {
     console.error("Error fetching username:", error.message);
@@ -250,7 +247,23 @@ async function fetchUsername() {
   } else {
     console.log("User not found with ID:", id);
   }
+
+  
+const { imgdata } = await _supabase.storage.from('public-bucket').getPublicUrl('userimages/' + id1 + '.png');
+
+  if (imgdata){
+    const usertab = document.querySelector(".user");
+    const usertab1 = document.querySelector(".username");
+
+    console.log(imgdata);
+
+    img = document.createElement('img');
+    img.setAttribute("src", imgdata);
+
+    usertab.insertBefore(img, usertab1);
+  }
 }
+
 
 fetchUsername();
 
