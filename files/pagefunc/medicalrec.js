@@ -88,7 +88,7 @@ function getusername1(username){
   console.log("======");
 
   var bb = username;
-  localStorage.setItem("jj", bb);
+  localStorage.setItem("x", bb);
 }
 
 getusername();
@@ -103,9 +103,8 @@ $("#insertstudmedform").submit(async function (event) {
   const id = $("#studid").val();
   const cs = $("#studcs").val();
   const loc1 = $("#locsel").val();
-  const add1 = $("#addedby").val();
 
-  var kk = localStorage.getItem("jj")
+  var username = localStorage.getItem("x")
 
   const medformInput = document.getElementById("medform");
   const medformFile = medformInput.files[0];
@@ -135,7 +134,7 @@ $("#insertstudmedform").submit(async function (event) {
       patient_name: name,
       course_section: cs,
       location: loc1,
-      added_by: kk,
+      added_by: username,
       med_file: medformURL,
     };
 
@@ -162,8 +161,9 @@ $("#insertempmedform").submit(async function (event) {
     const name1 = $("#empname").val();
     const id1 = $("#empid").val();
     const loc1 = $("#locsel1").val();
-    const add1 = $("#addedby1").val();
-  
+
+    var username = localStorage.getItem("x")
+
     const medformInput = document.getElementById("medform2");
     const medformFile = medformInput.files[0];
   
@@ -192,7 +192,7 @@ $("#insertempmedform").submit(async function (event) {
         patient_name: name1,
         course_section: "Employee",
         location: loc1,
-        added_by: add1,
+        added_by: username,
         med_file: medformURL,
       };
   
@@ -212,7 +212,7 @@ $("#insertempmedform").submit(async function (event) {
     }
   });
 
-// Define an async function to fetch the username
+//////////////////////////////////// user display
 async function fetchUsername() {
   var id1 = localStorage.getItem("uid1");
 
