@@ -256,22 +256,34 @@ async function fetchUserPic() {
   const piclink = id1 + '.png';
   console.log(piclink);
 
-  const { imgdata} = await _supabase.storage.from('userimages').getPublicUrl(piclink);
+  const userpiclink = `${SUPABASE_URL}/storage/v1/object/public/userimages/${piclink}`;
 
-  if (imgdata) {
-    const userTab = document.querySelector(".user");
+  const userTab = document.querySelector(".user");
     const usernameDiv = document.querySelector(".username");
 
-    console.log(imgdata);
+    console.log(userpiclink);
 
     const img = document.createElement('img');
-    img.setAttribute("src", imgdata);
+    img.setAttribute("src", userpiclink);
 
     userTab.insertBefore(img, usernameDiv);
-  }
-  else {
-    console.log("yaw gumana ya");
-  }
+
+  // const { imgdata} = await _supabase.storage.from('userimages').getPublicUrl(piclink);
+
+  // if (imgdata) {
+  //   const userTab = document.querySelector(".user");
+  //   const usernameDiv = document.querySelector(".username");
+
+  //   console.log(imgdata);
+
+  //   const img = document.createElement('img');
+  //   img.setAttribute("src", imgdata);
+
+  //   userTab.insertBefore(img, usernameDiv);
+  // }
+  // else {
+  //   console.log("yaw gumana ya");
+  // }
 }
 
 fetchUserPic();
