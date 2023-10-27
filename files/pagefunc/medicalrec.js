@@ -270,7 +270,7 @@ async function fetchUserPic() {
     userTab.insertBefore(img, usernameDiv);
   }
   else {
-    console.error(err.message);
+    console.log("yaw gumana ya");
   }
 }
 
