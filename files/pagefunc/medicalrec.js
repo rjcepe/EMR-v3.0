@@ -256,7 +256,7 @@ async function fetchUserPic() {
   const piclink = id1 + '.png';
   console.log(piclink);
 
-  const { imgdata } = await _supabase.storage.from('public-bucket').getPublicUrl('userimages/' + id1 + '.png');
+  const { imgdata, error: err } = await _supabase.storage.from('public-bucket').getPublicUrl('userimages/' + piclink);
 
   if (imgdata) {
     const userTab = document.querySelector(".user");
@@ -270,7 +270,7 @@ async function fetchUserPic() {
     userTab.insertBefore(img, usernameDiv);
   }
   else {
-    console.error(error.message);
+    console.error(err.message);
   }
 }
 
