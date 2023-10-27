@@ -347,7 +347,7 @@ document.getElementById("searchpatient").addEventListener("click", async functio
       return;
     }
   
-    const tableBody = document.querySelector("#dentalform_table tbody");
+    const tableBody = document.querySelector("#dental_table tbody");
   
     // Clear the current table
     tableBody.innerHTML = "";
