@@ -39,9 +39,9 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       } else if (selectedOption === "TimeLate") {
         tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
       } else if (selectedOption === "TimeOld") {
-        tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+        tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
       } else if (selectedOption === "def") {
-        tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+        tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
       } else if (selectedOption === "Name") {
         tableData1.sort((a, b) => new Date(a.patient_name) - new Date(b.patient_name));
       } else if (selectedOption === "CS") {
