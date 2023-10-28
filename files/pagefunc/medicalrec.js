@@ -332,7 +332,7 @@ function hidev() {
 
   main.classList.remove("main-filter");
   vfile.classList.add("hidev");
-  vfile.classList remove("showv");
+  vfile.classList.remove("showv");
 }
 
 //////////////////////////////////search function
