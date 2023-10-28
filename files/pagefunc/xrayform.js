@@ -213,7 +213,7 @@ $("#insertempxrayform").submit(async function (event) {
   
       // Insert data into the 'med_forms1' table
       const { data: insertData, error: insertError } = await _supabase
-        .from("dental_forms")
+        .from("xray_forms")
         .insert(formInfo);
   
       if (insertError) {
