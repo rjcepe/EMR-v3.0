@@ -110,30 +110,41 @@ function getusername1(username){
 getusername();
 
 
-/////////////////////////////////// Upload student info
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
-  
-  let studmedfilecount = 0;
-  studmedfilecount ++ ;
-  
-  console.log(studmedfilecount);
+
+  // Retrieve the current studmedfilecount value from local storage
+  let studmedfilecount = localStorage.getItem("studmedfilecount");
+
+  // If studmedfilecount is not present in local storage, initialize it to 0
+  if (studmedfilecount === null) {
+    studmedfilecount = 0;
+  } else {
+    // Convert it to a number
+    studmedfilecount = parseInt(studmedfilecount);
+  }
+
   // Get form field values
   const name = $("#studname").val();
   const id = $("#studid").val();
   const cs = $("#studcs").val();
   const loc1 = $("#locsel").val();
 
-  var username = localStorage.getItem("x")
+  var username = localStorage.getItem("x");
 
   const medformInput = document.getElementById("medform");
   const medformFile = medformInput.files[0];
 
-  // Initialize the 'user' variable outside the try-catch block
+  // Increment studmedfilecount
+  studmedfilecount++;
 
+  // Store the updated studmedfilecount back in local storage
+  localStorage.setItem("studmedfilecount", studmedfilecount);
+
+  // Initialize the 'user' variable outside the try-catch block
   try {
     // Change the filename to "(name inputted)_medform"
-    const fileName = `${id}_medform.${medformFile.name.split(".").pop()}`;
+    const fileName = `${id}_medform${studmedfilecount}.${medformFile.name.split(".").pop()}`;
 
     // Upload the file to Supabase storage with the modified filename
     const { data, error: uploadError } = await _supabase.storage
@@ -145,7 +156,7 @@ $("#insertstudmedform").submit(async function (event) {
       return;
     }
 
-    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
+    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
 
     console.log("sssss");
 
@@ -173,6 +184,7 @@ $("#insertstudmedform").submit(async function (event) {
     console.error("Error:", error.message);
   }
 });
+
 
 /////////////////////////////////////////// Upload employee info
 $("#insertempmedform").submit(async function (event) {
