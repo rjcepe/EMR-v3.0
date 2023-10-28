@@ -1,6 +1,6 @@
 const SUPABASE_URL = "https://yspyqlodogzmrqsifbww.supabase.co";
 const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9db2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -20,7 +20,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const { data: tableData1, error } = await _supabase.from("med_forms").select("*");
   
     if (error) {
-      console.log("Error loading table data:", error.message);
+      alert("Error loading table data: " + error.message);
       return;
     }
   
@@ -31,7 +31,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       const newRow = document.createElement("tr");
       newRow.innerHTML = `<th class="row" colspan="7">No data available</td>`;
       tableBody.appendChild(newRow);
-      console.log("No data");
+      alert("No data");
     } else {
       // Sort the data based on the selected option
       if (selectedOption === "ID") {
@@ -58,7 +58,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         newRow.classList.add("res");
         newRow.innerHTML = `
           <th class="row idcol">${row.patient_id}</th>
-          <th class="row namecol">${row.patient_name}</th>
+          <th class "row namecol">${row.patient_name}</th>
           <th class="row timecol">${row.created_date}</th>
           <th class="row coursecol">${row.course_section}</th>
           <th class="row timecol">${row.location}</th>
@@ -85,7 +85,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     .eq("id", id1);
 
   if (error) {
-    console.error("Error fetching username:", error.message);
+    alert("Error fetching username: " + error.message);
     return;
   }
 
@@ -97,7 +97,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // Now, you can use the 'username' variable as needed.
   } else {
-    console.log("User not found with ID:", id);
+    alert("User not found with ID: " + id);
   }
 }
 
@@ -137,13 +137,13 @@ $("#insertstudmedform").submit(async function (event) {
       .upload(fileName, medformFile);
 
     if (uploadError) {
-      console.error("Error uploading file:", uploadError);
+      alert("Error uploading file: " + uploadError);
       return;
     }
 
     const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
 
-    console.log("sssss");
+    alert("sssss");
 
     const medformInfo = {
       patient_id: id,
@@ -160,13 +160,13 @@ $("#insertstudmedform").submit(async function (event) {
       .insert(medformInfo);
 
     if (insertError) {
-      console.error("Error inserting data:", insertError.message);
+      alert("Error inserting data: " + insertError.message);
     } else {
-      console.log("Data inserted successfully:", insertData);
+      alert("Data inserted successfully: " + insertData);
       location.reload();
     }
   } catch (error) {
-    console.error("Error:", error.message);
+    alert("Error: " + error.message);
   }
 });
 
@@ -195,13 +195,13 @@ $("#insertempmedform").submit(async function (event) {
         .upload(fileName, medformFile);
   
       if (uploadError) {
-        console.error("Error uploading file:", uploadError);
+        alert("Error uploading file: " + uploadError);
         return;
       }
   
       const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
   
-      console.log("sssss");
+      alert("sssss");
   
       const medformInfo = {
         patient_id: id1,
@@ -218,13 +218,13 @@ $("#insertempmedform").submit(async function (event) {
         .insert(medformInfo);
   
       if (insertError) {
-        console.error("Error inserting data:", insertError.message);
+        alert("Error inserting data: " + insertError.message);
       } else {
-        console.log("Data inserted successfully:", insertData);
+        alert("Data inserted successfully: " + insertData);
         location.reload();
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      alert("Error: " + error.message);
     }
   });
 
@@ -235,14 +235,14 @@ async function fetchUsername() {
   const { data, error } = await _supabase.from("user_accs").select("username").eq("id", id1);
 
   if (error) {
-    console.error("Error fetching username:", error.message);
+    alert("Error fetching username: " + error.message);
     return;
   }
 
   // Check if data is not empty
   if (data && data.length > 0) {
     const username = data[0].username;
-    console.log(username);
+    alert(username);
 
     const usertab = document.querySelector(".username");
 
@@ -256,28 +256,27 @@ async function fetchUsername() {
       usertab.appendChild(h4);
       usertab.appendChild(h6);
     } else {
-      console.error("Element with class 'vfile' not found.");
+      alert("Element with class 'vfile' not found.");
     }
 
     // Now, you can use the 'username' variable as needed.
   } else {
-    console.log("User not found with ID:", id);
+    alert("User not found with ID: " + id);
   }
-
 }
 
 ////////// display corresponding user pic  
 async function fetchUserPic() {
   var id1 = localStorage.getItem("uid1");
   const piclink = id1 + '.png';
-  console.log(piclink);
+  alert(piclink);
 
   const userpiclink = `${SUPABASE_URL}/storage/v1/object/public/userimages/${piclink}`;
 
   const userTab = document.querySelector(".user");
     const usernameDiv = document.querySelector(".username");
 
-    console.log(userpiclink);
+    alert(userpiclink);
 
     const img = document.createElement('img');
     img.setAttribute("src", userpiclink);
@@ -310,7 +309,7 @@ function showv(url, name) {
     file.appendChild(filec);
     file.appendChild(name1);
   } else {
-    console.error("Element with class 'vfile' not found.");
+    alert("Element with class 'vfile' not found.");
   }
 
   main.classList.add("main-filter");
@@ -333,9 +332,8 @@ function hidev() {
 
   main.classList.remove("main-filter");
   vfile.classList.add("hidev");
-  vfile.classList.remove("showv");
+  vfile.classList remove("showv");
 }
-
 
 //////////////////////////////////search function
 document.getElementById("searchpatient").addEventListener("click", async function() {
@@ -346,7 +344,7 @@ document.getElementById("searchpatient").addEventListener("click", async functio
     const { data: patientData, error } = await _supabase.from("med_forms").select("*").eq("patient_id", searchID);
   
     if (error) {
-      console.error("Error fetching patient data:", error.message);
+      alert("Error fetching patient data: " + error.message);
       return;
     }
   
@@ -363,7 +361,7 @@ document.getElementById("searchpatient").addEventListener("click", async functio
   
         newRow.innerHTML = `
           <th class="row idcol">${row.patient_id}</th>
-          <th class="row namecol">${row.patient_name}</th>
+          <th class "row namecol">${row.patient_name}</th>
           <th class="row timecol">${row.created_date}</th>
           <th class="row coursecol">${row.course_section}</th>
           <th class="row timecol">${row.location}</th>
@@ -386,8 +384,3 @@ document.getElementById("searchpatient").addEventListener("click", async functio
       tableBody.appendChild(newRow);
     }
   });
-
-
-
-
-  

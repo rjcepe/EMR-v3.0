@@ -20,6 +20,8 @@ Record Pages
 <!-- -View File -->
 <!-- -view file label (left dock info, change label to patient name) -->
 -if image is uploaded, convert to pdf
+-add arhive feature?
+-allow file duplication (multiple row containing same id)
 
 ====================================
 
@@ -28,3 +30,6 @@ Report Pages
 -Finalize data display (Spreadsheet or not)
 -If spreadsheet, fix columns
 ====================================
+
+Misc
+-add error popups
