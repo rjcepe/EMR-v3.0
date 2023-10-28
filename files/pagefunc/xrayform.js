@@ -150,7 +150,7 @@ $("#insertstudxrayform").submit(async function (event) {
       course_section: cs,
       location: loc1,
       added_by: username,
-      dental_file: formURL,
+      xray_file: formURL,
     };
 
     // Insert data into the 'med_forms1' table
@@ -208,7 +208,7 @@ $("#insertempxrayform").submit(async function (event) {
         course_section: "Employee",
         location: loc1,
         added_by: username,
-        dxray_file: formURL,
+        xray_file: formURL,
       };
   
       // Insert data into the 'med_forms1' table
