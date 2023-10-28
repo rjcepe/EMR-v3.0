@@ -110,10 +110,13 @@ function getusername1(username){
 getusername();
 
 
-
+let studmedfilecount = 0;
 /////////////////////////////////// Upload student info
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
+
+  studmedfilecount ++ ;
+  console.log(studmedfilecount);
   // Get form field values
   const name = $("#studname").val();
   const id = $("#studid").val();
