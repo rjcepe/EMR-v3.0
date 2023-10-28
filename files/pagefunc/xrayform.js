@@ -114,6 +114,17 @@ getusername();
 /////////////////////////////////// Upload student info
 $("#insertstudxrayform").submit(async function (event) {
   event.preventDefault();
+  // Retrieve the current filecount value from local storage
+  let studxrayfilecount = localStorage.getItem("studxrayfilecount");
+
+  // If filecount is not present in local storage, initialize it to 0
+  if (studxrayfilecount === null) {
+    studxrayfilecount = 0;
+  } else {
+    // Convert it to a number
+    studxrayfilecount = parseInt(studxrayfilecount);
+  }
+
   // Get form field values
   const name = $("#studname").val();
   const id = $("#studid").val();
@@ -125,10 +136,14 @@ $("#insertstudxrayform").submit(async function (event) {
   const formInput = document.getElementById("xrayform");
   const formFile = formInput.files[0];
 
-  // Initialize the 'user' variable outside the try-catch block
+  // Increment filecount
+  studxrayfilecount++;
+
+  // Store the updated filecount back in local storage
+  localStorage.setItem("studxrayfilecount", studxrayfilecount);
 
   try {
-    const fileName = `${id}_xrayform.${formFile.name.split(".").pop()}`;
+    const fileName = `${id}_xrayform${studxrayfilecount}.${formFile.name.split(".").pop()}`;
 
     // Upload the file to Supabase storage with the modified filename
     const { data, error: uploadError } = await _supabase.storage
@@ -172,6 +187,16 @@ $("#insertstudxrayform").submit(async function (event) {
 /////////////////////////////////////////// Upload employee info
 $("#insertempxrayform").submit(async function (event) {
     event.preventDefault();
+    // Retrieve the current filecount value from local storage
+    let empxrayfilecount = localStorage.getItem("empxrayfilecount");
+
+    // If filecount is not present in local storage, initialize it to 0
+    if (empxrayfilecount === null) {
+      empxrayfilecount = 0;
+    } else {
+      // Convert it to a number
+      empxrayfilecount = parseInt(empxrayfilecount);
+    }
     // Get form field values
     const name1 = $("#empname").val();
     const id1 = $("#empid").val();
@@ -182,11 +207,13 @@ $("#insertempxrayform").submit(async function (event) {
     const formInput = document.getElementById("xrayform2");
   const formFile = formInput.files[0];
   
-    // Initialize the 'user' variable outside the try-catch block
+  empxrayfilecount++;
+
+  localStorage.setItem("empxrayfilecount", empxrayfilecount);
   
     try {
       // Change the filename to "(name inputted)_medform"
-      const fileName = `${id1}_xrayform.${formFile.name.split(".").pop()}`;
+      const fileName = `${id1}_xrayform${empxrayfilecount}.${formFile.name.split(".").pop()}`;
 
     // Upload the file to Supabase storage with the modified filename
     const { data, error: uploadError } = await _supabase.storage

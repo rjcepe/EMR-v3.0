@@ -114,10 +114,10 @@ getusername();
 /////////////////////////////////// Upload student info
 $("#insertstuddentalform").submit(async function (event) {
   event.preventDefault();
-  // Retrieve the current studdentalfilecount value from local storage
+  // Retrieve the current filecount value from local storage
   let studdentalfilecount = localStorage.getItem("studdentalfilecount");
 
-  // If studdentalfilecount is not present in local storage, initialize it to 0
+  // If filecount is not present in local storage, initialize it to 0
   if (studdentalfilecount === null) {
     studdentalfilecount = 0;
   } else {
@@ -135,13 +135,13 @@ $("#insertstuddentalform").submit(async function (event) {
   const dentalformInput = document.getElementById("dentalform");
   const dentalformFile = dentalformInput.files[0];
 
-  // Increment studdentalfilecount
+  // Increment filecount
   studdentalfilecount++;
 
-  // Store the updated studdentalfilecount back in local storage
+  // Store the updated filecount back in local storage
   localStorage.setItem("studdentalfilecount", studdentalfilecount);
 
-  // Initialize the 'user' variable outside the try-catch block
+ 
   try {
     const fileName = `${id}_medform${studdentalfilecount}.${dentalformFile.name.split(".").pop()}`;
 
@@ -168,7 +168,7 @@ $("#insertstuddentalform").submit(async function (event) {
       dental_file: dentalformURL,
     };
 
-    // Insert data into the 'med_forms1' table
+    // Insert data into table
     const { data: insertData, error: insertError } = await _supabase
       .from("dental_forms")
       .insert(dentalformInfo);
@@ -187,10 +187,10 @@ $("#insertstuddentalform").submit(async function (event) {
 /////////////////////////////////////////// Upload employee info
 $("#insertempdentalform").submit(async function (event) {
     event.preventDefault();
-    // Retrieve the current empdentalfilecount value from local storage
+    // Retrieve the current filecount value from local storage
   let empdentalfilecount = localStorage.getItem("empdentalfilecount");
 
-  // If empdentalfilecount is not present in local storage, initialize it to 0
+  // If filecount is not present in local storage, initialize it to 0
   if (empdentalfilecount === null) {
     empdentalfilecount = 0;
   } else {
@@ -208,15 +208,13 @@ $("#insertempdentalform").submit(async function (event) {
     const dentalformInput = document.getElementById("dentalform2");
     const dentalformFile = dentalformInput.files[0];
     
-      // Increment empdentalfilecount
+  
     empdentalfilecount++;
 
-    // Store the updated empdentalfilecount back in local storage
     localStorage.setItem("empdentalfilecount", empdentalfilecount);
-    // Initialize the 'user' variable outside the try-catch block
+    
   
     try {
-      // Change the filename to "(name inputted)_medform"
       const fileName = `${id1}_dentalform${empdentalfilecount}.${dentalformFile.name.split(".").pop()}`;
 
     // Upload the file to Supabase storage with the modified filename
@@ -242,7 +240,6 @@ $("#insertempdentalform").submit(async function (event) {
         dental_file: dentalformURL,
       };
   
-      // Insert data into the 'med_forms1' table
       const { data: insertData, error: insertError } = await _supabase
         .from("dental_forms")
         .insert(dentalformInfo);
