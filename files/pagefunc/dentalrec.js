@@ -114,6 +114,16 @@ getusername();
 /////////////////////////////////// Upload student info
 $("#insertstuddentalform").submit(async function (event) {
   event.preventDefault();
+  // Retrieve the current studdentalfilecount value from local storage
+  let studdentalfilecount = localStorage.getItem("studdentalfilecount");
+
+  // If studdentalfilecount is not present in local storage, initialize it to 0
+  if (studdentalfilecount === null) {
+    studdentalfilecount = 0;
+  } else {
+    // Convert it to a number
+    studdentalfilecount = parseInt(studdentalfilecount);
+  }
   // Get form field values
   const name = $("#studname").val();
   const id = $("#studid").val();
@@ -125,10 +135,15 @@ $("#insertstuddentalform").submit(async function (event) {
   const dentalformInput = document.getElementById("dentalform");
   const dentalformFile = dentalformInput.files[0];
 
-  // Initialize the 'user' variable outside the try-catch block
+  // Increment studdentalfilecount
+  studdentalfilecount++;
 
+  // Store the updated studdentalfilecount back in local storage
+  localStorage.setItem("studdentalfilecount", studdentalfilecount);
+
+  // Initialize the 'user' variable outside the try-catch block
   try {
-    const fileName = `${id}_dentalform.${dentalformFile.name.split(".").pop()}`;
+    const fileName = `${id}_medform${studdentalfilecount}.${dentalformFile.name.split(".").pop()}`;
 
     // Upload the file to Supabase storage with the modified filename
     const { data, error: uploadError } = await _supabase.storage
@@ -172,6 +187,17 @@ $("#insertstuddentalform").submit(async function (event) {
 /////////////////////////////////////////// Upload employee info
 $("#insertempdentalform").submit(async function (event) {
     event.preventDefault();
+    // Retrieve the current empdentalfilecount value from local storage
+  let empdentalfilecount = localStorage.getItem("empdentalfilecount");
+
+  // If empdentalfilecount is not present in local storage, initialize it to 0
+  if (empdentalfilecount === null) {
+    empdentalfilecount = 0;
+  } else {
+    // Convert it to a number
+    empdentalfilecount = parseInt(empdentalfilecount);
+  }
+
     // Get form field values
     const name1 = $("#empname").val();
     const id1 = $("#empid").val();
@@ -180,13 +206,18 @@ $("#insertempdentalform").submit(async function (event) {
     var username = localStorage.getItem("x")
 
     const dentalformInput = document.getElementById("dentalform2");
-  const dentalformFile = dentalformInput.files[0];
-  
+    const dentalformFile = dentalformInput.files[0];
+    
+      // Increment empdentalfilecount
+    empdentalfilecount++;
+
+    // Store the updated empdentalfilecount back in local storage
+    localStorage.setItem("empdentalfilecount", empdentalfilecount);
     // Initialize the 'user' variable outside the try-catch block
   
     try {
       // Change the filename to "(name inputted)_medform"
-      const fileName = `${id1}_dentalform.${dentalformFile.name.split(".").pop()}`;
+      const fileName = `${id1}_dentalform${empdentalfilecount}.${dentalformFile.name.split(".").pop()}`;
 
     // Upload the file to Supabase storage with the modified filename
     const { data, error: uploadError } = await _supabase.storage
