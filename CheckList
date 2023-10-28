@@ -22,6 +22,7 @@ Record Pages
 -if image is uploaded, convert to pdf
 -add arhive feature?
 -allow file duplication (multiple row containing same id)
+-fix date 1 day delay
 
 ====================================
 
