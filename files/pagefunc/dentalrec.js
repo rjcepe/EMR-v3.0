@@ -109,6 +109,18 @@ function getusername1(username){
 
 getusername();
 
+///get current date
+
+    // Specify the target timezone as "Asia/Manila"
+    const targetTimezone = "Asia/Manila";
+
+    // Get the current date and time in the target timezone
+    const today = new Date();
+    const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
+    const date1 = today.toLocaleString("en-US", options);
+
+
+    console.log("Date in " + targetTimezone + ": " + date1);
 
 /////////////////////////////////// Upload student info
 $("#insertstuddentalform").submit(async function (event) {
