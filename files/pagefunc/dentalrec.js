@@ -111,8 +111,19 @@ getusername();
 
 
 ///get current date
-var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+// var today = new Date();
+// // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+// Specify the target timezone as "Asia/Manila"
+const targetTimezone = "Asia/Manila";
+
+// Get the current date and time in the target timezone
+const today = new Date();
+const options = { timeZone: targetTimezone };
+const formattedDate = today.toLocaleString("en-US", options);
+var date = formattedDate;
+
+console.log("Date in " + targetTimezone + ": " + formattedDate);
 
 /////////////////////////////////// Upload student info
 $("#insertstuddentalform").submit(async function (event) {
