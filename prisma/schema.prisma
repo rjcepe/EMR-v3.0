@@ -27,14 +27,14 @@ model user_accs {
 }
 
 model dental_forms {
-  row_id         BigInt    @id @default(autoincrement())
+  row_id         BigInt  @id @default(autoincrement())
   patient_id     Int
   patient_name   String?
   course_section String?
   location       String?
   added_by       String?
   dental_file    String?
-  created_date   DateTime? @db.Date
+  created_date   String?
 }
 
 model xray_forms {

@@ -110,6 +110,9 @@ function getusername1(username){
 getusername();
 
 
+///get current date
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 /////////////////////////////////// Upload student info
 $("#insertstuddentalform").submit(async function (event) {
@@ -162,6 +165,7 @@ $("#insertstuddentalform").submit(async function (event) {
     const dentalformInfo = {
       patient_id: id,
       patient_name: name,
+      created_date: date,
       course_section: cs,
       location: loc1,
       added_by: username,
