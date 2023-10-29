@@ -119,10 +119,16 @@ getusername();
     const today = new Date();
     const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
     const date1 = today.toLocaleString("en-US", options);
+    const dateParts = date1.split('/'); // Split the date by slashes
+    const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
+
     const date2 = date1.toString();
-
-
+    const date3 = dateWithDashes.toString();
+    
+    
+    console.log(dateWithDashes);
     console.log(date2);
+    console.log(date3);
 
 /////////////////////////////////// Upload student info
 $("#insertstuddentalform").submit(async function (event) {
