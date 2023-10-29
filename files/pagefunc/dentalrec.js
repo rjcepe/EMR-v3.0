@@ -110,6 +110,7 @@ function getusername1(username){
 getusername();
 
 ///get current date
+///get current date
 
     // Specify the target timezone as "Asia/Manila"
     const targetTimezone = "Asia/Manila";
@@ -118,9 +119,10 @@ getusername();
     const today = new Date();
     const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
     const date1 = today.toLocaleString("en-US", options);
+    const date2 = date1.toString();
 
 
-    console.log("Date in " + targetTimezone + ": " + date1);
+    console.log(date2);
 
 /////////////////////////////////// Upload student info
 $("#insertstuddentalform").submit(async function (event) {
@@ -182,7 +184,7 @@ $("#insertstuddentalform").submit(async function (event) {
     const date2 = date1.toString();
 
 
-    console.log("Date in " + targetTimezone + ": " + date1);
+    console.log(date2);
 
     const dentalformInfo = {
       patient_id: id,
