@@ -110,21 +110,6 @@ function getusername1(username){
 getusername();
 
 
-///get current date
-// var today = new Date();
-// // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
-// Specify the target timezone as "Asia/Manila"
-const targetTimezone = "Asia/Manila";
-
-// Get the current date and time in the target timezone
-const today = new Date();
-const options = { timeZone: targetTimezone };
-const formattedDate = today.toLocaleString("en-US", options);
-var date = formattedDate;
-
-console.log("Date in " + targetTimezone + ": " + formattedDate);
-
 /////////////////////////////////// Upload student info
 $("#insertstuddentalform").submit(async function (event) {
   event.preventDefault();
@@ -173,10 +158,23 @@ $("#insertstuddentalform").submit(async function (event) {
 
     console.log("sssss");
 
+    ///get current date
+
+    // Specify the target timezone as "Asia/Manila"
+    const targetTimezone = "Asia/Manila";
+
+    // Get the current date and time in the target timezone
+    const today = new Date();
+    const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
+    const date1 = today.toLocaleString("en-US", options);
+
+
+    console.log("Date in " + targetTimezone + ": " + date1);
+
     const dentalformInfo = {
       patient_id: id,
       patient_name: name,
-      created_date: date,
+      created_date: date1,
       course_section: cs,
       location: loc1,
       added_by: username,
