@@ -179,7 +179,7 @@ $("#insertstuddentalform").submit(async function (event) {
     const today = new Date();
     const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
     const date1 = today.toLocaleString("en-US", options);
-    const date2 = date1
+    const date2 = date1.toString();
 
 
     console.log("Date in " + targetTimezone + ": " + date1);
@@ -260,7 +260,7 @@ $("#insertempdentalform").submit(async function (event) {
       const dentalformInfo = {
         patient_id: id1,
         patient_name: name1,
-        created_date: date,
+        created_date: date2,
         course_section: "Employee",
         location: loc1,
         added_by: username,
