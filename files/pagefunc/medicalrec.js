@@ -109,6 +109,9 @@ function getusername1(username){
 
 getusername();
 
+///get current date
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
@@ -163,6 +166,7 @@ $("#insertstudmedform").submit(async function (event) {
     const medformInfo = {
       patient_id: id,
       patient_name: name,
+      created_date: date,
       course_section: cs,
       location: loc1,
       added_by: username,
@@ -238,6 +242,7 @@ $("#insertempmedform").submit(async function (event) {
     const medformInfo = {
       patient_id: id1,
       patient_name: name1,
+      created_date: date,
       course_section: "Employee",
       location: loc1,
       added_by: username,

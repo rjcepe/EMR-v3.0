@@ -238,6 +238,7 @@ $("#insertempdentalform").submit(async function (event) {
       const dentalformInfo = {
         patient_id: id1,
         patient_name: name1,
+        created_date: date,
         course_section: "Employee",
         location: loc1,
         added_by: username,
