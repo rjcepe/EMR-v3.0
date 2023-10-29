@@ -109,26 +109,6 @@ function getusername1(username){
 
 getusername();
 
-///get current date
-///get current date
-
-    // Specify the target timezone as "Asia/Manila"
-    const targetTimezone = "Asia/Manila";
-
-    // Get the current date and time in the target timezone
-    const today = new Date();
-    const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
-    const date1 = today.toLocaleString("en-US", options);
-    const dateParts = date1.split('/'); // Split the date by slashes
-    const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
-
-    const date2 = date1.toString();
-    const date3 = dateWithDashes.toString();
-    
-    
-    console.log(dateWithDashes);
-    console.log(date2);
-    console.log(date3);
 
 /////////////////////////////////// Upload student info
 $("#insertstuddentalform").submit(async function (event) {
@@ -179,7 +159,6 @@ $("#insertstuddentalform").submit(async function (event) {
     console.log("sssss");
 
     ///get current date
-
     // Specify the target timezone as "Asia/Manila"
     const targetTimezone = "Asia/Manila";
 
@@ -187,15 +166,15 @@ $("#insertstuddentalform").submit(async function (event) {
     const today = new Date();
     const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
     const date1 = today.toLocaleString("en-US", options);
-    const date2 = date1.toString();
+    const dateParts = date1.split('/'); // Split the date by slashes
+    const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
 
-
-    console.log(date2);
+    const CurrentDate = dateWithDashes.toString();
 
     const dentalformInfo = {
       patient_id: id,
       patient_name: name,
-      created_date: date2,
+      created_date: CurrentDate,
       course_section: cs,
       location: loc1,
       added_by: username,
