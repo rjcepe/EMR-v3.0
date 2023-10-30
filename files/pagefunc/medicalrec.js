@@ -109,26 +109,28 @@ function getusername1(username){
 
 getusername();
 
-const getyr = getFullYear();
 ///get current date
-    // Specify the target timezone as "Asia/Manila"
-    const targetTimezone = "Asia/Manila";
+// Specify the target timezone as "Asia/Manila"
+const targetTimezone = "Asia/Manila";
 
-    // Get the current date and time in the target timezone
-    const today = new Date();
-    const options = {
-      timeZone: targetTimezone,
-      year: '2-digit', // Use '2-digit' for two-digit years
-      month: '2-digit', // Use '2-digit' for two-digit months
-      day: '2-digit',   // Use '2-digit' for two-digit days
-    };
-    const date1 = today.toLocaleString("en-US", options);
-    const dateParts = date1.split('/'); // Split the date by slashes
-    const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
+// Get the current date and time in the target timezone
+const today = new Date();
+const options = {
+  timeZone: targetTimezone,
+  year: '2-digit', // Use '2-digit' for two-digit years
+  month: '2-digit', // Use '2-digit' for two-digit months
+  day: '2-digit',   // Use '2-digit' for two-digit days
+};
+const date1 = today.toLocaleString("en-US", options);
+const dateParts = date1.split('/'); // Split the date by slashes
+const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
 
-    const CurrentDate = dateWithDashes.toString();
-    console.log(CurrentDate);
-    console.log(date1);
+const CurrentDate = dateWithDashes.toString();
+console.log(CurrentDate);
+console.log(date1);
+
+const getyr = CurrentDate.getFullYear();
+
     console.log(getyr);
 
 $("#insertstudmedform").submit(async function (event) {
