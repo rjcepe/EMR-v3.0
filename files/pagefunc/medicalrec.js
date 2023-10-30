@@ -130,8 +130,12 @@ console.log(CurrentDate);
 console.log(date1);
 
 const getyr = today.getFullYear();
+const getm = today.getMonth();
+const gett = today.getDay();
 
 console.log(getyr);
+console.log(getm);
+console.log(gett);
 
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
