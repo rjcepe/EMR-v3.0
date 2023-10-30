@@ -115,7 +115,12 @@ getusername();
 
     // Get the current date and time in the target timezone
     const today = new Date();
-    const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
+    const options = {
+      timeZone: targetTimezone,
+      year: '2-digit', // Use '2-digit' for two-digit years
+      month: '2-digit', // Use '2-digit' for two-digit months
+      day: '2-digit',   // Use '2-digit' for two-digit days
+    };
     const date1 = today.toLocaleString("en-US", options);
     const dateParts = date1.split('/'); // Split the date by slashes
     const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
