@@ -17,11 +17,8 @@ Record Pages
 <!-- -Load Data -->
 <!-- -View File -->
 <!-- -view file label (left dock info, change label to patient name) -->
--if image is uploaded, convert to pdf
--add arhive feature?
 <!-- -allow file duplication (multiple row containing same id) -->
 <!-- -fix date 1 day delay -->
--search results can be sorted
 ====================================
 Report Pages
 
