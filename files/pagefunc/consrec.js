@@ -231,15 +231,13 @@ $("#insertempconsform").submit(async function (event) {
       
     };
 
-    const { data: insertData, error: insertError } = await _supabase
-      .from("cons_rec")
-      .insert(formInfo);
+    const { data: insertData, error: insertError } = await _supabase.from("cons_rec").insert(formInfo);
 
     if (insertError) {
       console.error("Error inserting data:", insertError.message);
     } else {
       console.log("Data inserted successfully:", insertData);
-      location.reload();
+    //   location.reload();
     }
   } catch (error) {
     console.error("Error:", error.message);
