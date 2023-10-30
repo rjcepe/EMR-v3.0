@@ -198,7 +198,7 @@ $("#insertstudaccform").submit(async function (event) {
       course_section: cs,
       location: loc1,
       added_by: username,
-      xray_file: formURL,
+      acc_file: formURL,
     };
 
     
@@ -294,7 +294,7 @@ $("#insertempaccform").submit(async function (event) {
       course_section: "Employee",
       location: loc1,
       added_by: username,
-      xray_file: formURL,
+      acc_file: formURL,
     };
 
     // Insert data into the 'med_forms1' table

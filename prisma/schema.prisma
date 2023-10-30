@@ -55,6 +55,6 @@ model acc_forms {
   course_section String?
   location       String?
   added_by       String?
-  med_file       String?
+  acc_file       String?
   created_date   String?
 }
