@@ -129,7 +129,7 @@ const CurrentDate = dateWithDashes.toString();
 console.log(CurrentDate);
 console.log(date1);
 
-const getyr = date1.getFullYear();
+const getyr = today.getFullYear();
 
 console.log(getyr);
 
