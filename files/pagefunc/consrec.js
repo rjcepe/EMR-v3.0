@@ -66,7 +66,7 @@ async function loadTableData() {
 
     tableData1.forEach((row) => {
       const newRow = document.createElement("tr");
-      newRow.classList.add("res");
+      newRow.classList.add("res1");
       newRow.innerHTML = `
           <th class="row1 idcol1">${row.patient_id}</th>
           <th class="row1 namecol1">${row.patient_name}</th>
@@ -336,7 +336,7 @@ document
       // Patient data found, update the table
       patientData.forEach((row) => {
         const newRow = document.createElement("tr");
-        newRow.classList.add("res");
+        newRow.classList.add("res1");
 
         newRow.innerHTML = `
             <th class="row1 idcol1">${row.patient_id}</th>
