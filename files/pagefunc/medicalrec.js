@@ -129,7 +129,7 @@ const CurrentDate = dateWithDashes.toString();
 console.log(CurrentDate);
 console.log(date1);
 
-const getyr = today.getFullYear();
+const getyr = options.getFullYear();
 const getm = today.getMonth();
 const gett = today.getDay();
 
