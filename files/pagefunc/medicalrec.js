@@ -109,6 +109,20 @@ function getusername1(username){
 
 getusername();
 
+///get current date
+    // Specify the target timezone as "Asia/Manila"
+    const targetTimezone = "Asia/Manila";
+
+    // Get the current date and time in the target timezone
+    const today = new Date();
+    const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
+    const date1 = today.toLocaleString("en-US", options);
+    const dateParts = date1.split('/'); // Split the date by slashes
+    const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
+
+    const CurrentDate = dateWithDashes.toString();
+    console.log(CurrentDate);
+    console.log(date1);
 
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
