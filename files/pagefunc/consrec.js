@@ -226,7 +226,7 @@ $("#insertempconsform").submit(async function (event) {
       course_section: "Employee",
       location: loc1,
       added_by: username,
-      dianosis: diag2,
+      diagnosis: diag2,
       notes: notes2,
       
     };
