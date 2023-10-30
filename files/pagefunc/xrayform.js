@@ -167,23 +167,29 @@ $("#insertstudxrayform").submit(async function (event) {
     const formURL = `${SUPABASE_URL}/storage/v1/object/public/xrayfiles/${fileName}`; // Fixed the URL formation
 
     console.log("sssss");
+
     ///get current date
     // Specify the target timezone as "Asia/Manila"
     const targetTimezone = "Asia/Manila";
 
     // Get the current date and time in the target timezone
     const today = new Date();
-    const options = {
+
+    const year = today.toLocaleString("en-US", {
       timeZone: targetTimezone,
       year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    };
-    const date1 = today.toLocaleString("en-US", options);
-    const dateParts = date1.split("/"); // Split the date by slashes
-    const dateWithDashes = dateParts.join("-"); // Join the date parts with dashes
+    });
+    const month = today.toLocaleString("en-US", {
+      timeZone: targetTimezone,
+      month: "2-digit",
+    });
+    const day = today.toLocaleString("en-US", {
+      timeZone: targetTimezone,
+      day: "2-digit",
+    });
 
-    const CurrentDate = dateWithDashes.toString();
+    const CurrentDate = `${year}-${month}-${day}`;
+    console.log(CurrentDate);
 
     const formInfo = {
       patient_id: id,
@@ -264,17 +270,22 @@ $("#insertempxrayform").submit(async function (event) {
 
     // Get the current date and time in the target timezone
     const today = new Date();
-    const options = {
+
+    const year = today.toLocaleString("en-US", {
       timeZone: targetTimezone,
       year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    };
-    const date1 = today.toLocaleString("en-US", options);
-    const dateParts = date1.split("/"); // Split the date by slashes
-    const dateWithDashes = dateParts.join("-"); // Join the date parts with dashes
+    });
+    const month = today.toLocaleString("en-US", {
+      timeZone: targetTimezone,
+      month: "2-digit",
+    });
+    const day = today.toLocaleString("en-US", {
+      timeZone: targetTimezone,
+      day: "2-digit",
+    });
 
-    const CurrentDate = dateWithDashes.toString();
+    const CurrentDate = `${year}-${month}-${day}`;
+    console.log(CurrentDate);
 
     const formInfo = {
       patient_id: id1,
