@@ -18,7 +18,7 @@ async function loadTableData() {
   const selectedOption = document.getElementById("sort1").value;
 
   const { data: tableData1, error } = await _supabase
-    .from("med_forms")
+    .from("acc_forms")
     .select("*");
 
   if (error) {
@@ -26,7 +26,7 @@ async function loadTableData() {
     return;
   }
 
-  const tableBody = document.querySelector("#medform_table tbody");
+  const tableBody = document.querySelector("#accdnt_table tbody");
   tableBody.innerHTML = ""; // Clear the current table
 
   if (tableData1.length === 0) {
@@ -75,7 +75,7 @@ async function loadTableData() {
           <th class="row timecol">${row.location}</th>
           <th class="row timecol">${row.added_by}</th>
           <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
+            <button class="viewbutt" onclick="showv('${row.xray_file}', '${row.patient_name}')">
               <p class="txt">View</p>
             </button>
           </th>
@@ -118,18 +118,18 @@ function getusername1(username) {
 
 getusername();
 
-$("#insertstudmedform").submit(async function (event) {
+/////////////////////////////////// Upload student info
+$("#insertstudaccform").submit(async function (event) {
   event.preventDefault();
+  // Retrieve the current filecount value from local storage
+  let studaccfilecount = localStorage.getItem("studaccfilecount");
 
-  // Retrieve the current studmedfilecount value from local storage
-  let studmedfilecount = localStorage.getItem("studmedfilecount");
-
-  // If studmedfilecount is not present in local storage, initialize it to 0
-  if (studmedfilecount === null) {
-    studmedfilecount = 0;
+  // If filecount is not present in local storage, initialize it to 0
+  if (studaccfilecount === null) {
+    studaccfilecount = 0;
   } else {
     // Convert it to a number
-    studmedfilecount = parseInt(studmedfilecount);
+    studaccfilecount = parseInt(studaccfilecount);
   }
 
   // Get form field values
@@ -140,33 +140,31 @@ $("#insertstudmedform").submit(async function (event) {
 
   var username = localStorage.getItem("x");
 
-  const medformInput = document.getElementById("medform");
-  const medformFile = medformInput.files[0];
+  const formInput = document.getElementById("accform");
+  const formFile = formInput.files[0];
 
-  // Increment studmedfilecount
-  studmedfilecount++;
+  // Increment filecount
+  studaccfilecount++;
 
-  // Store the updated studmedfilecount back in local storage
-  localStorage.setItem("studmedfilecount", studmedfilecount);
+  // Store the updated filecount back in local storage
+  localStorage.setItem("studaccfilecount", studaccfilecount);
 
-  // Initialize the 'user' variable outside the try-catch block
   try {
-    // Change the filename to "(name inputted)_medform"
-    const fileName = `${id}_medform${studmedfilecount}.${medformFile.name
+    const fileName = `${id}_accidentform${studaccfilecount}.${formFile.name
       .split(".")
       .pop()}`;
 
     // Upload the file to Supabase storage with the modified filename
     const { data, error: uploadError } = await _supabase.storage
-      .from("medicalrecords")
-      .upload(fileName, medformFile);
+      .from("accdntfiles")
+      .upload(fileName, formFile);
 
     if (uploadError) {
       console.error("Error uploading file:", uploadError);
       return;
     }
 
-    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
+    const formURL = `${SUPABASE_URL}/storage/v1/object/public/accdntfiles/${fileName}`; // Fixed the URL formation
 
     console.log("sssss");
 
@@ -193,20 +191,20 @@ $("#insertstudmedform").submit(async function (event) {
     const CurrentDate = `${year}-${month}-${day}`;
     console.log(CurrentDate);
 
-    const medformInfo = {
+    const formInfo = {
       patient_id: id,
       patient_name: name,
       created_date: CurrentDate,
       course_section: cs,
       location: loc1,
       added_by: username,
-      med_file: medformURL,
+      xray_file: formURL,
     };
 
-    // Insert data into the 'med_forms1' table
+    
     const { data: insertData, error: insertError } = await _supabase
-      .from("med_forms")
-      .insert(medformInfo);
+      .from("acc_forms")
+      .insert(formInfo);
 
     if (insertError) {
       console.error("Error inserting data:", insertError.message);
@@ -219,20 +217,19 @@ $("#insertstudmedform").submit(async function (event) {
   }
 });
 
-$("#insertempmedform").submit(async function (event) {
+/////////////////////////////////////////// Upload employee info
+$("#insertempaccform").submit(async function (event) {
   event.preventDefault();
+  // Retrieve the current filecount value from local storage
+  let empaccfilecount = localStorage.getItem("empaccfilecount");
 
-  // Retrieve the current empmedfilecount value from local storage
-  let empmedfilecount = localStorage.getItem("empmedfilecount");
-
-  // If empmedfilecount is not present in local storage, initialize it to 0
-  if (empmedfilecount === null) {
-    empmedfilecount = 0;
+  // If filecount is not present in local storage, initialize it to 0
+  if (empaccfilecount === null) {
+    empaccfilecount = 0;
   } else {
     // Convert it to a number
-    empmedfilecount = parseInt(empmedfilecount);
+    empaccfilecount = parseInt(empaccfilecount);
   }
-
   // Get form field values
   const name1 = $("#empname").val();
   const id1 = $("#empid").val();
@@ -240,33 +237,30 @@ $("#insertempmedform").submit(async function (event) {
 
   var username = localStorage.getItem("x");
 
-  const medformInput = document.getElementById("medform2");
-  const medformFile = medformInput.files[0];
+  const formInput = document.getElementById("accform2");
+  const formFile = formInput.files[0];
 
-  // Increment empmedfilecount
-  empmedfilecount++;
+  empaccfilecount++;
 
-  // Store the updated empmedfilecount back in local storage
-  localStorage.setItem("empmedfilecount", empmedfilecount);
+  localStorage.setItem("empaccfilecount", empaccfilecount);
 
-  // Initialize the 'user' variable outside the try-catch block
   try {
     // Change the filename to "(name inputted)_medform"
-    const fileName = `${id1}_medform${empmedfilecount}.${medformFile.name
+    const fileName = `${id1}_xrayform${empaccfilecount}.${formFile.name
       .split(".")
       .pop()}`;
 
     // Upload the file to Supabase storage with the modified filename
     const { data, error: uploadError } = await _supabase.storage
-      .from("medicalrecords")
-      .upload(fileName, medformFile);
+      .from("accdntfiles")
+      .upload(fileName, formFile);
 
     if (uploadError) {
       console.error("Error uploading file:", uploadError);
       return;
     }
 
-    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
+    const formURL = `${SUPABASE_URL}/storage/v1/object/public/accdntfiles/${fileName}`; // Fixed the URL formation
 
     console.log("sssss");
 
@@ -293,20 +287,20 @@ $("#insertempmedform").submit(async function (event) {
     const CurrentDate = `${year}-${month}-${day}`;
     console.log(CurrentDate);
 
-    const medformInfo = {
+    const formInfo = {
       patient_id: id1,
       patient_name: name1,
       created_date: CurrentDate,
       course_section: "Employee",
       location: loc1,
       added_by: username,
-      med_file: medformURL,
+      xray_file: formURL,
     };
 
     // Insert data into the 'med_forms1' table
     const { data: insertData, error: insertError } = await _supabase
-      .from("med_forms")
-      .insert(medformInfo);
+      .from("acc_forms")
+      .insert(formInfo);
 
     if (insertError) {
       console.error("Error inserting data:", insertError.message);
@@ -437,7 +431,7 @@ document
 
     // Fetch the patient data based on the search ID
     const { data: patientData, error } = await _supabase
-      .from("med_forms")
+      .from("acc_forms")
       .select("*")
       .eq("patient_id", searchID);
 
@@ -446,7 +440,7 @@ document
       return;
     }
 
-    const tableBody = document.querySelector("#medform_table tbody");
+    const tableBody = document.querySelector("#accdnt_table tbody");
 
     // Clear the current table
     tableBody.innerHTML = "";
@@ -465,7 +459,7 @@ document
           <th class="row timecol">${row.location}</th>
           <th class="row timecol">${row.added_by}</th>
           <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
+            <button class="viewbutt" onclick="showv('${row.xray_file}', '${row.patient_name}')">
               <p class="txt">View</p>
             </button>
           </th>
