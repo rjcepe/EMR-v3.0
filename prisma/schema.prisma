@@ -58,3 +58,16 @@ model acc_forms {
   acc_file       String?
   created_date   String?
 }
+
+model cons_rec {
+  row_id         BigInt  @id @default(autoincrement())
+  patient_id     Int
+  patient_name   String?
+  course_section String?
+  location       String?
+  added_by       String?
+  acc_file       String?
+  diagnosis      String?
+  notes          String?
+  created_date   String?
+}
