@@ -109,6 +109,7 @@ function getusername1(username){
 
 getusername();
 
+const getyr = getFullYear();
 ///get current date
     // Specify the target timezone as "Asia/Manila"
     const targetTimezone = "Asia/Manila";
@@ -128,6 +129,7 @@ getusername();
     const CurrentDate = dateWithDashes.toString();
     console.log(CurrentDate);
     console.log(date1);
+    console.log(getyr);
 
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
