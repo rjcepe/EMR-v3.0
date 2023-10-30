@@ -1299,8 +1299,9 @@ select option:hover{
     margin-bottom: 5px;
 }
 .form-links a:hover{
-    background-color: var(--green);
+    background-color: var(--lightgreen);
     color: white;
+    text-shadow: var(--txtshadow);
 }
 .form-links{
     margin-right: 10px;
