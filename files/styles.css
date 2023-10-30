@@ -1086,7 +1086,7 @@ select option:hover{
     min-width: 140px;
 }
 .notescol{
-    padding: 20px;
+    /* padding: 20px; */
     text-align: left;
     min-width: 150px;
     max-width: 150px;
