@@ -41,9 +41,9 @@ async function loadTableData() {
         (a, b) => new Date(a.patient_id) - new Date(b.patient_id)
       );
     } else if (selectedOption === "TimeLate") {
-      tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+      tableData1.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
     } else if (selectedOption === "TimeOld") {
-      tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+      tableData1.sort((a, b) => new Date(a.created_date) - new Date(b.created_date));
     } else if (selectedOption === "def") {
       tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
     } else if (selectedOption === "Nameaz") {
