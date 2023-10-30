@@ -129,9 +129,9 @@ const CurrentDate = dateWithDashes.toString();
 console.log(CurrentDate);
 console.log(date1);
 
-const getyr = CurrentDate.getFullYear();
+const getyr = date1.getFullYear();
 
-    console.log(getyr);
+console.log(getyr);
 
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
