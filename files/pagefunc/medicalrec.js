@@ -115,12 +115,11 @@ const targetTimezone = "Asia/Manila";
 
 // Get the current date and time in the target timezone
 const today = new Date();
-const options = {
-  timeZone: targetTimezone,
-  year: '2-digit', // Use '2-digit' for two-digit years
-  month: '2-digit', // Use '2-digit' for two-digit months
-  day: '2-digit',   // Use '2-digit' for two-digit days
-};
+
+const year = today.toLocaleString('en-US', { timeZone: targetTimezone, year: 'numeric' });
+const month = today.toLocaleString('en-US', { timeZone: targetTimezone, month: '2-digit' });
+const day = today.toLocaleString('en-US', { timeZone: targetTimezone, day: '2-digit' });
+
 const date1 = today.toLocaleString("en-US", options);
 const dateParts = date1.split('/'); // Split the date by slashes
 const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
@@ -129,13 +128,8 @@ const CurrentDate = dateWithDashes.toString();
 console.log(CurrentDate);
 console.log(date1);
 
-const getyr = options.getFullYear();
-const getm = today.getMonth();
-const gett = today.getDay();
-
-console.log(getyr);
-console.log(getm);
-console.log(gett);
+const formattedDate = `${year}/${month}/${day}`;
+console.log(formattedDate);
 
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
