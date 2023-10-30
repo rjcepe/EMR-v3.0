@@ -109,27 +109,7 @@ function getusername1(username){
 
 getusername();
 
-///get current date
-// Specify the target timezone as "Asia/Manila"
-const targetTimezone = "Asia/Manila";
 
-// Get the current date and time in the target timezone
-const today = new Date();
-
-const year = today.toLocaleString('en-US', { timeZone: targetTimezone, year: 'numeric' });
-const month = today.toLocaleString('en-US', { timeZone: targetTimezone, month: '2-digit' });
-const day = today.toLocaleString('en-US', { timeZone: targetTimezone, day: '2-digit' });
-
-// const date1 = today.toLocaleString("en-US", options);
-// const dateParts = date1.split('/'); // Split the date by slashes
-// const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
-
-// const CurrentDate = dateWithDashes.toString();
-// console.log(CurrentDate);
-// console.log(date1);
-
-const formattedDate = `${year}/${month}/${day}`;
-console.log(formattedDate);
 
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
@@ -182,17 +162,19 @@ $("#insertstudmedform").submit(async function (event) {
     console.log("sssss");
 
     ///get current date
-    // Specify the target timezone as "Asia/Manila"
-    const targetTimezone = "Asia/Manila";
+// Specify the target timezone as "Asia/Manila"
+const targetTimezone = "Asia/Manila";
 
-    // Get the current date and time in the target timezone
-    const today = new Date();
-    const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
-    const date1 = today.toLocaleString("en-US", options);
-    const dateParts = date1.split('/'); // Split the date by slashes
-    const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
+// Get the current date and time in the target timezone
+const today = new Date();
 
-    const CurrentDate = dateWithDashes.toString();
+const year = today.toLocaleString('en-US', { timeZone: targetTimezone, year: 'numeric' });
+const month = today.toLocaleString('en-US', { timeZone: targetTimezone, month: '2-digit' });
+const day = today.toLocaleString('en-US', { timeZone: targetTimezone, day: '2-digit' });
+
+
+const CurrentDate = `${year}-${month}-${day}`;
+console.log(CurrentDate);
 
     const medformInfo = {
       patient_id: id,
