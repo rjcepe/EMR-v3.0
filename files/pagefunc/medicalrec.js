@@ -120,7 +120,7 @@ const year = today.toLocaleString('en-US', { timeZone: targetTimezone, year: 'nu
 const month = today.toLocaleString('en-US', { timeZone: targetTimezone, month: '2-digit' });
 const day = today.toLocaleString('en-US', { timeZone: targetTimezone, day: '2-digit' });
 
-const date1 = today.toLocaleString("en-US", options);
+// const date1 = today.toLocaleString("en-US", options);
 const dateParts = date1.split('/'); // Split the date by slashes
 const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
 
