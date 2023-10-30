@@ -73,7 +73,7 @@ async function loadTableData() {
           <th class="row1 timecol1">${row.created_date}</th>
           <th class="row1 coursecol1">${row.course_section}</th>
           <th class="row1 diagcol1">${row.diagnosis}</th>
-          <th class="row1 notescol1">${row.notes}</th>
+          <th class="row1 notescol">${row.notes}</th>
           <th class="row1 timecol1">${row.location}</th>
           <th class="row1 timecol1">${row.added_by}</th>
           
@@ -344,7 +344,7 @@ document
             <th class="row1 timecol1">${row.created_date}</th>
             <th class="row1 coursecol1">${row.course_section}</th>
             <th class="row1 diagcol1">${row.diagnosis}</th>
-            <th class="row1 notescol1">${row.notes}</th>
+            <th class="row1 notescol">${row.notes}</th>
             <th class="row1 timecol1">${row.location}</th>
             <th class="row1 timecol1">${row.added_by}</th>
         `;
