@@ -75,7 +75,7 @@ async function loadTableData() {
           <th class="row timecol">${row.location}</th>
           <th class="row timecol">${row.added_by}</th>
           <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.xray_file}', '${row.patient_name}')">
+            <button class="viewbutt" onclick="showv('${row.acc_file}', '${row.patient_name}')">
               <p class="txt">View</p>
             </button>
           </th>
@@ -459,7 +459,7 @@ document
           <th class="row timecol">${row.location}</th>
           <th class="row timecol">${row.added_by}</th>
           <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.xray_file}', '${row.patient_name}')">
+            <button class="viewbutt" onclick="showv('${row.acc_file}', '${row.patient_name}')">
               <p class="txt">View</p>
             </button>
           </th>
