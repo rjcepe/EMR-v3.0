@@ -528,6 +528,28 @@ button{
 .searchbutt:hover{
     background-color: #1c3b31;
 }
+.filters a{
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--green);
+    text-decoration: none;
+    background-color: white;
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 13px;
+    transition: 0.3s;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.filters a:hover{
+    background-color: var(--lightgreen);
+    color: white;
+    text-shadow: var(--txtshadow);
+}
 .filters{
     display: flex;
     align-items: center;
@@ -1365,24 +1387,64 @@ select option:hover{
     height: 100%;
     width: 100%;
 }
+.search{
+    display: flex;
+    align-items: center;
+}
+.search p{
+    font-weight: 700;
+}
 .search a{
-    text-transform: uppercase;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--green);
-    text-decoration: none;
-    background-color: white;
     width: 100%;
     height: 30px;
+    background-color: white;
+    border: none;
     border-radius: 10px;
+    margin-left: 3px;
+    transition: 0.3s;
+    text-decoration: none;
+    background-color: white;
     font-weight: 800;
     font-size: 13px;
-    transition: 0.3s;
     padding-left: 10px;
     padding-right: 10px;
+    text-transform: uppercase;
 }
 .search a:hover{
-    background-color: var(--green);
+    background-color: var(--lightgreen);
     color: white;
+    text-shadow: var(--txtshadow);
+}
+.formbutt:hover{
+    background-color: var(--lgreen50);
+    text-shadow: var(--txtshadow);
+}
+.formbutt{
+    color: white;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(41, 41, 41, .3);
+    border: none;
+    border-radius: 10px;
+    margin-left: 3px;
+    transition: 0.3s;
+}
+.formbutt:hover{
+    background-color: var(--lgreen50);
+    text-shadow: var(--txtshadow);
+}
+.activebuttform{
+    color: white;
+    width: 30px;
+    height: 30px;
+    background-color: var(--lightgreen);
+    border: none;
+    border-radius: 10px;
+    margin-left: 3px;
+    transition: 0.3s;
+    text-shadow: var(--txtshadow);
 }
