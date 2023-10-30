@@ -10,8 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="animations.css">
+        <link rel="stylesheet" href="/files/styles.css">
     <title>Accident Census</title>
 </head>
 
@@ -19,28 +18,28 @@
     <div class="sidecont sidehide">
         <div class="sidenav">
             <div class="logo">
-                <img src="/navicons/logo.png" alt="DLSUD logo">
+                <img src="/files/images/logo.png" alt="DLSUD logo">
             </div>
             <div class="nav">
                 <div class="recs">
                     <h5>Records</h5>
-                    <button class="navbutt " onclick="ToMedRec()" id="mr">  <img src="/navicons/arrow.png" alt="">Medical Records</button>
-                    <button class="navbutt" onclick="ToDenRec()"><img src="/navicons/arrow.png" alt="">Dental Records</button>
-                    <button class="navbutt" onclick="ToXray()"><img src="/navicons/arrow.png" alt="">X-ray Images</button>
-                    <button class="navbutt" onclick="ToAccRec()"><img src="/navicons/arrow.png" alt="">Accident Records</button>
-                    <button class="navbutt" onclick="ToConRec()"><img src="/navicons/arrow.png" alt="">Consultation Records</button>
+                    <button class="navbutt" onclick="ToMedRec()" id="mr">  <img src="/files/images/arrow.png" alt="">Medical Records</button>
+                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental Records</button>
+                    <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray Images</button>
+                    <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Records</button>
+                    <button class="navbutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation Records</button>
                 </div>
             </div>
             <div class="nav navrep">
                 <div class="reps">
                     <h5>Reports</h5>
-                    <button class="navbutt" onclick="ToMedCert()"><img src="/navicons/arrow.png" alt="">Medical Certificates</button>
-                    <button class="activebutt" onclick="ToAccCen()"><img src="/navicons/arrow.png" alt="">Accident Census</button>
+                    <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical Certificates</button>
+                    <button class="activebutt" onclick="ToAccCen()"><img src="/files/images/arrow.png" alt="">Accident Census</button>
                     <!-- <button class="navbutt" onclick="ToPresc()"><img src="/navicons/arrow.png" alt="">Prescription?</button> -->
                 </div>
             </div>
             <div class="logout" onclick="logout()">
-                <img src="/navicons/logout.png" alt="">
+                <img src="/files/images/logout.png" alt="">
                 <p>Logout</p>
             </div>
             <div class="z">
@@ -62,33 +61,26 @@
             <div class="headline">
                 <h1>Accident Census</h1>
                 <div class="user">
-                    <img src="/navicons/userpic.jpg" alt="userpic">
-                <div class="username">
-                    <h4>Rizjan Cepe</h4>
-                    <h6>202030642</h6>
+                    <div class="username"></div>
                 </div>
             </div>
             </div>
             <div class="inputs">
                 <div class="search">
-                    <a href="https://docs.google.com/spreadsheets/d/1DF-3QXSzD1ly1ksVVUQEfNO-T2fGkYCAXEoygsMnXjY/edit?usp=sharing" target="_blank">Edit SpreadSheet >></a>
+                    <a href="https://docs.google.com/spreadsheets/d/1DF-3QXSzD1ly1ksVVUQEfNO-T2fGkYCAXEoygsMnXjY/edit?usp=sharing" target="_blank">Manage SpreadSheet >></a>
                 </div>
                 
             </div>
             <div class="results3">
-                <!-- <iframe scrolling="no" src="https://docs.google.com/spreadsheets/d/176H1hWGqDh302L5uNcIQaxwgnE2JSpDXAzElyFlFsGU/edit?usp=sharingwidget=true&amp;headers=false"></iframe>  
-                    
-                editable -->
-
                 <iframe scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSGkOck6MjBWya9w1U95j6X4kujuOxS6doOXek2csnF4dE7-4FKYjlPjIrO2An2kuod3R_Rk-aqq8yq/pubhtml?widget=true&amp;headers=false"></iframe>
             </div>
            
-            <!-- <button onclick="printres()">Print Container</button> -->
+            
         </div>
     </div>
 
-        <script src="ui.js"></script>
-        <script src="app.js"></script>
+    <script src="/files/pagefunc/ui.js"></script>
+    <script src="/files/connfunc/app.js"></script>
 </body>
 
 </html>
