@@ -255,7 +255,7 @@ $("#insertempmedform").submit(async function (event) {
 
     // Get the current date and time in the target timezone
     const today = new Date();
-    const options = { timeZone: targetTimezone, year: 'numeric', month: 'numeric', day: 'numeric' };
+    const options = { timeZone: targetTimezone, day: 'numeric', month: 'numeric', year: 'numeric' };
     const date1 = today.toLocaleString("en-US", options);
     const dateParts = date1.split('/'); // Split the date by slashes
     const dateWithDashes = dateParts.join('-'); // Join the date parts with dashes
