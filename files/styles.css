@@ -568,6 +568,8 @@ button{
     color: white;
     background-color: var(--green50);
     backdrop-filter: var(--blur);
+    padding-left: 10px;
+    margin-left: 5px;
 }
 .filters option{
     background-color: var(--green50);
@@ -576,6 +578,9 @@ button{
 select option:hover{
     background-color: var(--lightgreen);
     color: var(--green);
+}
+.filters label{
+    font-weight: 600;
 }
 .addrecbutt{
     margin-left: 5px;
@@ -933,13 +938,38 @@ select option:hover{
     border-radius: 10px 10px 0px 0px;
     border: none;
     transition: 0.3s;
+    font-weight: 700;
+    color: var(--green);
 }
 .submitp:hover{
-    background-color: var(--lgreen50);
+    background-color: var(--lightgreen);
     color: white;
     text-shadow: var(--txtshadow);
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
 }
+.location1 select{
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    padding-left: 10px;
+    margin-left: 10px;
+    font-weight: 700;
+    color: white;
+    background-color: var(--green50);
+    backdrop-filter: var(--blur);
+}
+.location1 option{
+    background-color: var(--green50);
+    font-weight: 700;
+}
+.inputfile{
+    background-color: var(--green50);
+    border-radius: 10px;
+    
+}
+
 
 
 /* add patient (type) */
