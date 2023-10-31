@@ -45,7 +45,7 @@ async function loadTableData() {
     } else if (selectedOption === "TimeOld") {
       tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
     } else if (selectedOption === "def") {
-      tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+      tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
     } else if (selectedOption === "Nameaz") {
       tableData1.sort((a, b) =>
         a.patient_name.toString().localeCompare(b.patient_name)
