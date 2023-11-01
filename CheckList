@@ -8,6 +8,7 @@ Login Page
 -security shit ng e-medical record web
 minimum characters with special character and numbers
 attempts (3 attempts) - when exceeded need to contact ICT for new password
+-if logged in from different ip, log out in previous device
 ====================================
 Record Pages
 
