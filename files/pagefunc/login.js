@@ -25,6 +25,8 @@ loginForm.addEventListener("submit", async function (event) {
 
         if (error) {
             console.error("Error querying the database:", error.message);
+            message.classList.add("loginfailed");
+            message.innerText = "!! User ID not found !!";
             return;
         }
 
