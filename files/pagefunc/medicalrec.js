@@ -212,7 +212,8 @@ $("#insertstudmedform").submit(async function (event) {
       console.error("Error inserting data:", insertError.message);
     } else {
       console.log("Data inserted successfully:", insertData);
-      location.reload();
+      // location.reload();
+      loadTableData();
     }
   } catch (error) {
     console.error("Error:", error.message);
@@ -312,7 +313,8 @@ $("#insertempmedform").submit(async function (event) {
       console.error("Error inserting data:", insertError.message);
     } else {
       console.log("Data inserted successfully:", insertData);
-      location.reload();
+      // location.reload();
+      loadTableData();
     }
   } catch (error) {
     console.error("Error:", error.message);
