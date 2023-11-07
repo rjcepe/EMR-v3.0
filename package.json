@@ -11,10 +11,10 @@
     "start": "node server.js"
   },
   "name": "emr-v3.0",
-  "description": "",
+  "description": "Capstone Project",
   "version": "1.0.0",
   "main": "app.js",
   "keywords": [],
-  "author": "",
+  "author": "Rizjan Cepe, Renz Gonzales, Alessandro Rocas",
   "license": "ISC"
 }

@@ -13,7 +13,7 @@ document.getElementById("sort1").addEventListener("change", function () {
   loadTableData(); // Reload the table data when the sorting option changes
 });
 
-// Modify the loadTableData function to sort the table data
+//loadTableData function to sort the table data
 async function loadTableData() {
   const selectedOption = document.getElementById("sort1").value;
 
