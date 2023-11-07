@@ -152,3 +152,23 @@ function prevy10(){
   const previmg = document.querySelector('.form-prev-img10');
   previmg.classList.toggle("shownprev");
 }
+
+
+// push notif
+function shownotif() { 
+  const cont = document.getElementById("notif");
+  cont.innerHTML = `1 Record added
+  <button onclick="hidenotif()"><svg xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 -960 960 960" width="15" fill="white"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>`;
+
+  cont.classList.add("notif");
+  cont.classList.add("bounce-in-right");
+  cont.classList.remove("notifinactive");
+}
+function hidenotif() { 
+  const cont = document.getElementById("notif");
+  cont.innerHTML = "";
+  
+  cont.classList.add("notifinactive");
+  cont.classList.remove("notif");
+  cont.classList.remove("bounce-in-right");
+ }

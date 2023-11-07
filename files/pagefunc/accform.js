@@ -210,7 +210,10 @@ $("#insertstudaccform").submit(async function (event) {
       console.error("Error inserting data:", insertError.message);
     } else {
       console.log("Data inserted successfully:", insertData);
-      location.reload();
+      // location.reload();
+      loadTableData();
+      hidep();
+      shownotif();
     }
   } catch (error) {
     console.error("Error:", error.message);
@@ -306,7 +309,10 @@ $("#insertempaccform").submit(async function (event) {
       console.error("Error inserting data:", insertError.message);
     } else {
       console.log("Data inserted successfully:", insertData);
-      location.reload();
+      // location.reload();
+      loadTableData();
+      hidep();
+      shownotif();
     }
   } catch (error) {
     console.error("Error:", error.message);

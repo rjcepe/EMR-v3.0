@@ -214,6 +214,8 @@ $("#insertstudmedform").submit(async function (event) {
       console.log("Data inserted successfully:", insertData);
       // location.reload();
       loadTableData();
+      hidep();
+      shownotif();
     }
   } catch (error) {
     console.error("Error:", error.message);
@@ -315,6 +317,8 @@ $("#insertempmedform").submit(async function (event) {
       console.log("Data inserted successfully:", insertData);
       // location.reload();
       loadTableData();
+      hidep();
+      shownotif();
     }
   } catch (error) {
     console.error("Error:", error.message);
