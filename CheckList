@@ -12,8 +12,8 @@ attempts (3 attempts) - when exceeded need to contact ICT for new password
 ====================================
 Record Pages
 
--Search function (cross-page results?)
--Sort function (cross-page?)
+<!-- -Search function  -->
+<!-- -Sort function  -->
 <!-- -Add record function (Details & File) -->
 <!-- -Load Data -->
 <!-- -View File -->
@@ -23,9 +23,20 @@ Record Pages
 ====================================
 Report Pages
 
--applyform and spreadsheet links
+<!-- -applyform and spreadsheet links -->
 ====================================
 Misc
 -add error popups?
 
 ====================================
+
+
+
+EXCEL formulas
+
+row id increment
+=SUM(A14 +1)
+
+file link 
+="https://yspyqlodogzmrqsifbww.supabase.co/storage/v1/object/public/medicalrecords/" & B15 &"_medform.pdf"
+
