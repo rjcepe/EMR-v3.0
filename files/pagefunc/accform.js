@@ -214,6 +214,12 @@ $("#insertstudaccform").submit(async function (event) {
       loadTableData();
       hidep();
       shownotif();
+
+      $("#studname").val("");
+      $("#studid").val("");
+      $("#studcs").val("");
+      $("#locsel").val("");
+      $("#accform").val("");
     }
   } catch (error) {
     console.error("Error:", error.message);
@@ -313,6 +319,11 @@ $("#insertempaccform").submit(async function (event) {
       loadTableData();
       hidep();
       shownotif();
+
+      $("#empname").val("");
+      $("#empid").val("");
+      $("#locsel1").val("");
+      $("#accform2").val("");
     }
   } catch (error) {
     console.error("Error:", error.message);

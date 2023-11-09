@@ -180,6 +180,13 @@ $("#insertstudconsform").submit(async function (event) {
       loadTableData();
       hidep1();
       shownotif();
+
+      $("#studname").val("");
+      $("#studid").val("");
+      $("#studcs").val("");
+      $("#locsel").val("");
+      $("#diagnosis1").val("");
+      $("#notes1").val("");
     }
   } catch (error) {
     console.error("Error:", error.message);
@@ -244,6 +251,12 @@ $("#insertempconsform").submit(async function (event) {
       loadTableData();
       hidep1();
       shownotif();
+
+      $("#empname").val("");
+      $("#empid").val("");
+      $("#locsel").val("");
+      $("#diag2").val("");
+      $("#notes2").val("");
     }
   } catch (error) {
     console.error("Error:", error.message);

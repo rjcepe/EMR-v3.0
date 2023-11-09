@@ -216,6 +216,12 @@ $("#insertstudmedform").submit(async function (event) {
       loadTableData();
       hidep();
       shownotif();
+
+      $("#studname").val("");
+      $("#studid").val("");
+      $("#studcs").val("");
+      $("#locsel").val("");
+      $("#medform").val("");
     }
   } catch (error) {
     console.error("Error:", error.message);
@@ -319,6 +325,11 @@ $("#insertempmedform").submit(async function (event) {
       loadTableData();
       hidep();
       shownotif();
+
+      $("#empname").val("");
+      $("#empid").val("");
+      $("#locsel1").val("");
+      $("#medform2").val("");
     }
   } catch (error) {
     console.error("Error:", error.message);

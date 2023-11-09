@@ -214,6 +214,12 @@ $("#insertstudxrayform").submit(async function (event) {
       loadTableData();
       hidep();
       shownotif();
+
+      $("#studname").val("");
+      $("#studid").val("");
+      $("#studcs").val("");
+      $("#locsel").val("");
+      $("#xrayform").val("");
     }
   } catch (error) {
     console.error("Error:", error.message);
@@ -313,6 +319,11 @@ $("#insertempxrayform").submit(async function (event) {
       loadTableData();
       hidep();
       shownotif();
+
+      $("#empname").val("");
+      $("#empid").val("");
+      $("#locsel1").val("");
+      $("#xrayform2").val("");
     }
   } catch (error) {
     console.error("Error:", error.message);

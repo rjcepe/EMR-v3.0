@@ -213,6 +213,12 @@ $("#insertstuddentalform").submit(async function (event) {
       loadTableData();
       hidep();
       shownotif();
+
+      $("#studname").val("");
+      $("#studid").val("");
+      $("#studcs").val("");
+      $("#locsel").val("");
+      $("#dentalform").val("");
     }
   } catch (error) {
     console.error("Error:", error.message);
@@ -311,6 +317,11 @@ $("#insertempdentalform").submit(async function (event) {
       loadTableData();
       hidep();
       shownotif();
+
+      $("#empname").val("");
+      $("#empid").val("");
+      $("#locsel1").val("");
+      $("#dentalform2").val("");
     }
   } catch (error) {
     console.error("Error:", error.message);
