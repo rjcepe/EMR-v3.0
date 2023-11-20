@@ -1,17 +1,156 @@
+var token = sessionStorage.getItem('accstoken');
+console.log(token);
+
+if (token === null){
+  window.location.href = "../index.html";
+}
+
 const SUPABASE_URL = "https://yspyqlodogzmrqsifbww.supabase.co";
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-///////////////////////////////////// Load data to table
+
 //////////////////////////////// sort function
-// Add an event listener to the select element to detect changes
 loadTableData();
 
+// Add an event listener to the select element to detect changes
 document.getElementById("sort1").addEventListener("change", function () {
   loadTableData(); // Reload the table data when the sorting option changes
 });
+
+///////////////////////////////////// Load data to table
+async function loadTableData() {
+  const selectedOption = document.getElementById("sort1").value;
+
+  const { data: tableData1, error } = await _supabase
+    .from("cons_rec")
+    .select("*");
+
+  if (error) {
+    console.log("Error loading table data:", error.message);
+    return;
+  }
+
+  const tableBody = document.querySelector("#cons_table tbody");
+  tableBody.innerHTML = ""; // Clear the current table
+
+  if (tableData1.length === 0) {
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `<th class="row" colspan="7">No data available</td>`;
+    tableBody.appendChild(newRow);
+    console.log("No data");
+  } else {
+    // Sort the data based on the selected option
+    if (selectedOption === "ID") {
+      tableData1.sort(
+        (a, b) => new Date(a.patient_id) - new Date(b.patient_id)
+      );
+    } else if (selectedOption === "TimeLate") {
+      tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+    } else if (selectedOption === "TimeOld") {
+      tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+    } else if (selectedOption === "def") {
+      tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+    } else if (selectedOption === "Nameaz") {
+      tableData1.sort((a, b) =>
+        a.patient_name.toString().localeCompare(b.patient_name)
+      );
+    } else if (selectedOption === "Nameza") {
+      tableData1.sort((a, b) =>
+        b.patient_name.toString().localeCompare(a.patient_name)
+      );
+    } else if (selectedOption === "CS") {
+      tableData1.sort((a, b) =>
+        a.course_section.toString().localeCompare(b.course_section)
+      );
+    } else if (selectedOption === "EMP") {
+      tableData1.sort((a, b) =>
+        b.course_section.toString().localeCompare(a.course_section)
+      );
+    }
+
+    tableData1.forEach((row) => {
+      const newRow = document.createElement("tr");
+      newRow.classList.add("res1");
+      newRow.innerHTML = `
+          <th class="row1 idcol1">${row.patient_id}</th>
+          <th class="row1 namecol1">${row.patient_name}</th>
+          <th class="row1 timecol1">${row.created_date}</th>
+          <th class="row1 coursecol1">${row.course_section}</th>
+          <th class="row1 diagcol1">${row.diagnosis}</th>
+          <th class="row1 notescol">${row.notes}</th>
+          <th class="row1 timecol1">${row.location}</th>
+          <th class="row1 timecol1">${row.added_by}</th>
+          
+        `;
+      tableBody.appendChild(newRow);
+    });
+  }
+}
+
+
+  //////// search while typing
+  document.getElementById('searchInput').addEventListener('keyup', async function() {
+      var results = this.value;
+      
+      if(results){
+        displayResults(results);
+      }
+      else{
+        loadTableData();
+      }
+    
+  });
+
+  async function displayResults(results) {
+    
+    // Fetch the patient data based on the search ID
+    const { data: patientData, error } = await _supabase
+      .from("cons_rec")
+      .select("*")
+      .or(`patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`);
+
+    if (error) {
+      console.error("Error fetching patient data:", error.message);
+      alert("Invalid Input")
+      return;
+    }
+
+    const tableBody = document.querySelector("#cons_table tbody");
+
+    // Clear the current table
+    tableBody.innerHTML = "";
+
+    if (patientData && patientData.length > 0) {
+      // Patient data found, update the table
+      patientData.forEach((row) => {
+        const newRow = document.createElement("tr");
+        newRow.classList.add("res1");
+
+        newRow.innerHTML = `
+            <th class="row1 idcol1">${row.patient_id}</th>
+            <th class="row1 namecol1">${row.patient_name}</th>
+            <th class="row1 timecol1">${row.created_date}</th>
+            <th class="row1 coursecol1">${row.course_section}</th>
+            <th class="row1 diagcol1">${row.diagnosis}</th>
+            <th class="row1 notescol">${row.notes}</th>
+            <th class="row1 timecol1">${row.location}</th>
+            <th class="row1 timecol1">${row.added_by}</th>
+        `;
+
+        tableBody.appendChild(newRow);
+      });
+    } else {
+      // Patient not found
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <th class="row" colspan="7">Patient not found</td>
+      `;
+      tableBody.appendChild(newRow);
+    }
+  };
 
 // Modify the loadTableData function to sort the table data
 async function loadTableData() {
@@ -83,6 +222,115 @@ async function loadTableData() {
   }
 }
 
+// filterfunction onclick
+document.getElementById("filterbuttz").addEventListener("click", async function (){
+
+  const form = document.getElementById("filterz-val");
+  const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+
+  const checkedValues = Array.from(checkboxes).map((checkbox) => checkbox.value);
+
+  console.log(checkedValues);
+
+  const { data: patientData, error } = await _supabase
+      .from("cons_rec")
+      .select("*")
+      .contains("diagchex", [checkedValues]);
+
+      const tableBody = document.querySelector("#cons_table tbody");
+
+      // Clear the current table
+      tableBody.innerHTML = "";
+  
+      if (patientData && patientData.length > 0) {
+        // Patient data found, update the table
+        patientData.forEach((row) => {
+          const newRow = document.createElement("tr");
+          newRow.classList.add("res1");
+  
+          newRow.innerHTML = `
+              <th class="row1 idcol1">${row.patient_id}</th>
+              <th class="row1 namecol1">${row.patient_name}</th>
+              <th class="row1 timecol1">${row.created_date}</th>
+              <th class="row1 coursecol1">${row.course_section}</th>
+              <th class="row1 diagcol1">${row.diagnosis}</th>
+              <th class="row1 notescol">${row.notes}</th>
+              <th class="row1 timecol1">${row.location}</th>
+              <th class="row1 timecol1">${row.added_by}</th>
+          `;
+  
+          tableBody.appendChild(newRow);
+        });
+      } else {
+        // Patient not found
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+          <th class="row" colspan="7">Patient not found</td>
+        `;
+        tableBody.appendChild(newRow);
+      }
+  
+});
+
+
+// filter fucntion, onchange
+const form1 = document.getElementById("filterz-val");
+const checkboxes = form1.querySelectorAll('input[type="checkbox"]:not([name="others"])');
+
+checkboxes.forEach(checkbox => {checkbox.addEventListener('change', async function() {
+      const checkedCheckboxes = form1.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+
+        if (checkedCheckboxes.length === 0) {
+            // No checkboxes are selected, load default table data
+            loadTableData();
+        } else {
+              const checkedValues = Array.from(form1.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])')).map(checkbox => checkbox.value);
+              
+
+              const { data: patientData, error } = await _supabase
+              .from("cons_rec")
+              .select("*")
+              .contains("diagchex", [checkedValues]);
+
+              const tableBody = document.querySelector("#cons_table tbody");
+
+              // Clear the current table
+              tableBody.innerHTML = "";
+          
+              if (patientData && patientData.length > 0) {
+                // Patient data found, update the table
+                patientData.forEach((row) => {
+                  const newRow = document.createElement("tr");
+                  newRow.classList.add("res1");
+          
+                  newRow.innerHTML = `
+                      <th class="row1 idcol1">${row.patient_id}</th>
+                      <th class="row1 namecol1">${row.patient_name}</th>
+                      <th class="row1 timecol1">${row.created_date}</th>
+                      <th class="row1 coursecol1">${row.course_section}</th>
+                      <th class="row1 diagcol1">${row.diagnosis}</th>
+                      <th class="row1 notescol">${row.notes}</th>
+                      <th class="row1 timecol1">${row.location}</th>
+                      <th class="row1 timecol1">${row.added_by}</th>
+                  `;
+          
+                  tableBody.appendChild(newRow);
+                });
+              } 
+              else {
+                // Patient not found
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                  <th class="row" colspan="7">Patient not found</td>
+                `;
+                tableBody.appendChild(newRow);
+              }
+    }
+  });
+});
+
+
+
 ////////////////////////////// fetch username
 async function getusername() {
   var id1 = localStorage.getItem("uid1");
@@ -109,10 +357,12 @@ async function getusername() {
   }
 }
 
+
 function getusername1(username) {
   var bb = username;
   localStorage.setItem("x", bb);
 }
+
 
 getusername();
 
@@ -120,88 +370,70 @@ getusername();
 $("#insertstudconsform").submit(async function (event) {
   event.preventDefault();
 
+  // get checkbox values
+  const form = document.getElementById("insertstudconsform");
+
+  // get values of all others textbox
+  // Initialize an array to hold the values of the filled textboxes
+  var filledValues = [];
+  var otherArr = [];
+
+  // Function to get the value of a textbox if it is filled
+  function getFilledValue(selector) {
+      var value = $(selector).val();
+      if (value) { // Checks if the value is not empty, null, or undefined
+          filledValues.push(value);
+
+          var other1 = "Others";
+          otherArr.push(other1);
+      }
+  }
+  // Get values of all textboxes if they are filled
+  getFilledValue("#othersTextDermatological");
+  getFilledValue("#othersTextMusculoskeletal");
+  getFilledValue("#othersTextHeadNeck");
+  getFilledValue("#othersTextRespiratory");
+  getFilledValue("#othersTextCardiovascular");
+  getFilledValue("#othersTextGastrointestinal");
+  getFilledValue("#othersTextGenitourinary");
+  getFilledValue("#othersTextInfectious");
+  getFilledValue("#othersTextNeurology");
+  getFilledValue("#othersTextTrauma");
+  getFilledValue("#othersTextMiscellaneous");
+
+
+  // get values of the checked boxes
+  const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+
+  const checkedValues = Array.from(checkboxes).map((checkbox) => checkbox.value);
+
+
+
+  // get cys
+  const college = $("#college").val();
+  const course = $("#course").val();
+  const section = $("#studcs").val();
+
   // Get form field values
   const name = $("#studname").val();
-  const id = $("#studid").val();
-  const cs = $("#studcs").val();
+  const id1 = $("#studid").val();
+  const cys = course + " " + section;
+
   const loc1 = $("#locsel").val();
-  const diag1 = $("#diagnosis1").val();
-  const note1 = $("#notes1").val();
+  const note1 = $("#notes").val();
+  
+  var diagchex = [...checkedValues, ...filledValues];
 
-  var username = localStorage.getItem("x");
-
-
-  try {
-    ///get current date
-    // Specify the target timezone as "Asia/Manila"
-    const targetTimezone = "Asia/Manila";
-
-    // Get the current date and time in the target timezone
-    const today = new Date();
-
-    const year = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      year: "numeric",
-    });
-    const month = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      month: "2-digit",
-    });
-    const day = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      day: "2-digit",
-    });
-
-    const CurrentDate = `${year}-${month}-${day}`;
-    console.log(CurrentDate);
-
-    const formInfo = {
-      patient_id: id,
-      patient_name: name,
-      created_date: CurrentDate,
-      course_section: cs,
-      location: loc1,
-      added_by: username,
-      diagnosis: diag1,
-      notes: note1,
-      
-    };
-
-    
-    const { data: insertData, error: insertError } = await _supabase
-      .from("cons_rec")
-      .insert(formInfo);
-
-    if (insertError) {
-      console.error("Error inserting data:", insertError.message);
-    } else {
-      console.log("Data inserted successfully:", insertData);
-      // location.reload();
-      loadTableData();
-      hidep1();
-      shownotif();
-
-      $("#studname").val("");
-      $("#studid").val("");
-      $("#studcs").val("");
-      $("#locsel").val("");
-      $("#diagnosis1").val("");
-      $("#notes1").val("");
-    }
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-});
-
-/////////////////////////////////////////// Upload employee info
-$("#insertempconsform").submit(async function (event) {
-  event.preventDefault();
-  // Get form field values
-  const name1 = $("#empname").val();
-  const id1 = $("#empid").val();
-  const loc1 = $("#locsel1").val();
-  const diag2 = $("#diag2").val();
-  const notes2 = $("#notes2").val();
+  const ptype = "Student";
+  const ptypeArray = [ptype];
+  if (otherArr != null){
+    var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray, ...otherArr];
+   }
+   else{
+   var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray];
+ }
+  
+  const diag1 = diagchex.join(", ");
 
   var username = localStorage.getItem("x");
 
@@ -231,17 +463,267 @@ $("#insertempconsform").submit(async function (event) {
 
     const formInfo = {
       patient_id: id1,
-      patient_name: name1,
+      patient_name: name,
       created_date: CurrentDate,
-      course_section: "Employee",
+      course_section: cys,
       location: loc1,
       added_by: username,
-      diagnosis: diag2,
-      notes: notes2,
-      
+      diagnosis: diag1,
+      diagchex: diagchex2,
+      notes: note1,
     };
 
-    const { data: insertData, error: insertError } = await _supabase.from("cons_rec").insert(formInfo);
+    const { data: insertData, error: insertError } = await _supabase
+      .from("cons_rec")
+      .insert(formInfo);
+
+    if (insertError) {
+      console.error("Error inserting data:", insertError.message);
+      console.log(formInfo);
+      alert("Missing Input Field")
+    } else {
+      console.log("Data inserted successfully:", insertData);
+      // location.reload();
+      loadTableData();
+      hidep1();
+      shownotif();
+
+      // remove input after submission
+      document.getElementById("insertstudconsform").reset();
+    }
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+});
+
+/////////////////////////////////////////// Upload faculty info
+$("#insertempconsform").submit(async function (event) {
+  event.preventDefault();
+  
+    // get checkbox values
+  const form = document.getElementById("insertempconsform");
+
+  // get values of all others textbox
+  // Initialize an array to hold the values of the filled textboxes
+  var filledValues = [];
+  var otherArr = [];
+
+  // Function to get the value of a textbox if it is filled
+  function getFilledValue(selector) {
+      var value = $(selector).val();
+      if (value) { // Checks if the value is not empty, null, or undefined
+          filledValues.push(value);
+
+          var other1 = "Others";
+          otherArr.push(other1);
+      }
+  }
+  // Get values of all textboxes if they are filled
+  getFilledValue("#othersTextDermatological1");
+  getFilledValue("#othersTextMusculoskeletal1");
+  getFilledValue("#othersTextHeadNeck1");
+  getFilledValue("#othersTextRespiratory1");
+  getFilledValue("#othersTextCardiovascular1");
+  getFilledValue("#othersTextGastrointestinal1");
+  getFilledValue("#othersTextGenitourinary1");
+  getFilledValue("#othersTextInfectious1");
+  getFilledValue("#othersTextNeurology1");
+  getFilledValue("#othersTextTrauma1");
+  getFilledValue("#othersTextMiscellaneous1");
+
+
+  // get values of the checked boxes
+  const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+
+  const checkedValues = Array.from(checkboxes).map((checkbox) => checkbox.value);
+
+  // get cys
+  const college = $("#college1").val();
+  const course = $("#course1").val();
+
+  // Get form field values
+  const name = $("#empname").val();
+  const id1 = $("#empid").val();
+
+  const loc1 = $("#locsel1").val();
+  const note1 = $("#notes1").val();
+  
+  var diagchex = [...checkedValues, ...filledValues];
+
+  const ptype = "Faculty";
+  const ptypeArray = [ptype];
+  if (otherArr != null){
+    var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray, ...otherArr];
+   }
+   else{
+   var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray];
+ }
+  
+  const diag1 = diagchex.join(", ");
+
+  var username = localStorage.getItem("x");
+
+  try {
+    ///get current date
+    // Specify the target timezone as "Asia/Manila"
+    const targetTimezone = "Asia/Manila";
+
+    // Get the current date and time in the target timezone
+    const today = new Date();
+
+    const year = today.toLocaleString("en-US", {
+      timeZone: targetTimezone,
+      year: "numeric",
+    });
+    const month = today.toLocaleString("en-US", {
+      timeZone: targetTimezone,
+      month: "2-digit",
+    });
+    const day = today.toLocaleString("en-US", {
+      timeZone: targetTimezone,
+      day: "2-digit",
+    });
+
+    const CurrentDate = `${year}-${month}-${day}`;
+    console.log(CurrentDate);
+
+    const formInfo = {
+      patient_id: id1,
+      patient_name: name,
+      created_date: CurrentDate,
+      course_section: "Faculty - " + course,
+      location: loc1,
+      added_by: username,
+      diagnosis: diag1,
+      diagchex: diagchex2,
+      notes: note1,
+    };
+
+    const { data: insertData, error: insertError } = await _supabase
+      .from("cons_rec")
+      .insert(formInfo);
+
+    if (insertError) {
+      console.error("Error inserting data:", insertError.message);
+      alert("Missing Input Field")
+    } else {
+      console.log("Data inserted successfully:", insertData);
+      // location.reload();
+      loadTableData();
+      hidep1();
+      shownotif();
+
+      document.getElementById("insertempconsform").reset();
+    }
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+});
+
+/////////////////////////////////////////// Upload staff info
+$("#insertstaffconsform").submit(async function (event) {
+  event.preventDefault();
+
+    // get checkbox values
+  const form = document.getElementById("insertstaffconsform");
+
+  // get values of all others textbox
+  // Initialize an array to hold the values of the filled textboxes
+  var filledValues = [];
+  var otherArr = [];
+
+  // Function to get the value of a textbox if it is filled
+  function getFilledValue(selector) {
+      var value = $(selector).val();
+      if (value) { // Checks if the value is not empty, null, or undefined
+          filledValues.push(value);
+
+          var other1 = "Others";
+          otherArr.push(other1);
+      }
+  }
+  // Get values of all textboxes if they are filled
+  getFilledValue("#othersTextDermatological2");
+  getFilledValue("#othersTextMusculoskeletal2");
+  getFilledValue("#othersTextHeadNeck2");
+  getFilledValue("#othersTextRespiratory2");
+  getFilledValue("#othersTextCardiovascular2");
+  getFilledValue("#othersTextGastrointestinal2");
+  getFilledValue("#othersTextGenitourinary2");
+  getFilledValue("#othersTextInfectious2");
+  getFilledValue("#othersTextNeurology2");
+  getFilledValue("#othersTextTrauma2");
+  getFilledValue("#othersTextMiscellaneous2");
+
+
+  // get values of the checked boxes
+  const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+
+  const checkedValues = Array.from(checkboxes).map((checkbox) => checkbox.value);
+
+
+  // Get form field values
+  const name = $("#stffname").val();
+  const id1 = $("#stffid").val();
+
+  const loc1 = $("#locsel2").val();
+  const note1 = $("#notes2").val();
+  
+  var diagchex = [...checkedValues, ...filledValues];
+
+  const ptype = "Staff";
+  const ptypeArray = [ptype];
+
+  if (otherArr != null){
+     var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray, ...otherArr];
+    }
+    else{
+    var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray];
+  }
+  
+  const diag1 = diagchex.join(", ");
+
+  var username = localStorage.getItem("x");
+
+  try {
+    ///get current date
+    // Specify the target timezone as "Asia/Manila"
+    const targetTimezone = "Asia/Manila";
+
+    // Get the current date and time in the target timezone
+    const today = new Date();
+
+    const year = today.toLocaleString("en-US", {
+      timeZone: targetTimezone,
+      year: "numeric",
+    });
+    const month = today.toLocaleString("en-US", {
+      timeZone: targetTimezone,
+      month: "2-digit",
+    });
+    const day = today.toLocaleString("en-US", {
+      timeZone: targetTimezone,
+      day: "2-digit",
+    });
+
+    const CurrentDate = `${year}-${month}-${day}`;
+    console.log(CurrentDate);
+
+    const formInfo = {
+      patient_id: id1,
+      patient_name: name,
+      created_date: CurrentDate,
+      course_section: "Staff",
+      location: loc1,
+      added_by: username,
+      diagnosis: diag1,
+      diagchex: diagchex2,
+      notes: note1,
+    };
+
+    const { data: insertData, error: insertError } = await _supabase
+      .from("cons_rec")
+      .insert(formInfo);
 
     if (insertError) {
       console.error("Error inserting data:", insertError.message);
@@ -252,11 +734,7 @@ $("#insertempconsform").submit(async function (event) {
       hidep1();
       shownotif();
 
-      $("#empname").val("");
-      $("#empid").val("");
-      $("#locsel").val("");
-      $("#diag2").val("");
-      $("#notes2").val("");
+      document.getElementById("insertstaffconsform").reset();
     }
   } catch (error) {
     console.error("Error:", error.message);
@@ -325,55 +803,3 @@ async function fetchUserPic() {
 fetchUserPic();
 fetchUsername();
 
-
-//////////////////////////////////search function
-document
-  .getElementById("searchpatient")
-  .addEventListener("click", async function () {
-    // Get the patient ID entered in the input field
-    const searchID = document.getElementById("searchInput").value;
-
-    // Fetch the patient data based on the search ID
-    const { data: patientData, error } = await _supabase
-      .from("cons_rec")
-      .select("*")
-      .eq("patient_id", searchID);
-
-    if (error) {
-      console.error("Error fetching patient data:", error.message);
-      return;
-    }
-
-    const tableBody = document.querySelector("#cons_table tbody");
-
-    // Clear the current table
-    tableBody.innerHTML = "";
-
-    if (patientData && patientData.length > 0) {
-      // Patient data found, update the table
-      patientData.forEach((row) => {
-        const newRow = document.createElement("tr");
-        newRow.classList.add("res1");
-
-        newRow.innerHTML = `
-            <th class="row1 idcol1">${row.patient_id}</th>
-            <th class="row1 namecol1">${row.patient_name}</th>
-            <th class="row1 timecol1">${row.created_date}</th>
-            <th class="row1 coursecol1">${row.course_section}</th>
-            <th class="row1 diagcol1">${row.diagnosis}</th>
-            <th class="row1 notescol">${row.notes}</th>
-            <th class="row1 timecol1">${row.location}</th>
-            <th class="row1 timecol1">${row.added_by}</th>
-        `;
-
-        tableBody.appendChild(newRow);
-      });
-    } else {
-      // Patient not found
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-        <th class="row" colspan="7">Patient not found</td>
-      `;
-      tableBody.appendChild(newRow);
-    }
-  });

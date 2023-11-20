@@ -68,6 +68,13 @@ function emp1() {
   const emp = document.querySelector('.uploadconsform2');
   const empbutt = document.getElementById("empupbutt");
   const studbutt = document.getElementById("studupbutt");
+  const stff = document.querySelector('.uploadconsform3');
+  const stffbutt = document.getElementById("stffupbutt");
+
+  stff.classList.add('hidden');
+  stff.classList.remove('shown');
+  stffbutt.classList.remove('activeptb');
+  
 
   stud.classList.add('hidden');
   stud.classList.remove('shown');
@@ -83,6 +90,12 @@ function stud1() {
   const emp = document.querySelector('.uploadconsform2');
   const empbutt = document.getElementById("empupbutt");
   const studbutt = document.getElementById("studupbutt");
+  const stff = document.querySelector('.uploadconsform3');
+  const stffbutt = document.getElementById("stffupbutt");
+
+  stff.classList.add('hidden');
+  stff.classList.remove('shown');
+  stffbutt.classList.remove('activeptb');
 
   emp.classList.add('hidden');
   emp.classList.remove('shown');
@@ -92,6 +105,29 @@ function stud1() {
 
   empbutt.classList.remove('activeptb');
   studbutt.classList.add('activeptb');
+}
+function staff1() {
+  const stud = document.querySelector('.uploadconsform1');
+  const emp = document.querySelector('.uploadconsform2');
+  
+  const empbutt = document.getElementById("empupbutt");
+  const studbutt = document.getElementById("studupbutt");
+
+  const stff = document.querySelector('.uploadconsform3');
+  const stffbutt = document.getElementById("stffupbutt");
+
+  stff.classList.add('shown');
+  stff.classList.remove('hidden');
+  stffbutt.classList.add('activeptb');
+
+  emp.classList.add('hidden');
+  emp.classList.remove('shown');
+
+  stud.classList.add('hidden');
+  stud.classList.remove('shown');
+
+  empbutt.classList.remove('activeptb');
+  studbutt.classList.remove('activeptb');
 }
 
 // add cons rec (button)
@@ -172,3 +208,58 @@ function hidenotif() {
   cont.classList.remove("notif");
   cont.classList.remove("bounce-in-right");
  }
+
+ ///// nextpage (for medrec)
+var pages = document.querySelectorAll('.page');
+var currentIndex = 0; // Start at the first div
+
+function showCurrentPage() {
+    // Hide all pages
+    pages.forEach(function(page, index) {
+        page.style.display = 'none';
+    });
+
+    // Show the current page
+    pages[currentIndex].style.display = 'block';
+}
+
+// document.getElementById('nextpagebutt').addEventListener('click', function() {
+//     currentIndex = (currentIndex + 1) % pages.length; // Loop around
+//     showCurrentPage();
+// });
+
+// document.getElementById('prevpagebutt').addEventListener('click', function() {
+//     currentIndex = (currentIndex - 1 + pages.length) % pages.length; // Loop around
+//     showCurrentPage();
+// });
+
+// showCurrentPage(); // Initialize the view
+
+//search, filter, sort
+function showsearch(){
+  const a = document.querySelector(".searchz");
+  const b = document.querySelector(".sortz");
+  const c = document.querySelector(".filterz1");
+
+  a.classList.toggle("filters");
+  b.classList.remove("filters");
+  c.classList.remove("filters");
+}
+function showsort(){
+  const a = document.querySelector(".sortz");
+  const b = document.querySelector(".searchz");
+  const c = document.querySelector(".filterz1");
+
+  a.classList.toggle("filters");
+  b.classList.remove("filters");
+  c.classList.remove("filters");
+}
+function showfiltz(){
+  const a = document.querySelector(".filterz1");
+  const b = document.querySelector(".searchz");
+  const c = document.querySelector(".sortz");
+
+  a.classList.toggle("filters");
+  b.classList.remove("filters");
+  c.classList.remove("filters");
+}

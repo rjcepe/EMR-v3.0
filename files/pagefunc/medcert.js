@@ -1,3 +1,9 @@
+var token = sessionStorage.getItem('accstoken');
+
+if (token === null){
+  window.location.href = "../index.html";
+}
+
 function cert02(button){
 
     const certcont = document.getElementById('medcert-cont');

@@ -23,7 +23,6 @@ loginForm.addEventListener("submit", async function (event) {
 
     const { data, error } = await _supabase.from('user_accs').select('*').eq('id', idInput);
     
-    
         if (error) {
             console.error("Error querying the database:", error.message);
             message.classList.add("loginfailed");
@@ -45,9 +44,13 @@ loginForm.addEventListener("submit", async function (event) {
             // Redirect to the desired webpage upon successful login
             window.location.href = "/webpages/medicalrecords.html";
 
+
+            const token = generateRandomString(64);
+            sessionStorage.setItem('accstoken', token);
+
             var gg =  document.getElementById('uid').value;
             localStorage.setItem('uid1', gg);
-
+            
 
         } else {
             console.log("Password Incorrect");
@@ -55,3 +58,14 @@ loginForm.addEventListener("submit", async function (event) {
             message.innerText = "!! Password Incorrect !!";
         }
     });
+
+function generateRandomString(length) {
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}

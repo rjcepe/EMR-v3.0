@@ -27,8 +27,10 @@
                     <h5>Records</h5>
                     <button class="navbutt " onclick="ToMedRec()" id="mr">  <img src="/files/images/arrow.png" alt="">Medical Records</button>
                     <button class="activebutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental Records</button>
-                    <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray Images</button>
-                    <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Records</button>
+                    <!-- <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray -->
+                        <!-- Images</button> -->
+                    <!-- <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident -->
+                        <!-- Records</button> -->
                     <button class="navbutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation Records</button>
                 </div>
             </div>
@@ -36,7 +38,8 @@
                 <div class="reps">
                     <h5>Reports</h5>
                     <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical Certificates</button>
-                    <button class="navbutt" onclick="ToAccCen()"><img src="/files/images/arrow.png" alt="">Accident Census</button>
+                    <button class="navbutt" onclick="ToAccCen()"><img src="/files/images/arrow.png" alt="">Monthly
+                        Census</button>
                     <!-- <button class="navbutt" onclick="ToPresc()"><img src="/navicons/arrow.png" alt="">Prescription?</button> -->
                 </div>
             </div>
@@ -66,12 +69,12 @@
                     <div class="username"></div>
                 </div>
             </div>
-            <div class="inputs">
-                <div class="search">
-                    <input type="text" id="searchInput" placeholder="Search ID...">
-                    <button class="searchbutt" id="searchpatient"><img src="/files/images/search.png" alt="">Search</button>
+            <div class="inputs1">
+                <div class="search1">
+                    <input type="text" id="searchInput" placeholder="Search via ID, Name, or CYS...">
+                    <!-- <button class="searchbutt" id="searchpatient"><img src="/files/images/search.png" alt="">Search</button> -->
                 </div>
-                <div class="filters">
+                <div class="filters1">
                     <label for="sort">Sort by:</label>
                     <select name="sort" id="sort1">
                         <option disabled selected value="def"> -- </option>
@@ -80,8 +83,6 @@
                         <option value="TimeOld">Oldest</option>
                         <option value="Nameaz">Name (A-Z)</option>
                         <option value="Nameza">Name (Z-A)</option>
-                        <option value="CS">College</option>
-                        <option value="EMP">Employees</option>
                     </select>
                     <button class="addrecbutt" onclick="showp()">Add Record +</button> 
                 </div>

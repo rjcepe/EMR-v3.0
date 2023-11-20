@@ -1,3 +1,9 @@
+var token = sessionStorage.getItem('accstoken');
+
+if (token === null){
+  window.location.href = "../index.html";
+}
+
 const SUPABASE_URL = "https://yspyqlodogzmrqsifbww.supabase.co";
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
@@ -437,36 +443,45 @@ function hidev() {
   vfile.classList.remove("showv");
 }
 
-//////////////////////////////////search function
-document
-  .getElementById("searchpatient")
-  .addEventListener("click", async function () {
-    // Get the patient ID entered in the input field
-    const searchID = document.getElementById("searchInput").value;
+//////// search while typing
+document.getElementById('searchInput').addEventListener('keyup', async function() {
+  var results = this.value;
+  
+  if(results){
+    displayResults(results);
+  }
+  else{
+    loadTableData();
+  }
 
-    // Fetch the patient data based on the search ID
-    const { data: patientData, error } = await _supabase
-      .from("dental_forms")
-      .select("*")
-      .eq("patient_id", searchID);
+});
 
-    if (error) {
-      console.error("Error fetching patient data:", error.message);
-      return;
-    }
+async function displayResults(results) {
 
-    const tableBody = document.querySelector("#dental_table tbody");
+// Fetch the patient data based on the search ID
+const { data: patientData, error } = await _supabase
+  .from("dental_forms")
+  .select("*")
+  .or(`patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`);
 
-    // Clear the current table
-    tableBody.innerHTML = "";
+if (error) {
+  console.error("Error fetching patient data:", error.message);
+  alert("Invalid Input")
+  return;
+}
 
-    if (patientData && patientData.length > 0) {
-      // Patient data found, update the table
-      patientData.forEach((row) => {
-        const newRow = document.createElement("tr");
-        newRow.classList.add("res");
+const tableBody = document.querySelector("#dental_table tbody");
 
-        newRow.innerHTML = `
+// Clear the current table
+tableBody.innerHTML = "";
+
+if (patientData && patientData.length > 0) {
+  // Patient data found, update the table
+  patientData.forEach((row) => {
+    const newRow = document.createElement("tr");
+    newRow.classList.add("res1");
+
+    newRow.innerHTML = `
           <th class="row idcol">${row.patient_id}</th>
           <th class="row namecol">${row.patient_name}</th>
           <th class="row timecol">${row.created_date}</th>
@@ -474,20 +489,20 @@ document
           <th class="row timecol">${row.location}</th>
           <th class="row timecol">${row.added_by}</th>
           <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.dental_file}', '${row.patient_name}')">
+            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
               <p class="txt">View</p>
             </button>
           </th>
         `;
 
-        tableBody.appendChild(newRow);
-      });
-    } else {
-      // Patient not found
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-        <th class="row" colspan="7">Patient not found</td>
-      `;
-      tableBody.appendChild(newRow);
-    }
+    tableBody.appendChild(newRow);
   });
+} else {
+  // Patient not found
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `
+    <th class="row" colspan="7">Patient not found</td>
+  `;
+  tableBody.appendChild(newRow);
+}
+};

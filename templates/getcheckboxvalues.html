@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox Test</title>
+</head>
+<body>
+
+<form id="myForm">
+    <h2>Checkbox Test Form</h2>
+    
+    <label>
+        <input type="checkbox" name="option1" value="Option 1"> Option 1
+    </label>
+
+    <label>
+        <input type="checkbox" name="option2" value="Option 2"> Option 2
+    </label>
+
+    <label>
+        <input type="checkbox" name="option3" value="Option 3"> Option 3
+    </label>
+
+    <label>
+        <input type="checkbox" name="option4" value="Option 4"> Option 4
+    </label>
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    const form = document.getElementById("myForm");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');
+        const checkedValues = Array.from(checkboxes).map(checkbox => checkbox.value);
+
+        console.log("Checked Values:", checkedValues);
+    });
+
+
+    //////////////////////get value from supabase array
+    const searchID = document.getElementById("searchInput").value;
+
+    // Fetch the patient data based on the search ID
+    const { data: patientData, error } = await _supabase
+      .from("cons_rec")
+      .select("*")
+      .contains("diagchex", [searchID]);
+</script>
+
+</body>
+</html>

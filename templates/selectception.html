@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>College Course Selection</title>
+    <script>
+        // This function will update the courses dropdown based on the selected college
+        function updateCourses() {
+            var collegeSelect = document.getElementById('college');
+            var courseSelect = document.getElementById('course');
+            var selectedCollege = collegeSelect.value;
+
+            // Object containing courses for each college
+            var courses = {
+                'cbaa': [
+                    'Accountancy',
+                    'Management Accounting',
+                    'Entrepreneurship - Food Entrepreneurship',
+                    'Entrepreneurship - Agripreneurship',
+                    'Business Administration - Business and Operations Management',
+                    'Business Administration - Business Economics',
+                    'Business Administration - Human Resource Development',
+                    'Business Administration - Marketing Management',
+                    'Specialization - Business Analytics',
+                    'Specialization - Integrated Marketing Communications'
+                ],
+                'ccje': ['Criminology', 'Forensic Science'],
+                'coe': [
+                    'Early Childhood Education',
+                    'Special Needs Education',
+                    'Secondary Education',
+                    'Certificate - Teaching Program',
+                    'Certificate - Teaching Values Education',
+                    'Certificate - Sign Language',
+                    'Certificate - Teaching Early Childhood Learners'
+                ],
+                'ceat': [
+                    'Architecture',
+                    'Civil Engineering',
+                    'Computer Engineering',
+                    'Electrical Engineering',
+                    'Electronics Engineering',
+                    'Industrial Engineering',
+                    'Mechanical Engineering',
+                    'Multimedia Arts'
+                ],
+                'clac': [
+                    'Communication',
+                    'Community Development',
+                    'Digital and Multimedia Journalism',
+                    'Philosophy',
+                    'Political Science',
+                    'International Development',
+                    'Psychology (BA)',
+                    'Psychology (BS)'
+                ],
+                'cscs': [
+                    'Biology - Medical Biology',
+                    'Biology - Microbiology',
+                    'Biology - Cell and Molecular Biology',
+                    'Biology - Plant Biology',
+                    'Biology - Animal Biology',
+                    'Environmental Science',
+                    'Applied Mathematics',
+                    'Computer Science',
+                    'Information Technology'
+                ],
+                'cthm': ['Hospitality Management', 'Tourism Management']
+            };
+
+            // Clear previous options
+            courseSelect.options.length = 0;
+            
+            // Add a placeholder
+            courseSelect.options.add(new Option("--Select a Course--", ""));
+
+            // Append new options
+            if (selectedCollege && courses[selectedCollege]) {
+                courses[selectedCollege].forEach(function(course) {
+                    courseSelect.options.add(new Option(course, course));
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <label for="college">Select College:</label>
+        <select id="college" onchange="updateCourses()">
+            <option value="">--Select a College--</option>
+            <option value="cbaa">College of Business Administration and Accountancy</option>
+            <option value="ccje">College of Criminal Justice Education</option>
+            <option value="coe">College of Education</option>
+            <option value="ceat">College of Engineering, Architecture and Technology</option>
+            <option value="clac">College of Liberal Arts and Communication</option>
+            <option value="cscs">College of Science and Computer Studies</option>
+            <option value="cthm">College of Tourism and Hospitality Management</option>
+        </select>
+
+        <label for="course">Select Course:</label>
+        <select id="course">
+            <option value="">--Select a Course--</option>
+            <!-- Course options will be populated based on the college selection -->
+        </select>
+    </form>
+</body>
+</html>

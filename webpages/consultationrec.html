@@ -26,18 +26,25 @@
             <div class="nav">
                 <div class="recs">
                     <h5>Records</h5>
-                    <button class="navbutt" onclick="ToMedRec()" id="mr">  <img src="/files/images/arrow.png" alt="">Medical Records</button>
-                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental Records</button>
-                    <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray Images</button>
-                    <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Records</button>
-                    <button class="activebutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation Records</button>
+                    <button class="navbutt" onclick="ToMedRec()" id="mr"> <img src="/files/images/arrow.png"
+                            alt="">Medical Records</button>
+                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental
+                        Records</button>
+                    <!-- <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray -->
+                        <!-- Images</button> -->
+                    <!-- <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident -->
+                        <!-- Records</button> -->
+                    <button class="activebutt" onclick="ToConRec()"><img src="/files/images/arrow.png"
+                            alt="">Consultation Records</button>
                 </div>
             </div>
             <div class="nav navrep">
                 <div class="reps">
                     <h5>Reports</h5>
-                    <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical Certificates</button>
-                    <button class="navbutt" onclick="ToAccCen()"><img src="/files/images/arrow.png" alt="">Accident Census</button>
+                    <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical
+                        Certificates</button>
+                    <button class="navbutt" onclick="ToAccCen()"><img src="/files/images/arrow.png" alt="">Monthly
+                        Census</button>
                     <!-- <button class="navbutt" onclick="ToPresc()"><img src="/navicons/arrow.png" alt="">Prescription?</button> -->
                 </div>
             </div>
@@ -46,9 +53,9 @@
                 <p>Logout</p>
             </div>
             <div class="z">
-                <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved   </p>
+                <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved </p>
             </div>
-            
+
         </div>
         <div class="arw" onclick="sideshow()">
             <div class="burger">
@@ -68,25 +75,209 @@
                 </div>
             </div>
             <div class="inputs">
-                <div class="search">
-                    <input type="text" id="searchInput" placeholder="Search ID...">
-                    <button class="searchbutt" id="searchpatient"><img src="/files/images/search.png" alt="">Search</button>
+                <div class="filterz-cont">
+                    <div class="filterz-sub-cont">
+                        <button class="filterz" onclick="showsearch()"> <img src="/files/images/search.png" alt=""
+                                srcset=""></button>
+                        <button class="filterz" onclick="showfiltz()"> <img src="/files/images/filter.png" alt=""
+                                srcset=""></button>
+                        <button class="filterz" onclick="showsort()"> <img src="/files/images/sort.png" alt=""
+                                srcset=""></button>
+                    </div>
+
+                    <div class="hiddenfilterz searchz">
+                        <input type="text" id="searchInput" placeholder="Search Via ID, Name, or CYS...">
+                    </div>
+                    <div class="hiddenfilterz sortz">
+                        <label for="sort">Sort by: </label>
+                        <select name="sort" id="sort1">
+                            <option disabled selected value="def"> -- </option>
+                            <option value="ID">ID</option>
+                            <option value="TimeLate">Latest</option>
+                            <option value="TimeOld">Oldest</option>
+                            <option value="Nameaz">Name (A-Z)</option>
+                            <option value="Nameza">Name (Z-A)</option>
+                            <option value="CS">College</option>
+                            <option value="EMP">Employees</option>
+                        </select>
+                    </div>
+                    <div class="hiddenfilterz filterz1">
+                        <div class="filterz1a">
+
+                       
+                        <div id="filterz-val">
+                            <table>
+                                <tr>
+                                    <th>
+                                        <h2>Patient Type</h2>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Student<input type="checkbox" id="studentfilter" name="studentfilter" value="Student"></td>
+                                    <td>Faculty<input type="checkbox" id="facultyfilter" name="facultyfilter" value="Faculty"></td>
+                                    <td> Staff<input type="checkbox" id="stafffilter" name="stafffilter" value="Staff">
+                                    </td>
+                                </tr>
+                    
+                                <tr>
+                                    <th class="filterz1th">
+                                        <h2>Reason for visit</h2>
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        <h3>Dermatological</h3>
+                                    </th>
+                                </tr>
+                                    <td>Allergy <input type="checkbox" id="allergyCheckbox" name="allergy" value="Allergy"></td>
+                                    <td>Boils<input type="checkbox" id="boilsCheckbox" name="boils" value="Boils"></td>
+                                    <td>Insect Sting/Bites<input type="checkbox" id="stingBitesCheckbox" name="sting_bites" value="Insect Sting/Bites"></td>
+                                    <td>Contact Dermatitis<input type="checkbox" id="contactDermatitisCheckbox" name="contact_dermatitis"value="Contact Dermatitis"></td>
+                                </tr>
+                                <tr>
+                                    <td>Psoriasis<input type="checkbox" id="psoriasisCheckbox" name="psoriasis" value="Psoriasis"></td>
+                                    <td>Eczema<input type="checkbox" id="eczemaCheckbox" name="eczema" value="Eczema"></td>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        <h3>Musculoskeletal</h3>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Costochondritis<input type="checkbox" id="costochondritisCheckbox" name="costochondritis"value="Costochondritis"></td>
+                                    <td>MSS<input type="checkbox" id="mssCheckbox" name="mss" value="MSS"></td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>
+                                        <h3>Head & Neck</h3>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Conjunctivitis<input type="checkbox" id="conjunctivitisCheckbox" name="conjunctivitis"value="Conjunctivitis"></td>
+                                    <td>Epistaxis<input type="checkbox" id="epistaxisCheckbox" name="epistaxis" value="Epistaxis"></td>
+                                    <td>Eye Irritation<input type="checkbox" id="eyeIrritationCheckbox" name="eye_irritation"value="Eye Irritation"></th>
+                                    <td>Stomatitis<input type="checkbox" id="stomatitisCheckbox" name="stomatitis" value="Stomatitis"></td>
+                                </tr>
+                                <tr>
+                                    <td>Otitis externa/media<input type="checkbox" id="otitisExternMediaCheckbox" name="otitis_externa_media"value="Otitis externa/media"></td>
+                                    <td>Stye<input type="checkbox" id="styeCheckbox" name="stye" value="Stye"></td>
+                                    <td>Throat irritation<input type="checkbox" id="throatIrritationCheckbox" name="throat_irritation"value="Throat irritation"></td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>
+                                        <h3>Respiratory </h3>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Asthma<input type="checkbox" id="asthma" name="asthma" value="Asthma"></td>
+                                    <td>ATP<input type="checkbox" id="atp" name="atp" value="ATP"></td>
+                                    <td>URTI<input type="checkbox" id="urti" name="urti" value="URTI"></td>
+                                    <td>Covid 19 Suspect<input type="checkbox" id="covid_19_suspect" name="covid_19_suspect" value="Covid 19 Suspect"></td>
+                                    <td>DOB<input type="checkbox" id="dob" name="dob" value="DOB"></td>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        <h3>Cardiovascular</h3>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Hypertension<input type="checkbox" id="hypertension" name="hypertension" value="Hypertension"></td>
+                                    <td>Tremor<input type="checkbox" id="tremor" name="tremor" value="Tremor"></td>
+                                </tr>
+                            
+                                <tr>
+                                    <th>
+                                        <h3>Gastrointestinal</h3>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>APD/GERD<input type="checkbox" id="apd_gerd" name="apd_gerd" value="APD/GERD"></td>
+                                    <td>AGE<input type="checkbox" id="age" name="age" value="AGE"></td>
+                                    <td>Gastritis<input type="checkbox" id="gastritis" name="gastritis" value="Gastritis"></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <h3>Genitourinary</h3>
+                                    </th>
+                                </tr>
+                                    <td>Dysmenorrhea<input type="checkbox" id="dysmenorrhea" name="dysmenorrhea" value="Dysmenorrhea"></td>
+                                    <td>PMS<input type="checkbox" id="pms" name="pms" value="PMS"></td>
+                                    <td>UTI<input type="checkbox" id="uti" name="uti" value="UTI"></td>
+                            
+                                <tr>
+                                    <th>
+                                        <h3>Infectious</h3>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>German Measles<input type="checkbox" id="german_measles" name="german_measles" value="German Measles"></td>
+                                    <td>Dengue Fever<input type="checkbox" id="dengue_fever" name="dengue_fever" value="Dengue Fever"></td>
+                                    <td>Chicken Pox<input type="checkbox" id="chicken_pox" name="chicken_pox" value="Chicken Pox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Covid 19 Confirmed<input type="checkbox" id="covid19_confirmed" name="covid19_confirmed"value="Covid 19 Confirmed"></td>
+                                    <td>Herpes zoster/shingles<input type="checkbox" id="herpes_zoster_shingles" name="herpes_zoster_shingles"value="Herpes zoster/shingles"></td>
+                                    <td>SVI<input type="checkbox" id="svi" name="svi" value="SVI"></td>
+                                </tr>
+                            
+                                <tr>
+                                    <th>
+                                        <h3>Neurology</h3>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>BPV<input type="checkbox" id="bpv" name="bpv" value="BPV"></td>
+                                    <td>NCA<input type="checkbox" id="nca" name="nca" value="NCA"></td>
+                                    <td>Migraine/Headache<input type="checkbox" id="migraine_headache" name="migraine_headache"value="Migraine/Headache"></td>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        <h3>Trauma</h3>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Fall<input type="checkbox" id="fall" name="fall" value="Fall"></td>
+                                    <td>Mauling<input type="checkbox" id="mauling" name="mauling" value="Mauling"></td>
+                                    <td>Soft Tissue Contusion<input type="checkbox" id="soft_tissue_contusion" name="soft_tissue_contusion"value="Soft Tissue Contusion"></td>
+                                    <td>Vehicular Accident<input type="checkbox" id="vehicular_accident" name="vehicular_accident" value="Vehicular Accident"></td>
+                                </tr>
+                                <tr>
+                                    <td>Sports Injury<input type="checkbox" id="sports_injury" name="sports_injury" value="Sports Injury"></td>
+                                    <td>Head Trauma<input type="checkbox" id="head_trauma" name="head_trauma" value="Head Trauma"></td>
+                        
+                                <tr>
+                                    <th>
+                                        <h3>Miscellaneous</h3>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Psychological Condition<input type="checkbox" id="psychological_condition" name="psychological_condition"value="Psychological Condition"></td>
+                                    <td>Burn<input type="checkbox" id="burn" name="burn" value="Burn"></td>
+                                    <td>Sprain/Strain<input type="checkbox" id="sprain_strain" name="sprain_strain" value="Sprain/Strain"></td>
+                                    <td>Wound Dressing<input type="checkbox" id="wound_dressing" name="wound_dressing" value="Wound Dressing"></td>
+                                </tr>
+                                <tr>
+                                    <td>Animal (Bite/Scratch)<input type="checkbox" id="bite_scratch" name="bite_scratch"value="Animal Bite/Scratch"></td>
+                                    <td>Issuance of Med. Cert<input type="checkbox" id="med_cert" name="med_cert" value="Issuance of Med. Cert"></td>
+                                    <td>Others<input type="checkbox" id="othersfilterz" name="othersfilterz" value="Others"></td>
+                                </tr>
+                            </table>
+                            <button id="filterbuttz" class="filterbutt">Filter</button>
+                        
+                        </div>
+                      </div>
+                    </div>
+
                 </div>
-                <div class="filters">
-                    <label for="sort">Sort by: </label>
-                    <select name="sort" id="sort1">
-                        <option disabled selected value="def"> -- </option>
-                        <option value="ID">ID</option>
-                        <option value="TimeLate">Latest</option>
-                        <option value="TimeOld">Oldest</option>
-                        <option value="Nameaz">Name (A-Z)</option>
-                        <option value="Nameza">Name (Z-A)</option>
-                        <option value="CS">College</option>
-                        <option value="EMP">Employees</option>
-                    </select>
-                    <button class="addrecbutt" onclick="showp1()">Add Record +</button> 
-                </div>
+                <button class="addrecbutt" onclick="showp1()">Add Record +</button>
             </div>
+
             <div class="results1">
                 <table class="toprow1">
                     <tr class="frow1">
@@ -94,7 +285,7 @@
                         <th class="namecol1">Name</th>
                         <th class="timecol1">Date Created</th>
                         <th class="coursecol1">Course & Section</th>
-                        <th class="diagcol1">Diagnosis</th>
+                        <th class="diagcol1">Reason for visit</th>
                         <th class="notescol1">Notes</th>
                         <th class="timecol1">Location</th>
                         <th class="timecol1">Added by</th>
@@ -104,16 +295,9 @@
                     <tr class="res1 inv"></tr>
                 </table>
             </div>
-            <!-- <button onclick="printres()">Print Container</button> -->
+
         </div>
         <div id="notif" class="notifinactive"></div>
-    </div>
-
-    <!-- sample medform view -->
-    <div class="main2 hidev">
-        <div class="vfile">
-            <button class="hidevfile" onclick="hidev()">go back</button>
-        </div>
     </div>
 
 
@@ -125,56 +309,1389 @@
             </div>
             <div class="patienttypebutt">
                 <button class="ptbutt activeptb" id="studupbutt" onclick="stud1()">Student</button>
-                <button class="ptbutt" id="empupbutt" onclick="emp1()">Employee</button>
+                <button class="ptbutt" id="empupbutt" onclick="emp1()">Faculty</button>
+                <button class="ptbutt" id="stffupbutt" onclick="staff1()">Staff</button>
             </div>
             <div class="cont1a">
                 <form id="insertstudconsform" class="uploadconsform1">
                     <h2>Student Information:</h2>
 
-                    <input type="text" id="studname" placeholder="Enter Student's Name...">
-                        <input type="text" id="studid" placeholder="Enter Student's ID...">
-                        <input type="text" id="studcs" placeholder="Enter Course & Section...">
+                    <div class="entries1">
+                        <div class="entry01">
+                            <h2>PERSONAL INFORMATION</h2>
+                            <table class="topt">
+                                <tr>
+                                    <td>
+                                        <label for="studname">NAME:</label>
 
-                        <div class="location1">
-                            <label for="loc">Location:</label>
-                            <select name="loc" id="locsel">
-                                <option disabled selected value> -- Select Location -- </option>
-                                <option value="East Clinic">East Clinic</option>
-                                <option value="West Clinic">West Clinic</option>
-                                <option value="SHS Clinic">SHS Clinic</option>
-                            </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="studname" placeholder="Enter Student's Name...">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="">ID:</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" id="studid" placeholder="Enter Student's ID...">
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="input-group1">
+                                <label for="college">College:</label>
+                                <select id="college" onchange="updateCourses()">
+                                    <option disabled selected>--Select a College--</option value="1">
+                                    <option value="cbaa">CBAA</option>
+                                    <option value="ccje">CCJE</option>
+                                    <option value="coe">COED</option>
+                                    <option value="ceat">CEAT</option>
+                                    <option value="clac">CLAC</option>
+                                    <option value="cscs">CSCS</option>
+                                    <option value="cthm">CTHM</option>
+                                </select>
+
+                                <label for="course">Course:</label>
+                                <select id="course">
+                                    <option disabled selected>--Select a Course--</option>
+                                    <!-- Course options will be populated based on the college selection -->
+                                </select>
+                                <label for="studname">Section:</label>
+                                <input type="number" id="studcs" placeholder="Section...">
+                            </div>
+
+                            <h2>Dermatological Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Allergy</td>
+                                            <th><input type="checkbox" id="allergyCheckbox" name="allergy"
+                                                    value="Allergy"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Boils</td>
+                                            <th><input type="checkbox" id="boilsCheckbox" name="boils" value="Boils">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Insect Sting/Bites</td>
+                                            <th><input type="checkbox" id="stingBitesCheckbox" name="sting_bites"
+                                                    value="Insect Sting/Bites"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact Dermatitis</td>
+                                            <th><input type="checkbox" id="contactDermatitisCheckbox"
+                                                    name="contact_dermatitis" value="Contact Dermatitis">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Psoriasis</td>
+                                            <th><input type="checkbox" id="psoriasisCheckbox" name="psoriasis"
+                                                    value="Psoriasis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Eczema</td>
+                                            <th><input type="checkbox" id="eczemaCheckbox" name="eczema" value="Eczema">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersCheckbox" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextDermatological')"></th>
+                                            <th><input type="text" id="othersTextDermatological"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2>Musculoskeletal Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tr>
+                                        <td>Costochondritis</td>
+                                        <th><input type="checkbox" id="costochondritisCheckbox" name="costochondritis"
+                                                value="Costochondritis"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>MSS</td>
+                                        <th><input type="checkbox" id="mssCheckbox" name="mss" value="MSS"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>Others:</td>
+                                        <th> <input type="checkbox" id="othersCheckboxMusculoskeletal" name="others"
+                                                onchange="toggleTextbox(this, 'othersTextMusculoskeletal')"></th>
+                                        <th> <input type="text" id="othersTextMusculoskeletal"
+                                                placeholder="Please specify" disabled></th>
+                                    </tr>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <h2>Head and Neck Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Conjunctivitis</td>
+                                            <th><input type="checkbox" id="conjunctivitisCheckbox" name="conjunctivitis"
+                                                    value="Conjunctivitis">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Epistaxis</td>
+                                            <th><input type="checkbox" id="epistaxisCheckbox" name="epistaxis"
+                                                    value="Epistaxis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Eye Irritation</td>
+                                            <th><input type="checkbox" id="eyeIrritationCheckbox" name="eye_irritation"
+                                                    value="Eye Irritation"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Stomatitis</td>
+                                            <th><input type="checkbox" id="stomatitisCheckbox" name="stomatitis"
+                                                    value="Stomatitis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Otitis externa/media</td>
+                                            <th><input type="checkbox" id="otitisExternMediaCheckbox"
+                                                    name="otitis_externa_media" value="Otitis externa/media">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Stye</td>
+                                            <th><input type="checkbox" id="styeCheckbox" name="stye" value="Stye">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Throat irritation</td>
+                                            <th><input type="checkbox" id="throatIrritationCheckbox"
+                                                    name="throat_irritation" value="Throat irritation"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="othersCheckboxHeadNeck" name="others"
+                                                    value="checked"
+                                                    onchange="toggleTextbox(this, 'othersTextHeadNeck')"></th>
+                                            <th> <input type="text" id="othersTextHeadNeck" placeholder="Please specify"
+                                                    disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Respiratory Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Asthma</td>
+                                            <th><input type="checkbox" id="asthma" name="asthma" value="Asthma"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>ATP</td>
+                                            <th><input type="checkbox" id="atp" name="atp" value="ATP"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>URTI</td>
+                                            <th><input type="checkbox" id="urti" name="urti" value="URTI"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Covid 19 Suspect</td>
+                                            <th><input type="checkbox" id="covid_19_suspect" name="covid_19_suspect"
+                                                    value="Covid 19 Suspect">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>DOB</td>
+                                            <th><input type="checkbox" id="dob" name="dob" value="DOB">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="others_dob" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextRespiratory')"></th>
+                                            <th> <input type="text" id="othersTextRespiratory"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Cardiovascular Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        </tr>
+                                        <td>Hypertension</td>
+                                        <th><input type="checkbox" id="hypertension" name="hypertension"
+                                                value="Hypertension"></th>
+                                        </tr>
+                                        <td>Tremor</td>
+                                        <th><input type="checkbox" id="tremor" name="tremor" value="Tremor"></th>
+                                        </tr>
+                                        <td>Others:</td>
+                                        <th><input type="checkbox" id="others_cardio" name="others"
+                                                onchange="toggleTextbox(this, 'othersTextCardiovascular')"></th>
+                                        <th><input type="text" id="othersTextCardiovascular"
+                                                placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Gastrointestinal Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>APD/GERD</td>
+                                            <th><input type="checkbox" id="apd_gerd" name="apd_gerd" value="APD/GERD">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>AGE</td>
+                                            <th><input type="checkbox" id="age" name="age" value="AGE"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Gastritis</td>
+                                            <th><input type="checkbox" id="gastritis" name="gastritis"
+                                                    value="Gastritis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="othersGastrointestinal" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextGastrointestinal')"></th>
+                                            <th> <input type="text" id="othersTextGastrointestinal"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Genitourinary Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Dysmenorrhea</td>
+                                            <th><input type="checkbox" id="dysmenorrhea" name="dysmenorrhea"
+                                                    value="Dysmenorrhea"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>PMS</td>
+                                            <th><input type="checkbox" id="pms" name="pms" value="PMS"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>UTI</td>
+                                            <th><input type="checkbox" id="uti" name="uti" value="UTI"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="othersGenitourinary" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextGenitourinary')"></th>
+                                            <th> <input type="text" id="othersTextGenitourinary"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Infectious Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>German Measles</td>
+                                            <th><input type="checkbox" id="german_measles" name="german_measles"
+                                                    value="German Measles"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Dengue Fever</td>
+                                            <th><input type="checkbox" id="dengue_fever" name="dengue_fever"
+                                                    value="Dengue Fever"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Chicken Pox</td>
+                                            <th><input type="checkbox" id="chicken_pox" name="chicken_pox"
+                                                    value="Chicken Pox"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Covid 19 Suspect</td>
+                                            <th><input type="checkbox" id="covid19_suspect" name="covid19_suspect"
+                                                    value="Covid 19 Suspect"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Covid 19 Confirmed</td>
+                                            <th><input type="checkbox" id="covid19_confirmed" name="covid19_confirmed"
+                                                    value="Covid 19 Confirmed">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Herpes zoster/shingles</td>
+                                            <th><input type="checkbox" id="herpes_zoster_shingles"
+                                                    name="herpes_zoster_shingles" value="Herpes zoster/shingles"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>SVI</td>
+                                            <th><input type="checkbox" id="svi" name="svi" value="SVI"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersInfectious" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextInfectious')"></th>
+                                            <th><input type="text" id="othersTextInfectious"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Neurology Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>BPV</td>
+                                            <th><input type="checkbox" id="bpv" name="bpv" value="BPV"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>NCA</td>
+                                            <th><input type="checkbox" id="nca" name="nca" value="NCA"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Migraine/Headache</td>
+                                            <th><input type="checkbox" id="migraine_headache" name="migraine_headache"
+                                                    value="Migraine/Headache">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersNeurology" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextNeurology')"></th>
+                                            <th><input type="text" id="othersTextNeurology" placeholder="Please specify"
+                                                    disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Trauma Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Fall</td>
+                                            <th><input type="checkbox" id="fall" name="fall" value="Fall"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Mauling</td>
+                                            <th><input type="checkbox" id="mauling" name="mauling" value="Mauling"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Soft Tissue Contusion</td>
+                                            <th><input type="checkbox" id="soft_tissue_contusion"
+                                                    name="soft_tissue_contusion" value="Soft Tissue Contusion"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Vehicular Accident</td>
+                                            <th><input type="checkbox" id="vehicular_accident" name="vehicular_accident"
+                                                    value="Vehicular Accident"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Sports Injury</td>
+                                            <th><input type="checkbox" id="sports_injury" name="sports_injury"
+                                                    value="Sports Injury"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Head Trauma</td>
+                                            <th><input type="checkbox" id="head_trauma" name="head_trauma"
+                                                    value="Head Trauma"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersCheckTrauma" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextTrauma')"></th>
+                                            <th><input type="text" id="othersTextTrauma" placeholder="Please specify"
+                                                    disabled>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Miscellaneous Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Psychological Condition</td>
+                                            <th><input type="checkbox" id="psychological_condition"
+                                                    name="psychological_condition" value="Psychological Condition"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Burn</td>
+                                            <th><input type="checkbox" id="burn" name="burn" value="Burn"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Sprain/Strain</td>
+                                            <th><input type="checkbox" id="sprain_strain" name="sprain_strain"
+                                                    value="Sprain/Strain"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Wound Dressing</td>
+                                            <th><input type="checkbox" id="wound_dressing" name="wound_dressing"
+                                                    value="Wound Dressing"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Animal (Bite/Scratch)</td>
+                                            <th><input type="checkbox" id="bite_scratch" name="bite_scratch"
+                                                    value="Animal Bite/Scratch"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Issuance of Med. Cert</td>
+                                            <th><input type="checkbox" id="med_cert" name="med_cert"
+                                                    value="Issuance of Med. Cert"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersMiscellaneous" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextMiscellaneous')"></th>
+                                            <th><input type="text" id="othersTextMiscellaneous"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2>Notes</h2>
+                            <div class="input-group1">
+                                <textarea name="" id="notes" placeholder="Enter Notes..."></textarea>
+                            </div>
                         </div>
 
-                    <hr>
+                    </div>
 
-                    <textarea name="" id="diagnosis1"
-                        placeholder="Enter Diagnosis (Ex. BP Check = 120/100, Weight = 70kg, etc..)"></textarea>
-                    <textarea name="" id="notes1" placeholder="Enter Notes..."></textarea>
+                    <div class="location1">
+                        <label for="loc">Location:</label>
+                        <select name="loc" id="locsel">
+                            <option disabled selected value> -- Select Location -- </option>
+                            <option value="East Clinic">East Clinic</option>
+                            <option value="West Clinic">West Clinic</option>
+                            <option value="SHS Clinic">SHS Clinic</option>
+                        </select>
+                    </div>
+
 
                     <button class="submitp">Submit</button>
                 </form>
 
                 <form id="insertempconsform" class="uploadconsform2 hidden">
-                    <h2>Employee Information:</h2>
+                    <h2>Faculty Information:</h2>
 
-                    <input type="text" id="empname" placeholder="Enter Emloyee's Name...">
-                        <input type="text" id="empid" placeholder="Enter Emloyee's ID...">
-                        
-                        <div class="location1">
-                            <label for="loc">Location:</label>
-                            <select name="loc" id="locsel1">
-                                <option disabled selected value> -- Select Location -- </option>
-                                <option value="East Clinic">East Clinic</option>
-                                <option value="West Clinic">West Clinic</option>
-                                <option value="SHS Clinic">SHS Clinic</option>
-                            </select>
+                    <div class="entries1">
+                        <div class="entry01">
+                            <h2>PERSONAL INFORMATION</h2>
+
+                            <table class="topt">
+                                <tr>
+                                    <td>
+                                        <label for="empname">NAME:</label>
+
+                                    </td>
+                                    <td>
+                                        <input type="text" id="empname" placeholder="Enter Employee's Name...">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="">ID:</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" id="empid" placeholder="Enter Employee's ID...">
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="input-group1">
+                                <label for="college">College:</label>
+                                <select id="college1" onchange="updateCourses()">
+                                    <option disabled selected>--Select a College--</option>
+                                    <option value="cbaa">CBAA</option>
+                                    <option value="ccje">CCJE</option>
+                                    <option value="coe">COED</option>
+                                    <option value="ceat">CEAT</option>
+                                    <option value="clac">CLAC</option>
+                                    <option value="cscs">CSCS</option>
+                                    <option value="cthm">CTHM</option>
+                                </select>
+
+                                <label for="course">Course:</label>
+                                <select id="course1">
+                                    <option disabled selected>--Select a Course--</option>
+                                    <!-- Course options will be populated based on the college selection -->
+                                </select>
+
+                            </div>
+
+                            <h2>Dermatological Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Allergy</td>
+                                            <th><input type="checkbox" id="allergyCheckbox1" name="allergy"
+                                                    value="Allergy"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Boils</td>
+                                            <th><input type="checkbox" id="boilsCheckbox1" name="boils" value="Boils">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Insect Sting/Bites</td>
+                                            <th><input type="checkbox" id="stingBitesCheckbox1" name="sting_bites"
+                                                    value="Insect Sting/Bites"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact Dermatitis</td>
+                                            <th><input type="checkbox" id="contactDermatitisCheckbox1"
+                                                    name="contact_dermatitis" value="Contact Dermatitis">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Psoriasis</td>
+                                            <th><input type="checkbox" id="psoriasisCheckbox1" name="psoriasis"
+                                                    value="Psoriasis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Eczema</td>
+                                            <th><input type="checkbox" id="eczemaCheckbox1" name="eczema"
+                                                    value="Eczema"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersCheckbox1" name="others" value=""
+                                                    onchange="toggleTextbox(this, 'othersTextDermatological1')"></th>
+                                            <th><input type="text" id="othersTextDermatological1"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2>Musculoskeletal Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tr>
+                                        <td>Costochondritis</td>
+                                        <th><input type="checkbox" id="costochondritisCheckbox1" name="costochondritis"
+                                                value="Costochondritis"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>MSS</td>
+                                        <th><input type="checkbox" id="mssCheckbox1" name="mss" value="MSS"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>Others:</td>
+                                        <th> <input type="checkbox" id="othersCheckboxMusculoskeletal1" name="others"
+                                                value="checked"
+                                                onchange="toggleTextbox(this, 'othersTextMusculoskeletal1')"></th>
+                                        <th> <input type="text" id="othersTextMusculoskeletal1"
+                                                placeholder="Please specify" disabled></th>
+                                    </tr>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <h2>Head and Neck Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Conjunctivitis</td>
+                                            <th><input type="checkbox" id="conjunctivitisCheckbox1"
+                                                    name="conjunctivitis" value="Conjunctivitis">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Epistaxis</td>
+                                            <th><input type="checkbox" id="epistaxisCheckbox1" name="epistaxis"
+                                                    value="Epistaxis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Eye Irritation</td>
+                                            <th><input type="checkbox" id="eyeIrritationCheckbox1" name="eye_irritation"
+                                                    value="Eye Irritation"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Stomatitis</td>
+                                            <th><input type="checkbox" id="stomatitisCheckbox1" name="stomatitis"
+                                                    value="Stomatitis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Otitis externa/media</td>
+                                            <th><input type="checkbox" id="otitisExternMediaCheckbox1"
+                                                    name="otitis_externa_media" value="Otitis externa/media">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Stye</td>
+                                            <th><input type="checkbox" id="styeCheckbox1" name="stye" value="Stye">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Throat irritation</td>
+                                            <th><input type="checkbox" id="throatIrritationCheckbox1"
+                                                    name="throat_irritation" value="Throat irritation"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="othersCheckboxHeadNeck1" name="others"
+                                                    value="" onchange="toggleTextbox(this, 'othersTextHeadNeck1')"></th>
+                                            <th> <input type="text" id="othersTextHeadNeck1"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Respiratory Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Asthma</td>
+                                            <th><input type="checkbox" id="asthma1" name="asthma" value="Asthma"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>ATP</td>
+                                            <th><input type="checkbox" id="atp1" name="atp" value="ATP"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>URTI</td>
+                                            <th><input type="checkbox" id="urti1" name="urti" value="URTI"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Covid 19 Suspect</td>
+                                            <th><input type="checkbox" id="covid_19_suspect1" name="covid_19_suspect"
+                                                    value="Covid 19 Suspect">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>DOB</td>
+                                            <th><input type="checkbox" id="dob1" name="dob" value="DOB">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="others_dob1" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextRespiratory1')"></th>
+                                            <th> <input type="text" id="othersTextRespiratory1"
+                                                    placeholder="Please pecify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Cardiovascular Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        </tr>
+                                        <td>Hypertension</td>
+                                        <th><input type="checkbox" id="hypertension" name="hypertension"
+                                                value="Hypertension"></th>
+                                        </tr>
+                                        <td>Tremor</td>
+                                        <th><input type="checkbox" id="tremor" name="tremor" value="Tremor"></th>
+                                        </tr>
+                                        <td>Others:</td>
+                                        <th><input type="checkbox" id="others_cardio1" name="others"
+                                                onchange="toggleTextbox(this, 'othersTextCardiovascular1')"></th>
+                                        <th><input type="text" id="othersTextCardiovascular1"
+                                                placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Gastrointestinal Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>APD/GERD</td>
+                                            <th><input type="checkbox" id="apd_gerd1" name="apd_gerd" value="APD/GERD">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>AGE</td>
+                                            <th><input type="checkbox" id="age1" name="age" value="AGE"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Gastritis</td>
+                                            <th><input type="checkbox" id="gastritis1" name="gastritis"
+                                                    value="Gastritis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="othersGastrointestinal1" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextGastrointestinal1')"></th>
+                                            <th> <input type="text" id="othersTextGastrointestinal1"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Genitourinary Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Dysmenorrhea</td>
+                                            <th><input type="checkbox" id="dysmenorrhea1" name="dysmenorrhea"
+                                                    value="Dysmenorrhea"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>PMS</td>
+                                            <th><input type="checkbox" id="pms1" name="pms" value="PMS"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>UTI</td>
+                                            <th><input type="checkbox" id="uti1" name="uti" value="UTI"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="othersGenitourinary1" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextGenitourinary1')"></th>
+                                            <th> <input type="text" id="othersTextGenitourinary1"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Infectious Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>German Measles</td>
+                                            <th><input type="checkbox" id="german_measles1" name="german_measles"
+                                                    value="German Measles"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Dengue Fever</td>
+                                            <th><input type="checkbox" id="dengue_fever1" name="dengue_fever"
+                                                    value="Dengue Fever"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Chicken Pox</td>
+                                            <th><input type="checkbox" id="chicken_pox1" name="chicken_pox"
+                                                    value="Chicken Pox"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Covid 19 Suspect</td>
+                                            <th><input type="checkbox" id="covid19_suspect1" name="covid19_suspect"
+                                                    value="Covid 19 Suspect"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Covid 19 Confirmed</td>
+                                            <th><input type="checkbox" id="covid19_confirmed1" name="covid19_confirmed"
+                                                    value="Covid 19 Confirmed">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Herpes zoster/shingles</td>
+                                            <th><input type="checkbox" id="herpes_zoster_shingles1"
+                                                    name="herpes_zoster_shingles" value="Herpes zoster/shingles"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>SVI</td>
+                                            <th><input type="checkbox" id="svi1" name="svi" value="SVI"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersInfectious1" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextInfectious1')"></th>
+                                            <th><input type="text" id="othersTextInfectious1"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Neurology Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>BPV</td>
+                                            <th><input type="checkbox" id="bpv1" name="bpv" value="BPV"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>NCA</td>
+                                            <th><input type="checkbox" id="nca1" name="nca" value="NCA"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Migraine/Headache</td>
+                                            <th><input type="checkbox" id="migraine_headache1" name="migraine_headache"
+                                                    value="Migraine/Headache">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersNeurology1" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextNeurology1')"></th>
+                                            <th><input type="text" id="othersTextNeurology1"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Trauma Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Fall</td>
+                                            <th><input type="checkbox" id="fall1" name="fall" value="Fall"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Mauling</td>
+                                            <th><input type="checkbox" id="mauling1" name="mauling" value="Mauling">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Soft Tissue Contusion</td>
+                                            <th><input type="checkbox" id="soft_tissue_contusion1"
+                                                    name="soft_tissue_contusion" value="Soft Tissue Contusion"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Vehicular Accident</td>
+                                            <th><input type="checkbox" id="vehicular_accident1"
+                                                    name="vehicular_accident" value="Vehicular Accident"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Sports Injury</td>
+                                            <th><input type="checkbox" id="sports_injury1" name="sports_injury"
+                                                    value="Sports Injury"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Head Trauma</td>
+                                            <th><input type="checkbox" id="head_trauma1" name="head_trauma"
+                                                    value="Head Trauma"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersCheckTrauma1" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextTrauma1')"></th>
+                                            <th><input type="text" id="othersTextTrauma1" placeholder="Please specify"
+                                                    disabled>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Miscellaneous Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Psychological Condition</td>
+                                            <th><input type="checkbox" id="psychological_condition1"
+                                                    name="psychological_condition" value="Psychological Condition"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Burn</td>
+                                            <th><input type="checkbox" id="burn1" name="burn" value="Burn"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Sprain/Strain</td>
+                                            <th><input type="checkbox" id="sprain_strain1" name="sprain_strain"
+                                                    value="Sprain/Strain"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Wound Dressing</td>
+                                            <th><input type="checkbox" id="wound_dressing1" name="wound_dressing"
+                                                    value="Wound Dressing"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Animal (Bite/Scratch)</td>
+                                            <th><input type="checkbox" id="bite_scratch1" name="bite_scratch"
+                                                    value="Animal Bite/Scratch"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Issuance of Med. Cert</td>
+                                            <th><input type="checkbox" id="med_cert1" name="med_cert"
+                                                    value="Issuance of Med. Cert"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersMiscellaneous1" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextMiscellaneous1')"></th>
+                                            <th><input type="text" id="othersTextMiscellaneous1"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2>Notes</h2>
+                            <div class="input-group1">
+                                <textarea name="" id="notes1" placeholder="Enter Notes..."></textarea>
+                            </div>
                         </div>
 
-                    <hr>
+                    </div>
 
-                    <textarea name="" id="diag2"
-                        placeholder="Enter Diagnosis (Ex. BP Check = 120/100, Weight = 70kg, etc..)"></textarea>
-                    <textarea name="" id="notes2" placeholder="Enter Notes..."></textarea>
+                    <div class="location1">
+                        <label for="loc">Location:</label>
+                        <select name="loc" id="locsel1">
+                            <option disabled selected value> -- Select Location -- </option>
+                            <option value="East Clinic">East Clinic</option>
+                            <option value="West Clinic">West Clinic</option>
+                            <option value="SHS Clinic">SHS Clinic</option>
+                        </select>
+                    </div>
+
+
+                    <button class="submitp">Submit</button>
+                </form>
+
+                <form id="insertstaffconsform" class="uploadconsform3 hidden">
+                    <h2>Staff Information:</h2>
+
+                    <div class="entries1">
+                        <div class="entry01">
+                            <h2>PERSONAL INFORMATION</h2>
+
+                            <table class="topt">
+                                <tr>
+                                    <td>
+                                        <label for="stffname">NAME:</label>
+
+                                    </td>
+                                    <td>
+                                        <input type="text" id="stffname" placeholder="Enter Staff's Name...">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="">ID:</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" id="stffid" placeholder="Enter Staff's ID...">
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <h2>Dermatological Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Allergy</td>
+                                            <th><input type="checkbox" id="allergyCheckbox2" name="allergy"
+                                                    value="Allergy"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Boils</td>
+                                            <th><input type="checkbox" id="boilsCheckbox2" name="boils" value="Boils">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Insect Sting/Bites</td>
+                                            <th><input type="checkbox" id="stingBitesCheckbox2" name="sting_bites"
+                                                    value="Insect Sting/Bites"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact Dermatitis</td>
+                                            <th><input type="checkbox" id="contactDermatitisCheckbox2"
+                                                    name="contact_dermatitis" value="Contact Dermatitis">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Psoriasis</td>
+                                            <th><input type="checkbox" id="psoriasisCheckbox2" name="psoriasis"
+                                                    value="Psoriasis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Eczema</td>
+                                            <th><input type="checkbox" id="eczemaCheckbox2" name="eczema"
+                                                    value="Eczema"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersCheckbox2" name="others" value=""
+                                                    onchange="toggleTextbox(this, 'othersTextDermatological2')"></th>
+                                            <th><input type="text" id="othersTextDermatological2"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2>Musculoskeletal Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tr>
+                                        <td>Costochondritis</td>
+                                        <th><input type="checkbox" id="costochondritisCheckbox2" name="costochondritis"
+                                                value="Costochondritis"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>MSS</td>
+                                        <th><input type="checkbox" id="mssCheckbox2" name="mss" value="MSS"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>Others:</td>
+                                        <th> <input type="checkbox" id="othersCheckboxMusculoskeletal2" name="others"
+                                                value="" onchange="toggleTextbox(this, 'othersTextMusculoskeletal2')">
+                                        </th>
+                                        <th> <input type="text" id="othersTextMusculoskeletal2"
+                                                placeholder="Please specify" disabled></th>
+                                    </tr>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <h2>Head and Neck Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Conjunctivitis</td>
+                                            <th><input type="checkbox" id="conjunctivitisCheckbox2"
+                                                    name="conjunctivitis" value="Conjunctivitis">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Epistaxis</td>
+                                            <th><input type="checkbox" id="epistaxisCheckbox2" name="epistaxis"
+                                                    value="Epistaxis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Eye Irritation</td>
+                                            <th><input type="checkbox" id="eyeIrritationCheckbox2" name="eye_irritation"
+                                                    value="Eye Irritation"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Stomatitis</td>
+                                            <th><input type="checkbox" id="stomatitisCheckbox2" name="stomatitis"
+                                                    value="Stomatitis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Otitis externa/media</td>
+                                            <th><input type="checkbox" id="otitisExternMediaCheckbox2"
+                                                    name="otitis_externa_media" value="Otitis externa/media">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Stye</td>
+                                            <th><input type="checkbox" id="styeCheckbox2" name="stye" value="Stye">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Throat irritation</td>
+                                            <th><input type="checkbox" id="throatIrritationCheckbox2"
+                                                    name="throat_irritation" value="Throat irritation"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="othersCheckboxHeadNeck2" name="others"
+                                                    value="" onchange="toggleTextbox(this, 'othersTextHeadNeck2')"></th>
+                                            <th> <input type="text" id="othersTextHeadNeck2"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Respiratory Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Asthma</td>
+                                            <th><input type="checkbox" id="asthma2" name="asthma" value="Asthma"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>ATP</td>
+                                            <th><input type="checkbox" id="atp2" name="atp" value="ATP"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>URTI</td>
+                                            <th><input type="checkbox" id="urti2" name="urti" value="URTI"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Covid 19 Suspect</td>
+                                            <th><input type="checkbox" id="covid_19_suspect2" name="covid_19_suspect"
+                                                    value="Covid 19 Suspect">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>DOB</td>
+                                            <th><input type="checkbox" id="dob2" name="dob" value="DOB">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="others_dob2" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextRespiratory2')"></th>
+                                            <th> <input type="text" id="othersTextRespiratory2"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Cardiovascular Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        </tr>
+                                        <td>Hypertension</td>
+                                        <th><input type="checkbox" id="hypertension2" name="hypertension"
+                                                value="Hypertension"></th>
+                                        </tr>
+                                        <td>Tremor</td>
+                                        <th><input type="checkbox" id="tremor2" name="tremor" value="Tremor"></th>
+                                        </tr>
+                                        <td>Others:</td>
+                                        <th><input type="checkbox" id="others_cardio2" name="others"
+                                                onchange="toggleTextbox(this, 'othersTextCardiovascular2')"></th>
+                                        <th><input type="text" id="othersTextCardiovascular2"
+                                                placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Gastrointestinal Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>APD/GERD</td>
+                                            <th><input type="checkbox" id="apd_gerd2" name="apd_gerd" value="APD/GERD">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>AGE</td>
+                                            <th><input type="checkbox" id="age2" name="age" value="AGE"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Gastritis</td>
+                                            <th><input type="checkbox" id="gastritis2" name="gastritis"
+                                                    value="Gastritis"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="othersGastrointestinal2" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextGastrointestinal2')"></th>
+                                            <th> <input type="text" id="othersTextGastrointestinal2"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Genitourinary Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Dysmenorrhea</td>
+                                            <th><input type="checkbox" id="dysmenorrhea2" name="dysmenorrhea"
+                                                    value="Dysmenorrhea"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>PMS</td>
+                                            <th><input type="checkbox" id="pms2" name="pms" value="PMS"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>UTI</td>
+                                            <th><input type="checkbox" id="uti2" name="uti" value="UTI"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th> <input type="checkbox" id="othersGenitourinary2" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextGenitourinary2')"></th>
+                                            <th> <input type="text" id="othersTextGenitourinary2"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Infectious Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>German Measles</td>
+                                            <th><input type="checkbox" id="german_measles2" name="german_measles"
+                                                    value="German Measles"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Dengue Fever</td>
+                                            <th><input type="checkbox" id="dengue_fever2" name="dengue_fever"
+                                                    value="Dengue Fever"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Chicken Pox</td>
+                                            <th><input type="checkbox" id="chicken_pox2" name="chicken_pox"
+                                                    value="Chicken Pox"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Covid 19 Suspect</td>
+                                            <th><input type="checkbox" id="covid19_suspect2" name="covid19_suspect"
+                                                    value="Covid 19 Suspect"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Covid 19 Confirmed</td>
+                                            <th><input type="checkbox" id="covid19_confirmed2" name="covid19_confirmed"
+                                                    value="Covid 19 Confirmed">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Herpes zoster/shingles</td>
+                                            <th><input type="checkbox" id="herpes_zoster_shingles2"
+                                                    name="herpes_zoster_shingles" value="Herpes zoster/shingles"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>SVI</td>
+                                            <th><input type="checkbox" id="svi2" name="svi" value="SVI"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersInfectious2" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextInfectious2')"></th>
+                                            <th><input type="text" id="othersTextInfectious2"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Neurology Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>BPV</td>
+                                            <th><input type="checkbox" id="bpv2" name="bpv" value="BPV"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>NCA</td>
+                                            <th><input type="checkbox" id="nca2" name="nca" value="NCA"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Migraine/Headache</td>
+                                            <th><input type="checkbox" id="migraine_headache2" name="migraine_headache"
+                                                    value="Migraine/Headache">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersNeurology2" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextNeurology2')"></th>
+                                            <th><input type="text" id="othersTextNeurology2"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Trauma Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Fall</td>
+                                            <th><input type="checkbox" id="fall2" name="fall" value="Fall"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Mauling</td>
+                                            <th><input type="checkbox" id="mauling2" name="mauling" value="Mauling">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Soft Tissue Contusion</td>
+                                            <th><input type="checkbox" id="soft_tissue_contusion2"
+                                                    name="soft_tissue_contusion" value="Soft Tissue Contusion"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Vehicular Accident</td>
+                                            <th><input type="checkbox" id="vehicular_accident2"
+                                                    name="vehicular_accident" value="Vehicular Accident"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Sports Injury</td>
+                                            <th><input type="checkbox" id="sports_injury2" name="sports_injury"
+                                                    value="Sports Injury"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Head Trauma</td>
+                                            <th><input type="checkbox" id="head_trauma2" name="head_trauma"
+                                                    value="Head Trauma"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersCheckTrauma2" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextTrauma2')"></th>
+                                            <th><input type="text" id="othersTextTrauma2" placeholder="Please specify"
+                                                    disabled>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h2>Miscellaneous Checklist</h2>
+                            <div class="input-group1">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Psychological Condition</td>
+                                            <th><input type="checkbox" id="psychological_condition2"
+                                                    name="psychological_condition" value="Psychological Condition"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Burn</td>
+                                            <th><input type="checkbox" id="burn2" name="burn" value="Burn"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Sprain/Strain</td>
+                                            <th><input type="checkbox" id="sprain_strain2" name="sprain_strain"
+                                                    value="Sprain/Strain"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Wound Dressing</td>
+                                            <th><input type="checkbox" id="wound_dressing2" name="wound_dressing"
+                                                    value="Wound Dressing"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Animal (Bite/Scratch)</td>
+                                            <th><input type="checkbox" id="bite_scratch2" name="bite_scratch"
+                                                    value="Animal Bite/Scratch"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Issuance of Med. Cert</td>
+                                            <th><input type="checkbox" id="med_cert2" name="med_cert"
+                                                    value="Issuance of Med. Cert"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Others:</td>
+                                            <th><input type="checkbox" id="othersMiscellaneous2" name="others"
+                                                    onchange="toggleTextbox(this, 'othersTextMiscellaneous2')"></th>
+                                            <th><input type="text" id="othersTextMiscellaneous2"
+                                                    placeholder="Please specify" disabled></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2>Notes</h2>
+                            <div class="input-group1">
+                                <textarea name="" id="notes2" placeholder="Enter Notes..."></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="location1">
+                        <label for="loc">Location:</label>
+                        <select name="loc" id="locsel2">
+                            <option disabled selected value> -- Select Location -- </option>
+                            <option value="East Clinic">East Clinic</option>
+                            <option value="West Clinic">West Clinic</option>
+                            <option value="SHS Clinic">SHS Clinic</option>
+                        </select>
+                    </div>
 
 
                     <button class="submitp">Submit</button>
@@ -182,9 +1699,10 @@
             </div>
         </div>
     </div>
-        <script src="/files/pagefunc/consrec.js"></script>
-        <script src="/files/pagefunc/ui.js"></script>
-        <script src="/files/connfunc/app.js"></script>
+    <script src="/files/pagefunc/consrec.js"></script>
+    <script src="/files/pagefunc/ui.js"></script>
+    <script src="/files/pagefunc/inputs.js"></script>
+    <script src="/files/connfunc/app.js"></script>
 </body>
 
 </html>

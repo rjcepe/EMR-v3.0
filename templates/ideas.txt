@@ -1,0 +1,13 @@
+filter{
+    -cys selection (dropdown)
+    -diagnosis selection (checkboxes)
+    -go button (will load results) 
+}
+
+sort{
+    -will sort data displayed
+}
+
+logic{
+    di ko pa alam pota
+}

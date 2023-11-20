@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="insertstudmedform" class="uploadmedform1">
+        <h2>SCREENING FORM</h2>
+
+        <h2>GENERAL DATA</h2>
+        <label for="date">DATE:</label>
+        <input type="text" id="date" placeholder="Enter Date...">
+
+        
+        <label for="studname">NAME:</label>
+        <input type="text" id="studname" placeholder="Enter Student's Name...">
+        <label for="studage">AGE: </label>
+        <input type="text" id="studage" placeholder="Enter Student's Age...">
+        <label for="studaddress">ADDRESS: </label>
+        <input type="text" id="studaddress" placeholder="Enter Address...">
+        <label for="sex">SEX:</label>
+        <input type="checkbox" id="sexmcb" name="sexmcb"><label for="sexmcb">M</label>
+        <input type="checkbox" id="sexfcb" name="sexfcb"><label for="sexfcb">F</label>
+        <label for="studcourse">COURSE: </label>
+        <input type="text" id="studcourse" placeholder="Enter Course...">
+        <label for="cs">CS:</label>
+        <input type="checkbox" id="csscb" name="csscb"><label for="csscb">S</label>
+        <input type="checkbox" id="csmcb" name="csmcb"><label for="csmcb">M</label>
+        <input type="checkbox" id="cswcb" name="cswcb"><label for="cswcb">W</label>
+        <label for="studyr">YR LEVEL: </label>
+        <input type="text" id="studyr" placeholder="Enter Year Level...">
+        <label for="sem">SEM:</label>
+        <input type="checkbox" id="sem1cb" name="sem1cb"><label for="sem1cb">1st</label>
+        <input type="checkbox" id="sem2cb" name="sem2cb"><label for="sem2cb">2nd</label>
+        <input type="checkbox" id="sem2cb" name="sem2cb"><label for="sem2cb">3rd</label>
+        <input type="checkbox" id="semsummercb" name="semsummercb"><label for="sexfcb">Summer</label>
+        <input type="checkbox" id="asympcb" name="asympcb"><label for="asympcb">ASYMPTOMATIC</label>
+        <input type="checkbox" id="asympcb" name="chiefcomplaintcb"><label for="asympcb">CHIEF COMPLAINT</label>
+        <label for="specify">SPECIFY: </label>
+        <input type="text" id="studcourse" placeholder="">
+        <label for="presentillness">PRESENT ILLNESS (IF ANY): </label>
+        <input type="text" id="presentillness" placeholder="">
+
+        <h2>PAST MEDICAL HISTORY</h2>
+        <input type="checkbox" id="primarycomplexcb" name="primarycomplexcb"><label for="primarycomplexcb">PRIMARY
+            COMPLEX</label>
+        <input type="checkbox" id="chickenpoxcb" name="chickenpoxcb"><label for="chickenpoxcb">CHICKEN POX</label>
+        <input type="checkbox" id="measlescb" name="measlescb"><label for="measlescb">MEASLES</label>
+        <input type="checkbox" id="mumpscb" name="mumpscb"><label for="mumpscb">MUMPS</label>
+        <input type="checkbox" id="denguecb" name="denguecb"><label for="denguecb">DENGUE</label>
+        <input type="checkbox" id="uticb" name="uticb"><label for="uticb">UTI</label>
+        <input type="checkbox" id="amoebiasiscb" name="amoebiasiscb"><label for="amoebiasiscb">AMOEBIASIS</label>
+        <input type="checkbox" id="bronchialasthmacb" name="bronchialasthmacb"><label for="bronchialasthmacb">BRONCHIAL
+            ASTHMA</label>
+        <input type="checkbox" id="hypertensioncb" name="hypertensioncb"><label
+            for="hypertensioncb">HYPERTENSION</label>
+        <input type="checkbox" id="hepatitiscb" name="hepatitiscb"><label for="hepatitiscb">HEPATITIS</label>
+        <input type="checkbox" id="typhoidfevercb" name="typhoidfevercb"><label for="typhoidfevercb">TYPHOID
+            FEVER</label>
+        <input type="checkbox" id="diabettesmellituscb" name="diabettesmellituscb"><label
+            for="diabettesmellituscb">DIABETES MELLITUS</label>
+        <label for="diabettesmellitusmeds">meds: </label><input type="text" id="diabettesmellitusmeds"
+            placeholder="">
+        <input type="checkbox" id="heartdiseasecb" name="heartdiseasecb"><label for="heartdiseasecb">HEART
+            DISEASE</label>
+        <label for="heartdiseasemeds">Specify / meds: </label><input type="text" id="heartdiseasemeds"
+            placeholder="">
+        <input type="checkbox" id="epilepsycb" name="epilepsycb"><label for="epilepsycb">EPILEPSY</label>
+        <label for="epilepsymeds">Last attack / meds: </label><input type="text" id="epilepsy" placeholder="">
+        <input type="checkbox" id="allergiescb" name="allergiescb"><label for="allergiescb">ALLERGIES</label>
+        <label for="allergiesmeds">Specify: </label><input type="text" id="allergiesmeds" placeholder="">
+        <input type="checkbox" id="surgerycb" name="surgerycb"><label for="surgerycb">SURGERIES / OPERATION(S)</label>
+        <input type="text" id="allergiesmeds" placeholder="">
+
+        <h2>MENSTRUAL HISTORY</h2>
+        <input type="checkbox" id="mhnacb" name="mhnacb"><label for="mhnacb">NOT APPLICABLE</label>
+        <input type="checkbox" id="mhlnmpcb" name="mhlnmpcb"><label for="mhlnmpcb">LNMP: </label>
+        <label for="mhlnmpmonth">MONTH: </label><input type="text" id="mhlnmpmonth" placeholder="">
+        <label for="mhlnmpday">DAY: </label><input type="text" id="mhlnmpday" placeholder="">
+        <label for="mhlnmpyear">YEAR: </label><input type="text" id="mhlnmpyear" placeholder="">
+        <input type="checkbox" id="mhregularcb" name="mhregularcb"><label for="mhregularcb">REGULAR</label>
+        <input type="checkbox" id="mhirregularcb" name="mhirregularcb"><label for="mhirregularcb">IRREGULAR</label>
+        <label for="mhirregularfrequency">Frequency: </label><input type="text" id="mhirregularfrequency"
+            placeholder="">
+        <label for="mhirregularmenarche">MENARCHE at: </label><input type="text" id="mhirregularmenarche"
+            placeholder="">
+
+        <h2>FAMILY HISTORY:</h2>
+        <input type="checkbox" id="fhunremarkablecb" name="fhunremarkablecb"><label
+            for="fhunremarkablecb">UNREMARKABLE</label>
+        <input type="checkbox" id="fhbronchialasthmacb" name="fhbronchialasthmacb"><label
+            for="fhbronchialasthmacb">BRONCHIAL ASTHMA</label>
+        <input type="checkbox" id="fhheartdiseasecb" name="fhheartdiseasecb"><label for="fhheartdiseasecb">HEART
+            DISEASE</label>
+        <input type="checkbox" id="fhcancercb" name="fhcancercb"><label for="fhcancercb">CANCER</label>
+        <input type="checkbox" id="fhdiabetesmellituscb" name="fhdiabetesmellituscb"><label
+            for="fhdiabetesmellituscb">DIABETES MELLITUS</label>
+        <input type="checkbox" id="fhhypertensioncb" name="fhhypertensioncb"><label
+            for="fhhypertensioncb">HYPERTENSION</label>
+        <input type="checkbox" id="fhotherscb" name="fhotherscb"><label for="fhotherscb">OTHERS:</label>
+        <label for="fhotherstext"></label><input type="text" id="fhotherstext" placeholder="">
+
+        <h2>PERSONAL & SOCIAL HISTORY</h2>
+        <h3>SMOKING STATUS</h3>
+        <input type="radio" id="pshnonsmokerradio" name="pshnonsmokerradio"><label for="pshnonsmokerradio">NON -
+            SMOKER</label>
+        <input type="radio" id="pshstoppedradio" name="pshstoppedradio"><label for="pshstoppedradio">STOPPED</label>
+        <input type="radio" id="pshsmokerradio" name="pshsmokerradio"><label for="pshsmokerradio">SMOKER</label>
+        <label for="pshsmokertext">(Sticks / day x Yrs)</label><input type="text" id="pshsmokertextt"
+            placeholder="">
+        <h3>ALCOHOL INTAKE</h3>
+        <input type="radio" id="pshnoneornilradio" name="pshnoneornilradio"><label for="pshnoneornilradio">NONE /
+            NIL</label>
+        <input type="radio" id="pshoccasionalradio" name="pshoccasionalradio"><label
+            for="pshoccasionalradio">OCCASIONAL</label>
+        <input type="radio" id="pshregularradio" name="pshregularradio"><label for="pshregularradio">REGULAR:</label>
+        <label for="fhotherstext">(Bottles / session):</label><input type="text" id="fhotherstext" placeholder="">
+
+        <h2>OBSTETRICAL & GYNE HISTORY</h2>
+        <input type="radio" id="oghnaradio" name="oghnaradio"><label for="oghnaradio">NOT APPLICABLE</label>
+        <input type="radio" id="oghobscoreradio" name="oghobscoreradio"><label for="oghobscoreradio">OB SCORE</label>
+        <label for="oghobscoretext"></label><input type="text" id="oghobscoretext" placeholder="">
+        <input type="radio" id="oghdysmenorrhearadio" name="oghdysmenorrhearadio"><label
+            for="oghdysmenorrhearadio">DYSMENORRHEA</label>
+        <label for="oghdysmenorrheatext">Meds:</label><input type="text" id="oghdysmenorrheatext" placeholder="">
+
+        <h2>PHYSICAL EXAMINATION</h2>
+        <h3>GENERAL SURVEY</h3>
+        <input type="radio" id="pegsnotindistressradio" name="pegsnotindistressradio"><label
+            for="pegsnotindistressradio">NOT IN DISTRESS</label>
+        <input type="radio" id="pegsindistressradio" name="pegsindistressradio"><label for="pegsindistressradio">IN
+            DISTRESS</label>
+        <input type="radio" id="pegsambulatoryradio" name="ppegsambulatoryradio"><label
+            for="pegsambulatoryradio">AMBULATORY</label>
+        <input type="radio" id="pegswheelchairradio" name="pegswheelchairradio"><label
+            for="pegswheelchairradio">WHEELCHAIR ~ BORNE</label>
+        <h3>BUILT</h3>
+        <input type="radio" id="pebuiltectomorphicradio" name="pebuiltectomorphicradio"><label
+            for="pebuiltectomorphicradio">ECTOMORPHIC</label>
+        <input type="radio" id="pebuiltmesomorphicradio" name="pebuiltmesomorphicradio"><label
+            for="pebuiltmesomorphicradio">MESOMORPHIC</label>
+        <input type="radio" id="pebuiltendomorphicradio" name="pebuiltendomorphicradio"><label
+            for="pebuiltendomorphicradio">ENDOMORPHIC</label>
+        <h3>NOURISHMENT</h3>
+        <input type="radio" id="penourishmentwellradio" name="penourishmentwellradio"><label
+            for="penourishmentwellradio">WELL</label>
+        <input type="radio" id="penourishmentfairradio" name="penourishmentfairradio"><label
+            for="penourishmentfairradio">FAIR</label>
+        <input type="radio" id="penourishmentpoorradio" name="penourishmentpoorradio"><label
+            for="penourishmentpoorradio">POOR</label>
+        <h3>VITAL SIGNS</h3>
+        <label for="pevsbptext">BP:</label><input type="text" id="pevsbptext" placeholder="">
+        <label for="pevsprtext">PR:</label><input type="text" id="pevsprtext" placeholder="">
+        <label for="pevsrrtext">RR:</label><input type="text" id="pevsrrtext" placeholder="">
+        <label for="pevsheighttext">HEIGHT(cm):</label><input type="text" id="pevsheighttext" placeholder="">
+        <label for="pevsweighttext">WEIGHT(kg):</label><input type="text" id="pevsweighttext" placeholder="">
+        <label for="pevstemperaturetext">TEMPERATURE(°C):</label><input type="text" id="pevstemperaturetext"
+            placeholder="">
+        <h3>APPEARANCE</h3>
+        <input type="radio" id="peappearancecwcaradio" name="peappearancecwcaradio"><label
+            for="peappearancecwcaradio">COINCIDES WITH CHRONOLOGICAL AGE</label>
+        <input type="radio" id="peappearancedncwaradio" name="peappearancedncwaradio"><label
+            for="peappearancedncwaradio">DOES NOT COINCIDED WITH AGE</label>
+    </form>
+</body>
+
+</html>

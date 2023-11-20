@@ -23,6 +23,7 @@ function ToAccCen() {
   window.location.href = "/webpages/accidentcensus.html";
 }
 function logout() {
+  localStorage.removeItem('accstoken');
   window.location.href = "../index.html";
 }
 

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <div class="examination-section">
+            <span class="examination-title">REGIONAL EXAMINATION</span>
+            <div>
+                <label class="option-label" for="skinScalpNormal">SKIN/SCALP:</label>
+                <input type="radio" id="skinScalpNormal" name="skinScalp" value="Normal" checked>
+                <label for="skinScalpNormal">Normal</label>
+                
+                <input type="radio" id="skinScalpFindings" name="skinScalp" value="Findings">
+                <label for="skinScalpFindings">With Findings</label>
+                
+                <div class="line"></div>
+                <input type="text" class="findings-input" name="skinScalpDetails" placeholder="IF WITH FINDINGS">
+            </div>
+        </div>
+    </form>
+    
+    <form>
+        <div class="visual-acuity-section">
+            <div class="section-title">HEAD/NECK</div>
+            <div>
+                <span class="visual-acuity-label">VISUAL ACUITY:</span>
+                
+                <label for="visualAcuityRight">R:</label>
+                <input type="text" id="visualAcuityRight" class="visual-acuity-input" name="visualAcuityRight">
+                <div class="divider"></div>
+                <label for="visualAcuityLeft">L:</label>
+                <input type="text" id="visualAcuityLeft" class="visual-acuity-input" name="visualAcuityLeft">
+            </div>
+        </div>
+    </form>
+    
+    <form action="">
+        <div>
+            <h3>Conjuctiva</h3>
+            <div>
+                <input type="radio" id="pink" name="Conjuctiva" value="pink">
+                <label for="pink">Pink</label>
+                <input type="radio" id="pale" name="Conjuctiva" value="pale">
+                <label for="Pale">Pale</label>
+            </div>
+        </div>
+        
+        <div>
+            <h3>Sclerae</h3>
+            <div>
+                <input type="radio" id="anicteric" name="sclerae" value="anicteric">
+                <label for="anicteric">Anicteric</label>
+                <input type="radio" id="icteric" name="sclerae" value="icteric">
+                <label for="icteric">Icteric</label>
+                <input type="radio" id="dirty" name="sclerae" value="dirty">
+                <label for="dirty">Dirty</label>
+            </div>
+        </div>
+        
+        <div>
+            <h3>Pupils</h3>
+            <div>
+                <input type="radio" id="equal/reactive" name="pupil" value="equal/reactive">
+                <label for="equal/reactive">equal/reactive</label>
+                <input type="radio" id="anisocoria" name="pupil" value="anisocoria">
+                <label for="anisocoria">anisocoria</label>
+            </div>
+        </div>
+        
+        <div>
+            <h3>Nose</h3>
+            <div>
+                <input type="radio" id="noseNormal" name="nose" value="normal">
+                <label for="noseNormal">normal</label>
+                <input type="radio" id="noseWithFindings" name="nose" value="W/ findings">
+                <label for="noseWithFindings">W/ findings</label>
+                <div class="line"></div>
+                <input type="text" class="findings-input" name="noseDetails" placeholder="IF WITH FINDINGS">
+            </div>
+            
+            <div>
+                <h3>Ears</h3>
+                <div>
+                    <input type="radio" id="normal" name="ears" value="normal">
+                    <label for="normal">normal</label>
+                    <input type="radio" id="W/ findings" name="ears" value="W/ findings">
+                    <label for="W/ findings">W/ findings</label>
+                    <div class="line"></div>
+                    <input type="text" class="findings-input" name="skinScalpDetails" placeholder="IF WITH FINDINGS">
+                </div>
+        </div>
+    </form>
+    
+    <form>
+        <div class="form-group">
+            <span class="form-label"><b>NECK:</b></span>
+            <label class="radio-label" for="neckNormal"><input type="radio" id="neckNormal" name="neck" value="normal"> NORMAL</label>
+            <label class="radio-label" for="neckFindings"><input type="radio" id="neckFindings" name="neck" value="findings"> W/FINDINGS</label>
+            
+            <span class="detail-label">Details:</span>
+            <input type="text" class="detail-input" id="neckDetails" name="neckDetails" placeholder="IF WITH FINDINGS">
+        </div>
+        
+        <div class="form-group">
+            <span class="form-label">THYROID:</span>
+            <label class="radio-label" for="thyroidNormal"><input type="radio" id="thyroidNormal" name="thyroid" value="normal"> NORMAL</label>
+            <label class="radio-label" for="thyroidFindings"><input type="radio" id="thyroidFindings" name="thyroid" value="findings"> W/FINDINGS</label>
+            
+            <span class="detail-label">Details:</span>
+            <input type="text" class="detail-input" id="thyroidDetails" name="thyroidDetails" placeholder="IF WITH FINDINGS">
+        </div>
+        
+        
+        <div class="form-group">
+            <span class="form-label">NY/CLAD:</span>
+            <label class="radio-label">
+              <input type="radio" id="nycladNo" name="nyclad" value="no"> NO
+            </label>
+            <label class="radio-label">
+              <input type="radio" id="nycladYes" name="nyclad" value="yes"> YES
+            </label>
+            
+            <span class="detail-label">Details:</span>
+            <input type="text" id="nycladDetailsInput" class="detail-input" name="nycladDetails" placeholder="IF WITH FINDINGS">
+          </div>
+          
+          <div class="form-group">
+            <span class="form-label">ORAL CAVITY:</span>
+            <label class="radio-label">
+              <input type="radio" id="oralCavityNo" name="oralCavity" value="no"> NO
+            </label>
+            <label class="radio-label">
+              <input type="radio" id="oralCavityYes" name="oralCavity" value="yes"> YES
+            </label>
+            
+            <span class="detail-label">Details:</span>
+            <input type="text" id="oralCavityDetailsInput" class="detail-input" name="oralCavityDetails" placeholder="IF WITH FINDINGS">
+          </div>
+          
+          <div class="form-group">
+            <span class="form-label">MASS(ES):</span>
+            <label class="radio-label">
+              <input type="radio" id="massesNo" name="masses" value="no"> NO
+            </label>
+            <label class="radio-label">
+              <input type="radio" id="massesYes" name="masses" value="yes"> YES
+            </label>
+            
+            <span class="detail-label">Details:</span>
+            <input type="text" id="massesDetailsInput" class="detail-input" name="massesDetails" placeholder="IF WITH FINDINGS">
+          </div>          
+        </div>
+    </form>
+    <h2>CHEST/LUNGS:</h2>
+
+    <form>
+
+    <label for="inspect">INSPECT:</label>
+    <input type="checkbox" id="inspect" name="inspect" value="normal">
+    <label for="inspect">Normal</label>
+    <input type="checkbox" id="inspect" name="inspect" value="chestlag">
+    <label for="inspect">Chest Lag</label>
+
+    <label for="palpate">PALPATE:</label>
+    <input type="checkbox" id="palpate" name="palpate" value="normal">
+    <label for="palpate">Normal</label>
+    <input type="checkbox" id="inspect" name="inspect" value="mass">
+    <label for="inspect">Mass</label>
+    <input type="checkbox" id="palpate" name="palpate" value="w_findings">
+    <label for="palpate">W/Findings</label>
+    <input type="text" class="detail-input" name="massesDetails" placeholder="IF WITH FINDINGS">
+    
+
+    <label for="percuss">PERCUSS:</label>
+    <input type="checkbox" id="percuss" name="percuss" value="normal">
+    <label for="percuss">Normal</label>
+    <input type="checkbox" id="percuss" name="percuss" value="dull">
+    <label for="percuss">Dull</label>
+    <input type="checkbox" id="percuss" name="percuss" value="w_findings">
+    <label for="percuss">W/Findings</label>
+    <input type="text" class="detail-input" name="massesDetails" placeholder="IF WITH FINDINGS">
+    
+
+    <label for="auscultate">AUSCULTATE:</label>
+    <input type="checkbox" id="auscultate" name="auscultate" value="normal">
+    <label for="auscultate">Normal</label>
+    <input type="checkbox" id="auscultate" name="auscultate" value="w_findings">
+    <label for="auscultate">W/Findings</label>
+    <input type="text" class="detail-input" name="massesDetails" placeholder="IF WITH FINDINGS">
+    
+    <input type="checkbox" id="auscultate" name="auscultate" value="wheezes">
+    <label for="auscultate">Wheezes</label>
+    <input type="checkbox" id="auscultate" name="auscultate" value="rhonchi">
+    <label for="auscultate">Rhonchi</label>
+    <input type="checkbox" id="auscultate" name="auscultate" value="rales">
+    <label for="auscultate">Rales</label>
+    <input type="checkbox" id="auscultate" name="auscultate" value="dullness">
+    <label for="auscultate">Dullness</label>
+    <input type="text" class="detail-input" name="massesDetails" placeholder="IF WITH FINDINGS">
+</form>
+    
+    <form>
+        <h2>HEART:</h2>
+            <label>INSPECTION</label>
+            <input type="radio" id="heartInspectionNormal" name="heartInspection" value="normal">
+            <label for="heartInspectionNormal">NORMAL</label>
+            <input type="radio" id="heartInspectionHeaveLift" name="heartInspection" value="heave-lift">
+            <label for="heartInspectionHeaveLift">HEAVE/LIFT</label>
+            
+  
+        <label>PALPATION</label>
+        <input type="radio" id="normal" name="palpation" value="normal">
+        <label for="normal">NORMAL</label>
+        <input type="radio" id="thrills" name="palpation" value="thrills">
+        <label for="thrills">THRILLS</label>
+        
+  
+        <label>AUSCULTATION</label>
+        <input type="radio" id="normal" name="auscultation" value="normal">
+        <label for="normal">NORMAL</label>
+        <input type="radio" id="abnormal-findings" name="auscultation" value="abnormal-findings">
+        <label for="abnormal-findings">ABNORMAL FINDINGS</label>
+        
+
+        <label for="heartdetails1">Details</label>
+            <input type="text" id="heartdetails1" placeholder="">
+        <label>P.M.I:</label>
+            <input type="text" id="heartdetails1" placeholder="">
+        <label>Murmurs:</label>    
+        <input type="radio" id="yes" name="pmi" value="yes">
+        <label for="yes">YES</label>
+        <input type="radio" id="no" name="pmi" value="no">
+        <label for="no">NO</label>
+        <label for="heartdetails1">Details</label>
+            <input type="text" id="heartdetails1" placeholder="">
+  
+        <label>S1:</label>
+        <input type="radio" id="apex" name="s1" value="apex">
+        <label for="apex">APEX</label>
+        <input type="radio" id="base" name="s1" value="base">
+        <label for="base">BASE</label>
+        
+  
+        <label>S2:</label>
+        <input type="radio" id="apex" name="s2" value="apex">
+        <label for="apex">APEX</label>
+        <input type="radio" id="base" name="s2" value="base">
+        <label for="base">BASE</label>
+        
+  
+        <label>S3:</label>
+        <input type="radio" id="yes" name="s3" value="yes">
+        <label for="yes">YES</label>
+        <input type="radio" id="no" name="s3" value="no">
+        <label for="no">NO</label>
+        
+  
+        <label>S4:</label>
+        <input type="radio" id="yes" name="s4" value="yes">
+        <label for="yes">YES</label>
+        <input type="radio" id="no" name="s4" value="no">
+        <label for="no">NO</label>
+        
+
+    <h2>ABDOMEN:</h2>
+        <label>INSPECT</label>
+        
+        <input type="radio" id="flat" name="inspect" value="flat">
+        <label for="flat">FLAT</label>
+        <input type="radio" id="globular" name="inspect" value="globular">
+        <label for="globular">GLOBULAR</label>
+        <input type="radio" id="scaphoid" name="inspect" value="scaphoid">
+        <label for="scaphoid">SCAPHOID</label>
+        
+        <input type="radio" id="distended" name="inspect" value="distended">
+        <label for="distended">DISTENDED</label>
+        <input type="radio" id="full" name="inspect" value="full">
+        <label for="full">FULL</label>
+        <input type="radio" id="scar" name="inspect" value="scar">
+        <label for="scar">SCAR</label>
+        
+  
+        <input type="text" id="inspect-detail" name="inspect-detail" placeholder="Details">
+        
+  
+        <label>AUSCULTATED BOWEL SOUNDS</label>
+        
+        <input type="radio" id="normal" name="bowel-sounds" value="normal">
+        <label for="normal">NORMAL</label>
+        <input type="radio" id="hyper" name="bowel-sounds" value="hyper">
+        <label for="hyper">HYPER</label>
+        <input type="radio" id="hypo" name="bowel-sounds" value="hypo">
+        <label for="hypo">HYPO</label>
+        
+  
+        <label>PALPATE LIVER PALPABLE</label>
+        <input type="radio" id="yes" name="liver-palpable" value="yes">
+        <label for="yes">YES</label>
+        <input type="radio" id="no" name="liver-palpable" value="no">
+        <label for="no">NO</label>
+        
+  
+        <input type="text" id="liver-detail" name="liver-detail" placeholder="Details">
+        
+  
+        <label>TENDER</label>
+        <input type="radio" id="yes-tender" name="tender" value="yes">
+        <label for="yes-tender">YES</label>
+        <input type="radio" id="no-tender" name="tender" value="no">
+        <label for="no-tender">NO</label>
+        
+  
+        <input type="text" id="tender-detail" name="tender-detail" placeholder="Details">
+        
+  
+        <label>PERCUSS</label>
+        <label>TRAUBE'S SPACE</label>
+        <input type="radio" id="intact" name="traubes-space" value="intact">
+        <label for="intact">INTACT</label>
+        <input type="radio" id="w-findings" name="traubes-space" value="w-findings">
+        <label for="w-findings">W/ FINDINGS</label>
+        
+  
+        <input type="text" id="traubes-detail" name="traubes-detail" placeholder="Details">
+        
+
+    <h2>EXTREMITIES:</h2>
+        <h3>PULSES</h3>
+        <input type="radio" id="pulses-normal" name="pulses" value="normal">
+        <label for="pulses-normal">NORMAL</label>
+        <input type="radio" id="pulses-findings" name="pulses" value="findings">
+        <label for="pulses-findings">W/ FINDINGS</label>
+        
+  
+        <h3>DEFORMED</h3>
+        <input type="radio" id="deformed-no" name="deformed" value="no">
+        <label for="deformed-no">NO</label>
+        <input type="radio" id="deformed-findings" name="deformed" value="findings">
+        <label for="deformed-findings">W/ FINDINGS</label>
+        
+  
+        <input type="text" id="extremities-detail" name="extremities-detail" placeholder="Details">
+        
+
+    <h2>NEUROLOGICAL EXAMINATION:</h2>
+    <h3>DEFICIT</h3>
+        <input type="radio" id="deficit-no" name="deficit" value="no">
+        <label for="deficit-no">NO</label>
+        <input type="radio" id="deficit-yes" name="deficit" value="yes">
+        <label for="deficit-yes">YES</label>
+         
+  
+        <input type="text" id="deficit-detail" name="deficit-detail" placeholder="Details">
+        
+
+        <h2>CHEST X-RAY:</h2>
+        <form>
+            <input type="checkbox" id="chestxray_normal" name="chestxray" value="normal">
+            <label for="chestxray_normal">Normal</label>
+            <input type="checkbox" id="chestxray_findings" name="chestxray" value="with_findings">
+            <label for="chestxray_findings">With Findings</label>
+            <p>Details:</p>
+            <input type="text" id="chestxray_details" name="chestxray_details">
+        </form>
+
+<h2>OTHER LAB RESULTS:</h2>
+<form>
+    <input type="checkbox" id="otherlab_normal" name="otherlab" value="normal">
+    <label for="otherlab_normal">Normal</label>
+    <input type="checkbox" id="otherlab_findings" name="otherlab" value="with_findings">
+    <label for="otherlab_findings">With Finding</label>
+    <p>Details:</p>
+    <input type="text" id="otherlab_details" name="otherlab_details">
+</form>
+
+<label for="recommendations">RECOMMENDATIONS:</label>
+    <textarea id="recommendations" name="recommendations" rows="4" cols="50"></textarea>
+
+    <label for="classification">CLASSIFICATION:</label>
+    <input type="checkbox" id="class_a" name="classification" value="A">
+    <label for="class_a">A</label>
+    <input type="checkbox" id="class_b" name="classification" value="B">
+    <label for="class_b">B</label>
+    <input type="checkbox" id="class_c" name="classification" value="C">
+    <label for="class_c">C</label>
+    <input type="checkbox" id="class_d" name="classification" value="D">
+    <label for="class_d">D</label>
+
+    <label for="interview">INTERVIEW AND PHYSICAL EXAMINATION PERFORMED BY:</label>
+    <input type="text" id="interview_nurse" name="interview_nurse" placeholder="Signature over Printed Name (Nurse-on-Duty)">
+    <input type="text" id="interview_resident" name="interview_resident" placeholder="Signature over Printed Name (Resident-on-Duty)">
+
+    <label for="noted_by">NOTED BY:</label>
+    <input type="text" id="noted_university_physician" name="noted_university_physician" placeholder="Signature over Printed Name (University Physician)">
+    </form>
+</body>
+</html>

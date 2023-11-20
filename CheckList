@@ -40,3 +40,15 @@ row id increment
 file link 
 ="https://yspyqlodogzmrqsifbww.supabase.co/storage/v1/object/public/medicalrecords/" & B15 &"_medform.pdf"
 
+
+
+
+new checklist
+
+<!-- -fix dental page  -->
+<!-- -fix medical cert css -->
+<!-- -remove xray and accidentrecs -->
+-filter location
+-chart.js
+-add level of access
+-add autocrat prescription and accident

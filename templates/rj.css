@@ -1,0 +1,25 @@
+
+.entry1 label, .entry1 input {
+    display: inline-block; 
+    margin: 5px; 
+}
+
+
+.entry1 input[type="text"], 
+.entry1 input[type="checkbox"] {
+    width: 200px; 
+    padding: 5px;
+    margin-right: 10px; 
+}
+
+
+.entry1a, .entry1b {
+    display: flex; 
+    flex-direction: column; 
+    margin-bottom: 20px; 
+}
+
+.entry1 h2 {
+    margin-top: 0;
+    padding: 10px 0;
+}

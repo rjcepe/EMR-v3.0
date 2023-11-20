@@ -26,18 +26,25 @@
             <div class="nav">
                 <div class="recs">
                     <h5>Records</h5>
-                    <button class="activebutt" onclick="ToMedRec()" id="mr">  <img src="/files/images/arrow.png" alt="">Medical Records</button>
-                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental Records</button>
-                    <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray Images</button>
-                    <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Records</button>
-                    <button class="navbutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation Records</button>
+                    <button class="activebutt" onclick="ToMedRec()" id="mr"> <img src="/files/images/arrow.png"
+                            alt="">Medical Records</button>
+                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental
+                        Records</button>
+                        <!-- <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray -->
+                        <!-- Images</button> -->
+                    <!-- <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident -->
+                        <!-- Records</button> -->
+                    <button class="navbutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation
+                        Records</button>
                 </div>
             </div>
             <div class="nav navrep">
                 <div class="reps">
                     <h5>Reports</h5>
-                    <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical Certificates</button>
-                    <button class="navbutt" onclick="ToAccCen()"><img src="/files/images/arrow.png" alt="">Accident Census</button>
+                    <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical
+                        Certificates</button>
+                    <button class="navbutt" onclick="ToAccCen()"><img src="/files/images/arrow.png" alt="">Monthly
+                        Census</button>
                     <!-- <button class="navbutt" onclick="ToPresc()"><img src="/navicons/arrow.png" alt="">Prescription?</button> -->
                 </div>
             </div>
@@ -46,9 +53,9 @@
                 <p>Logout</p>
             </div>
             <div class="z">
-                <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved   </p>
+                <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved </p>
             </div>
-            
+
         </div>
         <div class="arw" onclick="sideshow()">
             <div class="burger">
@@ -67,12 +74,11 @@
                     <div class="username"></div>
                 </div>
             </div>
-            <div class="inputs">
-                <div class="search">
-                    <input type="text" id="searchInput" placeholder="Search ID...">
-                    <button class="searchbutt" id="searchpatient"><img src="/files/images/search.png" alt="">Search</button>
+            <div class="inputs1">
+                <div class="search1">
+                    <input type="text" id="searchInput" placeholder="Search via ID, Name, or CYS...">
                 </div>
-                <div class="filters">
+                <div class="filters1">
                     <label for="sort">Sort by: </label>
                     <select name="sort" id="sort1">
                         <option disabled selected value="def"> -- </option>
@@ -81,10 +87,8 @@
                         <option value="TimeOld">Oldest</option>
                         <option value="Nameaz">Name (A-Z)</option>
                         <option value="Nameza">Name (Z-A)</option>
-                        <option value="CS">College</option>
-                        <option value="EMP">Employees</option>
                     </select>
-                    <button class="addrecbutt" onclick="showp()">Add Record +</button> 
+                    <button class="addrecbutt" onclick="showp()">Add Record +</button>
                 </div>
             </div>
             <div class="results">
@@ -119,67 +123,69 @@
 
 
     <div class="addp-cont hidev">
-            <div class="adders">
-                <div class="headbar">
-                    <h1>Add Patient</h1>
-                    <button class="hideaddp" onclick="hidep()">Go Back</button>
-                </div>
-                <div class="patienttypebutt">
-                    <button class="ptbutt activeptb" id="studupbutt" onclick="stud()">Student</button>
-                    <button class="ptbutt" id="empupbutt" onclick="emp()">Employee</button>
-                </div>
-                <div class="cont1a">
-                    <form id="insertstudmedform" class="uploadmedform1">
-                        <h2>Student Information:</h2>
+        <div class="adders2">
+            <div class="headbar">
+                <h1>Add Patient</h1>
+                <button class="hideaddp" onclick="hidep()">Go Back</button>
+            </div>
+            <div class="patienttypebutt">
+                <button class="ptbutt activeptb" id="studupbutt" onclick="stud()">Student</button>
+                <button class="ptbutt" id="empupbutt" onclick="emp()">Employee</button>
+            </div>
+            <div class="cont1a">
+                <form id="insertstudmedform" class="uploadmedform1">
+                    <h2>Student Information:</h2>
 
-                        <input type="text" id="studname" placeholder="Enter Student's Name...">
-                        <input type="text" id="studid" placeholder="Enter Student's ID...">
-                        <input type="text" id="studcs" placeholder="Enter Course & Section...">
+                    <input type="text" id="studname" placeholder="Enter Student's Name...">
+                    <input type="text" id="studid" placeholder="Enter Student's ID...">
+                    <input type="text" id="studcs" placeholder="Enter Course & Section...">
 
-                        <div class="location1">
-                            <label for="loc">Location:</label>
-                            <select name="loc" id="locsel">
-                                <option disabled selected value> -- Select Location -- </option>
-                                <option value="East Clinic">East Clinic</option>
-                                <option value="West Clinic">West Clinic</option>
-                                <option value="SHS Clinic">SHS Clinic</option>
-                            </select>
-                        </div>
-                        <hr>
-                        <label for="medform">Upload Medical Record</label>
-                        <input type="file" id="medform" name="medform" accept=".pdf" class="inputfile">
-                        <!-- <input type="file" id="medform" name="medform" multiple> -->
+                    <div class="location1">
+                        <label for="loc">Location:</label>
+                        <select name="loc" id="locsel">
+                            <option disabled selected value> -- Select Location -- </option>
+                            <option value="East Clinic">East Clinic</option>
+                            <option value="West Clinic">West Clinic</option>
+                            <option value="SHS Clinic">SHS Clinic</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <label for="medform">Upload Medical Record</label>
+                    <input type="file" id="medform" name="medform" accept=".pdf" class="inputfile">
+                    <!-- <input type="file" id="medform" name="medform" multiple> -->
 
-                        <button class="submitp">Submit</button>
-                    </form>
+                    <button class="submitp">Submit</button>
+                </form>
 
-                    <form id="insertempmedform" class="uploadmedform2 hidden">
-                        <h2>Employee Information:</h2>
+                <form id="insertempmedform" class="uploadmedform2 hidden">
+                    <h2>Employee Information:</h2>
 
-                        <input type="text" id="empname" placeholder="Enter Emloyee's Name...">
-                        <input type="text" id="empid" placeholder="Enter Emloyee's ID...">
-                        
-                        <div class="location1">
-                            <label for="loc">Location:</label>
-                            <select name="loc" id="locsel1">
-                                <option disabled selected value> -- Select Location -- </option>
-                                <option value="East Clinic">East Clinic</option>
-                                <option value="West Clinic">West Clinic</option>
-                                <option value="SHS Clinic">SHS Clinic</option>
-                            </select>
-                        </div>
-                        <hr>
-                        <label for="medform">Upload Medical Record</label>
-                        <input type="file" id="medform2" name="medform" accept=".pdf" class="inputfile">
+                    <input type="text" id="empname" placeholder="Enter Emloyee's Name...">
+                    <input type="text" id="empid" placeholder="Enter Emloyee's ID...">
+                    
+                    <div class="location1">
+                        <label for="loc">Location:</label>
+                        <select name="loc" id="locsel1">
+                            <option disabled selected value> -- Select Location -- </option>
+                            <option value="East Clinic">East Clinic</option>
+                            <option value="West Clinic">West Clinic</option>
+                            <option value="SHS Clinic">SHS Clinic</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <label for="medform">Upload Medical Record</label>
+                    <input type="file" id="medform2" name="medform" accept=".pdf" class="inputfile">
 
-                        <button class="submitp">Submit</button>
-                    </form>
-                </div>
+                    <button class="submitp">Submit</button>
+                </form>
             </div>
         </div>
-        <script src="/files/pagefunc/medicalrec.js"></script>
-        <script src="/files/pagefunc/ui.js"></script>
-        <script src="/files/connfunc/app.js"></script>
+</div>
+    <script src="/files/pagefunc/medicalrec.js"></script>
+    <script src="/files/pagefunc/ui.js"></script>
+    <script src="/files/pagefunc/inputs.js"></script>
+    <script src="/files/connfunc/app.js"></script>
+    <script src="/files/connfunc/server.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>November Diseases</title>
+</head>
+<body>
+    <!-- Checkboxes for Diseases -->
+    <label><input type="checkbox" id="checkboxAllergy" value="Allergy"> Allergy</label>
+    <label><input type="checkbox" id="checkboxBoils" value="Boils"> Boils</label>
+    <label><input type="checkbox" id="checkboxInsectBites" value="Insect Bites"> Insect Bites</label>
+    <label><input type="checkbox" id="checkboxContactDermatitis" value="Contact Dermatitis"> Contact Dermatitis</label>
+    <label><input type="checkbox" id="checkboxOthers" value="Others"> Others</label>
+    <label><input type="checkbox" id="checkboxCostochondritis" value="Costochondritis"> Costochondritis</label>
+    <label><input type="checkbox" id="checkboxMSS" value="MSS"> MSS</label>
+    <label><input type="checkbox" id="checkboxConjunctivitis" value="Conjunctivitis"> Conjunctivitis</label>
+    <label><input type="checkbox" id="checkboxEpistaxis" value="Epistaxis"> Epistaxis</label>
+    <label><input type="checkbox" id="checkboxEyeIrritation" value="Eye Irritation"> Eye Irritation</label>
+    <label><input type="checkbox" id="checkboxStomatitis" value="Stomatitis"> Stomatitis</label>
+    
+
+    <!-- Submit Button -->
+    <button onclick="submitForm()">Submit</button>
+
+    <!-- Your bar chart will go here -->
+    <canvas id="diseaseCountChart"></canvas>
+
+    <script>
+        // Disease count data
+        var diseaseCounts = {
+            'Allergy': {
+                'Student': 0,
+            },
+            'Boils': {
+                'Student': 0,
+            },
+            'Insect Bites': {
+                'Student': 0,
+            },
+            'Contact Dermatitis': {
+                'Student': 0,
+            },
+            'Others': {
+                'Student': 0,
+            },
+            'Costochondritis': {
+                'Student': 0,
+            },
+            'MSS': {
+                'Student': 0,
+            },
+            'Conjunctivitis': {
+                'Student': 0,
+            },
+            'Epistaxis': {
+                'Student': 0,
+            },
+            'Eye Irritation': {
+                'Student': 0,
+            },
+            'Stomatitis': {
+                'Student': 0,
+            }
+        };
+
+        // Function to update the bar chart based on disease counts
+        function updateDiseaseCountChart() {
+            // Update the bar chart data
+            diseaseCountChart.data.labels = Object.keys(diseaseCounts['Allergy']);
+            diseaseCountChart.data.datasets[0].data = Object.values(diseaseCounts['Allergy']);
+            diseaseCountChart.data.datasets[1].data = Object.values(diseaseCounts['Boils']);
+            diseaseCountChart.data.datasets[2].data = Object.values(diseaseCounts['Insect Bites']);
+            diseaseCountChart.data.datasets[3].data = Object.values(diseaseCounts['Contact Dermatitis']);
+            diseaseCountChart.data.datasets[4].data = Object.values(diseaseCounts['Others']);
+            diseaseCountChart.data.datasets[5].data = Object.values(diseaseCounts['Costochondritis']);
+            diseaseCountChart.data.datasets[6].data = Object.values(diseaseCounts['MSS']);
+            diseaseCountChart.data.datasets[7].data = Object.values(diseaseCounts['Conjunctivitis']);
+            diseaseCountChart.data.datasets[8].data = Object.values(diseaseCounts['Epistaxis']);
+            diseaseCountChart.data.datasets[9].data = Object.values(diseaseCounts['Eye Irritation']);
+            diseaseCountChart.data.datasets[10].data = Object.values(diseaseCounts['Stomatitis']);
+            diseaseCountChart.options.plugins.title.text = 'November Disease Cases (Student)';
+
+            // Update the chart
+            diseaseCountChart.update();
+        }
+
+        // Submit form function
+        function submitForm() {
+            // Update counts based on checked checkboxes
+            var checkboxAllergy = document.getElementById('checkboxAllergy');
+            var checkboxBoils = document.getElementById('checkboxBoils');
+            var checkboxInsectBites = document.getElementById('checkboxInsectBites');
+            var checkboxContactDermatitis = document.getElementById('checkboxContactDermatitis');
+            var checkboxOthers = document.getElementById('checkboxOthers');
+            var checkboxCostochondritis = document.getElementById('checkboxCostochondritis');
+            var checkboxMSS = document.getElementById('checkboxMSS');
+            var checkboxConjunctivitis = document.getElementById('checkboxConjunctivitis');
+            var checkboxEpistaxis = document.getElementById('checkboxEpistaxis');
+            var checkboxEyeIrritation = document.getElementById('checkboxEyeIrritation');
+            var checkboxStomatitis = document.getElementById('checkboxStomatitis');
+
+            if (checkboxAllergy.checked) {
+                diseaseCounts['Allergy']['Student']++;
+            }
+
+            if (checkboxBoils.checked) {
+                diseaseCounts['Boils']['Student']++;
+            }
+
+            if (checkboxInsectBites.checked) {
+                diseaseCounts['Insect Bites']['Student']++;
+            }
+
+            if (checkboxContactDermatitis.checked) {
+                diseaseCounts['Contact Dermatitis']['Student']++;
+            }
+
+            if (checkboxOthers.checked) {
+                diseaseCounts['Others']['Student']++;
+            }
+
+            if (checkboxCostochondritis.checked) {
+                diseaseCounts['Costochondritis']['Student']++;
+            }
+
+            if (checkboxMSS.checked) {
+                diseaseCounts['MSS']['Student']++;
+            }
+
+            if (checkboxConjunctivitis.checked) {
+                diseaseCounts['Conjunctivitis']['Student']++;
+            }
+
+            if (checkboxEpistaxis.checked) {
+                diseaseCounts['Epistaxis']['Student']++;
+            }
+
+            if (checkboxEyeIrritation.checked) {
+                diseaseCounts['Eye Irritation']['Student']++;
+            }
+
+            if (checkboxStomatitis.checked) {
+                diseaseCounts['Stomatitis']['Student']++;
+            }
+
+            // Uncheck the checkboxes
+            checkboxAllergy.checked = false;
+            checkboxBoils.checked = false;
+            checkboxInsectBites.checked = false;
+            checkboxContactDermatitis.checked = false;
+            checkboxOthers.checked = false;
+            checkboxCostochondritis.checked = false;
+            checkboxMSS.checked = false;
+            checkboxConjunctivitis.checked = false;
+            checkboxEpistaxis.checked = false;
+            checkboxEyeIrritation.checked = false;
+            checkboxStomatitis.checked = false;
+
+            // Update the bar chart
+            updateDiseaseCountChart();
+        }
+
+        // Get the canvas element
+        var ctxDiseaseCount = document.getElementById('diseaseCountChart').getContext('2d');
+
+        // Define initial data for the bar chart with zero counts
+        var initialDiseaseCountData = {
+            labels: ['Student'],
+            datasets: [
+                {
+                    label: 'Allergy',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(255, 99, 132, 0.7)'],
+                    borderColor: ['rgba(255, 99, 132, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Boils',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(255, 255, 0, 0.7)'],
+                    borderColor: ['rgba(255, 255, 0, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Insect Bites',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(75, 192, 192, 0.7)'],
+                    borderColor: ['rgba(75, 192, 192, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Contact Dermatitis',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(54, 162, 235, 0.7)'],
+                    borderColor: ['rgba(54, 162, 235, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Others',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(153, 102, 255, 0.7)'],
+                    borderColor: ['rgba(153, 102, 255, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Costochondritis',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(255, 0, 0, 0.7)'],
+                    borderColor: ['rgba(255, 0, 0, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'MSS',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(0, 255, 0, 0.7)'],
+                    borderColor: ['rgba(0, 255, 0, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Conjunctivitis',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(255, 165, 0, 0.7)'],
+                    borderColor: ['rgba(255, 165, 0, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Epistaxis',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(128, 0, 128, 0.7)'],
+                    borderColor: ['rgba(128, 0, 128, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Eye Irritation',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(0, 255, 255, 0.7)'],
+                    borderColor: ['rgba(0, 255, 255, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Stomatitis',
+                    data: [0], // Initial values set to zero
+                    backgroundColor: ['rgba(255, 20, 147, 0.7)'],
+                    borderColor: ['rgba(255, 20, 147, 1)'],
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Create the initial bar chart
+        var diseaseCountChart = new Chart(ctxDiseaseCount, {
+            type: 'bar',
+            data: initialDiseaseCountData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        // You can set any value here based on your data
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'November Disease Cases (Student)'
+                    }
+                }
+            }
+        });
+
+        // Attach the update function to checkbox changes
+        document.getElementById('checkboxAllergy').addEventListener('change', updateDiseaseCountChart);
+        document.getElementById('checkboxBoils').addEventListener('change', updateDiseaseCountChart);
+        document.getElementById('checkboxInsectBites').addEventListener('change', updateDiseaseCountChart);
+        document.getElementById('checkboxContactDermatitis').addEventListener('change', updateDiseaseCountChart);
+        document.getElementById('checkboxOthers').addEventListener('change', updateDiseaseCountChart);
+        document.getElementById('checkboxCostochondritis').addEventListener('change', updateDiseaseCountChart);
+        document.getElementById('checkboxMSS').addEventListener('change', updateDiseaseCountChart);
+        document.getElementById('checkboxConjunctivitis').addEventListener('change', updateDiseaseCountChart);
+        document.getElementById('checkboxEpistaxis').addEventListener('change', updateDiseaseCountChart);
+        document.getElementById('checkboxEyeIrritation').addEventListener('change', updateDiseaseCountChart);
+        document.getElementById('checkboxStomatitis').addEventListener('change', updateDiseaseCountChart);
+
+    </script>
+</body>
+</html>

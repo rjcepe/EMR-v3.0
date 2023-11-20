@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>PERSONAL HISTORY</h2>
+    <input type="checkbox" id="smokingCheckbox" name="smokingCheckbox">      
+    <label for="smokingCheckbox">Smoking</label>
+    <input type="text" id="packYears" name="packYears">          
+    <label for="packYears">#Pack Years</label>
+
+    
+    <input type="checkbox" id="alcoholCheckbox" name="alcoholCheckbox">
+    <label for="alcoholCheckbox">Alcohol</label>
+    
+
+    <h2>OB-GYNE</h2>
+    <h3>Menstrual Cycle</h3>
+    <label for="lmp">LMP</label>
+    <input type="text" id="lmp" name="lmp"> Days
+    
+    <label for="pmp">PMP</label>
+    <input type="text" id="pmp" name="pmp"> Interval
+    
+
+    <h2>PHYSICAL EXAMINATION</h2>
+    <label for="height">Height</label>
+    <input type="text" id="height" name="height"> cm
+    <label for="weight">Weight</label>
+    <input type="text" id="weight" name="weight"> kg
+    
+    <label for="bp">BP</label>
+    <input type="text" id="bp" name="bp">
+    <span>/</span>
+    <input type="text" id="bp2" name="bp2">
+    
+    <label for="pr">PR</label>
+    <input type="text" id="pr" name="pr"> /min
+    <label for="rr">RR</label>
+    <input type="text" id="rr" name="rr"> /min
+    
+
+    <h2>VISUAL ACUITY</h2>
+    <div class="acuity-section">
+        <span class="acuity-label">Uncorrected</span>
+        <label class="acuity-pair">
+            <input type="checkbox" id="uncorrectedOD" name="uncorrectedOD">OD 20/
+        </label>
+        <label class="acuity-pair">
+            <input type="checkbox" id="uncorrectedOS" name="uncorrectedOS">OS 20/
+        </label>
+    </div>
+
+    <div class="acuity-section">
+        <span class="acuity-label">Corrected</span>
+        <label class="acuity-pair">
+            <input type="checkbox" id="correctedOD" name="correctedOD">OD 20/
+        </label>
+        <label class="acuity-pair">
+            <input type="checkbox" id="correctedOS" name="correctedOS">OS 20/
+        </label>
+    </div>
+    
+
+    <form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Examination</th>
+                    <th>Normal</th>
+                    <th>Findings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Skin</td>
+                    <td class="checkbox-column"><input type="checkbox" id="skinNormal" name="skinNormal"></td>
+                    <td class="findings-column"><input type="text" class="findings-input" id="skinFindings" name="skinFindings"></td>
+                </tr>
+                <tr>
+                    <td>Eyes</td>
+                    <td class="checkbox-column"><input type="checkbox" id="eyesNormal" name="eyesNormal"></td>
+                    <td class="findings-column"><input type="text" class="findings-input" id="eyesFindings" name="eyesFindings"></td>
+                </tr>
+                <tr>
+                    <td>Mouth</td>
+                    <td class="checkbox-column">
+                        <input type="checkbox" id="mouthNormalCheckbox" name="mouthNormal">
+                      </td>
+                      <td class="findings-column">
+                        <input type="text" id="mouthFindingsInput" class="findings-input" name="mouthFindings">
+                      </td>
+                      
+                </tr>
+                <tr>
+                    <td>ENT</td>
+                    <td class="checkbox-column">
+                      <input type="checkbox" id="entNormalCheckbox" name="entNormal">
+                    </td>
+                    <td class="findings-column">
+                      <input type="text" id="entFindingsInput" class="findings-input" name="entFindings">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Neck, LN</td>
+                    <td class="checkbox-column">
+                      <input type="checkbox" id="neckLnNormalCheckbox" name="neckLnNormal">
+                    </td>
+                    <td class="findings-column">
+                      <input type="text" id="neckLnFindingsInput" class="findings-input" name="neckLnFindings">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Breast</td>
+                    <td class="checkbox-column">
+                      <input type="checkbox" id="breastNormalCheckbox" name="breastNormal">
+                    </td>
+                    <td class="findings-column">
+                      <input type="text" id="breastFindingsInput" class="findings-input" name="breastFindings">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>C/L</td>
+                    <td class="checkbox-column">
+                      <input type="checkbox" id="clNormalCheckbox" name="clNormal">
+                    </td>
+                    <td class="findings-column">
+                      <input type="text" id="clFindingsInput" class="findings-input" name="clFindings">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Heart</td>
+                    <td class="checkbox-column">
+                      <input type="checkbox" id="heartNormalCheckbox" name="heartNormal">
+                    </td>
+                    <td class="findings-column">
+                      <input type="text" id="heartFindingsInput" class="findings-input" name="heartFindings">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Abdomen</td>
+                    <td class="checkbox-column">
+                      <input type="checkbox" id="abdomenNormalCheckbox" name="abdomenNormal">
+                    </td>
+                    <td class="findings-column">
+                      <input type="text" id="abdomenFindingsInput" class="findings-input" name="abdomenFindings">
+                    </td>
+                  </tr>                  
+                  <tr>
+                    <td>Back</td>
+                    <td class="checkbox-column">
+                      <input type="checkbox" id="backNormalCheckbox" name="backNormal">
+                    </td>
+                    <td class="findings-column">
+                      <input type="text" id="backFindingsInput" class="findings-input" name="backFindings">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Anus</td>
+                    <td class="checkbox-column">
+                      <input type="checkbox" id="anusNormalCheckbox" name="anusNormal">
+                    </td>
+                    <td class="findings-column">
+                      <input type="text" id="anusFindingsInput" class="findings-input" name="anusFindings">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Genitals</td>
+                    <td class="checkbox-column">
+                      <input type="checkbox" id="genitalsNormalCheckbox" name="genitalsNormal">
+                    </td>
+                    <td class="findings-column">
+                      <input type="text" id="genitalsFindingsInput" class="findings-input" name="genitalsFindings">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Extremities</td>
+                    <td class="checkbox-column">
+                      <input type="checkbox" id="extremitiesNormalCheckbox" name="extremitiesNormal">
+                    </td>
+                    <td class="findings-column">
+                      <input type="text" id="extremitiesFindingsInput" class="findings-input" name="extremitiesFindings">
+                    </td>
+                  </tr>                  
+            </tbody>
+        </table>
+    </form>
+    
+
+    <form>
+        <div class="section">
+            <div><b>PAST MEDICAL HISTORY</b></div>
+            <label>
+                <input type="checkbox" class="remarkable" id="pastMedicalHistoryNormal" name="pastMedicalHistoryNormal">
+                Unremarkable
+            </label>
+            
+            <textarea id="pastMedicalHistoryDetails" name="pastMedicalHistoryDetails" rows="3"></textarea>
+        </div>
+    
+
+        <div class="section">
+            <div><b>REVIEW OF SYSTEMS</b></div>
+            <label>
+                <input type="checkbox" class="remarkable" id="reviewOfSystemsNormal" name="reviewOfSystemsNormal">
+                Unremarkable
+            </label>
+            
+            <textarea id="reviewOfSystemsDetails" name="reviewOfSystemsDetails" rows="3"></textarea>
+        </div>
+    </form>
+    
+
+    <form>
+        <div class="examination-section">
+            <span><b>LABORATORY & DIAGNOSTIC EXAMINATION</b></span>
+            
+            <div class="test-item">
+                <label for="chestXrayNormal">Chest X-RAY</label>
+                <input type="checkbox" class="normal-checkbox" id="chestXrayNormal" name="chestXrayNormal">
+                <span>Normal</span>
+                <input type="text" class="findings-input" id="chestXrayFindings" name="chestXrayFindings">
+            </div>
+            
+            <div class="test-item">
+                <label for="cbcNormal">CBC</label>
+                <input type="checkbox" class="normal-checkbox" id="cbcNormal" name="cbcNormal">
+                <span>Normal</span>
+                <input type="text" class="findings-input" id="cbcFindings" name="cbcFindings">
+            </div>
+            
+            <div class="test-item">
+                <label for="urinalysisNormal">Urinalysis</label>
+                <input type="checkbox" class="normal-checkbox" id="urinalysisNormal" name="urinalysisNormal">
+                <span>Normal</span>
+                <input type="text" class="findings-input" id="urinalysisFindings" name="urinalysisFindings">
+            </div>            
+            
+            <div class="test-item">
+                <label for="fecalysisNormal">Fecalysis</label>
+                <input type="checkbox" class="normal-checkbox" id="fecalysisNormal" name="fecalysisNormal">
+                <span>Normal</span>
+                <input type="text" class="findings-input" id="fecalysisFindings" name="fecalysisFindings">
+            </div>
+            
+            <div class="test-item">
+                <label>HEPATITIS</label>
+                <div>
+                    <label class="checkbox-label" for="antiHavIgm">
+                        <input type="checkbox" class="normal-checkbox" id="antiHavIgm" name="antiHavIgm">
+                        <span>Reactive</span>
+                    </label>
+                    <label class="checkbox-label" for="antiHavIgmNon">
+                        <input type="checkbox" class="normal-checkbox" id="antiHavIgmNon" name="antiHavIgmNon">
+                        <span>Non-reactive</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+
+    <form>
+        <div class="form-section">
+            <span class="title"><h2>CLINICAL ASSESSMENT AND RECOMMENDATION</h2></span>
+            
+            <label class="assessment-option">
+                <input type="radio" id="assessmentClassA" name="assessment" value="ClassA"> Class A - Physically Fit
+            </label>
+            
+        <label class="assessment-option">
+            <input type="radio" name="assessment" value="ClassB"> Class B - Physically Fit but with minor ailment(s), condition(s), curable within a short period of time, that will not adversely affect the student/employee's efficiency.
+        </label>
+        
+        <label class="assessment-option">
+            <input type="radio" name="assessment" value="ClassC"> Class C - Marginally enrollable/employable but with non-disabling, non-communicable conditions and laboratory finding controlled and maintained by medications.
+        </label>
+        
+        <label class="assessment-option">
+            <input type="radio" name="assessment" value="ClassD"> Class D - Unfit or unsuited for enrollment/employment.
+        </label>
+        </div>
+        
+        <div class="examination-info">
+            <div>
+                <label for="examinedBy">Examined by</label>
+                <div class="line"></div>
+                <input type="text" id="examinedBy" name="examinedBy">
+            </div>
+            
+            <div>
+                <label for="date">Date</label>
+                <div class="line"></div>
+                <input type="date" id="date" name="date">
+            </div>
+        </div>
+    </form>
+</body>
+</html>

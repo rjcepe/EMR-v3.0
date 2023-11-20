@@ -1,8 +1,9 @@
 {
   "dependencies": {
     "@prisma/client": "^5.4.2",
-    "@supabase/supabase-js": "^2.38.2",
+    "@supabase/supabase-js": "^2.38.4",
     "create-html-project": "^1.0.1",
+    "jsonwebtoken": "^9.0.2",
     "jspdf": "^2.5.1",
     "node": "^21.0.0",
     "pdf-lib": "^1.17.1"
