@@ -10,17 +10,26 @@ const SUPABASE_ANON_KEY =
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+let searchState = 0;
+
 ///////////////////////////////////// Load data to table
 //////////////////////////////// sort function
 // Add an event listener to the select element to detect changes
 loadTableData();
 
 document.getElementById("sort1").addEventListener("change", function () {
-  loadTableData(); // Reload the table data when the sorting option changes
+  if (searchState !=1){
+    loadTableData(); // Reload the table data when the sorting option changes
+  }
+  if (searchState == 1){
+    searchEvent.call(document.getElementById('searchInput'));
+  } // Reload the table data when the sorting option changes
 });
 
 // Modify the loadTableData function to sort the table data
 async function loadTableData() {
+  searchState = 0;
+
   const selectedOption = document.getElementById("sort1").value;
 
   const { data: tableData1, error } = await _supabase
@@ -41,6 +50,7 @@ async function loadTableData() {
     tableBody.appendChild(newRow);
     console.log("No data");
   } else {
+
     // Sort the data based on the selected option
     if (selectedOption === "ID") {
       tableData1.sort(
@@ -60,15 +70,7 @@ async function loadTableData() {
       tableData1.sort((a, b) =>
         b.patient_name.toString().localeCompare(a.patient_name)
       );
-    } else if (selectedOption === "CS") {
-      tableData1.sort((a, b) =>
-        a.course_section.toString().localeCompare(b.course_section)
-      );
-    } else if (selectedOption === "EMP") {
-      tableData1.sort((a, b) =>
-        b.course_section.toString().localeCompare(a.course_section)
-      );
-    }
+    } 
 
     tableData1.forEach((row) => {
       const newRow = document.createElement("tr");
@@ -90,6 +92,96 @@ async function loadTableData() {
     });
   }
 }
+
+document.getElementById('searchInput').addEventListener('keyup', searchEvent);
+
+async function searchEvent() {
+  var results = this.value;
+  
+  if(results){
+    searchState = 1;
+    displayResults(results);
+  }
+
+  else{
+    loadTableData();
+  }
+  
+};
+
+async function displayResults(results) {
+
+// Fetch the patient data based on the search ID
+const { data: patientData, error } = await _supabase
+  .from("dental_forms")
+  .select("*")
+  .or(`patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`);
+
+if (error) {
+  console.error("Error fetching patient data:", error.message);
+  alert("Invalid Input")
+  return;
+}
+
+const tableBody = document.querySelector("#dental_table tbody");
+
+// Clear the current table
+tableBody.innerHTML = "";
+
+if (patientData && patientData.length > 0) {
+
+  const selectedOption = document.getElementById("sort1").value;
+  // Sort the data based on the selected option
+        if (selectedOption === "ID") {
+          patientData.sort(
+            (a, b) => new Date(a.patient_id) - new Date(b.patient_id)
+          );
+        } else if (selectedOption === "TimeLate") {
+          patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+        } else if (selectedOption === "TimeOld") {
+          patientData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+        } else if (selectedOption === "def") {
+          patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+        } else if (selectedOption === "Nameaz") {
+          patientData.sort((a, b) =>
+            a.patient_name.toString().localeCompare(b.patient_name)
+          );
+        } else if (selectedOption === "Nameza") {
+          patientData.sort((a, b) =>
+            b.patient_name.toString().localeCompare(a.patient_name)
+          );
+        } 
+
+  // Patient data found, update the table
+  patientData.forEach((row) => {
+    const newRow = document.createElement("tr");
+    newRow.classList.add("res1");
+
+    newRow.innerHTML = `
+          <th class="row idcol">${row.patient_id}</th>
+          <th class="row namecol">${row.patient_name}</th>
+          <th class="row timecol">${row.created_date}</th>
+          <th class="row coursecol">${row.course_section}</th>
+          <th class="row timecol">${row.location}</th>
+          <th class="row timecol">${row.added_by}</th>
+          <th class="buttscol">
+            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
+              <p class="txt">View</p>
+            </button>
+          </th>
+        `;
+
+    tableBody.appendChild(newRow);
+  });
+} else {
+  // Patient not found
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `
+    <th class="row" colspan="7">Patient not found</td>
+  `;
+  tableBody.appendChild(newRow);
+}
+};
 
 ////////////////////////////// fetch username
 async function getusername() {
@@ -171,7 +263,6 @@ $("#insertstuddentalform").submit(async function (event) {
 
     const dentalformURL = `${SUPABASE_URL}/storage/v1/object/public/dentalrecords/${fileName}`; // Fixed the URL formation
 
-    console.log("sssss");
 
     ///get current date
     // Specify the target timezone as "Asia/Manila"
@@ -194,7 +285,6 @@ $("#insertstuddentalform").submit(async function (event) {
     });
 
     const CurrentDate = `${year}-${month}-${day}`;
-    console.log(CurrentDate);
 
     const dentalformInfo = {
       patient_id: id,
@@ -276,7 +366,6 @@ $("#insertempdentalform").submit(async function (event) {
 
     const dentalformURL = `${SUPABASE_URL}/storage/v1/object/public/dentalrecords/${fileName}`; // Fixed the URL formation
 
-    console.log("sssss");
 
     ///get current date
     // Specify the target timezone as "Asia/Manila"
@@ -299,7 +388,6 @@ $("#insertempdentalform").submit(async function (event) {
     });
 
     const CurrentDate = `${year}-${month}-${day}`;
-    console.log(CurrentDate);
 
     const dentalformInfo = {
       patient_id: id1,
@@ -351,7 +439,6 @@ async function fetchUsername() {
   // Check if data is not empty
   if (data && data.length > 0) {
     const username = data[0].username;
-    console.log(username);
 
     const usertab = document.querySelector(".username");
 
@@ -378,14 +465,12 @@ async function fetchUsername() {
 async function fetchUserPic() {
   var id1 = localStorage.getItem("uid1");
   const piclink = id1 + ".png";
-  console.log(piclink);
 
   const userpiclink = `${SUPABASE_URL}/storage/v1/object/public/userimages/${piclink}`;
 
   const userTab = document.querySelector(".user");
   const usernameDiv = document.querySelector(".username");
 
-  console.log(userpiclink);
 
   const img = document.createElement("img");
   img.setAttribute("src", userpiclink);
@@ -444,65 +529,3 @@ function hidev() {
 }
 
 //////// search while typing
-document.getElementById('searchInput').addEventListener('keyup', async function() {
-  var results = this.value;
-  
-  if(results){
-    displayResults(results);
-  }
-  else{
-    loadTableData();
-  }
-
-});
-
-async function displayResults(results) {
-
-// Fetch the patient data based on the search ID
-const { data: patientData, error } = await _supabase
-  .from("dental_forms")
-  .select("*")
-  .or(`patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`);
-
-if (error) {
-  console.error("Error fetching patient data:", error.message);
-  alert("Invalid Input")
-  return;
-}
-
-const tableBody = document.querySelector("#dental_table tbody");
-
-// Clear the current table
-tableBody.innerHTML = "";
-
-if (patientData && patientData.length > 0) {
-  // Patient data found, update the table
-  patientData.forEach((row) => {
-    const newRow = document.createElement("tr");
-    newRow.classList.add("res1");
-
-    newRow.innerHTML = `
-          <th class="row idcol">${row.patient_id}</th>
-          <th class="row namecol">${row.patient_name}</th>
-          <th class="row timecol">${row.created_date}</th>
-          <th class="row coursecol">${row.course_section}</th>
-          <th class="row timecol">${row.location}</th>
-          <th class="row timecol">${row.added_by}</th>
-          <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
-              <p class="txt">View</p>
-            </button>
-          </th>
-        `;
-
-    tableBody.appendChild(newRow);
-  });
-} else {
-  // Patient not found
-  const newRow = document.createElement("tr");
-  newRow.innerHTML = `
-    <th class="row" colspan="7">Patient not found</td>
-  `;
-  tableBody.appendChild(newRow);
-}
-};

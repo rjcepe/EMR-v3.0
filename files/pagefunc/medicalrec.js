@@ -29,6 +29,7 @@ document.getElementById("sort1").addEventListener("change", function () {
 //loadTableData function to sort the table data
 async function loadTableData() {
   searchState = 0;
+  
   const selectedOption = document.getElementById("sort1").value;
 
   const { data: tableData1, error } = await _supabase.from("med_forms").select("*");
