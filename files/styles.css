@@ -709,7 +709,9 @@
  
 
   .filters {
-      background-color: var(--green);
+      background-color: var(--green50);
+      backdrop-filter: var(--blur);
+      border: var(--blurborder);
       position: absolute;
       display: flex;
       align-items: center;
@@ -721,7 +723,6 @@
       z-index: 10;
       padding: 20px;
       border-radius: 10px;
-
   }
 
   .filters select {
