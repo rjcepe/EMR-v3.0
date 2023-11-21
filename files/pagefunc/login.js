@@ -44,6 +44,8 @@ loginForm.addEventListener("submit", async function (event) {
             // Redirect to the desired webpage upon successful login
             window.location.href = "/webpages/medicalrecords.html";
 
+            var zz = user.access_level;
+            sessionStorage.setItem('z', zz);
 
             const token = generateRandomString(64);
             sessionStorage.setItem('accstoken', token);

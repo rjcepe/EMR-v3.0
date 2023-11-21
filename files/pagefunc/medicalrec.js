@@ -12,9 +12,6 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 let searchState = 0;
 
-if(!getusertype()){
-  window.location.reload;
-}
 ///////////////////////////////////// Load data to table
 //////////////////////////////// sort function
 // Add an event listener to the select element to detect changes
@@ -31,6 +28,7 @@ document.getElementById("sort1").addEventListener("change", function () {
 
 //loadTableData function to sort the table data
 async function loadTableData() {
+
   searchState = 0;
 
   const selectedOption = document.getElementById("sort1").value;
@@ -414,6 +412,9 @@ $("#insertempmedform").submit(async function (event) {
   }
 });
 
+
+getusername();
+
 ////////////////////////////// fetch username
 async function getusername() {
   var id1 = sessionStorage.getItem("uid1");
@@ -439,52 +440,15 @@ async function getusername() {
   }
 }
 
-getusertype();
-
-getusername();
-
 function getusername1(username) {
   var bb = username;
   sessionStorage.setItem("x", bb);
 }
 
-////////////////////////////// fetch user type
-async function getusertype() {
-  var id1 = sessionStorage.getItem("uid1");
-
-  const { data, error } = await _supabase
-    .from("user_accs")
-    .select("access_level")
-    .eq("id", id1);
-
-  if (error) {
-    console.error("Error fetching user type:", error.message);
-    return;
-  }
-
-  // Check if data is not empty
-  if (data && data.length > 0) {
-    const usertype = data[0].access_level;
-
-    
-    getusertype1(usertype);
-    
-  } else {
-    console.log("User not found with ID:", id1);
-  }
-}
-
-function getusertype1(usertype) {
-  var xx = usertype;
-  sessionStorage.setItem("y", xx);
-}
-
-
-
 //////////////////////////////////// user display
 async function fetchUsername() {
   var id1 = sessionStorage.getItem("uid1");
-  var type = sessionStorage.getItem("y");
+  var type = sessionStorage.getItem("z");
 
 
   const { data, error } = await _supabase
