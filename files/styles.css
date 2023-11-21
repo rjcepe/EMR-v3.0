@@ -1611,7 +1611,7 @@
       position: relative;
       /* background-color: blue; */
       /* border: 1px solid white; */
-      width: 100%;
+      width: 70%;
       height: 100%;
       display: flex;
       justify-content: center;
@@ -1711,9 +1711,10 @@
       background-color: white;
       padding-left: 10px;
       text-transform: uppercase;
-      margin-top: 5px;
+    }
+    .entries1 h2{
+        margin-top: 5px;
   }
-
   .uploadconsform1,
   .uploadconsform3,
   .uploadconsform2 {
@@ -1738,24 +1739,24 @@
   }
 
   .topt input[type="number"]{
-    width: 500px;
+    width: 130px;
     height: 30px;
     border-radius: 10px;
     border: none;
     padding-left: 10px;
   }
-  .input-group1 input[type="number"]{
+  /* .input-group1 input[type="number"]{
     width: 100px;
     height: 30px;
     border-radius: 10px;
     border: none;
     padding-left: 10px;
-  }
+  } */
 
   .uploadconsform1 input[type="text"],
   .uploadconsform3 input[type="text"],
   .uploadconsform2 input[type="text"] {
-      width: 500px;
+      min-width: 300px;
       height: 30px;
       border-radius: 10px;
       border: none;

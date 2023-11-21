@@ -324,46 +324,67 @@
                     <div class="entries1">
                         <div class="entry01">
                             <h2>PERSONAL INFORMATION</h2>
-                            <table class="topt">
-                                <tr>
-                                    <td>
-                                        <label for="studname">NAME:</label>
-
-                                    </td>
-                                    <td>
-                                        <input type="text" id="studname" placeholder="Enter Student's Name...">
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="">ID:</label>
-                                    </td>
-                                    <td>
-                                        <input type="number" id="studid" placeholder="Enter Student's ID...">
-                                    </td>
-                                </tr>
-                            </table>
                             <div class="input-group1">
-                                <label for="college">College:</label>
-                                <select id="college" onchange="updateCourses()">
-                                    <option disabled selected>--Select a College--</option value="1">
-                                    <option value="cbaa">CBAA</option>
-                                    <option value="ccje">CCJE</option>
-                                    <option value="coe">COED</option>
-                                    <option value="ceat">CEAT</option>
-                                    <option value="clac">CLAC</option>
-                                    <option value="cscs">CSCS</option>
-                                    <option value="cthm">CTHM</option>
-                                </select>
-
-                                <label for="course">Course:</label>
-                                <select id="course">
-                                    <option disabled selected>--Select a Course--</option>
-                                    <!-- Course options will be populated based on the college selection -->
-                                </select>
-                                <label for="studname">Section:</label>
-                                <input type="number" id="studcs" placeholder="Section...">
+                                <table class="topt">
+                                    <tr>
+                                        <td>
+                                            <label for="studname">NAME:</label>
+    
+                                        </td>
+                                        <td>
+                                            <input type="text" id="studname" placeholder="Student's Name...">
+    
+                                        </td>
+                                        <td>
+                                            <label for="college">College:</label>
+                                        </td>
+                                        <td>
+                                            <select id="college" onchange="updateCourses()">
+                                                <option disabled selected>--Select a College--</option value="1">
+                                                <option value="cbaa">CBAA</option>
+                                                <option value="ccje">CCJE</option>
+                                                <option value="coe">COED</option>
+                                                <option value="ceat">CEAT</option>
+                                                <option value="clac">CLAC</option>
+                                                <option value="cscs">CSCS</option>
+                                                <option value="cthm">CTHM</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="topt">
+                                    <tr>
+                                        <td>
+                                            <label for="">ID:</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="studid" placeholder="Student's ID...">
+                                        </td>
+                                        <td>
+                                            <label for="studname">Section:</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="studcs" placeholder="Section...">
+                                        </td>
+                                        <td>
+                                            <label for="course">Course:</label>
+                                        </td>
+                                        <td>
+                                            <select id="course">
+                                                <option disabled selected>--Select a Course--</option>
+                                                <!-- Course options will be populated based on the college selection -->
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
 
                             <h2>Dermatological Checklist</h2>
@@ -406,7 +427,7 @@
                                             <th><input type="checkbox" id="othersCheckbox" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextDermatological')"></th>
                                             <th><input type="text" id="othersTextDermatological"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -429,7 +450,7 @@
                                         <th> <input type="checkbox" id="othersCheckboxMusculoskeletal" name="others"
                                                 onchange="toggleTextbox(this, 'othersTextMusculoskeletal')"></th>
                                         <th> <input type="text" id="othersTextMusculoskeletal"
-                                                placeholder="Please specify" disabled></th>
+                                                placeholder="Please specify..." disabled></th>
                                     </tr>
                                     <tbody></tbody>
                                 </table>
@@ -480,7 +501,7 @@
                                             <th> <input type="checkbox" id="othersCheckboxHeadNeck" name="others"
                                                     value="checked"
                                                     onchange="toggleTextbox(this, 'othersTextHeadNeck')"></th>
-                                            <th> <input type="text" id="othersTextHeadNeck" placeholder="Please specify"
+                                            <th> <input type="text" id="othersTextHeadNeck" placeholder="Please specify..."
                                                     disabled></th>
                                         </tr>
                                     </tbody>
@@ -518,7 +539,7 @@
                                             <th> <input type="checkbox" id="others_dob" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextRespiratory')"></th>
                                             <th> <input type="text" id="othersTextRespiratory"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -539,7 +560,7 @@
                                         <th><input type="checkbox" id="others_cardio" name="others"
                                                 onchange="toggleTextbox(this, 'othersTextCardiovascular')"></th>
                                         <th><input type="text" id="othersTextCardiovascular"
-                                                placeholder="Please specify" disabled></th>
+                                                placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -567,7 +588,7 @@
                                             <th> <input type="checkbox" id="othersGastrointestinal" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextGastrointestinal')"></th>
                                             <th> <input type="text" id="othersTextGastrointestinal"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -594,7 +615,7 @@
                                             <th> <input type="checkbox" id="othersGenitourinary" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextGenitourinary')"></th>
                                             <th> <input type="text" id="othersTextGenitourinary"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -643,7 +664,7 @@
                                             <th><input type="checkbox" id="othersInfectious" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextInfectious')"></th>
                                             <th><input type="text" id="othersTextInfectious"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -670,7 +691,7 @@
                                             <td>Others:</td>
                                             <th><input type="checkbox" id="othersNeurology" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextNeurology')"></th>
-                                            <th><input type="text" id="othersTextNeurology" placeholder="Please specify"
+                                            <th><input type="text" id="othersTextNeurology" placeholder="Please specify..."
                                                     disabled></th>
                                         </tr>
                                     </tbody>
@@ -712,7 +733,7 @@
                                             <td>Others:</td>
                                             <th><input type="checkbox" id="othersCheckTrauma" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextTrauma')"></th>
-                                            <th><input type="text" id="othersTextTrauma" placeholder="Please specify"
+                                            <th><input type="text" id="othersTextTrauma" placeholder="Please specify..."
                                                     disabled>
                                             </th>
                                         </tr>
@@ -757,7 +778,7 @@
                                             <th><input type="checkbox" id="othersMiscellaneous" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextMiscellaneous')"></th>
                                             <th><input type="text" id="othersTextMiscellaneous"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -791,7 +812,7 @@
                     <div class="entries1">
                         <div class="entry01">
                             <h2>PERSONAL INFORMATION</h2>
-
+                        <div class="input-group1">
                             <table class="topt">
                                 <tr>
                                     <td>
@@ -799,8 +820,22 @@
 
                                     </td>
                                     <td>
-                                        <input type="text" id="empname" placeholder="Enter Employee's Name...">
-
+                                        <input type="text" id="empname" placeholder="Employee's Name...">
+                                    </td>
+                                    <td>
+                                        <label for="college">College:</label>
+                                    </td>
+                                    <td>
+                                        <select id="college1" onchange="updateCourses()">
+                                            <option disabled selected>--Select a College--</option>
+                                            <option value="cbaa">CBAA</option>
+                                            <option value="ccje">CCJE</option>
+                                            <option value="coe">COED</option>
+                                            <option value="ceat">CEAT</option>
+                                            <option value="clac">CLAC</option>
+                                            <option value="cscs">CSCS</option>
+                                            <option value="cthm">CTHM</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -808,30 +843,20 @@
                                         <label for="">ID:</label>
                                     </td>
                                     <td>
-                                        <input type="number" id="empid" placeholder="Enter Employee's ID...">
+                                        <input type="number" id="empid" placeholder="Employee's ID...">
+                                    </td>
+                                    <td>
+                                        <label for="course">Course:</label>
+                                    </td>
+                                    <td>
+                                        <select id="course1">
+                                            <option disabled selected>--Select a Course--</option>
+                                            <!-- Course options will be populated based on the college selection -->
+                                        </select>
                                     </td>
                                 </tr>
                             </table>
-                            <div class="input-group1">
-                                <label for="college">College:</label>
-                                <select id="college1" onchange="updateCourses()">
-                                    <option disabled selected>--Select a College--</option>
-                                    <option value="cbaa">CBAA</option>
-                                    <option value="ccje">CCJE</option>
-                                    <option value="coe">COED</option>
-                                    <option value="ceat">CEAT</option>
-                                    <option value="clac">CLAC</option>
-                                    <option value="cscs">CSCS</option>
-                                    <option value="cthm">CTHM</option>
-                                </select>
-
-                                <label for="course">Course:</label>
-                                <select id="course1">
-                                    <option disabled selected>--Select a Course--</option>
-                                    <!-- Course options will be populated based on the college selection -->
-                                </select>
-
-                            </div>
+                        </div>
 
                             <h2>Dermatological Checklist</h2>
                             <div class="input-group1">
@@ -873,7 +898,7 @@
                                             <th><input type="checkbox" id="othersCheckbox1" name="others" value=""
                                                     onchange="toggleTextbox(this, 'othersTextDermatological1')"></th>
                                             <th><input type="text" id="othersTextDermatological1"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -897,7 +922,7 @@
                                                 value="checked"
                                                 onchange="toggleTextbox(this, 'othersTextMusculoskeletal1')"></th>
                                         <th> <input type="text" id="othersTextMusculoskeletal1"
-                                                placeholder="Please specify" disabled></th>
+                                                placeholder="Please specify..." disabled></th>
                                     </tr>
                                     <tbody></tbody>
                                 </table>
@@ -948,7 +973,7 @@
                                             <th> <input type="checkbox" id="othersCheckboxHeadNeck1" name="others"
                                                     value="" onchange="toggleTextbox(this, 'othersTextHeadNeck1')"></th>
                                             <th> <input type="text" id="othersTextHeadNeck1"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1006,7 +1031,7 @@
                                         <th><input type="checkbox" id="others_cardio1" name="others"
                                                 onchange="toggleTextbox(this, 'othersTextCardiovascular1')"></th>
                                         <th><input type="text" id="othersTextCardiovascular1"
-                                                placeholder="Please specify" disabled></th>
+                                                placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1034,7 +1059,7 @@
                                             <th> <input type="checkbox" id="othersGastrointestinal1" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextGastrointestinal1')"></th>
                                             <th> <input type="text" id="othersTextGastrointestinal1"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1061,7 +1086,7 @@
                                             <th> <input type="checkbox" id="othersGenitourinary1" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextGenitourinary1')"></th>
                                             <th> <input type="text" id="othersTextGenitourinary1"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1110,7 +1135,7 @@
                                             <th><input type="checkbox" id="othersInfectious1" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextInfectious1')"></th>
                                             <th><input type="text" id="othersTextInfectious1"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1138,7 +1163,7 @@
                                             <th><input type="checkbox" id="othersNeurology1" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextNeurology1')"></th>
                                             <th><input type="text" id="othersTextNeurology1"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1180,7 +1205,7 @@
                                             <td>Others:</td>
                                             <th><input type="checkbox" id="othersCheckTrauma1" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextTrauma1')"></th>
-                                            <th><input type="text" id="othersTextTrauma1" placeholder="Please specify"
+                                            <th><input type="text" id="othersTextTrauma1" placeholder="Please specify..."
                                                     disabled>
                                             </th>
                                         </tr>
@@ -1225,7 +1250,7 @@
                                             <th><input type="checkbox" id="othersMiscellaneous1" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextMiscellaneous1')"></th>
                                             <th><input type="text" id="othersTextMiscellaneous1"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1267,7 +1292,7 @@
 
                                     </td>
                                     <td>
-                                        <input type="text" id="stffname" placeholder="Enter Staff's Name...">
+                                        <input type="text" id="stffname" placeholder="Staff's Name...">
 
                                     </td>
                                 </tr>
@@ -1276,7 +1301,7 @@
                                         <label for="">ID:</label>
                                     </td>
                                     <td>
-                                        <input type="number" id="stffid" placeholder="Enter Staff's ID...">
+                                        <input type="number" id="stffid" placeholder="Staff's ID...">
                                     </td>
                                 </tr>
                             </table>
@@ -1322,7 +1347,7 @@
                                             <th><input type="checkbox" id="othersCheckbox2" name="others" value=""
                                                     onchange="toggleTextbox(this, 'othersTextDermatological2')"></th>
                                             <th><input type="text" id="othersTextDermatological2"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1346,7 +1371,7 @@
                                                 value="" onchange="toggleTextbox(this, 'othersTextMusculoskeletal2')">
                                         </th>
                                         <th> <input type="text" id="othersTextMusculoskeletal2"
-                                                placeholder="Please specify" disabled></th>
+                                                placeholder="Please specify..." disabled></th>
                                     </tr>
                                     <tbody></tbody>
                                 </table>
@@ -1397,7 +1422,7 @@
                                             <th> <input type="checkbox" id="othersCheckboxHeadNeck2" name="others"
                                                     value="" onchange="toggleTextbox(this, 'othersTextHeadNeck2')"></th>
                                             <th> <input type="text" id="othersTextHeadNeck2"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1434,7 +1459,7 @@
                                             <th> <input type="checkbox" id="others_dob2" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextRespiratory2')"></th>
                                             <th> <input type="text" id="othersTextRespiratory2"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1455,7 +1480,7 @@
                                         <th><input type="checkbox" id="others_cardio2" name="others"
                                                 onchange="toggleTextbox(this, 'othersTextCardiovascular2')"></th>
                                         <th><input type="text" id="othersTextCardiovascular2"
-                                                placeholder="Please specify" disabled></th>
+                                                placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1483,7 +1508,7 @@
                                             <th> <input type="checkbox" id="othersGastrointestinal2" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextGastrointestinal2')"></th>
                                             <th> <input type="text" id="othersTextGastrointestinal2"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1510,7 +1535,7 @@
                                             <th> <input type="checkbox" id="othersGenitourinary2" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextGenitourinary2')"></th>
                                             <th> <input type="text" id="othersTextGenitourinary2"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1559,7 +1584,7 @@
                                             <th><input type="checkbox" id="othersInfectious2" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextInfectious2')"></th>
                                             <th><input type="text" id="othersTextInfectious2"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1587,7 +1612,7 @@
                                             <th><input type="checkbox" id="othersNeurology2" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextNeurology2')"></th>
                                             <th><input type="text" id="othersTextNeurology2"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1629,7 +1654,7 @@
                                             <td>Others:</td>
                                             <th><input type="checkbox" id="othersCheckTrauma2" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextTrauma2')"></th>
-                                            <th><input type="text" id="othersTextTrauma2" placeholder="Please specify"
+                                            <th><input type="text" id="othersTextTrauma2" placeholder="Please specify..."
                                                     disabled>
                                             </th>
                                         </tr>
@@ -1674,7 +1699,7 @@
                                             <th><input type="checkbox" id="othersMiscellaneous2" name="others"
                                                     onchange="toggleTextbox(this, 'othersTextMiscellaneous2')"></th>
                                             <th><input type="text" id="othersTextMiscellaneous2"
-                                                    placeholder="Please specify" disabled></th>
+                                                    placeholder="Please specify..." disabled></th>
                                         </tr>
                                     </tbody>
                                 </table>
