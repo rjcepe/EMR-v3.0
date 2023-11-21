@@ -10,6 +10,10 @@ const SUPABASE_ANON_KEY =
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+function GenAcc(){
+  window.open('https://forms.gle/ZhHvWKZhZcVA4M5bA', '_blank');
+}
+
 ///////////////////////////////////// Load data to table
 //////////////////////////////// sort function
 // Add an event listener to the select element to detect changes
@@ -93,7 +97,7 @@ async function loadTableData() {
 
 ////////////////////////////// fetch username
 async function getusername() {
-  var id1 = localStorage.getItem("uid1");
+  var id1 = sessionStorage.getItem("uid1");
 
   const { data, error } = await _supabase
     .from("user_accs")
@@ -119,16 +123,48 @@ async function getusername() {
 
 function getusername1(username) {
   var bb = username;
-  localStorage.setItem("x", bb);
+  sessionStorage.setItem("x", bb);
 }
 
+////////////////////////////// fetch user type
+async function getusertype() {
+  var id1 = sessionStorage.getItem("uid1");
+
+  const { data, error } = await _supabase
+    .from("user_accs")
+    .select("access_level")
+    .eq("id", id1);
+
+  if (error) {
+    console.error("Error fetching user type:", error.message);
+    return;
+  }
+
+  // Check if data is not empty
+  if (data && data.length > 0) {
+    const usertype = data[0].access_level;
+
+    
+    getusertype1(usertype);
+    
+  } else {
+    console.log("User not found with ID:", id1);
+  }
+}
+
+function getusertype1(usertype) {
+  var xx = usertype;
+  sessionStorage.setItem("y", xx);
+}
+
+getusertype();
 getusername();
 
 /////////////////////////////////// Upload student info
 $("#insertstudaccform").submit(async function (event) {
   event.preventDefault();
   // Retrieve the current filecount value from local storage
-  let studaccfilecount = localStorage.getItem("studaccfilecount");
+  let studaccfilecount = sessionStorage.getItem("studaccfilecount");
 
   // If filecount is not present in local storage, initialize it to 0
   if (studaccfilecount === null) {
@@ -144,7 +180,7 @@ $("#insertstudaccform").submit(async function (event) {
   const cs = $("#studcs").val();
   const loc1 = $("#locsel").val();
 
-  var username = localStorage.getItem("x");
+  var username = sessionStorage.getItem("x");
 
   const formInput = document.getElementById("accform");
   const formFile = formInput.files[0];
@@ -153,7 +189,7 @@ $("#insertstudaccform").submit(async function (event) {
   studaccfilecount++;
 
   // Store the updated filecount back in local storage
-  localStorage.setItem("studaccfilecount", studaccfilecount);
+  sessionStorage.setItem("studaccfilecount", studaccfilecount);
 
   try {
     const fileName = `${id}_accidentform${studaccfilecount}.${formFile.name
@@ -236,7 +272,7 @@ $("#insertstudaccform").submit(async function (event) {
 $("#insertempaccform").submit(async function (event) {
   event.preventDefault();
   // Retrieve the current filecount value from local storage
-  let empaccfilecount = localStorage.getItem("empaccfilecount");
+  let empaccfilecount = sessionStorage.getItem("empaccfilecount");
 
   // If filecount is not present in local storage, initialize it to 0
   if (empaccfilecount === null) {
@@ -250,14 +286,14 @@ $("#insertempaccform").submit(async function (event) {
   const id1 = $("#empid").val();
   const loc1 = $("#locsel1").val();
 
-  var username = localStorage.getItem("x");
+  var username = sessionStorage.getItem("x");
 
   const formInput = document.getElementById("accform2");
   const formFile = formInput.files[0];
 
   empaccfilecount++;
 
-  localStorage.setItem("empaccfilecount", empaccfilecount);
+  sessionStorage.setItem("empaccfilecount", empaccfilecount);
 
   try {
     // Change the filename to "(name inputted)_medform"
@@ -338,7 +374,8 @@ $("#insertempaccform").submit(async function (event) {
 
 //////////////////////////////////// user display
 async function fetchUsername() {
-  var id1 = localStorage.getItem("uid1");
+  var id1 = sessionStorage.getItem("uid1");
+  var type = sessionStorage.getItem("y");
 
   const { data, error } = await _supabase
     .from("user_accs")
@@ -362,7 +399,7 @@ async function fetchUsername() {
       h4.innerHTML = username;
 
       h6 = document.createElement("h6");
-      h6.innerHTML = id1;
+      h6.innerHTML = `${id1} (${type})`;
 
       usertab.appendChild(h4);
       usertab.appendChild(h6);
@@ -378,7 +415,7 @@ async function fetchUsername() {
 
 ////////// display corresponding user pic
 async function fetchUserPic() {
-  var id1 = localStorage.getItem("uid1");
+  var id1 = sessionStorage.getItem("uid1");
   const piclink = id1 + ".png";
   console.log(piclink);
 

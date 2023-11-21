@@ -38,14 +38,22 @@
                         Records</button>
                 </div>
             </div>
-            <div class="nav navrep">
+            <div class="nav">
                 <div class="reps">
                     <h5>Reports</h5>
+                    <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Reports</button>
                     <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical
                         Certificates</button>
-                    <button class="navbutt" onclick="ToAccCen()"><img src="/files/images/arrow.png" alt="">Monthly
-                        Census</button>
+                    <button class="navbutt" onclick="ToPresc()"><img src="/files/images/arrow.png" alt="">Prescriptions</button>
+                    
                     <!-- <button class="navbutt" onclick="ToPresc()"><img src="/navicons/arrow.png" alt="">Prescription?</button> -->
+                </div>
+            </div>
+            <div class="nav">
+                <div class="reps">
+                    <h5>Analytics</h5>
+                    <button class="navbutt" onclick="ToConsOvw()"><img src="/files/images/arrow.png" alt="">Monthly
+                        Census</button>
                 </div>
             </div>
             <div class="logout" onclick="logout()">
@@ -88,7 +96,7 @@
                         <option value="Nameaz">Name (A-Z)</option>
                         <option value="Nameza">Name (Z-A)</option>
                     </select>
-                    <button class="addrecbutt" onclick="showp()">Add Record +</button>
+                    <button class="addrecbutt" onclick="showp()" id="addrecbutt">Add Record +</button>
                 </div>
             </div>
             <div class="results">

@@ -1,13 +1,19 @@
+var token = sessionStorage.getItem('accstoken');
+
+if (token === null){
+  window.location.href = "../index.html";
+}
+
 const SUPABASE_URL = "https://yspyqlodogzmrqsifbww.supabase.co";
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-
 //////////////////////////////////// user display
 async function fetchUsername() {
-    var id1 = localStorage.getItem("uid1");
+    var id1 = sessionStorage.getItem("uid1");
+    var type = sessionStorage.getItem("y");
   
     const { data, error } = await _supabase
       .from("user_accs")
@@ -22,7 +28,6 @@ async function fetchUsername() {
     // Check if data is not empty
     if (data && data.length > 0) {
       const username = data[0].username;
-      console.log(username);
   
       const usertab = document.querySelector(".username");
   
@@ -31,7 +36,7 @@ async function fetchUsername() {
         h4.innerHTML = username;
   
         h6 = document.createElement("h6");
-        h6.innerHTML = id1;
+        h6.innerHTML = `${id1} (${type})`;
   
         usertab.appendChild(h4);
         usertab.appendChild(h6);
@@ -47,16 +52,14 @@ async function fetchUsername() {
   
   ////////// display corresponding user pic
   async function fetchUserPic() {
-    var id1 = localStorage.getItem("uid1");
+    var id1 = sessionStorage.getItem("uid1");
     const piclink = id1 + ".png";
-    console.log(piclink);
   
     const userpiclink = `${SUPABASE_URL}/storage/v1/object/public/userimages/${piclink}`;
   
     const userTab = document.querySelector(".user");
     const usernameDiv = document.querySelector(".username");
   
-    console.log(userpiclink);
   
     const img = document.createElement("img");
     img.setAttribute("src", userpiclink);
@@ -64,7 +67,37 @@ async function fetchUsername() {
     userTab.insertBefore(img, usernameDiv);
   }
   
+  ////////////////////////////// fetch user type
+  async function getusertype() {
+    var id1 = sessionStorage.getItem("uid1");
+  
+    const { data, error } = await _supabase
+      .from("user_accs")
+      .select("access_level")
+      .eq("id", id1);
+  
+    if (error) {
+      console.error("Error fetching user type:", error.message);
+      return;
+    }
+  
+    // Check if data is not empty
+    if (data && data.length > 0) {
+      const usertype = data[0].access_level;
+  
+      
+      getusertype1(usertype);
+      
+    } else {
+      console.log("User not found with ID:", id1);
+    }
+  }
+  
+  function getusertype1(usertype) {
+    var xx = usertype;
+    sessionStorage.setItem("y", xx);
+  }
+  
+  getusertype();
   fetchUserPic();
   fetchUsername();
-
- 

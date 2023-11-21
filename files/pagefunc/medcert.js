@@ -4,6 +4,105 @@ if (token === null){
   window.location.href = "../index.html";
 }
 
+const SUPABASE_URL = "https://yspyqlodogzmrqsifbww.supabase.co";
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
+
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+//////////////////////////////////// user display
+async function fetchUsername() {
+    var id1 = sessionStorage.getItem("uid1");
+    var type = sessionStorage.getItem("y");
+  
+    const { data, error } = await _supabase
+      .from("user_accs")
+      .select("username")
+      .eq("id", id1);
+  
+    if (error) {
+      console.error("Error fetching username:", error.message);
+      return;
+    }
+  
+    // Check if data is not empty
+    if (data && data.length > 0) {
+      const username = data[0].username;
+  
+      const usertab = document.querySelector(".username");
+  
+      if (usertab) {
+        h4 = document.createElement("h4");
+        h4.innerHTML = username;
+  
+        h6 = document.createElement("h6");
+        h6.innerHTML = `${id1} (${type})`;
+  
+        usertab.appendChild(h4);
+        usertab.appendChild(h6);
+      } else {
+        console.error("Element with class 'vfile' not found.");
+      }
+  
+      // Now, you can use the 'username' variable as needed.
+    } else {
+      console.log("User not found with ID:", id);
+    }
+  }
+  
+  ////////// display corresponding user pic
+  async function fetchUserPic() {
+    var id1 = sessionStorage.getItem("uid1");
+    const piclink = id1 + ".png";
+  
+    const userpiclink = `${SUPABASE_URL}/storage/v1/object/public/userimages/${piclink}`;
+  
+    const userTab = document.querySelector(".user");
+    const usernameDiv = document.querySelector(".username");
+  
+  
+    const img = document.createElement("img");
+    img.setAttribute("src", userpiclink);
+  
+    userTab.insertBefore(img, usernameDiv);
+  }
+  
+  fetchUserPic();
+  fetchUsername();
+
+  ////////////////////////////// fetch user type
+async function getusertype() {
+    var id1 = sessionStorage.getItem("uid1");
+  
+    const { data, error } = await _supabase
+      .from("user_accs")
+      .select("access_level")
+      .eq("id", id1);
+  
+    if (error) {
+      console.error("Error fetching user type:", error.message);
+      return;
+    }
+  
+    // Check if data is not empty
+    if (data && data.length > 0) {
+      const usertype = data[0].access_level;
+  
+      
+      getusertype1(usertype);
+      
+    } else {
+      console.log("User not found with ID:", id1);
+    }
+  }
+  
+  function getusertype1(usertype) {
+    var xx = usertype;
+    sessionStorage.setItem("y", xx);
+  }
+  
+  getusertype();
+
 function cert02(button){
 
     const certcont = document.getElementById('medcert-cont');
@@ -436,4 +535,72 @@ function cert10(button){
  
      filtersdiv.appendChild(manage);
      filtersdiv.appendChild(generate);    
+}
+
+function gcert02(){
+    window.open('https://forms.gle/mLVr7KQ3WEhyomWu6', '_blank');
+}
+function gcert03(){
+    window.open('https://forms.gle/kEssM3EXtvLyDRST7', '_blank');
+}
+function gcert04(){
+    window.open('https://forms.gle/pwLWqymsR9zTbz3W7', '_blank');
+}
+function gcert05(){
+    window.open('https://forms.gle/ocGJLn2wcEEp5C3K6', '_blank');
+}
+function gcert06(){
+    window.open('https://forms.gle/hHGT2hV6VRJGyFE17', '_blank');
+}
+function gcert07(){
+    window.open('https://forms.gle/xsfXf66nrjseCDML6', '_blank');
+}
+function gcert08(){
+    window.open('https://forms.gle/gWAMarj6awgMH5iY6', '_blank');
+}
+function gcert09(){
+    window.open('https://forms.gle/aR8ssYdVzfaLCw6M9', '_blank');
+}
+function gcert10(){
+    window.open('https://forms.gle/YJiK6hVCrEzTEBkb8', '_blank');
+}
+
+
+access();
+
+////////////// access initialization
+function access(){
+  var type = sessionStorage.getItem("y");
+
+  if (type == "Doctor"){
+    document.getElementById("vcert07").disabled = true;
+    document.getElementById("vcert10").disabled = true;
+
+    document.getElementById("gcert07").disabled = true;
+    document.getElementById("gcert10").disabled = true;
+  }
+  if (type == "Nurse"){
+    document.getElementById("vcert02").disabled = true;
+    document.getElementById("vcert03").disabled = true;
+    document.getElementById("vcert04").disabled = true;
+    document.getElementById("vcert08").disabled = true;
+    document.getElementById("vcert09").disabled = true;
+
+    document.getElementById("gcert02").disabled = true;
+    document.getElementById("gcert03").disabled = true;
+    document.getElementById("gcert04").disabled = true;
+    document.getElementById("gcert08").disabled = true;
+    document.getElementById("gcert09").disabled = true;
+
+    document.getElementById("formview").setAttribute('src', "https://docs.google.com/spreadsheets/d/e/2PACX-1vQt-xM01oDkB3Gss480mAO8nBP03-CxSC_V_NsjD6OCyz4F9MAUVxrRnRt4pb6WXLb_hlYfVKttG7i3/pubhtml?widget=true&amp;headers=false");
+
+    document.getElementById('vcert02').classList.remove('activebuttform');
+    document.getElementById('vcert02').classList.add('formbutt');
+
+    document.getElementById('vcert05').classList.add('activebuttform');
+    document.getElementById('vcert05').classList.remove('formbutt');
+
+    document.getElementById('manageform').setAttribute('href', 'https://docs.google.com/spreadsheets/d/1IJb6Xl4GwP-Xmym8FBdpJTWr50-f83nli4laaxnNpFY/edit?usp=sharing');
+  }
+
 }

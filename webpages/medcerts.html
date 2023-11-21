@@ -27,19 +27,34 @@
             <div class="nav">
                 <div class="recs">
                     <h5>Records</h5>
-                    <button class="navbutt" onclick="ToMedRec()" id="mr">  <img src="/files/images/arrow.png" alt="">Medical Records</button>
-                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental Records</button>
-                    <!-- <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray Images</button> -->
-                    <!-- <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Records</button> -->
-                    <button class="navbutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation Records</button>
+                    <button class="navbutt" onclick="ToMedRec()" id="mr"> <img src="/files/images/arrow.png"
+                            alt="">Medical Records</button>
+                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental
+                        Records</button>
+                        <!-- <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray -->
+                        <!-- Images</button> -->
+                    <!-- <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident -->
+                        <!-- Records</button> -->
+                    <button class="navbutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation
+                        Records</button>
                 </div>
             </div>
-            <div class="nav navrep">
+            <div class="nav">
                 <div class="reps">
                     <h5>Reports</h5>
-                    <button class="activebutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical Certificates</button>
-                    <button class="navbutt" onclick="ToAccCen()"><img src="/files/images/arrow.png" alt="">Accident Census</button>
+                    <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Reports</button>
+                    <button class="activebutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical
+                        Certificates</button>
+                    <button class="navbutt" onclick="ToPresc()"><img src="/files/images/arrow.png" alt="">Prescriptions</button>
+                    
                     <!-- <button class="navbutt" onclick="ToPresc()"><img src="/navicons/arrow.png" alt="">Prescription?</button> -->
+                </div>
+            </div>
+            <div class="nav">
+                <div class="reps">
+                    <h5>Analytics</h5>
+                    <button class="navbutt" onclick="ToConsOvw()"><img src="/files/images/arrow.png" alt="">Monthly
+                        Census</button>
                 </div>
             </div>
             <div class="logout" onclick="logout()">
@@ -71,24 +86,24 @@
             <div class="inputs1">
                 <div class="search1">
                     <p>Form :</p>
-                    <button class="activebuttform" onclick="cert02(this)">02</button>
-                    <button class="formbutt" onclick="cert03(this)">03</button>
-                    <button class="formbutt" onclick="cert04(this)">04</button>
-                    <button class="formbutt" onclick="cert05(this)">05</button>
-                    <button class="formbutt" onclick="cert06(this)">06</button>
-                    <button class="formbutt" onclick="cert07(this)">07</button>
-                    <button class="formbutt" onclick="cert08(this)">08</button>
-                    <button class="formbutt" onclick="cert09(this)">09</button>
-                    <button class="formbutt" onclick="cert10(this)">10</button>
+                    <button class="activebuttform" onclick="cert02(this)" id="vcert02">02</button>
+                    <button class="formbutt" onclick="cert03(this)" id="vcert03">03</button>
+                    <button class="formbutt" onclick="cert04(this)" id="vcert04">04</button>
+                    <button class="formbutt" onclick="cert05(this)" id="vcert05">05</button>
+                    <button class="formbutt" onclick="cert06(this)" id="vcert06">06</button>
+                    <button class="formbutt" onclick="cert07(this)" id="vcert07">07</button>
+                    <button class="formbutt" onclick="cert08(this)" id="vcert08">08</button>
+                    <button class="formbutt" onclick="cert09(this)" id="vcert09">09</button>
+                    <button class="formbutt" onclick="cert10(this)" id="vcert10">10</button>
                 </div>
                 <div class="filters1">
-                        <a href="https://docs.google.com/spreadsheets/d/1uVqbtw1zskjAE-q4m4UXVQYTbG8ID3nrH3JW7Qu7450/edit?usp=sharing" target="_blank">Manage SpreadSheet >></a>
+                        <a id="manageform" href="https://docs.google.com/spreadsheets/d/1uVqbtw1zskjAE-q4m4UXVQYTbG8ID3nrH3JW7Qu7450/edit?usp=sharing" target="_blank">Manage SpreadSheet >></a>
                     <button class="addrecbutt" onclick="showp()">GENERATE +</button> 
                 </div>
             </div>
             <div class="results3" id="medcert-cont">
 
-                <iframe scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTybn7jCZKaiet2ZZDD91LUQpAx0b7X4D5xq27tXgLxWu0w1DfslolWqKA42Q2PJ4ueFYN8B9FYeTQ9/pubhtml?widget=true&amp;headers=false"></iframe>
+                <iframe id="formview" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTybn7jCZKaiet2ZZDD91LUQpAx0b7X4D5xq27tXgLxWu0w1DfslolWqKA42Q2PJ4ueFYN8B9FYeTQ9/pubhtml?widget=true&amp;headers=false"></iframe>
             </div>
            
             <!-- <button onclick="printres()">Print Container</button> -->
@@ -105,19 +120,15 @@
                 <div class="cont1z">
                         <div class="form-links">
         
-                            <a href="https://forms.gle/mLVr7KQ3WEhyomWu6"
-                             target='_blank' class="lform1" onmouseover="prevy2()" onmouseout="prevy2()">> Form 02 <</a>
-                            <a href="https://forms.gle/kEssM3EXtvLyDRST7
-                            " target='_blank' class="lform1" onmouseover="prevy3()" onmouseout="prevy3()">> Form 03 <</a>
-                            <a href="https://forms.gle/pwLWqymsR9zTbz3W7
-                            " target='_blank' class="lform1" onmouseover="prevy4()" onmouseout="prevy4()">> Form 04 <</a>
-                            <a href="https://forms.gle/ocGJLn2wcEEp5C3K6" target='_blank' class="lform1" onmouseover="prevy5()" onmouseout="prevy5()">> Form 05 <</a>
-                            <a href="https://forms.gle/hHGT2hV6VRJGyFE17" target='_blank' class="lform1" onmouseover="prevy6()" onmouseout="prevy6()">> Form 06 <</a>
-                            <a href="https://forms.gle/xsfXf66nrjseCDML6" target='_blank' class="lform1" onmouseover="prevy7()" onmouseout="prevy7()">> Form 07 <</a>
-                            <a href="https://forms.gle/gWAMarj6awgMH5iY6
-                            " target='_blank' class="lform1" onmouseover="prevy8()" onmouseout="prevy8()">> Form 08 <</a>
-                            <a href="https://forms.gle/aR8ssYdVzfaLCw6M9" target='_blank' class="lform1" onmouseover="prevy9()" onmouseout="prevy9()">> Form 09 <</a>
-                            <a href="https://forms.gle/YJiK6hVCrEzTEBkb8" target='_blank' class="lform1" onmouseover="prevy10()" onmouseout="prevy10()">> Form 10 <</a>
+                            <button class="lform1" onmouseover="prevy2()" onmouseout="prevy2()" onclick="gcert02()" id="gcert02">> Form 02 <</a>
+                            <button class="lform1" onmouseover="prevy3()" onmouseout="prevy3()" onclick="gcert03()" id="gcert03">> Form 03 </button>
+                            <button class="lform1" onmouseover="prevy4()" onmouseout="prevy4()" onclick="gcert04()" id="gcert04">> Form 04 </button>
+                            <button class="lform1" onmouseover="prevy5()" onmouseout="prevy5()" onclick="gcert05()" id="gcert05">> Form 05 </button>
+                            <button class="lform1" onmouseover="prevy6()" onmouseout="prevy6()" onclick="gcert06()" id="gcert06">> Form 06 </button>
+                            <button class="lform1" onmouseover="prevy7()" onmouseout="prevy7()" onclick="gcert07()" id="gcert07">> Form 07 </button>
+                            <button class="lform1" onmouseover="prevy8()" onmouseout="prevy8()" onclick="gcert08()" id="gcert08">> Form 08 </button>
+                            <button class="lform1" onmouseover="prevy9()" onmouseout="prevy9()" onclick="gcert09()" id="gcert09">> Form 09 </button>
+                            <button class="lform1" onmouseover="prevy10()" onmouseout="prevy10()" onclick="gcert10()" id="gcert10">> Form 10 </button>
                             
                         </div>
                         <div class="form-prevs">

@@ -49,7 +49,7 @@ loginForm.addEventListener("submit", async function (event) {
             sessionStorage.setItem('accstoken', token);
 
             var gg =  document.getElementById('uid').value;
-            localStorage.setItem('uid1', gg);
+            sessionStorage.setItem('uid1', gg);
             
 
         } else {
@@ -58,6 +58,7 @@ loginForm.addEventListener("submit", async function (event) {
             message.innerText = "!! Password Incorrect !!";
         }
     });
+
 
 function generateRandomString(length) {
   let result = "";

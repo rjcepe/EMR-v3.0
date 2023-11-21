@@ -14,7 +14,8 @@
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <title>Accident Records</title>
+        
+    <title>Accident Reports</title>
 </head>
 
 <body>
@@ -26,20 +27,34 @@
             <div class="nav">
                 <div class="recs">
                     <h5>Records</h5>
-                    <button class="navbutt" onclick="ToMedRec()" id="mr">  <img src="/files/images/arrow.png" alt="">Medical Records</button>
-                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental Records</button>
-                    <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray Images</button>
-                    <button class="activebutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Records</button>
-                    <button class="navbutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation Records</button>
+                    <button class="navbutt" onclick="ToMedRec()" id="mr"> <img src="/files/images/arrow.png"
+                            alt="">Medical Records</button>
+                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental
+                        Records</button>
+                        <!-- <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray -->
+                        <!-- Images</button> -->
+                    <!-- <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident -->
+                        <!-- Records</button> -->
+                    <button class="navbutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation
+                        Records</button>
                 </div>
             </div>
-            <div class="nav navrep">
+            <div class="nav">
                 <div class="reps">
                     <h5>Reports</h5>
-                    <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical Certificates</button>
-                    <button class="navbutt" onclick="ToAccCen()"><img src="/files/images/arrow.png" alt="">Monthly
-                        Census</button>
+                    <button class="activebutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Reports</button>
+                    <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical
+                        Certificates</button>
+                    <button class="navbutt" onclick="ToPresc()"><img src="/files/images/arrow.png" alt="">Prescriptions</button>
+                    
                     <!-- <button class="navbutt" onclick="ToPresc()"><img src="/navicons/arrow.png" alt="">Prescription?</button> -->
+                </div>
+            </div>
+            <div class="nav">
+                <div class="reps">
+                    <h5>Analytics</h5>
+                    <button class="navbutt" onclick="ToConsOvw()"><img src="/files/images/arrow.png" alt="">Monthly
+                        Census</button>
                 </div>
             </div>
             <div class="logout" onclick="logout()">
@@ -63,121 +78,94 @@
     <div class="main">
         <div class="cont1b">
             <div class="headline">
-                <h1>Accident Records</h1>
+                <h1>Accident Reports</h1>
                 <div class="user">
                     <div class="username"></div>
                 </div>
             </div>
-            <div class="inputs">
-                <div class="search">
-                    <input type="text" id="searchInput" placeholder="Search ID...">
-                    <button class="searchbutt" id="searchpatient"><img src="/files/images/search.png" alt="">Search</button>
+            <div class="inputs1">
+                <div class="filters1">
+                    <a href="https://docs.google.com/spreadsheets/d/1vq69fIcFImFVmvSNfmh7fgNK7VN0yombLZukwyvlnME/edit?usp=sharing" target="_blank">Manage SpreadSheet >></a>
                 </div>
-                <div class="filters">
-                    <label for="sort">Sort by: </label>
-                    <select name="sort" id="sort1">
-                        <option disabled selected value="def"> -- </option>
-                        <option value="ID">ID</option>
-                        <option value="TimeLate">Latest</option>
-                        <option value="TimeOld">Oldest</option>
-                        <option value="Nameaz">Name (A-Z)</option>
-                        <option value="Nameza">Name (Z-A)</option>
-                        <option value="CS">College</option>
-                        <option value="EMP">Employees</option>
-                    </select>
-                    <button class="addrecbutt" onclick="showp()">Add Record +</button> 
-                </div>
+                <button class="addrecbutt" onclick="GenAcc()">GENERATE +</button> 
             </div>
-            <div class="results">
-                <table class="toprow">
-                    <tr class="frow">
-                        <th class="idcol">ID</th>
-                        <th class="namecol">Name</th>
-                        <th class="timecol">Date Created</th>
-                        <th class="coursecol">Course & Section</th>
-                        <th class="timecol">Location</th>
-                        <th class="timecol">Added by</th>
-                        <th class="buttscol"></th>
-                    </tr>
-                </table>
-                <table class="tablee" id="accdnt_table">
-                    <tr class="res inv"></tr>
-                </table>
+            <div class="results3" id="medcert-cont">
+
+                <iframe scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQhkZrI31zI66M7FYPhk3isJPXx6szvR1i0XB6uT2FY3RlTkDXr38Zj7zNL3qdxT-U_QUDAb9GsE2Zj/pubhtml?widget=true&amp;headers=false"></iframe>
             </div>
+           
             <!-- <button onclick="printres()">Print Container</button> -->
         </div>
-        <div id="notif" class="notifinactive"></div>
     </div>
-
-    <!-- sample medform view -->
-    <div class="main2 hidev">
-        <div class="vfile">
-            <button class="hidevfile" onclick="hidev()">go back</button>
-        </div>
-    </div>
-
+    
 
     <div class="addp-cont hidev">
-            <div class="adders">
-                <div class="headbar">
-                    <h1>Add Patient</h1>
+            <div class="adders4">
+                <div class="headbar3">
+                    <h1>Generate Form</h1>
                     <button class="hideaddp" onclick="hidep()">Go Back</button>
                 </div>
-                <div class="patienttypebutt">
-                    <button class="ptbutt activeptb" id="studupbutt" onclick="stud()">Student</button>
-                    <button class="ptbutt" id="empupbutt" onclick="emp()">Employee</button>
-                </div>
-                <div class="cont1a">
-                    <form id="insertstudaccform" class="uploadmedform1">
-                        <h2>Student Information:</h2>
-
-                        <input type="text" id="studname" placeholder="Enter Student's Name...">
-                    <input type="text" id="studid" placeholder="Enter Student's ID...">
-                    <input type="text" id="studcs" placeholder="Enter Course & Section...">
-
-                    <div class="location1">
-                        <label for="loc">Location:</label>
-                        <select name="loc" id="locsel">
-                            <option disabled selected value> -- Select Location -- </option>
-                            <option value="East Clinic">East Clinic</option>
-                            <option value="West Clinic">West Clinic</option>
-                            <option value="SHS Clinic">SHS Clinic</option>
-                        </select>
-                    </div>
-                        <hr>
-                        <label for="accform">Upload Accident Report</label>
-                        <input type="file" id="accform" name="accform" accept=".pdf" class="inputfile">
-
-                        <button class="submitp">Submit</button>
-                    </form>
-
-                    <form id="insertempaccform" class="uploadmedform2 hidden">
-                        <h2>Employee Information:</h2>
-
-                        <input type="text" id="empname" placeholder="Enter Emloyee's Name...">
-                        <input type="text" id="empid" placeholder="Enter Emloyee's ID...">
-                        
-                        <div class="location1">
-                            <label for="loc">Location:</label>
-                            <select name="loc" id="locsel1">
-                                <option disabled selected value> -- Select Location -- </option>
-                                <option value="East Clinic">East Clinic</option>
-                                <option value="West Clinic">West Clinic</option>
-                                <option value="SHS Clinic">SHS Clinic</option>
-                            </select>
+                <div class="cont1z">
+                        <div class="form-links">
+        
+                            <a href="https://forms.gle/mLVr7KQ3WEhyomWu6"
+                             target='_blank' class="lform1" onmouseover="prevy2()" onmouseout="prevy2()">> Form 02 <</a>
+                            <a href="https://forms.gle/kEssM3EXtvLyDRST7
+                            " target='_blank' class="lform1" onmouseover="prevy3()" onmouseout="prevy3()">> Form 03 <</a>
+                            <a href="https://forms.gle/pwLWqymsR9zTbz3W7
+                            " target='_blank' class="lform1" onmouseover="prevy4()" onmouseout="prevy4()">> Form 04 <</a>
+                            <a href="https://forms.gle/ocGJLn2wcEEp5C3K6" target='_blank' class="lform1" onmouseover="prevy5()" onmouseout="prevy5()">> Form 05 <</a>
+                            <a href="https://forms.gle/hHGT2hV6VRJGyFE17" target='_blank' class="lform1" onmouseover="prevy6()" onmouseout="prevy6()">> Form 06 <</a>
+                            <a href="https://forms.gle/xsfXf66nrjseCDML6" target='_blank' class="lform1" onmouseover="prevy7()" onmouseout="prevy7()">> Form 07 <</a>
+                            <a href="https://forms.gle/gWAMarj6awgMH5iY6
+                            " target='_blank' class="lform1" onmouseover="prevy8()" onmouseout="prevy8()">> Form 08 <</a>
+                            <a href="https://forms.gle/aR8ssYdVzfaLCw6M9" target='_blank' class="lform1" onmouseover="prevy9()" onmouseout="prevy9()">> Form 09 <</a>
+                            <a href="https://forms.gle/YJiK6hVCrEzTEBkb8" target='_blank' class="lform1" onmouseover="prevy10()" onmouseout="prevy10()">> Form 10 <</a>
+                            
                         </div>
-                        <hr>
-                        <label for="accform">Upload Accident Report</label>
-                        <input type="file" id="accform2" name="accform" accept=".pdf" class="inputfile">
-
-                        <button class="submitp">Submit</button>
-                    </form>
+                        <div class="form-prevs">
+                            <h2>PREVIEW</h2>
+                            <div class="form-prev-img2">
+                                <img src="/files/images/medcert/Form02.jpg" alt="">
+                            </div>
+                            <div class="form-prev-img3">
+                                <img src="/files/images/medcert/Form03.jpg" alt="">
+                            </div>
+                            <div class="form-prev-img4">
+                                <img src="/files/images/medcert/Form04.jpg" alt="">
+                            </div>
+                            <div class="form-prev-img5">
+                                <img src="/files/images/medcert/Form05.jpg" alt="">
+                            </div>
+                            <div class="form-prev-img6">
+                                <img src="/files/images/medcert/Form06.jpg" alt="">
+                            </div>
+                            <div class="form-prev-img7">
+                                <img src="/files/images/medcert/Form07.jpg" alt="">
+                            </div>
+                            <div class="form-prev-img8">
+                                <img src="/files/images/medcert/Form08.jpg" alt="">
+                            </div>
+                            <div class="form-prev-img9">
+                                <img src="/files/images/medcert/Form09.jpg" alt="">
+                            </div>
+                            <div class="form-prev-img10">
+                                <img src="/files/images/medcert/Form10.jpg" alt="">
+                            </div>
+                        </div>
                 </div>
             </div>
-        </div>
-        <script src="/files/pagefunc/accform.js"></script>
+    </div>
+
+        <script src="/files/pagefunc/presc.js"></script>
         <script src="/files/pagefunc/ui.js"></script>
         <script src="/files/connfunc/app.js"></script>
 </body>
 
 </html>
+
+
+
+
+
+

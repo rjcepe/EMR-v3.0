@@ -267,7 +267,7 @@ async function filterEvent() {
 
 ////////////////////////////// fetch username
 async function getusername() {
-  var id1 = localStorage.getItem("uid1");
+  var id1 = sessionStorage.getItem("uid1");
 
   const { data, error } = await _supabase
     .from("user_accs")
@@ -294,7 +294,7 @@ async function getusername() {
 
 function getusername1(username) {
   var bb = username;
-  localStorage.setItem("x", bb);
+  sessionStorage.setItem("x", bb);
 }
 
 getusername();
@@ -368,7 +368,7 @@ $("#insertstudconsform").submit(async function (event) {
   
   const diag1 = diagchex.join(", ");
 
-  var username = localStorage.getItem("x");
+  var username = sessionStorage.getItem("x");
 
   try {
     ///get current date
@@ -492,7 +492,7 @@ $("#insertempconsform").submit(async function (event) {
   
   const diag1 = diagchex.join(", ");
 
-  var username = localStorage.getItem("x");
+  var username = sessionStorage.getItem("x");
 
   try {
     ///get current date
@@ -613,7 +613,7 @@ $("#insertstaffconsform").submit(async function (event) {
   
   const diag1 = diagchex.join(", ");
 
-  var username = localStorage.getItem("x");
+  var username = sessionStorage.getItem("x");
 
   try {
     ///get current date
@@ -672,7 +672,8 @@ $("#insertstaffconsform").submit(async function (event) {
 
 //////////////////////////////////// user display
 async function fetchUsername() {
-  var id1 = localStorage.getItem("uid1");
+  var id1 = sessionStorage.getItem("uid1");
+  var type = sessionStorage.getItem("y");
 
   const { data, error } = await _supabase
     .from("user_accs")
@@ -695,7 +696,7 @@ async function fetchUsername() {
       h4.innerHTML = username;
 
       h6 = document.createElement("h6");
-      h6.innerHTML = id1;
+      h6.innerHTML = `${id1} (${type})`;
 
       usertab.appendChild(h4);
       usertab.appendChild(h6);
@@ -711,7 +712,7 @@ async function fetchUsername() {
 
 ////////// display corresponding user pic
 async function fetchUserPic() {
-  var id1 = localStorage.getItem("uid1");
+  var id1 = sessionStorage.getItem("uid1");
   const piclink = id1 + ".png";
 
   const userpiclink = `${SUPABASE_URL}/storage/v1/object/public/userimages/${piclink}`;
@@ -724,7 +725,38 @@ async function fetchUserPic() {
 
   userTab.insertBefore(img, usernameDiv);
 }
+////////////////////////////// fetch user type
+async function getusertype() {
+  var id1 = sessionStorage.getItem("uid1");
 
+  const { data, error } = await _supabase
+    .from("user_accs")
+    .select("access_level")
+    .eq("id", id1);
+
+  if (error) {
+    console.error("Error fetching user type:", error.message);
+    return;
+  }
+
+  // Check if data is not empty
+  if (data && data.length > 0) {
+    const usertype = data[0].access_level;
+
+    
+    getusertype1(usertype);
+    
+  } else {
+    console.log("User not found with ID:", id1);
+  }
+}
+
+function getusertype1(usertype) {
+  var xx = usertype;
+  sessionStorage.setItem("y", xx);
+}
+
+getusertype();
 fetchUserPic();
 fetchUsername();
 

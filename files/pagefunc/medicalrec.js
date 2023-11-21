@@ -29,7 +29,7 @@ document.getElementById("sort1").addEventListener("change", function () {
 //loadTableData function to sort the table data
 async function loadTableData() {
   searchState = 0;
-  
+
   const selectedOption = document.getElementById("sort1").value;
 
   const { data: tableData1, error } = await _supabase.from("med_forms").select("*");
@@ -190,46 +190,12 @@ async function displayResults(results) {
   
 };
 
-
-////////////////////////////// fetch username
-async function getusername() {
-  var id1 = localStorage.getItem("uid1");
-
-  const { data, error } = await _supabase
-    .from("user_accs")
-    .select("username")
-    .eq("id", id1);
-
-  if (error) {
-    console.error("Error fetching username:", error.message);
-    return;
-  }
-
-  // Check if data is not empty
-  if (data && data.length > 0) {
-    const username = data[0].username;
-
-    getusername1(username);
-
-    // Now, you can use the 'username' variable as needed.
-  } else {
-    console.log("User not found with ID:", id);
-  }
-}
-
-function getusername1(username) {
-  var bb = username;
-  localStorage.setItem("x", bb);
-}
-
-getusername();
-
 /////////////////////////////////////////////// insert student info
 $("#insertstudmedform").submit(async function (event) {
   event.preventDefault();
 
   // Retrieve the current studmedfilecount value from local storage
-  let studmedfilecount = localStorage.getItem("studmedfilecount");
+  let studmedfilecount = sessionStorage.getItem("studmedfilecount");
 
   // If studmedfilecount is not present in local storage, initialize it to 0
   if (studmedfilecount === null) {
@@ -245,7 +211,7 @@ $("#insertstudmedform").submit(async function (event) {
   const cs = $("#studcs").val();
   const loc1 = $("#locsel").val();
 
-  var username = localStorage.getItem("x");
+  var username = sessionStorage.getItem("x");
 
   const medformInput = document.getElementById("medform");
   const medformFile = medformInput.files[0];
@@ -254,7 +220,7 @@ $("#insertstudmedform").submit(async function (event) {
   studmedfilecount++;
 
   // Store the updated studmedfilecount back in local storage
-  localStorage.setItem("studmedfilecount", studmedfilecount);
+  sessionStorage.setItem("studmedfilecount", studmedfilecount);
 
   // Initialize the 'user' variable outside the try-catch block
   try {
@@ -340,7 +306,7 @@ $("#insertempmedform").submit(async function (event) {
   event.preventDefault();
 
   // Retrieve the current empmedfilecount value from local storage
-  let empmedfilecount = localStorage.getItem("empmedfilecount");
+  let empmedfilecount = sessionStorage.getItem("empmedfilecount");
 
   // If empmedfilecount is not present in local storage, initialize it to 0
   if (empmedfilecount === null) {
@@ -355,7 +321,7 @@ $("#insertempmedform").submit(async function (event) {
   const id1 = $("#empid").val();
   const loc1 = $("#locsel1").val();
 
-  var username = localStorage.getItem("x");
+  var username = sessionStorage.getItem("x");
 
   const medformInput = document.getElementById("medform2");
   const medformFile = medformInput.files[0];
@@ -364,7 +330,7 @@ $("#insertempmedform").submit(async function (event) {
   empmedfilecount++;
 
   // Store the updated empmedfilecount back in local storage
-  localStorage.setItem("empmedfilecount", empmedfilecount);
+  sessionStorage.setItem("empmedfilecount", empmedfilecount);
 
   // Initialize the 'user' variable outside the try-catch block
   try {
@@ -445,9 +411,78 @@ $("#insertempmedform").submit(async function (event) {
   }
 });
 
+////////////////////////////// fetch username
+async function getusername() {
+  var id1 = sessionStorage.getItem("uid1");
+
+  const { data, error } = await _supabase
+    .from("user_accs")
+    .select("username")
+    .eq("id", id1);
+
+  if (error) {
+    console.error("Error fetching username:", error.message);
+    return;
+  }
+
+  // Check if data is not empty
+  if (data && data.length > 0) {
+    const username = data[0].username;
+
+    getusername1(username);
+
+  } else {
+    console.log("User not found with ID:", id1);
+  }
+}
+
+getusertype();
+
+getusername();
+
+function getusername1(username) {
+  var bb = username;
+  sessionStorage.setItem("x", bb);
+}
+
+////////////////////////////// fetch user type
+async function getusertype() {
+  var id1 = sessionStorage.getItem("uid1");
+
+  const { data, error } = await _supabase
+    .from("user_accs")
+    .select("access_level")
+    .eq("id", id1);
+
+  if (error) {
+    console.error("Error fetching user type:", error.message);
+    return;
+  }
+
+  // Check if data is not empty
+  if (data && data.length > 0) {
+    const usertype = data[0].access_level;
+
+    
+    getusertype1(usertype);
+    
+  } else {
+    console.log("User not found with ID:", id1);
+  }
+}
+
+function getusertype1(usertype) {
+  var xx = usertype;
+  sessionStorage.setItem("y", xx);
+}
+
+
+
 //////////////////////////////////// user display
 async function fetchUsername() {
-  var id1 = localStorage.getItem("uid1");
+  var id1 = sessionStorage.getItem("uid1");
+  var type = sessionStorage.getItem("y");
+
 
   const { data, error } = await _supabase
     .from("user_accs")
@@ -470,7 +505,7 @@ async function fetchUsername() {
       h4.innerHTML = username;
 
       h6 = document.createElement("h6");
-      h6.innerHTML = id1;
+      h6.innerHTML = `${id1} (${type})`;
 
       usertab.appendChild(h4);
       usertab.appendChild(h6);
@@ -486,7 +521,7 @@ async function fetchUsername() {
 
 ////////// display corresponding user pic
 async function fetchUserPic() {
-  var id1 = localStorage.getItem("uid1");
+  var id1 = sessionStorage.getItem("uid1");
   const piclink = id1 + ".png";
 
   const userpiclink = `${SUPABASE_URL}/storage/v1/object/public/userimages/${piclink}`;
@@ -551,4 +586,14 @@ function hidev() {
   vfile.classList.remove("showv");
 }
 
+access();
 
+////////////// access initialization
+function access(){
+  var type = sessionStorage.getItem("y");
+
+  if (type == "Doctor"){
+    document.getElementById("addrecbutt").disabled = true;
+  }
+
+}

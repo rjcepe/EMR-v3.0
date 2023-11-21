@@ -52,3 +52,21 @@ new checklist
 -chart.js
 -add level of access
 -add autocrat prescription and accident
+
+Level of access:
+    Admin - can access everything 
+    Nurse & Clerk - can add medical record record/view record
+    Doctor - View medical records only
+
+    Staff that can access forms
+        FORM 2 - DOCTOR
+        FORM 3 - DOCTOR
+        FORM 4 - DOCTOR
+        FORM 5 - DOCTOR / NURSE&CLERK
+        FORM 6 - DOCTOR / NURSE&CLERK
+        FORM 7 - NURSE&CLERK
+        FORM 8 - DOCTOR
+        FORM 9 - DOCTOR
+        FORM 10 - NURSE&CLERK
+
+        FORM 12 (prescriptions) - DOCTOR (NURSE&CLERK = cant generate, cant manage spreadsheet)
