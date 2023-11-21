@@ -579,7 +579,7 @@ function access(){
     document.getElementById("gcert07").disabled = true;
     document.getElementById("gcert10").disabled = true;
   }
-  if (type == "Nurse"){
+  if (type == "Nurse" && type == "Cert"){
     document.getElementById("vcert02").disabled = true;
     document.getElementById("vcert03").disabled = true;
     document.getElementById("vcert04").disabled = true;
