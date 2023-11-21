@@ -244,6 +244,17 @@ function showsearch(){
   a.classList.toggle("filters");
   b.classList.remove("filters");
   c.classList.remove("filters");
+
+  const form1 = document.getElementById("filterz-val");
+  const checkedCheckboxes = form1.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+  checkedCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+  
+  const searrchIn = $("#searchInput").val();
+  if(!searrchIn){
+    loadTableData();
+  }
 }
 function showsort(){
   const a = document.querySelector(".sortz");
@@ -262,4 +273,7 @@ function showfiltz(){
   a.classList.toggle("filters");
   b.classList.remove("filters");
   c.classList.remove("filters");
+
+  $("#searchInput").val("");
+
 }

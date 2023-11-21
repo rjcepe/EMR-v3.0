@@ -10,6 +10,7 @@ const SUPABASE_ANON_KEY =
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+let searchState = 0;
 
 ///////////////////////////////////// Load data to table
 //////////////////////////////// sort function
@@ -17,11 +18,17 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 loadTableData();
 
 document.getElementById("sort1").addEventListener("change", function () {
-  loadTableData(); // Reload the table data when the sorting option changes
+  if (searchState !=1){
+    loadTableData(); // Reload the table data when the sorting option changes
+  }
+  if (searchState == 1){
+    searchEvent.call(document.getElementById('searchInput'));
+  } // Reload the table data when the sorting option changes
 });
 
 //loadTableData function to sort the table data
 async function loadTableData() {
+  searchState = 0;
   const selectedOption = document.getElementById("sort1").value;
 
   const { data: tableData1, error } = await _supabase.from("med_forms").select("*");
@@ -89,6 +96,99 @@ async function loadTableData() {
     });
   }
 }
+
+//////// search while typing
+document.getElementById('searchInput').addEventListener('keyup', searchEvent);
+
+async function searchEvent() {
+  var results = this.value;
+  console.log(results);
+  
+  if(results){
+    searchState = 1;
+    displayResults(results);
+  }
+
+  else{
+    loadTableData();
+  }
+  
+};
+
+async function displayResults(results) {
+    
+  // Fetch the patient data based on the search ID
+  const { data: patientData, error } = await _supabase
+    .from("cons_rec")
+    .select("*")
+    .or(`patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`);
+
+  if (error) {
+    console.error("Error fetching patient data:", error.message);
+    alert("Invalid Input")
+    return;
+  }
+
+  const tableBody = document.querySelector("#medform_table tbody");
+
+  // Clear the current table
+  tableBody.innerHTML = "";
+
+  if (patientData && patientData.length > 0) {
+
+    const selectedOption = document.getElementById("sort1").value;
+  // Sort the data based on the selected option
+        if (selectedOption === "ID") {
+          patientData.sort(
+            (a, b) => new Date(a.patient_id) - new Date(b.patient_id)
+          );
+        } else if (selectedOption === "TimeLate") {
+          patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+        } else if (selectedOption === "TimeOld") {
+          patientData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+        } else if (selectedOption === "def") {
+          patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+        } else if (selectedOption === "Nameaz") {
+          patientData.sort((a, b) =>
+            a.patient_name.toString().localeCompare(b.patient_name)
+          );
+        } else if (selectedOption === "Nameza") {
+          patientData.sort((a, b) =>
+            b.patient_name.toString().localeCompare(a.patient_name)
+          );
+        } 
+
+    // Patient data found, update the table
+    patientData.forEach((row) => {
+      const newRow = document.createElement("tr");
+      newRow.classList.add("res");
+      newRow.innerHTML = `
+          <th class="row idcol">${row.patient_id}</th>
+          <th class="row namecol">${row.patient_name}</th>
+          <th class="row timecol">${row.created_date}</th>
+          <th class="row coursecol">${row.course_section}</th>
+          <th class="row timecol">${row.location}</th>
+          <th class="row timecol">${row.added_by}</th>
+          <th class="buttscol">
+            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
+              <p class="txt">View</p>
+            </button>
+          </th>
+        `;
+      tableBody.appendChild(newRow);
+    });
+  } else {
+    // Patient not found
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <th class="row" colspan="7">Patient not found</td>
+    `;
+    tableBody.appendChild(newRow);
+  }
+
+  
+};
+
 
 ////////////////////////////// fetch username
 async function getusername() {
@@ -450,66 +550,4 @@ function hidev() {
   vfile.classList.remove("showv");
 }
 
-//////// search while typing
-document.getElementById('searchInput').addEventListener('keyup', async function() {
-  var results = this.value;
-  
-  if(results){
-    displayResults(results);
-  }
-  else{
-    loadTableData();
-  }
 
-});
-
-async function displayResults(results) {
-
-// Fetch the patient data based on the search ID
-const { data: patientData, error } = await _supabase
-  .from("med_forms")
-  .select("*")
-  .or(`patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`);
-
-if (error) {
-  console.error("Error fetching patient data:", error.message);
-  alert("Invalid Input")
-  return;
-}
-
-const tableBody = document.querySelector("#medform_table tbody");
-
-// Clear the current table
-tableBody.innerHTML = "";
-
-if (patientData && patientData.length > 0) {
-  // Patient data found, update the table
-  patientData.forEach((row) => {
-    const newRow = document.createElement("tr");
-    newRow.classList.add("res1");
-
-    newRow.innerHTML = `
-          <th class="row idcol">${row.patient_id}</th>
-          <th class="row namecol">${row.patient_name}</th>
-          <th class="row timecol">${row.created_date}</th>
-          <th class="row coursecol">${row.course_section}</th>
-          <th class="row timecol">${row.location}</th>
-          <th class="row timecol">${row.added_by}</th>
-          <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
-              <p class="txt">View</p>
-            </button>
-          </th>
-        `;
-
-    tableBody.appendChild(newRow);
-  });
-} else {
-  // Patient not found
-  const newRow = document.createElement("tr");
-  newRow.innerHTML = `
-    <th class="row" colspan="7">Patient not found</td>
-  `;
-  tableBody.appendChild(newRow);
-}
-};
