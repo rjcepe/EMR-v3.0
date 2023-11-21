@@ -12,6 +12,9 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 let searchState = 0;
 
+if(!getusertype()){
+  window.location.reload;
+}
 ///////////////////////////////////// Load data to table
 //////////////////////////////// sort function
 // Add an event listener to the select element to detect changes
