@@ -130,7 +130,8 @@ function cert02(button){
 
     
     ///managing section
-    const filtersdiv = document.querySelector(".filters");
+    const filtersdiv = document.querySelector(".filters1");
+
     const sheetlink1 = "https://docs.google.com/spreadsheets/d/1uVqbtw1zskjAE-q4m4UXVQYTbG8ID3nrH3JW7Qu7450/edit?usp=sharing";
 
     //clear div
@@ -179,7 +180,7 @@ function cert03(button){
      button.classList.add('activebuttform');
     
      ///managing section
-    const filtersdiv = document.querySelector(".filters");
+    const filtersdiv = document.querySelector(".filters1");
     const sheetlink1 = "https://docs.google.com/spreadsheets/d/1BtQl7BKrm8YaP9ErymQ97itcYcMjrzOCD8WQSFE9TuY/edit?usp=sharing";
 
     //clear div
@@ -227,7 +228,7 @@ function cert04(button){
      button.classList.add('activebuttform');
     
      ///managing section
-     const filtersdiv = document.querySelector(".filters");
+     const filtersdiv = document.querySelector(".filters1");
      const sheetlink1 = "https://docs.google.com/spreadsheets/d/1lkpjfAWUGLhkY-I2riz2wIFHxnBjf0FCKgd2oQi8Fxs/edit?usp=sharing";
  
      //clear div
@@ -275,7 +276,7 @@ function cert05(button){
      button.classList.add('activebuttform');
     
      ///managing section
-     const filtersdiv = document.querySelector(".filters");
+     const filtersdiv = document.querySelector(".filters1");
      const sheetlink1 = "https://docs.google.com/spreadsheets/d/1IJb6Xl4GwP-Xmym8FBdpJTWr50-f83nli4laaxnNpFY/edit?usp=sharing";
  
      //clear div
@@ -323,7 +324,7 @@ function cert06(button){
      button.classList.add('activebuttform');
     
      ///managing section
-     const filtersdiv = document.querySelector(".filters");
+     const filtersdiv = document.querySelector(".filters1");
      const sheetlink1 = "https://docs.google.com/spreadsheets/d/1e1QjZpj5MptIrWKuoS_RJaEMchVjtDV4SpS2yThuzic/edit?usp=sharing";
  
      //clear div
@@ -371,7 +372,7 @@ function cert07(button){
      button.classList.add('activebuttform');
     
      ///managing section
-     const filtersdiv = document.querySelector(".filters");
+     const filtersdiv = document.querySelector(".filters1");
      const sheetlink1 = "https://docs.google.com/spreadsheets/d/1ZBxMJDJL7PhPyseMugB9lBhpJtixJBh_YFYmwLHQ7Xg/edit?usp=sharing";
  
      //clear div
@@ -419,7 +420,7 @@ function cert08(button){
      button.classList.add('activebuttform');
     
      ///managing section
-     const filtersdiv = document.querySelector(".filters");
+     const filtersdiv = document.querySelector(".filters1");
      const sheetlink1 = "https://docs.google.com/spreadsheets/d/1LIG0wx-NJDGu_aPH0CIuIC11axLUQXwW6WLox-fUtBQ/edit?usp=sharing";
  
      //clear div
@@ -467,7 +468,7 @@ function cert09(button){
      button.classList.add('activebuttform');
     
      ///managing section
-     const filtersdiv = document.querySelector(".filters");
+     const filtersdiv = document.querySelector(".filters1");
      const sheetlink1 = "https://docs.google.com/spreadsheets/d/1mK_fymE99j9MYSHlaY8CrPXYyoOPlZODPENN4Z3dIzA/edit?usp=sharing";
  
      //clear div
@@ -515,7 +516,7 @@ function cert10(button){
      button.classList.add('activebuttform');
     
      ///managing section
-     const filtersdiv = document.querySelector(".filters");
+     const filtersdiv = document.querySelector(".filters1");
      const sheetlink1 = "https://docs.google.com/spreadsheets/d/191u-2221YTCLfFSARGCU1K0_JZFrrcmOToy5G5ihG00/edit?usp=sharing";
  
      //clear div
