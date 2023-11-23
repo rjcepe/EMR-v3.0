@@ -602,16 +602,15 @@
 
   .inputsX {
       /* border: 1px solid white; */
-      width: 100%;
+      width: 80%;
       margin-bottom: 5px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-evenly;
       color: white;
+
   }
-  .inputsX div{
-    margin: 0px 20px 0px 20px;
-  }
+
   .inputs {
       /* border: 1px solid white; */
       width: 100%;
