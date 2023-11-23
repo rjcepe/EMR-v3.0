@@ -14,7 +14,8 @@
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <title>Accident Census</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Monthly Census</title>
 </head>
 
 <body>
@@ -82,14 +83,59 @@
                     <div class="username"></div>
                 </div>
             </div>
-            <div class="inputs">
-                <div class="search">
-                    <a href="https://docs.google.com/spreadsheets/d/1DF-3QXSzD1ly1ksVVUQEfNO-T2fGkYCAXEoygsMnXjY/edit?usp=sharing" target="_blank">Manage SpreadSheet >></a>
+            <div class="inputsX">
+                <div class="typeselect">
+                    <label>Patient Type:</label>
+                    <select id="patType" onchange="updateType()">
+                        <option value="AllTy" selected>All</option>
+                        <option value="Student">Student</option>
+                        <option value="Faculty">Faculty</option>
+                        <option value="Staff">Staff</option>
+                    </select>
+                </div>
+                <div class="location">
+                    <label>Location:</label>
+                    <select id="location" onchange="updateType()">
+                        <option value="AllLoc" selected>All</option>
+                        <option value="East Clinic">East Clinic</option>
+                        <option value="West Clinic">West Clinic</option>
+                        <option value="SHS Clinic">SHS Clinic</option>
+                    </select>
+                </div>
+                <div class="year">
+                    <label>Year:</label>
+                    <select id="year" onchange="updateType()">
+                        <option value="AllYr" selected>All</option>
+                        <option value="2023" >2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+                <div class="month">
+                    <label>Month:</label>
+                    <select id="month" onchange="updateType()">
+                        <option value="AllMn" selected>All</option>
+                        <option value="1" >Jan</option>
+                        <option value="2">Feb</option>
+                        <option value="3">Mar</option>
+                        <option value="4">Apr</option>
+                        <option value="5">May</option>
+                        <option value="6">Jun</option>
+                        <option value="7">Jul</option>
+                        <option value="8">Aug</option>
+                        <option value="9">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                    </select>
                 </div>
                 
             </div>
-            <div class="results3">
-                <iframe scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSGkOck6MjBWya9w1U95j6X4kujuOxS6doOXek2csnF4dE7-4FKYjlPjIrO2An2kuod3R_Rk-aqq8yq/pubhtml?widget=true&amp;headers=false"></iframe>
+            <div class="results4">
+                <div class="chart-div">
+                    <canvas id="diseaseCountChart"></canvas>
+                </div>
             </div>
            
             

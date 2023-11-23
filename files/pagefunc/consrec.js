@@ -206,11 +206,14 @@ async function filterEvent() {
       loadTableData();
   } else {
     const checkedValues = Array.from(checkedCheckboxes).map(checkbox => checkbox.value);
+    
 
     const { data: patientData, error } = await _supabase
       .from("cons_rec")
       .select("*")
-      .contains("diagchex", [checkedValues]);
+      .contains("allArr", [checkedValues]);
+
+    console.log(patientData);
 
     const tableBody = document.querySelector("#cons_table tbody");
     tableBody.innerHTML = ""; // Clear the current table
@@ -356,22 +359,9 @@ $("#insertstudconsform").submit(async function (event) {
   const note1 = $("#notes").val();
   
   var diagchex = [...checkedValues, ...filledValues];
-
   const ptype = "Student";
-  const ptypeArray = [ptype];
-  if (otherArr != null){
-    var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray, ...otherArr];
-   }
-   else{
-   var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray];
- }
-  
-  const diag1 = diagchex.join(", ");
 
-  var username = sessionStorage.getItem("x");
-
-  try {
-    ///get current date
+  ///get current date
     // Specify the target timezone as "Asia/Manila"
     const targetTimezone = "Asia/Manila";
 
@@ -392,6 +382,25 @@ $("#insertstudconsform").submit(async function (event) {
     });
 
     const CurrentDate = `${year}-${month}-${day}`;
+    const DateArr = [year, month, day];
+    var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
+  
+  if (otherArr != null){
+    var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
+    var allArr = [...checkedValues, ...filledValues, ...otherArr, ...miscArr];
+  }
+  else{
+    var diagchex2 = [...checkedValues, ...filledValues];
+    var allArr = [...checkedValues, ...filledValues, ...miscArr];
+ }
+  
+
+  const diag1 = diagchex.join(", ");
+
+  var username = sessionStorage.getItem("x");
+
+  try {
+    
 
     const formInfo = {
       patient_id: id1,
@@ -403,6 +412,9 @@ $("#insertstudconsform").submit(async function (event) {
       diagnosis: diag1,
       diagchex: diagchex2,
       notes: note1,
+      DateArr: DateArr,
+      misc: miscArr,
+      allArr: allArr,
     };
 
     const { data: insertData, error: insertError } = await _supabase
@@ -482,20 +494,7 @@ $("#insertempconsform").submit(async function (event) {
   var diagchex = [...checkedValues, ...filledValues];
 
   const ptype = "Faculty";
-  const ptypeArray = [ptype];
-  if (otherArr != null){
-    var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray, ...otherArr];
-   }
-   else{
-   var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray];
- }
-  
-  const diag1 = diagchex.join(", ");
-
-  var username = sessionStorage.getItem("x");
-
-  try {
-    ///get current date
+  ///get current date
     // Specify the target timezone as "Asia/Manila"
     const targetTimezone = "Asia/Manila";
 
@@ -516,6 +515,24 @@ $("#insertempconsform").submit(async function (event) {
     });
 
     const CurrentDate = `${year}-${month}-${day}`;
+    const DateArr = [year, month, day];
+    var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
+ 
+  if (otherArr != null){
+    var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
+    var allArr = [...checkedValues, ...filledValues, ...otherArr, ...miscArr];
+  }
+  else{
+    var diagchex2 = [...checkedValues, ...filledValues];
+    var allArr = [...checkedValues, ...filledValues, ...miscArr];
+ }
+  
+  const diag1 = diagchex.join(", ");
+
+  var username = sessionStorage.getItem("x");
+
+  try {
+    
 
     const formInfo = {
       patient_id: id1,
@@ -527,6 +544,9 @@ $("#insertempconsform").submit(async function (event) {
       diagnosis: diag1,
       diagchex: diagchex2,
       notes: note1,
+      DateArr: DateArr,
+      misc: miscArr,
+      allArr: allArr,
     };
 
     const { data: insertData, error: insertError } = await _supabase
@@ -602,21 +622,8 @@ $("#insertstaffconsform").submit(async function (event) {
   var diagchex = [...checkedValues, ...filledValues];
 
   const ptype = "Staff";
-  const ptypeArray = [ptype];
 
-  if (otherArr != null){
-     var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray, ...otherArr];
-    }
-    else{
-    var diagchex2 = [...checkedValues, ...filledValues, ...ptypeArray];
-  }
-  
-  const diag1 = diagchex.join(", ");
-
-  var username = sessionStorage.getItem("x");
-
-  try {
-    ///get current date
+   ///get current date
     // Specify the target timezone as "Asia/Manila"
     const targetTimezone = "Asia/Manila";
 
@@ -637,6 +644,24 @@ $("#insertstaffconsform").submit(async function (event) {
     });
 
     const CurrentDate = `${year}-${month}-${day}`;
+    const DateArr = [year, month, day];
+    var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
+
+  if (otherArr != null){
+    var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
+    var allArr = [...checkedValues, ...filledValues, ...otherArr, ...miscArr];
+  }
+  else{
+    var diagchex2 = [...checkedValues, ...filledValues];
+    var allArr = [...checkedValues, ...filledValues, ...miscArr];
+ }
+  
+  const diag1 = diagchex.join(", ");
+
+  var username = sessionStorage.getItem("x");
+
+  try {
+   
 
     const formInfo = {
       patient_id: id1,
@@ -648,6 +673,9 @@ $("#insertstaffconsform").submit(async function (event) {
       diagnosis: diag1,
       diagchex: diagchex2,
       notes: note1,
+      DateArr: DateArr,
+      misc: miscArr,
+      allArr: allArr,
     };
 
     const { data: insertData, error: insertError } = await _supabase

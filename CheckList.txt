@@ -70,3 +70,12 @@ Level of access:
         FORM 10 - NURSE&CLERK
 
         FORM 12 (prescriptions) - DOCTOR (NURSE&CLERK = cant generate, cant manage spreadsheet)
+
+
+
+
+chart.js road map
+- get all values in supabase
+- 50 for loops? (maybe nested?)
+
+-
