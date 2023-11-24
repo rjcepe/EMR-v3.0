@@ -121,7 +121,7 @@ async function displayResults(results) {
     
   // Fetch the patient data based on the search ID
   const { data: patientData, error } = await _supabase
-    .from("cons_rec")
+    .from("med_forms")
     .select("*")
     .or(`patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`);
 

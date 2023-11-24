@@ -132,7 +132,7 @@ function addDataset(label, count) {
 // Update the chart to display the new dataset
 
 }
-function addLabel(type, year, location, month){
+function addLabel(type, year, location, month, patientC){
   if(type == "AllTy"){
     type = "All Patients";
   }
@@ -150,7 +150,7 @@ function addLabel(type, year, location, month){
   if(month == "7"){month = "July";} if(month == "8"){month = "August";} if(month == "9"){month = "September";}
   if(month == "10"){month = "October";} if(month == "11"){month = "November";} if(month == "12"){month = "December";}
   
-  var title = `${year} ${month} Disease Cases in ${location} | ${type}`;
+  var title = `${year} ${month} Disease Cases in ${location} | ${type} (${patientC})`;
 
   // diseaseCountChart.options.plugins.title.text.push(title);
   initialDiseaseCountData.labels.push(title);
@@ -176,103 +176,6 @@ function updateType(){
 
 }
 
-// // fetch ALL
-// async function fetchAllData(type){
-
-//     const { data } = await _supabase
-//       .from("cons_rec")
-//       .select("*")
-//       .contains("misc", [type]);
-
-//       const stat = {};
-      
-//       if (data && data.length > 0){
-
-//         addLabel(type);
-//         var location = document.getElementById("location").value;
-//         var year = document.getElementById("year").value;
-//         var month = document.getElementById("month").value;
-
-//         if (location != "AllLoc"){
-//           const xx = [location, type];
-
-//           const { data } = await _supabase
-//           .from("cons_rec")
-//           .select("*")
-//           .contains("misc", [xx]);
-
-//           const stat = {};
-
-//           console.log(data);
-//           if (data && data.length > 0){
-
-//             data.forEach(data1 => {
-                  
-//               data1.diagchex.forEach(dis =>{
-              
-//                   if(stat[dis]){
-//                     stat[dis]++;
-//                   }
-//                   else {
-//                   stat[dis] = 1;
-//                   }
-//                 })
-//               });
-//           }
-//             for (const [disease, count] of Object.entries(stat)) {
-//               addDataset(disease, count);
-//           }
-//         }
-//         if (year != "AllYr"){
-//           const xx = [year, type, location];
-
-//           const { data } = await _supabase
-//           .from("cons_rec")
-//           .select("*")
-//           .contains("misc", [xx]);
-
-//           const stat = {};
-
-//           console.log(data);
-//           if (data && data.length > 0){
-
-//             data.forEach(data1 => {
-                  
-//               data1.diagchex.forEach(dis =>{
-              
-//                   if(stat[dis]){
-//                     stat[dis]++;
-//                   }
-//                   else {
-//                   stat[dis] = 1;
-//                   }
-//                 })
-//               });
-//           }
-//             for (const [disease, count] of Object.entries(stat)) {
-//               addDataset(disease, count);
-//           }
-//         }
-//         else{
-//           data.forEach(data1 => {
-            
-//             data1.diagchex.forEach(dis =>{
-            
-//                 if(stat[dis]){
-//                   stat[dis]++;
-//                 }
-//                 else {
-//                 stat[dis] = 1;
-//                 }
-//               })
-//             });
-//          }
- 
-//          for (const [disease, count] of Object.entries(stat)) {
-//            addDataset(disease, count);
-//        }
-//       }
-//   }
 // fetch ALL
 async function fetchAllData(type){
     var location = document.getElementById("location").value;
@@ -288,31 +191,28 @@ async function fetchAllData(type){
 
       const stat = {};
 
-      console.log(data);
+      var patients = data.length;
       
       if (data && data.length > 0){
-
-        addLabel(type, year, location, month);
+        addLabel(type, year, location, month, patients);
         
         
           data.forEach(data1 => {
-            
             data1.diagchex.forEach(dis =>{
-            
-                if(stat[dis]){
-                  stat[dis]++;
-                }
-                else {
+              
+              if(stat[dis]){
+                stat[dis]++;
+              }
+              else {
                 stat[dis] = 1;
-                }
-              })
-            });
-         }
- 
-         for (const [disease, count] of Object.entries(stat)) {
-           addDataset(disease, count);
-       
-      }
+              }
+            })
+          });
+        }
+        for (const [disease, count] of Object.entries(stat)) {
+          addDataset(disease, count);
+        }
+        
   }
 
 
