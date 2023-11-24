@@ -108,13 +108,13 @@ async function fetchUsername() {
 
 function addDataset(label, count) {
 
-  // random color generator
-  const red = Math.floor(Math.random() * 26).toString(16).padStart(2, '0');
-  const green = Math.floor(Math.random() * 156).toString(16).padStart(2, '0');
-  const blue = Math.floor(Math.random() * 26).toString(16).padStart(2, '0');
-  
-  // Combine them into a single string and return
-  const randomColor = `#${red}${green}${blue}`;
+ // random color generator
+ const red = Math.floor(Math.random() * 156);
+ const green = Math.floor(Math.random() * 256);
+ const blue = Math.floor(Math.random() * 156);
+ 
+ // Combine them into an rgba string with 0.5 opacity
+ const randomColor = `rgba(${red},${green},${blue},0.5)`;
 
   var newDataset = {
 
