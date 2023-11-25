@@ -2076,6 +2076,9 @@
   }
 
   .chart-div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       position: relative;
       height: 100%;
       width: 100%;
@@ -2084,7 +2087,31 @@
       border: var(--blurborder);
       padding: 10px;
   }
+  .chart-div canvas{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.438);
+  }
 
+  .chart-div iframe{
+    display: none;
+  }
+
+  .printStat {
+      margin-top: 5px;
+      color: var(--green);
+      font-weight: 800;
+      border: none;
+      background-color: white;
+      width: 160px;
+      height: 30px;
+      border-radius: 10px;
+      transition: 0.3s;
+  }
+
+  .printStat:hover {
+      text-shadow: var(--txtshadow);
+      background-color: var(--lightgreen);
+      color: white;
+  }
 
   .search p {
       font-weight: 700;
@@ -2117,10 +2144,6 @@
       text-shadow: var(--txtshadow);
   }
 
-  .formbutt:hover {
-      background-color: var(--lgreen50);
-      text-shadow: var(--txtshadow);
-  }
 
   .formbutt {
       color: white;

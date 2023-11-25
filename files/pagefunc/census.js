@@ -130,7 +130,6 @@ function addDataset(label, count) {
   initialDiseaseCountData.datasets.push(newDataset);
   diseaseCountChart.update();
 // Update the chart to display the new dataset
-
 }
 function addLabel(type, year, location, month, patientC){
   if(type == "AllTy"){
@@ -156,6 +155,13 @@ function addLabel(type, year, location, month, patientC){
   initialDiseaseCountData.labels.push(title);
   diseaseCountChart.update();
   
+  const diseaseDiv = document.getElementById('printFrame');
+  const iframeDoc = diseaseDiv.contentDocument || diseaseIframe.contentWindow.document;
+
+  var content = `<h2><strong>${year} ${month} Disease Cases in ${location} | ${type} (${patientC})</strong></h2><hr>`;
+
+  iframeDoc.write(content);
+
 }
 function clearChart() {
   // Set the datasets array to an empty array
@@ -166,14 +172,19 @@ function clearChart() {
   diseaseCountChart.update();
 }
 
-
 function updateType(){
   clearChart();
 
   var patType = document.getElementById("patType").value;
   
+  const diseaseDiv = document.getElementById('printFrame');
+  const iframeDoc = diseaseDiv.contentDocument || diseaseIframe.contentWindow.document;
+  
+  iframeDoc.open();
+  iframeDoc.write('');
+  iframeDoc.close();
+  
   fetchAllData(patType);
-
 }
 
 // fetch ALL
@@ -209,12 +220,20 @@ async function fetchAllData(type){
             })
           });
         }
+        const diseaseDiv = document.getElementById('printFrame');
+        const iframeDoc = diseaseDiv.contentDocument || diseaseIframe.contentWindow.document;
+        
+        let content = '';
+
         for (const [disease, count] of Object.entries(stat)) {
           addDataset(disease, count);
-        }
-        
-  }
 
+          content += `<p><b>${disease}</b>: ${count}</p>`;
+         
+        }
+        iframeDoc.write(content);
+        console.log(content);
+  }
 
 
 ////////////// CHART INITIALIZATION
@@ -250,13 +269,14 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
               display: true,
               position: 'right',
               labels: {
-                color: 'white', // Legend label colors
+                color: 'white',
+                
             }
           },
           title: {
               display: true,
               text: '',
-              color: 'white', // Title text color
+              color: 'white', 
               font: {
                   size: 18
               }
@@ -269,3 +289,8 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
 updateType();
 
 
+function printStat(){
+  var printFrame = document.getElementById('printFrame');
+
+  printFrame.contentWindow.print();
+}
