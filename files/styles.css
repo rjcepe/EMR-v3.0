@@ -526,7 +526,7 @@
       backdrop-filter: var(--blur);
       background-color: var(--green);
       border-radius: 40px 10px 10px 40px;
-      cursor: pointer;
+      /* cursor: pointer; */
       /* margin-right: 10px; */
   }
 
