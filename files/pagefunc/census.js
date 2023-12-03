@@ -13,7 +13,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 //////////////////////////////////// user display
 async function fetchUsername() {
     var id1 = sessionStorage.getItem("uid1");
-    var type = sessionStorage.getItem("y");
+    var type = sessionStorage.getItem("z");
   
     const { data, error } = await _supabase
       .from("user_accs")
