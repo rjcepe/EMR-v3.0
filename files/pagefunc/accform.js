@@ -45,38 +45,7 @@ function getusername1(username) {
   sessionStorage.setItem("x", bb);
 }
 
-////////////////////////////// fetch user type
-async function getusertype() {
-  var id1 = sessionStorage.getItem("uid1");
 
-  const { data, error } = await _supabase
-    .from("user_accs")
-    .select("access_level")
-    .eq("id", id1);
-
-  if (error) {
-    console.error("Error fetching user type:", error.message);
-    return;
-  }
-
-  // Check if data is not empty
-  if (data && data.length > 0) {
-    const usertype = data[0].access_level;
-
-    
-    getusertype1(usertype);
-    
-  } else {
-    console.log("User not found with ID:", id1);
-  }
-}
-
-function getusertype1(usertype) {
-  var xx = usertype;
-  sessionStorage.setItem("y", xx);
-}
-
-getusertype();
 getusername();
 
 
