@@ -1,34 +1,79 @@
 
 // Add patient (type)
 function emp() {
+  const emp = document.querySelector('.uploadmedform2');
+  const empbutt = document.getElementById("empupbutt");
+  
+  emp.classList.add('shown');
+  emp.classList.remove('hidden');
+  
+  empbutt.classList.add('activeptb');
+
+  const stud = document.querySelector('.uploadmedform1');
+  const studbutt = document.getElementById("studupbutt");
+  
+  stud.classList.add('hidden');
+  stud.classList.remove('shown');
+
+  studbutt.classList.remove('activeptb');
+
+  const staff = document.querySelector('.uploadmedform3');
+  const staffbutt = document.getElementById("staffupbutt");
+  
+  staff.classList.add('hidden');
+  staff.classList.remove('shown');
+
+  staffbutt.classList.remove('activeptb');
+  }
+  function stud() {
     const stud = document.querySelector('.uploadmedform1');
+    const studbutt = document.getElementById("studupbutt");
+
+    stud.classList.add('shown');
+    stud.classList.remove('hidden');
+
+    studbutt.classList.add('activeptb');
+
     const emp = document.querySelector('.uploadmedform2');
     const empbutt = document.getElementById("empupbutt");
+
+    emp.classList.add('hidden');
+    emp.classList.remove('shown');
+
+    empbutt.classList.remove('activeptb');
+
+    const staff = document.querySelector('.uploadmedform3');
+    const staffbutt = document.getElementById("staffupbutt");
+    
+    staff.classList.add('hidden');
+    staff.classList.remove('shown');
+  
+    staffbutt.classList.remove('activeptb');
+  }
+  function staff() {
+    const staff = document.querySelector('.uploadmedform3');
+    const staffbutt = document.getElementById("staffupbutt");
+    
+    staff.classList.add('shown');
+    staff.classList.remove('hidden');
+  
+    staffbutt.classList.add('activeptb');
+
+    const stud = document.querySelector('.uploadmedform1');
     const studbutt = document.getElementById("studupbutt");
 
     stud.classList.add('hidden');
     stud.classList.remove('shown');
 
-    emp.classList.add('shown');
-    emp.classList.remove('hidden');
-
-    empbutt.classList.add('activeptb');
     studbutt.classList.remove('activeptb');
-  }
-  function stud() {
-    const stud = document.querySelector('.uploadmedform1');
+
     const emp = document.querySelector('.uploadmedform2');
     const empbutt = document.getElementById("empupbutt");
-    const studbutt = document.getElementById("studupbutt");
 
     emp.classList.add('hidden');
     emp.classList.remove('shown');
 
-    stud.classList.add('shown');
-    stud.classList.remove('hidden');
-
     empbutt.classList.remove('activeptb');
-    studbutt.classList.add('activeptb');
   }
 
   // add patients (button)

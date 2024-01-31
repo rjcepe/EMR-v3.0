@@ -121,8 +121,8 @@
                                 <tr>
                                     <td>Student - SHS<input type="checkbox" id="studentfilter" name="studentfilter" value="shs"></td>
                                     <td>Student - College<input type="checkbox" id="studentfilter" name="studentfilter" value="coll"></td>
-                                    <td>Faculty<input type="checkbox" id="facultyfilter" name="facultyfilter" value="Faculty"></td>
-                                    <td> Staff<input type="checkbox" id="stafffilter" name="stafffilter" value="Staff">
+                                    <td>Faculty<input type="checkbox" id="facultyfilter" name="facultyfilter" value="faculty"></td>
+                                    <td> Staff<input type="checkbox" id="stafffilter" name="stafffilter" value="staff">
                                     </td>
                                 </tr>
                     
@@ -186,6 +186,7 @@
             <div class="patienttypebutt">
                 <button class="ptbutt activeptb" id="studupbutt" onclick="stud()">Student</button>
                 <button class="ptbutt" id="empupbutt" onclick="emp()">Employee</button>
+                <button class="ptbutt" id="staffupbutt" onclick="staff()">Staff</button>
             </div>
             <div class="cont1a">
                 <form id="insertstudmedform" class="uploadmedform1">
@@ -288,15 +289,6 @@
                                             <input type="text" id="empname" placeholder="Emloyee's Name...">
                 
                                         </td>
-                                    </tr>
-                
-                                    <tr>
-                                        <td>
-                                            <label for="">ID:</label>
-                                        </td>
-                                        <td>
-                                            <input type="number" id="empid" placeholder="Emloyee's ID...">
-                                        </td>
                                         <td>
                                             <label for="college">College:</label>
                                         </td>
@@ -314,7 +306,15 @@
                                             </select>
                                         </td>
                                     </tr>
+                
                                     <tr>
+                                        <td>
+                                            <label for="">ID:</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="empid" placeholder="Emloyee's ID...">
+                                        </td>
+
                                         <td>
                                             <label for="course">Course:</label>
                                         </td>
@@ -324,6 +324,9 @@
                                                 <!-- Course options will be populated based on the college selection -->
                                             </select>
                                         </td>
+                                        
+                                    </tr>
+                                        
                                 </table>
                             </div>
                             <div class="location1">
@@ -339,6 +342,58 @@
                             <hr>
                                 <label for="medform">Upload Medical Record</label>
                                 <input type="file" id="medform2" name="medform" accept=".pdf" class="inputfile">
+                        </div>
+                        
+                    </div>
+                
+                    
+                
+                    <button class="submitp">Submit</button>
+                </form>
+
+                <form id="insertstaffmedform" class="uploadmedform3 hidden">
+                    <h2>Staff Information:</h2>
+                
+                    <div class="entries1">
+                        <div class="entry01a">
+                            <h2>PERSONAL INFORMATION</h2>
+                            <div class="input-group1">
+                                <table class="topt">
+                                    <tr>
+                                        <td>
+                                            <label for="staffname">NAME:</label>
+                
+                                        </td>
+                                        <td>
+                                            <input type="text" id="staffname" placeholder="Staff's Name...">
+                
+                                        </td>                                    
+                                    </tr>
+                
+                                    <tr>
+                                        <td>
+                                            <label for="">ID:</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="staffid" placeholder="Staff's ID...">
+                                        </td>
+                                    </tr>
+                                        
+                                </table>
+                            </div>
+                            <div class="location1">
+                                <label for="loc">Location:</label>
+                                <select name="loc" id="locsel2">
+                                    <option disabled selected value> -- Select Location -- </option>
+                                    <option value="East Clinic">East Clinic</option>
+                                    <option value="West Clinic">West Clinic</option>
+                                    <option value="SHS Clinic">SHS Clinic</option>
+                                </select>
+                            </div>
+                
+                            <hr>
+                                <label for="medform">Upload Medical Record</label>
+                                <input type="file" id="medform3" name="medform" accept=".pdf" class="inputfile">
                         </div>
                         
                     </div>

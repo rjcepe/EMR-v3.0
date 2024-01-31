@@ -407,37 +407,57 @@ $("#insertstudmedform").submit(async function (event) {
 $("#insertempmedform").submit(async function (event) {
   event.preventDefault();
 
-  // Retrieve the current empmedfilecount value from local storage
-  let empmedfilecount = sessionStorage.getItem("empmedfilecount");
+  let empmedfilecount = 0;
 
-  // If empmedfilecount is not present in local storage, initialize it to 0
-  if (empmedfilecount === null) {
-    empmedfilecount = 0;
-  } else {
-    // Convert it to a number
-    empmedfilecount = parseInt(empmedfilecount);
-  }
+  // get cys
+  const course = $("#course3").val();
 
   // Get form field values
   const name1 = $("#empname").val();
   const id1 = $("#empid").val();
   const loc1 = $("#locsel1").val();
 
+  var ptype = "faculty";
+  
+
+  ///get current date
+  // Specify the target timezone as "Asia/Manila"
+  const targetTimezone = "Asia/Manila";
+
+  // Get the current date and time in the target timezone
+  const today = new Date();
+
+  const year = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    year: "numeric",
+  });
+  const month = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    month: "2-digit",
+  });
+  const day = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    day: "2-digit",
+  });
+
+  const CurrentDate = `${year}-${month}-${day}`;
+  const DateArr = [year, month, day];
+  var allArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
+
   var username = sessionStorage.getItem("x");
 
   const medformInput = document.getElementById("medform2");
   const medformFile = medformInput.files[0];
 
+  var fileName;
+
   // Increment empmedfilecount
   empmedfilecount++;
 
-  // Store the updated empmedfilecount back in local storage
-  sessionStorage.setItem("empmedfilecount", empmedfilecount);
-
-  // Initialize the 'user' variable outside the try-catch block
-  try {
+  async function uploadEmpMedFile() {
+    
     // Change the filename to "(name inputted)_medform"
-    const fileName = `${id1}_medform${empmedfilecount}.${medformFile.name
+    fileName = `${id1}_medform_${year}(${empmedfilecount}).${medformFile.name
       .split(".")
       .pop()}`;
 
@@ -447,43 +467,32 @@ $("#insertempmedform").submit(async function (event) {
       .upload(fileName, medformFile);
 
     if (uploadError) {
-      console.error("Error uploading file:", uploadError);
-      alert("Error uploading file:", uploadError);
-      return;
+      var errorMessage = uploadError.error;
+
+      if (errorMessage === "Duplicate") {
+        empmedfilecount++;
+        await uploadEmpMedFile();
+      }
     }
+    if (data){
+      await uploadEmpMedInfo();
+    }
+  }
 
-    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`; // Fixed the URL formation
-
-    ///get current date
-    // Specify the target timezone as "Asia/Manila"
-    const targetTimezone = "Asia/Manila";
-
-    // Get the current date and time in the target timezone
-    const today = new Date();
-
-    const year = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      year: "numeric",
-    });
-    const month = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      month: "2-digit",
-    });
-    const day = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      day: "2-digit",
-    });
-
-    const CurrentDate = `${year}-${month}-${day}`;
+  async function uploadEmpMedInfo() {
+    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
 
     const medformInfo = {
       patient_id: id1,
       patient_name: name1,
       created_date: CurrentDate,
-      course_section: "Employee",
+      course_section: "Faculty - " + course,
       location: loc1,
       added_by: username,
       med_file: medformURL,
+      allArr: allArr,
+      DateArr: DateArr,
+      archived: false,
     };
 
     // Insert data into the 'med_forms1' table
@@ -493,23 +502,133 @@ $("#insertempmedform").submit(async function (event) {
 
     if (insertError) {
       console.error("Error inserting data:", insertError.message);
-      alert("Error inserting data:", insertError.message);
+      alert("Error inserting data");
     } else {
       console.log("Data inserted successfully:", insertData);
       // location.reload();
       loadTableData();
-      hidep();
+      hidep1();
       shownotif();
 
-      $("#empname").val("");
-      $("#empid").val("");
-      $("#locsel1").val("");
-      $("#medform2").val("");
+      // blanks the add record container
+      document.getElementById("insertempmedform").reset();
     }
-  } catch (error) {
-    console.error("Error:", error.message);
-    alert("Error:", error.message);
   }
+
+  await uploadEmpMedFile();
+  
+});
+
+$("#insertstaffmedform").submit(async function (event) {
+  event.preventDefault();
+
+  let staffmedfilecount = 0;
+
+  // Get form field values
+  const name1 = $("#staffname").val();
+  const id1 = $("#staffid").val();
+  const loc1 = $("#locsel2").val();
+
+  var ptype = "staff";
+  
+
+  ///get current date
+  // Specify the target timezone as "Asia/Manila"
+  const targetTimezone = "Asia/Manila";
+
+  // Get the current date and time in the target timezone
+  const today = new Date();
+
+  const year = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    year: "numeric",
+  });
+  const month = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    month: "2-digit",
+  });
+  const day = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    day: "2-digit",
+  });
+
+  const CurrentDate = `${year}-${month}-${day}`;
+  const DateArr = [year, month, day];
+  var allArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
+
+  var username = sessionStorage.getItem("x");
+
+  const medformInput = document.getElementById("medform3");
+  const medformFile = medformInput.files[0];
+
+  var fileName;
+
+  // Increment staffmedfilecount
+  staffmedfilecount++;
+
+  async function uploadStaffMedFile() {
+    
+    // Change the filename to "(name inputted)_medform"
+    fileName = `${id1}_medform_${year}(${staffmedfilecount}).${medformFile.name
+      .split(".")
+      .pop()}`;
+
+    // Upload the file to Supabase storage with the modified filename
+    const { data, error: uploadError } = await _supabase.storage
+      .from("medicalrecords")
+      .upload(fileName, medformFile);
+
+    if (uploadError) {
+      var errorMessage = uploadError.error;
+
+      if (errorMessage === "Duplicate") {
+        staffmedfilecount++;
+        await uploadStaffMedFile();
+      }
+    }
+    if (data){
+      await uploadStaffMedInfo();
+    }
+  }
+
+  async function uploadStaffMedInfo() {
+    const medformURL = `${SUPABASE_URL}/storage/v1/object/public/medicalrecords/${fileName}`;
+
+    const medformInfo = {
+      patient_id: id1,
+      patient_name: name1,
+      created_date: CurrentDate,
+      course_section: "Staff",
+      location: loc1,
+      added_by: username,
+      med_file: medformURL,
+      allArr: allArr,
+      DateArr: DateArr,
+      archived: false,
+    };
+
+    // Insert data into the 'med_forms1' table
+    const { data: insertData, error: insertError } = await _supabase
+      .from("med_forms")
+      .insert(medformInfo);
+
+    if (insertError) {
+      console.error("Error inserting data:", insertError.message);
+      alert("Error inserting data");
+    } else {
+      console.log("Data inserted successfully:", insertData);
+      // location.reload();
+      loadTableData();
+      hidep1();
+      shownotif();
+
+      // blanks the add record container
+      document.getElementById("insertstaffmedform").reset();
+    }
+  }
+
+  await uploadStaffMedFile();
+  
 });
 
 getusername();

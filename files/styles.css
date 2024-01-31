@@ -1253,7 +1253,8 @@
   }
 
   .uploadmedform1 input[type="text"],
-  .uploadmedform2 input[type="text"] {
+  .uploadmedform2 input[type="text"],
+  .uploadmedform3 input[type="text"] {
       width: 80%;
       height: 30px;
       border-radius: 10px;
@@ -1322,7 +1323,8 @@
   }
 
   .uploadmedform1 h2,
-  .uploadmedform2 h2 {
+  .uploadmedform2 h2,
+  .uploadmedform3 h2 {
       width: 100%;
       border: var(--gborder);
       color: var(--green);
@@ -1332,7 +1334,8 @@
   }
 
   .uploadmedform1,
-  .uploadmedform2 {
+  .uploadmedform2,
+  .uploadmedform3 {
       display: flex;
       justify-content: space-between;
       /* padding-top: 20px; */
@@ -1356,7 +1359,8 @@
   .entry1 input[type="text"],
   .entry2 input[type="text"],
   .entry3 input[type="text"],
-  .uploadmedform2 input[type="number"] {
+  .uploadmedform2 input[type="number"], 
+  .uploadmedform3 input[type="number"] {
       width: auto;
       height: 30px;
       border-radius: 10px;
@@ -1373,7 +1377,8 @@
   }
 
   .uploadmedform1 hr,
-  .uploadmedform2 hr {
+  .uploadmedform2 hr,
+  .uploadmedform3 hr {
       width: 80%;
       border: 1px solid white;
       border-radius: 10px;

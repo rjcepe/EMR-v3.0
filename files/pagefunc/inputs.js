@@ -16,6 +16,8 @@ function toggleTextbox1(checkbox, textboxID) {
 
 
 //////////////////course n section 
+
+//cons rec
 function updateCourses() {
     var collegeSelect = document.getElementById('college');
     var courseSelect = document.getElementById('course');
@@ -98,6 +100,7 @@ function updateCourses() {
     
 }
 
+//med rec
 function updateCourses1() {
     var collegeSelect = document.getElementById('college2');
     var courseSelect = document.getElementById('course2');
@@ -106,7 +109,6 @@ function updateCourses1() {
     var collegeSelect1 = document.getElementById('college3');
     var courseSelect1 = document.getElementById('course3');
     var selectedCollege1 = collegeSelect1.value;
-
 
     // Object containing courses for each college
     var courses = {

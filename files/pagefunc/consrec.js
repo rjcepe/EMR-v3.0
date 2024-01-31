@@ -513,7 +513,6 @@ $("#insertempconsform").submit(async function (event) {
   const checkedValues = Array.from(checkboxes).map((checkbox) => checkbox.value);
 
   // get cys
-  const college = $("#college1").val();
   const course = $("#course1").val();
 
   // Get form field values
