@@ -43,7 +43,8 @@ async function loadTableData() {
     newRow.innerHTML = `<th class="row" colspan="7">No data available</td>`;
     tableBody.appendChild(newRow);
     console.log("No data");
-  }  
+  } 
+  
   else {
 
     const selectedOption = document.getElementById("sort1").value;
@@ -75,26 +76,90 @@ async function loadTableData() {
 
     tableData1.forEach((row) => {
 
+      // check if the row is archived
       if (row.archived === false) {
+      
         const newRow = document.createElement("tr");
-        newRow.classList.add("res1");
+      newRow.classList.add("res1");
+      newRow.innerHTML = `
+          <th class="row1 idcol1">${row.patient_id}</th>
+          <th class="row1 namecol1">${row.patient_name}</th>
+          <th class="row1 timecol1">${row.created_date}</th>
+          <th class="row1 coursecol1">${row.course_section}</th>
+          <th class="row1 diagcol1">${row.diagnosis}</th>
+          <th class="row1 notescol">${row.notes}</th>
+          <th class="row1 timecol1">${row.location}</th>
+          <th class="row1 timecol1">${row.added_by}</th>
 
-        newRow.innerHTML = `
-            <th class="row1 idcol1">${row.patient_id}</th>
-            <th class="row1 namecol1">${row.patient_name}</th>
-            <th class="row1 timecol1">${row.created_date}</th>
-            <th class="row1 coursecol1">${row.course_section}</th>
-            <th class="row1 diagcol1">${row.diagnosis}</th>
-            <th class="row1 notescol">${row.notes}</th>
-            <th class="row1 timecol1">${row.location}</th>
-            <th class="row1 timecol1">${row.added_by}</th>
+          <th class="row1 admincol">
+            <button class="admnbutt" onclick="archive(${row.patient_id}, '${row.archived}')">
+                
+                <img src="/files/images/archive.png" alt="archive" srcset="">
+                
+                </button>
+              <button class="admnbutt" onclick="deleteData(${row.patient_id}, '${row.patient_name}', '${row.created_date}', '${row.course_section}', '${row.diagnosis}', '${row.notes}', '${row.location}', '${row.added_by}')">
+              
+              <img src="/files/images/delete.png" alt="" srcset="">
+              
+              </button>
+              
+          </th>
+          
         `;
-
-        tableBody.appendChild(newRow);
-        }
+      tableBody.appendChild(newRow);
+      }
     });
   }
 }
+
+//edit data in row
+async function deleteData(id) {
+  try {
+          // Delete the data from the table
+          const { data: deletedData, error: deleteError } = await _supabase.from('cons_rec').delete().eq('patient_id', id);
+
+          if (deleteError) {
+              console.log('Error deleting data:', deleteError.message);
+          } else {
+              console.log('Data deleted successfully:', deletedData);
+              location.reload();
+          }
+
+
+          loadTableData();
+  } catch (error) {
+      console.error('Error deleting data:', error.message);
+  }
+}
+
+//add to archives
+async function archive(id, stat) {
+  try {   
+
+          if (stat == "false"){
+            var newStatus = "true";
+          }
+          else{
+            var newStatus = "false"; 
+          }
+
+          // archive the data from the table
+          const { data: archiveData, error: archiveDataError } = await _supabase.from('cons_rec').update({archived: newStatus}).eq('patient_id', id);
+
+          if (archiveDataError) {
+              console.log('Error archiving data:', archiveDataError.message);
+          } else {
+              console.log('Data archived successfully:', archiveData);
+              
+          }
+
+
+          loadTableData();
+  } catch (error) {
+      console.error('Error archiving data:', error.message);
+  }
+}
+
 
 // Add an event listener to the select element to detect changes
 document.getElementById("sort1").addEventListener("change", function () {
@@ -152,12 +217,12 @@ async function displayResults(results) {
       const selectedOption = document.getElementById("sort1").value;
     // Sort the data based on the selected option
     if (selectedOption === "IDasc") {
-      tableData1.sort(
+      patientData.sort(
         (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
       );
     }
     else if (selectedOption === "IDdesc") {
-      tableData1.sort(
+      patientData.sort(
         (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
       );
     } else if (selectedOption === "TimeLate") {
@@ -179,22 +244,36 @@ async function displayResults(results) {
       // Patient data found, update the table
       patientData.forEach((row) => {
         if (row.archived === false) {
+      
           const newRow = document.createElement("tr");
-          newRow.classList.add("res1");
+        newRow.classList.add("res1");
+        newRow.innerHTML = `
+            <th class="row1 idcol1">${row.patient_id}</th>
+            <th class="row1 namecol1">${row.patient_name}</th>
+            <th class="row1 timecol1">${row.created_date}</th>
+            <th class="row1 coursecol1">${row.course_section}</th>
+            <th class="row1 diagcol1">${row.diagnosis}</th>
+            <th class="row1 notescol">${row.notes}</th>
+            <th class="row1 timecol1">${row.location}</th>
+            <th class="row1 timecol1">${row.added_by}</th>
   
-          newRow.innerHTML = `
-              <th class="row1 idcol1">${row.patient_id}</th>
-              <th class="row1 namecol1">${row.patient_name}</th>
-              <th class="row1 timecol1">${row.created_date}</th>
-              <th class="row1 coursecol1">${row.course_section}</th>
-              <th class="row1 diagcol1">${row.diagnosis}</th>
-              <th class="row1 notescol">${row.notes}</th>
-              <th class="row1 timecol1">${row.location}</th>
-              <th class="row1 timecol1">${row.added_by}</th>
+            <th class="row1 admincol">
+              <button class="admnbutt" onclick="archive(${row.patient_id}, '${row.archived}')">
+                  
+                  <img src="/files/images/archive.png" alt="archive" srcset="">
+                  
+                  </button>
+                <button class="admnbutt" onclick="deleteData(${row.patient_id}, '${row.patient_name}', '${row.created_date}', '${row.course_section}', '${row.diagnosis}', '${row.notes}', '${row.location}', '${row.added_by}')">
+                
+                <img src="/files/images/delete.png" alt="" srcset="">
+                
+                </button>
+                
+            </th>
+            
           `;
-  
-          tableBody.appendChild(newRow);
-          }
+        tableBody.appendChild(newRow);
+        }
       });
     } else {
       // Patient not found
@@ -240,12 +319,12 @@ async function filterEvent() {
       const selectedOption = document.getElementById("sort1").value;
         // Sort the data based on the selected option
         if (selectedOption === "IDasc") {
-          tableData1.sort(
+          patientData.sort(
             (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
           );
         }
         else if (selectedOption === "IDdesc") {
-          tableData1.sort(
+          patientData.sort(
             (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
           );
         } else if (selectedOption === "TimeLate") {
@@ -265,11 +344,10 @@ async function filterEvent() {
           } 
       // Patient data found, update the table
       patientData.forEach((row) => {
-
         if (row.archived === false) {
-        const newRow = document.createElement("tr");
+      
+          const newRow = document.createElement("tr");
         newRow.classList.add("res1");
-
         newRow.innerHTML = `
             <th class="row1 idcol1">${row.patient_id}</th>
             <th class="row1 namecol1">${row.patient_name}</th>
@@ -279,8 +357,22 @@ async function filterEvent() {
             <th class="row1 notescol">${row.notes}</th>
             <th class="row1 timecol1">${row.location}</th>
             <th class="row1 timecol1">${row.added_by}</th>
-        `;
-
+  
+            <th class="row1 admincol">
+              <button class="admnbutt" onclick="archive(${row.patient_id}, '${row.archived}')">
+                  
+                  <img src="/files/images/archive.png" alt="archive" srcset="">
+                  
+                  </button>
+                <button class="admnbutt" onclick="deleteData(${row.patient_id}, '${row.patient_name}', '${row.created_date}', '${row.course_section}', '${row.diagnosis}', '${row.notes}', '${row.location}', '${row.added_by}')">
+                
+                <img src="/files/images/delete.png" alt="" srcset="">
+                
+                </button>
+                
+            </th>
+            
+          `;
         tableBody.appendChild(newRow);
         }
       });
@@ -443,9 +535,9 @@ $("#insertstudconsform").submit(async function (event) {
       diagnosis: diag1,
       diagchex: diagchex2,
       notes: note1,
+      DateArr: DateArr,
       misc: miscArr,
       allArr: allArr,
-      DateArr: DateArr,
       archived: false,
     };
 
@@ -457,10 +549,12 @@ $("#insertstudconsform").submit(async function (event) {
       console.error("Error inserting data:", insertError.message);
       alert("Missing Input Field")
     } else {
-      console.log("Data inserted successfully:", insertData);
+      console.log("Data inserted successfully.");
       // location.reload();
       loadTableData();
       hidep1();
+
+
       shownotif();
 
       // remove input after submission

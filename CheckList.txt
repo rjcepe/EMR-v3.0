@@ -72,10 +72,23 @@ Level of access:
         FORM 12 (prescriptions) - DOCTOR (NURSE&CLERK = cant generate, cant manage spreadsheet)
 
 
+REVISIONS ==============================
 
+- Try Long Text in Autocrat
+- SHS
+- Edit
+- Archive
+- Remove Buttons for Access
+- Dashboard
 
-chart.js road map
-- get all values in supabase
-- 50 for loops? (maybe nested?)
+- Edit Print with Clinic Format
+SAME FORMAT NUNG SINEND DATI NA NAKA EXCEL
 
--
+- Can We Have Legit Records
+PWEDE
+
+- Confirm if magdelete sa clinic
+DISPOSE ANG RECORD AFTER A YEAR OR 2 LALO NA KUNG NAKASCAN NAMAN
+
+- Number of Patients per day week month
+NALIMUTAN KO FCK

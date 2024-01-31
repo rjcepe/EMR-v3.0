@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <title>Consultation Records</title>
+    <title>Consultation Archives</title>
 </head>
 
 <body>
@@ -76,7 +76,7 @@
     <div class="main">
         <div class="cont1b">
             <div class="headline">
-                <h1>Consultation Records</h1>
+                <h1>Consultation Archives</h1>
                 <div class="user">
                     <div class="username"></div>
                 </div>
@@ -91,7 +91,7 @@
                         <button class="filterz" onclick="showsort()"> <img src="/files/images/sort.png" alt=""
                                 srcset=""></button>
                     </div>
-                    
+
                     <div class="hiddenfilterz searchz">
                         <input type="text" id="searchInput" placeholder="Search Via ID, Name, or CYS...">
                     </div>
@@ -125,18 +125,7 @@
                                     <td> Staff<input type="checkbox" id="stafffilter" name="stafffilter" value="Staff">
                                     </td>
                                 </tr>
-
-                                <tr>
-                                    <th class="filterz1th">
-                                        <h2>Location</h2>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>East Clinic<input type="checkbox" id="" name="studentfilter" value="East Clinic"></td>
-                                    <td>West Clinic<input type="checkbox" id="" name="studentfilter" value="West Clinic"></td>
-                                    <td>SHS Clinic<input type="checkbox" id="" name="facultyfilter" value="SHS Clinic"></td>
-                                </tr>
-
+                    
                                 <tr>
                                     <th class="filterz1th">
                                         <h2>Reason for visit</h2>
@@ -292,7 +281,10 @@
                     </div>
 
                 </div>
-                <button class="addrecbutt" onclick="showp1()">Add Record +</button>
+                <div>
+                    <button class="addrecbutt" onclick="ToConRec()">Go Back</button>
+                 
+                </div>
             </div>
 
             <div class="results1">
@@ -306,6 +298,7 @@
                         <th class="notescol1">Notes</th>
                         <th class="timecol1">Location</th>
                         <th class="timecol1">Added by</th>
+                        <th class="archcol"></th>
                     </tr>
                 </table>
                 <table class="botrow" id="cons_table">
@@ -1734,7 +1727,7 @@
             </div>
         </div>
     </div>
-    <script src="/files/pagefunc/consrec.js"></script>
+    <script src="/files/pagefunc/consrec-archives.js"></script>
     <script src="/files/pagefunc/ui.js"></script>
     <script src="/files/pagefunc/inputs.js"></script>
     <script src="/files/connfunc/app.js"></script>

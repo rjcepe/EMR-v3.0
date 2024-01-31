@@ -189,11 +189,14 @@ function prevy10(){
   previmg.classList.toggle("shownprev");
 }
 
-
+let notifcount = 0;
 // push notif
 function shownotif() { 
+
+  notifcount ++;
+
   const cont = document.getElementById("notif");
-  cont.innerHTML = `1 Record added
+  cont.innerHTML = `${notifcount} Record(s) added
   <button onclick="hidenotif()"><svg xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 -960 960 960" width="15" fill="white"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>`;
 
   cont.classList.add("notif");
@@ -201,6 +204,9 @@ function shownotif() {
   cont.classList.remove("notifinactive");
 }
 function hidenotif() { 
+
+  notifcount = 0;
+
   const cont = document.getElementById("notif");
   cont.innerHTML = "";
   

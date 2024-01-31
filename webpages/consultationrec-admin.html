@@ -91,7 +91,7 @@
                         <button class="filterz" onclick="showsort()"> <img src="/files/images/sort.png" alt=""
                                 srcset=""></button>
                     </div>
-                    
+
                     <div class="hiddenfilterz searchz">
                         <input type="text" id="searchInput" placeholder="Search Via ID, Name, or CYS...">
                     </div>
@@ -292,7 +292,10 @@
                     </div>
 
                 </div>
-                <button class="addrecbutt" onclick="showp1()">Add Record +</button>
+                <div>
+                    <button class="addrecbutt" onclick="ToConsRecArchives()">Show Archives</button>
+                    <button class="addrecbutt" onclick="showp1()">Add Record +</button>
+                </div>
             </div>
 
             <div class="results1">
@@ -306,6 +309,7 @@
                         <th class="notescol1">Notes</th>
                         <th class="timecol1">Location</th>
                         <th class="timecol1">Added by</th>
+                        <th class="archcol"></th>
                     </tr>
                 </table>
                 <table class="botrow" id="cons_table">
@@ -1734,7 +1738,7 @@
             </div>
         </div>
     </div>
-    <script src="/files/pagefunc/consrec.js"></script>
+    <script src="/files/pagefunc/consrec-admin.js"></script>
     <script src="/files/pagefunc/ui.js"></script>
     <script src="/files/pagefunc/inputs.js"></script>
     <script src="/files/connfunc/app.js"></script>

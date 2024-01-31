@@ -52,6 +52,7 @@
   }
 
   body {
+      /* overflow-x: hidden; */
       min-height: 100vh;
       font-family: 'Poppins', sans-serif;
   }
@@ -1046,6 +1047,53 @@
       transition: 0.3s;
   }
 
+  .admnbutt {
+      cursor: pointer;
+      background-color: rgb(51, 51, 51);
+      height: 40px;
+      width: 40px;
+      border-radius: 5px;
+      border: none;
+      color: white;
+      font-weight: 800;
+      transition: 0.3s;
+      /* box-shadow: 0px 0px 10px 1px rgba(38, 38, 38, 0.423); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 3px;
+  }
+  .admnbutt img{
+    height: 25px;
+  }
+
+  .admnbutt:hover {
+      background-color: var(--lgreen50);
+
+      .txt {
+          text-shadow: none;
+      }
+  }
+  .viewbutt {
+      cursor: pointer;
+      background-color: var(--lightgreen);
+      height: 100%;
+      width: 100%;
+      border-radius: 5px;
+      border: none;
+      color: white;
+      font-weight: 800;
+      transition: 0.3s;
+      
+  }
+
+  .viewbutt:hover {
+      background-color: var(--lgreen50);
+
+      .txt {
+          text-shadow: none;
+      }
+  }
   .viewbutt {
       cursor: pointer;
       background-color: var(--lightgreen);
@@ -1175,8 +1223,9 @@
   }
 
   .hidev {
-      display: none;
-      transform: translateX(2000px);
+      /* display: none; */
+      display: flex;
+      transform: translateX(-2000px);
       opacity: 0;
   }
 
@@ -1196,8 +1245,8 @@
       height: 100vh;
       width: 100vw;
       /* display: flex; */
-      justify-content: center;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       transition: .3s ease;
       /* background-color: #19d89f; */
@@ -1230,7 +1279,7 @@
       /* background-color: blue; */
       /* border: 1px solid white; */
       width: 80%;
-      height: 70%;
+      height: 90%;
       display: flex;
       justify-content: center;
       flex-direction: column;
@@ -1777,6 +1826,21 @@
       justify-content: center;
   }
 
+  .entry01a,
+  .entry02a,
+  .entry03a {
+      background-color: var(--green50);
+      width: 80%;
+      height: 80%;
+      overflow-y: auto;
+      overflow-x: auto;
+      position: absolute;
+      border-radius: 10px;
+      display: flex;
+      flex-direction:column ;
+      justify-content: space-between;
+      align-items: center;
+  }
   .entry01,
   .entry02,
   .entry03 {
@@ -2087,12 +2151,13 @@
       border: var(--blurborder);
       padding: 10px;
   }
-  .chart-div canvas{
-    border-bottom: 1px solid rgba(255, 255, 255, 0.438);
+
+  .chart-div canvas {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.438);
   }
 
-  .chart-div iframe{
-    display: none;
+  .chart-div iframe {
+      display: none;
   }
 
   .printStat {
@@ -2111,6 +2176,15 @@
       text-shadow: var(--txtshadow);
       background-color: var(--lightgreen);
       color: white;
+  }
+
+  .restab{
+    margin-top: 20px ;
+    width: 100%;
+}
+.restab th{
+      border: 1px solid rgb(0, 0, 0);
+      border-radius: 5px;
   }
 
   .search p {

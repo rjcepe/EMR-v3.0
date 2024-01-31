@@ -103,6 +103,13 @@ function addLabel(type, year, location, month, patientC){
   if(type == "AllTy"){
     type = "All Patients";
   }
+  else if (patType == "shs"){
+    type = "SHS Students";
+  }
+  else if (type =="coll"){
+    type =  "College Students"
+  }
+
   if(location == "AllLoc"){
     location = "every clinic";
   }
@@ -144,6 +151,7 @@ function updateType(){
   clearChart();
 
   var patType = document.getElementById("patType").value;
+
   
   const diseaseDiv = document.getElementById('printFrame');
   const iframeDoc = diseaseDiv.contentDocument || diseaseIframe.contentWindow.document;
@@ -191,14 +199,15 @@ async function fetchAllData(type){
         const diseaseDiv = document.getElementById('printFrame');
         const iframeDoc = diseaseDiv.contentDocument || diseaseIframe.contentWindow.document;
         
-        let content = '';
+        let content = '<head><link rel="stylesheet" href="/files/styles.css"></head>';
+        content += '<body><table class="restab"><tr><th><h2>DISEASE</h2></th><th><h2>COUNT</h2></th></tr>';
 
         for (const [disease, count] of Object.entries(stat)) {
-          addDataset(disease, count);
-
-          content += `<p><b>${disease}</b>: ${count}</p>`;
-         
+            addDataset(disease, count);
+            content += `<tr><th><b>${disease}</b></th><th>${count}</th></tr>`;
         }
+
+        content += '</table></body>';
         iframeDoc.write(content);
         console.log(content);
   }

@@ -1,4 +1,4 @@
-
+var type = sessionStorage.getItem("z");
 
 //nav functions
 
@@ -9,8 +9,15 @@
     function ToDenRec() {
       window.location.href = "/webpages/dentalrecords.html";
     }
+
     function ToConRec() {
-      window.location.href = "/webpages/consultationrec.html";
+
+      if (type == "Admin"){
+        window.location.href = "/webpages/consultationrec-admin.html";
+      }
+      else{
+        window.location.href = "/webpages/consultationrec.html";
+      }
     }
 
   // reports
@@ -28,6 +35,12 @@
     function ToConsOvw() {
       window.location.href = "/webpages/monthlycensus.html";
     }
+    
+    // Admin
+    function ToConsRecArchives() {
+      window.location.href = "/webpages/consultationrec-archives.html";
+    }
+    
     
 
 
