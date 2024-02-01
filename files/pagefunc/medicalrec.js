@@ -68,22 +68,26 @@ async function loadTableData() {
     }
 
     tableData1.forEach((row) => {
-      const newRow = document.createElement("tr");
-      newRow.classList.add("res");
-      newRow.innerHTML = `
-          <th class="row idcol">${row.patient_id}</th>
-          <th class="row namecol">${row.patient_name}</th>
-          <th class="row timecol">${row.created_date}</th>
-          <th class="row coursecol">${row.course_section}</th>
-          <th class="row timecol">${row.location}</th>
-          <th class="row timecol">${row.added_by}</th>
-          <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
-              <p class="txt">View</p>
-            </button>
-          </th>
-        `;
-      tableBody.appendChild(newRow);
+      if (row.archived === false) {
+        const newRow = document.createElement("tr");
+        newRow.classList.add("res1");
+
+        newRow.innerHTML = `
+        <th class="row idcol">${row.patient_id}</th>
+        <th class="row namecol">${row.patient_name}</th>
+        <th class="row timecol">${row.created_date}</th>
+        <th class="row coursecol">${row.course_section}</th>
+        <th class="row timecol">${row.location}</th>
+        <th class="row timecol">${row.added_by}</th>
+        <th class="buttscol">
+          <button class="viewbutt" onclick="showv('${row.med_file}', '${row.patient_name}')">
+            <p class="txt">View</p>
+          </button>
+        </th>
+      `;
+
+        tableBody.appendChild(newRow);
+      }
     });
   }
 }
