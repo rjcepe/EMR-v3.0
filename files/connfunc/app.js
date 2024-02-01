@@ -4,7 +4,13 @@ var type = sessionStorage.getItem("z");
 
   // records
     function ToMedRec() {
-      window.location.href = "/webpages/medicalrecords.html";
+      
+      if (type == "Admin"){
+        window.location.href = "/webpages/medicalrecords-admin.html";
+      }
+      else{
+        window.location.href = "/webpages/medicalrecords.html";
+      }
     }
     function ToDenRec() {
       window.location.href = "/webpages/dentalrecords.html";
@@ -39,6 +45,9 @@ var type = sessionStorage.getItem("z");
     // Admin
     function ToConsRecArchives() {
       window.location.href = "/webpages/consultationrec-archives.html";
+    }
+    function ToMedRecArchives() {
+      window.location.href = "/webpages/medicalrecords-archives.html";
     }
     
     

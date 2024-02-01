@@ -1017,13 +1017,13 @@
   }
 
   .idcol {
-      min-width: 150px;
+      min-width: 100px;
       /* max-width: 120px; */
   }
 
   .namecol {
       width: 100%;
-      min-width: 300px;
+      min-width: 250px;
       /* max-width: 200px; */
   }
 
@@ -1045,6 +1045,12 @@
       cursor: pointer;
       /* background-color: var(--lightgreen); */
       transition: 0.3s;
+      margin-right: 4px;
+      
+  }
+  .admincol {
+       /* border: 1px solid blue; */
+       min-width: 100px;
   }
 
   .admnbutt {
@@ -1070,24 +1076,28 @@
   .admnbutt:hover {
       background-color: var(--lgreen50);
 
-      .txt {
-          text-shadow: none;
-      }
   }
-  .viewbutt {
+  .admnbutt1 {
       cursor: pointer;
-      background-color: var(--lightgreen);
-      height: 100%;
-      width: 100%;
+      background-color: rgb(51, 51, 51);
+      height: 30px;
+      width: 30px;
       border-radius: 5px;
       border: none;
       color: white;
       font-weight: 800;
       transition: 0.3s;
-      
+      /* box-shadow: 0px 0px 10px 1px rgba(38, 38, 38, 0.423); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 3px;
+  }
+  .admnbutt1 img{
+    height: 20px;
   }
 
-  .viewbutt:hover {
+  .admnbutt1:hover {
       background-color: var(--lgreen50);
 
       .txt {
@@ -1104,14 +1114,17 @@
       color: white;
       font-weight: 800;
       transition: 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
 
   .viewbutt:hover {
       background-color: var(--lgreen50);
-
-      .txt {
-          text-shadow: none;
-      }
+  }
+  .viewbutt img{
+    height: 20px;
+    margin-left: 3px;
   }
 
   .txt,

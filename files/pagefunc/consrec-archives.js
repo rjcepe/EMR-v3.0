@@ -91,18 +91,12 @@ async function loadTableData() {
           <th class="row1 timecol1">${row.location}</th>
           <th class="row1 timecol1">${row.added_by}</th>
 
-          <th class="row1 admincol">
-            <button class="admnbutt" onclick="archive(${row.patient_id}, '${row.archived}')">
-                
-                <img src="/files/images/unarchive.png" alt="archive" srcset="">
-                
-                </button>
-              <button class="admnbutt" onclick="deleteData(${row.patient_id}, '${row.patient_name}', '${row.created_date}', '${row.course_section}', '${row.diagnosis}', '${row.notes}', '${row.location}', '${row.added_by}')">
-              
-              <img src="/files/images/delete.png" alt="" srcset="">
-              
+          <th class="buttscol">
+            <button class="viewbutt" onclick="archive(${row.row_id}, '${row.archived}')">    
+            <p class="txt">Restore</p>
+            <img src="/files/images/unarchive1.png" alt="archive" srcset="">
               </button>
-              
+
           </th>
           
         `;
@@ -116,7 +110,7 @@ async function loadTableData() {
 async function deleteData(id) {
   try {
           // Delete the data from the table
-          const { data: deletedData, error: deleteError } = await _supabase.from('cons_rec').delete().eq('patient_id', id);
+          const { data: deletedData, error: deleteError } = await _supabase.from('cons_rec').delete().eq('row_id', id);
 
           if (deleteError) {
               console.log('Error deleting data:', deleteError.message);
@@ -144,7 +138,7 @@ async function archive(id, stat) {
           }
 
           // archive the data from the table
-          const { data: archiveData, error: archiveDataError } = await _supabase.from('cons_rec').update({archived: newStatus}).eq('patient_id', id);
+          const { data: archiveData, error: archiveDataError } = await _supabase.from('cons_rec').update({archived: newStatus}).eq('row_id', id);
 
           if (archiveDataError) {
               console.log('Error archiving data:', archiveDataError.message);
@@ -153,8 +147,15 @@ async function archive(id, stat) {
               
           }
 
-
-          loadTableData();
+          if (searchState != 1 && filterState != 1) {
+            loadTableData(); // Reload the table data when the sorting option changes
+          }
+          if (searchState == 1) {
+            searchEvent.call(document.getElementById("searchInput"));
+          } // Reload the table data when the sorting option changes
+          if (filterState == 1) {
+            filterEvent.call(document.getElementById("filterz-val"));
+          }
   } catch (error) {
       console.error('Error archiving data:', error.message);
   }
@@ -258,18 +259,12 @@ async function displayResults(results) {
             <th class="row1 timecol1">${row.location}</th>
             <th class="row1 timecol1">${row.added_by}</th>
 
-            <th class="row1 admincol">
-            <button class="admnbutt" onclick="archive(${row.patient_id}, '${row.archived}')">
-                
-                <img src="/files/images/unarchive.png" alt="archive" srcset="">
-                
-                </button>
-              <button class="admnbutt" onclick="deleteData(${row.patient_id}, '${row.patient_name}', '${row.created_date}', '${row.course_section}', '${row.diagnosis}', '${row.notes}', '${row.location}', '${row.added_by}')">
-              
-              <img src="/files/images/delete.png" alt="" srcset="">
-              
+            <th class="buttscol">
+            <button class="viewbutt" onclick="archive(${row.row_id}, '${row.archived}')">    
+            <p class="txt">Restore</p>
+            <img src="/files/images/unarchive1.png" alt="archive" srcset="">
               </button>
-              
+
           </th>
         `;
 
@@ -361,18 +356,12 @@ async function filterEvent() {
             <th class="row1 timecol1">${row.location}</th>
             <th class="row1 timecol1">${row.added_by}</th>
 
-            <th class="row1 admincol">
-            <button class="admnbutt" onclick="archive(${row.patient_id}, '${row.archived}')">
-                
-                <img src="/files/images/unarchive.png" alt="archive" srcset="">
-                
-                </button>
-              <button class="admnbutt" onclick="deleteData(${row.patient_id}, '${row.patient_name}', '${row.created_date}', '${row.course_section}', '${row.diagnosis}', '${row.notes}', '${row.location}', '${row.added_by}')">
-              
-              <img src="/files/images/delete.png" alt="" srcset="">
-              
+            <th class="buttscol">
+            <button class="viewbutt" onclick="archive(${row.row_id}, '${row.archived}')">    
+            <p class="txt">Restore</p>
+            <img src="/files/images/unarchive1.png" alt="archive" srcset="">
               </button>
-              
+
           </th>
         `;
 

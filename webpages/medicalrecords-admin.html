@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/files/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <title>Medical Records</title>
+</head>
+
+<body>
+    <div class="sidecont sidehide">
+        <div class="sidenav">
+            <div class="logo">
+                <img src="/files/images/logo.png" alt="DLSUD logo">
+            </div>
+            <div class="nav">
+                <div class="recs">
+                    <h5>Records</h5>
+                    <button class="activebutt" onclick="ToMedRec()" id="mr"> <img src="/files/images/arrow.png"
+                            alt="">Medical Records</button>
+                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental
+                        Records</button>
+                        <!-- <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray -->
+                        <!-- Images</button> -->
+                    <!-- <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident -->
+                        <!-- Records</button> -->
+                    <button class="navbutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation
+                        Records</button>
+                </div>
+            </div>
+            <div class="nav">
+                <div class="reps">
+                    <h5>Reports</h5>
+                    <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Reports</button>
+                    <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical
+                        Certificates</button>
+                    <button class="navbutt" onclick="ToPresc()"><img src="/files/images/arrow.png" alt="">Prescriptions</button>
+                    
+                    <!-- <button class="navbutt" onclick="ToPresc()"><img src="/navicons/arrow.png" alt="">Prescription?</button> -->
+                </div>
+            </div>
+            <div class="nav">
+                <div class="reps">
+                    <h5>Analytics</h5>
+                    <button class="navbutt" onclick="ToConsOvw()"><img src="/files/images/arrow.png" alt="">Census Overview</button>
+                </div>
+            </div>
+            <div class="logout" onclick="logout()">
+                <img src="/files/images/logout.png" alt="">
+                <p>Logout</p>
+            </div>
+            <div class="z">
+                <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved </p>
+            </div>
+
+        </div>
+        <div class="arw" onclick="sideshow()">
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </div>
+    <div class="behindsn bsn"></div>
+    <div class="main">
+        <div class="cont1b">
+            <div class="headline">
+                <h1>Medical Records</h1>
+                <div class="user">
+                    <div class="username"></div>
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="filterz-cont">
+                    <div class="filterz-sub-cont">
+                        <button class="filterz" onclick="showsearch()"> <img src="/files/images/search.png" alt=""
+                                srcset=""></button>
+                        <button class="filterz" onclick="showfiltz()"> <img src="/files/images/filter.png" alt=""
+                                srcset=""></button>
+                        <button class="filterz" onclick="showsort()"> <img src="/files/images/sort.png" alt=""
+                                srcset=""></button>
+                    </div>
+
+                    <div class="hiddenfilterz searchz">
+                        <input type="text" id="searchInput" placeholder="Search Via ID, Name, or CYS...">
+                    </div>
+                    <div class="hiddenfilterz sortz">
+                        <label for="sort">Sort by: </label>
+                        <select name="sort" id="sort1">
+                            <option disabled selected value="def"> -- </option>
+                            <option value="IDasc">ID ( ▲ )</option>
+                            <option value="IDdesc">ID ( ▼ )</option>
+                            <option value="TimeLate">Latest</option>
+                            <option value="TimeOld">Oldest</option>
+                            <option value="Nameaz">Name (A-Z)</option>
+                            <option value="Nameza">Name (Z-A)</option>
+                        </select>
+                    </div>
+                    <div class="hiddenfilterz filterz1">
+                        <div class="filterz1a">
+
+                       
+                        <div id="filterz-val">
+                            <table>
+                                <tr>
+                                    <th>
+                                        <h2>Patient Type</h2>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Student - SHS<input type="checkbox" id="studentfilter" name="studentfilter" value="shs"></td>
+                                    <td>Student - College<input type="checkbox" id="studentfilter" name="studentfilter" value="coll"></td>
+                                    <td>Faculty<input type="checkbox" id="facultyfilter" name="facultyfilter" value="faculty"></td>
+                                    <td> Staff<input type="checkbox" id="stafffilter" name="stafffilter" value="staff">
+                                    </td>
+                                </tr>
+                    
+                                <tr>
+                                    <th class="filterz1th">
+                                        <h2>Location</h2>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>East Clinic<input type="checkbox" id="" name="studentfilter" value="East Clinic"></td>
+                                    <td>West Clinic<input type="checkbox" id="" name="studentfilter" value="West Clinic"></td>
+                                    <td>SHS Clinic<input type="checkbox" id="" name="facultyfilter" value="SHS Clinic"></td>
+                                </tr>
+                                
+                            </table>
+                        
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+            <div>
+                <button class="addrecbutt" onclick="ToMedRecArchives()">Show Archives</button>
+                <button class="addrecbutt" onclick="showp1()">Add Record +</button>
+            </div>
+            </div>
+            <div class="results">
+                <table class="toprow">
+                    <tr class="frow">
+                        <th class="idcol">ID</th>
+                        <th class="namecol">Name</th>
+                        <th class="timecol">Date Created</th>
+                        <th class="coursecol">Course & Section</th>
+                        <th class="timecol">Location</th>
+                        <th class="timecol">Added by</th>
+                        <th class="admincol"></th>
+                        <th class="buttscol"></th>
+                    </tr>
+                </table>
+                <table class="tablee" id="medform_table">
+                    <tr class="res inv"></tr>
+                </table>
+            </div>
+            <!-- <button onclick="printres()">Print Container</button> -->
+        </div>
+        <!-- push notif -->
+        <!-- <div id="notif" class="notif"> -->
+        <div id="notif" class="notifinactive"></div>
+    </div>
+
+    <!-- sample medform view -->
+    <div class="main2 hidev">
+        <div class="vfile">
+            <button class="hidevfile" onclick="hidev()">go back</button>
+        </div>
+    </div>
+
+
+    <div class="addp-cont1 hidev">
+        <div class="adders2">
+            <div class="headbar">
+                <h1>Add Patient</h1>
+                <button class="hideaddp" onclick="hidep1()">Go Back</button>
+            </div>
+            <div class="patienttypebutt">
+                <button class="ptbutt activeptb" id="studupbutt" onclick="stud()">Student</button>
+                <button class="ptbutt" id="empupbutt" onclick="emp()">Employee</button>
+                <button class="ptbutt" id="staffupbutt" onclick="staff()">Staff</button>
+            </div>
+            <div class="cont1a">
+                <form id="insertstudmedform" class="uploadmedform1">
+                    <h2>Student Information:</h2>
+    
+                    <div class="entries1">
+                        <div class="entry01a">
+                            <h2>PERSONAL INFORMATION</h2>
+                            <div class="input-group1">
+                                <table class="topt">
+                                    <tr>
+                                        <td>
+                                            <label for="studname">NAME:</label>
+    
+                                        </td>
+                                        <td>
+                                            <input type="text" id="studname" placeholder="Student's Name...">
+    
+                                        </td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td>
+                                            <label for="">ID:</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="studid" placeholder="Student's ID...">
+                                        </td>
+                                        <td>
+                                            <label for="college">College:</label>
+                                        </td>
+                                        <td>
+                                            <select id="college2" onchange="updateCourses1()">
+                                                <option disabled selected>--Select a College--</option value="1">
+                                                <option value="shs">Senior High School</option>
+                                                <option value="cbaa">CBAA</option>
+                                                <option value="ccje">CCJE</option>
+                                                <option value="coe">COED</option>
+                                                <option value="ceat">CEAT</option>
+                                                <option value="clac">CLAC</option>
+                                                <option value="cscs">CSCS</option>
+                                                <option value="cthm">CTHM</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="studname">Section:</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="studcs" placeholder="Section...">
+                                        </td>
+                                        <td>
+                                            <label for="course">Course:</label>
+                                        </td>
+                                        <td>
+                                            <select id="course2">
+                                                <option disabled selected>--Select a Course--</option>
+                                                <!-- Course options will be populated based on the college selection -->
+                                            </select>
+                                        </td>
+                                </table>
+                            </div>
+                            <div class="location1">
+                                <label for="loc">Location:</label>
+                                <select name="loc" id="locsel">
+                                    <option disabled selected value> -- Select Location -- </option>
+                                    <option value="East Clinic">East Clinic</option>
+                                    <option value="West Clinic">West Clinic</option>
+                                    <option value="SHS Clinic">SHS Clinic</option>
+                                </select>
+                            </div>
+            
+                            <hr>
+                                <label for="medform">Upload Medical Record</label>
+                                <input type="file" id="medform" name="medform" accept=".pdf" class="inputfile">
+                        </div>
+                        
+                    </div>
+    
+                    
+    
+                    <button class="submitp">Submit</button>
+                </form>
+
+                <form id="insertempmedform" class="uploadmedform2 hidden">
+                    <h2>Employee Information:</h2>
+                
+                    <div class="entries1">
+                        <div class="entry01a">
+                            <h2>PERSONAL INFORMATION</h2>
+                            <div class="input-group1">
+                                <table class="topt">
+                                    <tr>
+                                        <td>
+                                            <label for="empname">NAME:</label>
+                
+                                        </td>
+                                        <td>
+                                            <input type="text" id="empname" placeholder="Emloyee's Name...">
+                
+                                        </td>
+                                        <td>
+                                            <label for="college">College:</label>
+                                        </td>
+                                        <td>
+                                            <select id="college3" onchange="updateCourses1()">
+                                                <option disabled selected>--Select a College--</option value="1">
+                                                <option value="shs">Senior High School</option>
+                                                <option value="cbaa">CBAA</option>
+                                                <option value="ccje">CCJE</option>
+                                                <option value="coe">COED</option>
+                                                <option value="ceat">CEAT</option>
+                                                <option value="clac">CLAC</option>
+                                                <option value="cscs">CSCS</option>
+                                                <option value="cthm">CTHM</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                
+                                    <tr>
+                                        <td>
+                                            <label for="">ID:</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="empid" placeholder="Emloyee's ID...">
+                                        </td>
+
+                                        <td>
+                                            <label for="course">Course:</label>
+                                        </td>
+                                        <td>
+                                            <select id="course3">
+                                                <option disabled selected>--Select a Course--</option>
+                                                <!-- Course options will be populated based on the college selection -->
+                                            </select>
+                                        </td>
+                                        
+                                    </tr>
+                                        
+                                </table>
+                            </div>
+                            <div class="location1">
+                                <label for="loc">Location:</label>
+                                <select name="loc" id="locsel1">
+                                    <option disabled selected value> -- Select Location -- </option>
+                                    <option value="East Clinic">East Clinic</option>
+                                    <option value="West Clinic">West Clinic</option>
+                                    <option value="SHS Clinic">SHS Clinic</option>
+                                </select>
+                            </div>
+                
+                            <hr>
+                                <label for="medform">Upload Medical Record</label>
+                                <input type="file" id="medform2" name="medform" accept=".pdf" class="inputfile">
+                        </div>
+                        
+                    </div>
+                
+                    
+                
+                    <button class="submitp">Submit</button>
+                </form>
+
+                <form id="insertstaffmedform" class="uploadmedform3 hidden">
+                    <h2>Staff Information:</h2>
+                
+                    <div class="entries1">
+                        <div class="entry01a">
+                            <h2>PERSONAL INFORMATION</h2>
+                            <div class="input-group1">
+                                <table class="topt">
+                                    <tr>
+                                        <td>
+                                            <label for="staffname">NAME:</label>
+                
+                                        </td>
+                                        <td>
+                                            <input type="text" id="staffname" placeholder="Staff's Name...">
+                
+                                        </td>                                    
+                                    </tr>
+                
+                                    <tr>
+                                        <td>
+                                            <label for="">ID:</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="staffid" placeholder="Staff's ID...">
+                                        </td>
+                                    </tr>
+                                        
+                                </table>
+                            </div>
+                            <div class="location1">
+                                <label for="loc">Location:</label>
+                                <select name="loc" id="locsel2">
+                                    <option disabled selected value> -- Select Location -- </option>
+                                    <option value="East Clinic">East Clinic</option>
+                                    <option value="West Clinic">West Clinic</option>
+                                    <option value="SHS Clinic">SHS Clinic</option>
+                                </select>
+                            </div>
+                
+                            <hr>
+                                <label for="medform">Upload Medical Record</label>
+                                <input type="file" id="medform3" name="medform" accept=".pdf" class="inputfile">
+                        </div>
+                        
+                    </div>
+                
+                    
+                
+                    <button class="submitp">Submit</button>
+                </form>
+            </div>
+        </div>
+</div>
+    <script src="/files/pagefunc/medicalrec-admin.js"></script>
+    <script src="/files/pagefunc/ui.js"></script>
+    <script src="/files/pagefunc/inputs.js"></script>
+    <script src="/files/connfunc/app.js"></script>
+    <script src="/files/connfunc/server.js"></script>
+</body>
+
+</html>
