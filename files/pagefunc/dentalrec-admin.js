@@ -80,10 +80,18 @@ async function loadTableData() {
         <th class="row timecol">${row.location}</th>
         <th class="row timecol">${row.added_by}</th>
         <th class="buttscol">
-          <button class="viewbutt" onclick="showv('${row.dental_file}', '${row.patient_name}')">
-            <p class="txt">View</p>
+        <button class="viewbutt" onclick="archive(${row.row_id}, '${row.archived}')">    
+        <p class="txt">Archive</p>
+        <img src="/files/images/archive1.png" alt="archive" srcset="">
           </button>
-        </th>
+
+      </th>
+      <th class="buttscol">
+        <button class="viewbutt" onclick="showv('${row.dental_file}', '${row.patient_name}')">
+          <p class="txt">View</p>
+          <img src="/files/images/view.png" alt="archive" srcset="">
+        </button>
+      </th>
       `;
 
         tableBody.appendChild(newRow);
@@ -179,10 +187,18 @@ async function displayResults(results) {
           <th class="row timecol">${row.location}</th>
           <th class="row timecol">${row.added_by}</th>
           <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.dental_file}', '${row.patient_name}')">
-              <p class="txt">View</p>
+          <button class="viewbutt" onclick="archive(${row.row_id}, '${row.archived}')">    
+          <p class="txt">Archive</p>
+          <img src="/files/images/archive1.png" alt="archive" srcset="">
             </button>
-          </th>
+  
+        </th>
+        <th class="buttscol">
+          <button class="viewbutt" onclick="showv('${row.dental_file}', '${row.patient_name}')">
+            <p class="txt">View</p>
+            <img src="/files/images/view.png" alt="archive" srcset="">
+          </button>
+        </th>
         `;
 
         tableBody.appendChild(newRow);
@@ -268,10 +284,18 @@ async function filterEvent() {
           <th class="row timecol">${row.location}</th>
           <th class="row timecol">${row.added_by}</th>
           <th class="buttscol">
-            <button class="viewbutt" onclick="showv('${row.dental_file}', '${row.patient_name}')">
-              <p class="txt">View</p>
+          <button class="viewbutt" onclick="archive(${row.row_id}, '${row.archived}')">    
+          <p class="txt">Archive</p>
+          <img src="/files/images/archive1.png" alt="archive" srcset="">
             </button>
-          </th>
+  
+        </th>
+        <th class="buttscol">
+          <button class="viewbutt" onclick="showv('${row.dental_file}', '${row.patient_name}')">
+            <p class="txt">View</p>
+            <img src="/files/images/view.png" alt="archive" srcset="">
+          </button>
+        </th>
         `;
 
           tableBody.appendChild(newRow);
@@ -283,6 +307,42 @@ async function filterEvent() {
       newRow.innerHTML = '<th class="row" colspan="7">Patient not found</td>';
       tableBody.appendChild(newRow);
     }
+  }
+}
+
+//add to archives
+async function archive(id, stat) {
+  try {   
+
+          if (stat == "false"){
+            var newStatus = "true";
+          }
+          else{
+            var newStatus = "false"; 
+          }
+
+          // archive the data from the table
+          const { data: archiveData, error: archiveDataError } = await _supabase.from('dental_forms').update({archived: newStatus}).eq('row_id', id);
+
+          if (archiveDataError) {
+              console.log('Error archiving data:', archiveDataError.message);
+          } else {
+              console.log('Data archived successfully:', archiveData);
+              
+          }
+
+          if (searchState != 1 && filterState != 1) {
+            loadTableData(); // Reload the table data when the sorting option changes
+          }
+          if (searchState == 1) {
+            searchEvent.call(document.getElementById("searchInput"));
+          } // Reload the table data when the sorting option changes
+          if (filterState == 1) {
+            filterEvent.call(document.getElementById("filterz-val"));
+          }
+
+  } catch (error) {
+      console.error('Error archiving data:', error.message);
   }
 }
 

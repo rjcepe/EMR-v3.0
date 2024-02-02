@@ -188,3 +188,92 @@ function updateCourses1() {
     }
     
 }
+
+//dental rec
+function updateCourses2() {
+    var collegeSelect = document.getElementById('college2');
+    var courseSelect = document.getElementById('course2');
+    var selectedCollege = collegeSelect.value;
+
+    var collegeSelect1 = document.getElementById('college3');
+    var courseSelect1 = document.getElementById('course3');
+    var selectedCollege1 = collegeSelect1.value;
+
+    // Object containing courses for each college
+    var courses = {
+        'cbaa': [
+            'BOM',
+            'BSA',
+            'BSM',
+            'ECO',
+            'ENR',
+            'HRD',
+            'MKA',
+        ],
+        'ccje': ['CRI', 'BFS',],
+        'coe': [
+            'BEC',
+            'BSE',
+            'SNE',
+            'BPE',
+        ],
+        'ceat': [
+            'ARC',
+            'CEE',
+            'CPE',
+            'EEE',
+            'ECE',
+            'ESE',
+            'IEE',
+            'MEE',
+            'MMA',
+        ],
+        'clac': [
+            'BSY',
+            'CDM',
+            'COM',
+            'DMJ',
+            'IDS',
+            'PHI',
+            'PSC',
+            'PSY',
+        ],
+        'cscs': [
+            'APM',
+            'BCS',
+            'BIO',
+            'BIT',
+            'MEB',
+        ],
+        'cthm': ['BHM', 'BTM',],
+        'shs': ['STEM', 'ABM', 'HUMMS', 'ICT'],
+    };
+
+    // Clear previous options
+    courseSelect.options.length = 0;
+    
+    // Add a placeholder
+    courseSelect.options.add(new Option("--Select a Course--", ""));
+
+    // Append new options
+    if (selectedCollege && courses[selectedCollege]) {
+        courses[selectedCollege].forEach(function(course) {
+            courseSelect.options.add(new Option(course, course));
+        });
+    }
+
+
+    // Clear previous options
+    courseSelect1.options.length = 0;
+    
+    // Add a placeholder
+    courseSelect1.options.add(new Option("--Select a Course--", ""));
+
+    // Append new options
+    if (selectedCollege1 && courses[selectedCollege1]) {
+        courses[selectedCollege1].forEach(function(course) {
+            courseSelect1.options.add(new Option(course, course));
+        });
+    }
+    
+}

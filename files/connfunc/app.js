@@ -13,7 +13,12 @@ var type = sessionStorage.getItem("z");
       }
     }
     function ToDenRec() {
-      window.location.href = "/webpages/dentalrecords.html";
+      if (type == "Admin"){
+        window.location.href = "/webpages/dentalrecords-admin.html";
+      }
+      else{
+        window.location.href = "/webpages/dentalrecords.html";
+      }
     }
 
     function ToConRec() {
@@ -48,6 +53,9 @@ var type = sessionStorage.getItem("z");
     }
     function ToMedRecArchives() {
       window.location.href = "/webpages/medicalrecords-archives.html";
+    }
+    function ToDentalRecArchives() {
+      window.location.href = "/webpages/dentalrecords-archives.html";
     }
     
     

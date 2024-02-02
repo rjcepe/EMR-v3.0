@@ -14,7 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <title>Medical Records</title>
+
+    <title>Dental Records</title>
 </head>
 
 <body>
@@ -26,14 +27,14 @@
             <div class="nav">
                 <div class="recs">
                     <h5>Records</h5>
-                    <button class="activebutt" onclick="ToMedRec()" id="mr"> <img src="/files/images/arrow.png"
+                    <button class="navbutt" onclick="ToMedRec()" id="mr"> <img src="/files/images/arrow.png"
                             alt="">Medical Records</button>
-                    <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental
+                    <button class="activebutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental
                         Records</button>
-                        <!-- <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray -->
-                        <!-- Images</button> -->
+                    <!-- <button class="navbutt" onclick="ToXray()"><img src="/files/images/arrow.png" alt="">X-ray -->
+                    <!-- Images</button> -->
                     <!-- <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident -->
-                        <!-- Records</button> -->
+                    <!-- Records</button> -->
                     <button class="navbutt" onclick="ToConRec()"><img src="/files/images/arrow.png" alt="">Consultation
                         Records</button>
                 </div>
@@ -41,18 +42,21 @@
             <div class="nav">
                 <div class="reps">
                     <h5>Reports</h5>
-                    <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident Reports</button>
+                    <button class="navbutt" onclick="ToAccRec()"><img src="/files/images/arrow.png" alt="">Accident
+                        Reports</button>
                     <button class="navbutt" onclick="ToMedCert()"><img src="/files/images/arrow.png" alt="">Medical
                         Certificates</button>
-                    <button class="navbutt" onclick="ToPresc()"><img src="/files/images/arrow.png" alt="">Prescriptions</button>
-                    
+                    <button class="navbutt" onclick="ToPresc()"><img src="/files/images/arrow.png"
+                            alt="">Prescriptions</button>
+
                     <!-- <button class="navbutt" onclick="ToPresc()"><img src="/navicons/arrow.png" alt="">Prescription?</button> -->
                 </div>
             </div>
             <div class="nav">
                 <div class="reps">
                     <h5>Analytics</h5>
-                    <button class="navbutt" onclick="ToConsOvw()"><img src="/files/images/arrow.png" alt="">Census Overview</button>
+                    <button class="navbutt" onclick="ToConsOvw()"><img src="/files/images/arrow.png" alt="">Census
+                        Overview</button>
                 </div>
             </div>
             <div class="logout" onclick="logout()">
@@ -76,7 +80,7 @@
     <div class="main">
         <div class="cont1b">
             <div class="headline">
-                <h1>Medical Records</h1>
+                <h1>Dental Records</h1>
                 <div class="user">
                     <div class="username"></div>
                 </div>
@@ -110,44 +114,51 @@
                     <div class="hiddenfilterz filterz1">
                         <div class="filterz1a">
 
-                       
-                        <div id="filterz-val">
-                            <table>
-                                <tr>
-                                    <th>
-                                        <h2>Patient Type</h2>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>Student - SHS<input type="checkbox" id="studentfilter" name="studentfilter" value="shs"></td>
-                                    <td>Student - College<input type="checkbox" id="studentfilter" name="studentfilter" value="coll"></td>
-                                    <td>Faculty<input type="checkbox" id="facultyfilter" name="facultyfilter" value="faculty"></td>
-                                    <td> Staff<input type="checkbox" id="stafffilter" name="stafffilter" value="staff">
-                                    </td>
-                                </tr>
-                    
-                                <tr>
-                                    <th class="filterz1th">
-                                        <h2>Location</h2>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>East Clinic<input type="checkbox" id="" name="studentfilter" value="East Clinic"></td>
-                                    <td>West Clinic<input type="checkbox" id="" name="studentfilter" value="West Clinic"></td>
-                                    <td>SHS Clinic<input type="checkbox" id="" name="facultyfilter" value="SHS Clinic"></td>
-                                </tr>
-                                
-                            </table>
-                        
+
+                            <div id="filterz-val">
+                                <table>
+                                    <tr>
+                                        <th>
+                                            <h2>Patient Type</h2>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>Student - SHS<input type="checkbox" id="studentfilter" name="studentfilter"
+                                                value="shs"></td>
+                                        <td>Student - College<input type="checkbox" id="studentfilter"
+                                                name="studentfilter" value="coll"></td>
+                                        <td>Faculty<input type="checkbox" id="facultyfilter" name="facultyfilter"
+                                                value="faculty"></td>
+                                        <td> Staff<input type="checkbox" id="stafffilter" name="stafffilter"
+                                                value="staff">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="filterz1th">
+                                            <h2>Location</h2>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>East Clinic<input type="checkbox" id="" name="studentfilter"
+                                                value="East Clinic"></td>
+                                        <td>West Clinic<input type="checkbox" id="" name="studentfilter"
+                                                value="West Clinic"></td>
+                                        <td>SHS Clinic<input type="checkbox" id="" name="facultyfilter"
+                                                value="SHS Clinic"></td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
                         </div>
-                      </div>
                     </div>
 
                 </div>
-            <div>
-                <button class="addrecbutt" onclick="ToMedRecArchives()">Show Archives</button>
-                <button class="addrecbutt" onclick="showp1()">Add Record +</button>
-            </div>
+                <div>
+                    <button class="addrecbutt" onclick="ToDntalRecArchives()">Show Archives</button>
+                    <button class="addrecbutt" onclick="showp1()">Add Record +</button>
+                </div>
             </div>
             <div class="results">
                 <table class="toprow">
@@ -158,18 +169,15 @@
                         <th class="coursecol">Course & Section</th>
                         <th class="timecol">Location</th>
                         <th class="timecol">Added by</th>
-                        <th class="admincol"></th>
                         <th class="buttscol"></th>
                     </tr>
                 </table>
-                <table class="tablee" id="medform_table">
+                <table class="tablee" id="dental_table">
                     <tr class="res inv"></tr>
                 </table>
             </div>
             <!-- <button onclick="printres()">Print Container</button> -->
         </div>
-        <!-- push notif -->
-        <!-- <div id="notif" class="notif"> -->
         <div id="notif" class="notifinactive"></div>
     </div>
 
@@ -193,9 +201,9 @@
                 <button class="ptbutt" id="staffupbutt" onclick="staff()">Staff</button>
             </div>
             <div class="cont1a">
-                <form id="insertstudmedform" class="uploadmedform1">
+                <form id="insertstuddentalform" class="uploadmedform1">
                     <h2>Student Information:</h2>
-    
+
                     <div class="entries1">
                         <div class="entry01a">
                             <h2>PERSONAL INFORMATION</h2>
@@ -204,29 +212,30 @@
                                     <tr>
                                         <td>
                                             <label for="studname">NAME:</label>
-    
+
                                         </td>
                                         <td>
                                             <input type="text" id="studname" placeholder="Student's Name...">
-    
+
                                         </td>
                                     </tr>
-    
+
                                     <tr>
                                         <td>
                                             <label for="">ID:</label>
                                         </td>
                                         <td>
-                                            <input type="number" id="studid" placeholder="Student's ID..." class="idint">
+                                            <input type="number" id="studid" placeholder="Student's ID...">
                                         </td>
                                         
                                     </tr>
+                                   
                                     <tr>
                                         <td>
                                             <label for="college">College:</label>
                                         </td>
                                         <td>
-                                            <select id="college2" onchange="updateCourses1()">
+                                            <select id="college2" onchange="updateCourses2()">
                                                 <option disabled selected>--Select a College--</option value="1">
                                                 <option value="shs">Senior High School</option>
                                                 <option value="cbaa">CBAA</option>
@@ -238,7 +247,6 @@
                                                 <option value="cthm">CTHM</option>
                                             </select>
                                         </td>
-                                        
                                     </tr>
                                     <tr>
                                         <td>
@@ -256,9 +264,9 @@
                                             <label for="studname">Section:</label>
                                         </td>
                                         <td>
-                                            <input type="number" id="studcs" placeholder="Section..." >
+                                            <input type="number" id="studcs" placeholder="Section...">
                                         </td>
-                                        
+                                      
                                     </tr>
                                 </table>
                             </div>
@@ -271,22 +279,22 @@
                                     <option value="SHS Clinic">SHS Clinic</option>
                                 </select>
                             </div>
-            
+
                             <hr>
-                                <label for="medform">Upload Medical Record</label>
-                                <input type="file" id="medform" name="medform" accept=".pdf" class="inputfile">
+                            <label for="dentalform">Upload Dental Record</label>
+                            <input type="file" id="dentalform" name="dentalform" accept=".pdf" class="inputfile">
                         </div>
-                        
+
                     </div>
-    
-                    
-    
+
+
+
                     <button class="submitp">Submit</button>
                 </form>
 
-                <form id="insertempmedform" class="uploadmedform2 hidden">
+                <form id="insertempdentalform" class="uploadmedform2 hidden">
                     <h2>Employee Information:</h2>
-                
+
                     <div class="entries1">
                         <div class="entry01a">
                             <h2>PERSONAL INFORMATION</h2>
@@ -295,14 +303,15 @@
                                     <tr>
                                         <td>
                                             <label for="empname">NAME:</label>
-                
+
                                         </td>
                                         <td>
                                             <input type="text" id="empname" placeholder="Emloyee's Name...">
-                
+
                                         </td>
                                         
                                     </tr>
+
                                     <tr>
                                         <td>
                                             <label for="">ID:</label>
@@ -316,7 +325,7 @@
                                             <label for="college">College:</label>
                                         </td>
                                         <td>
-                                            <select id="college3" onchange="updateCourses1()">
+                                            <select id="college3" onchange="updateCourses2()">
                                                 <option disabled selected>--Select a College--</option value="1">
                                                 <option value="shs">Senior High School</option>
                                                 <option value="cbaa">CBAA</option>
@@ -351,22 +360,22 @@
                                     <option value="SHS Clinic">SHS Clinic</option>
                                 </select>
                             </div>
-                
+
                             <hr>
-                                <label for="medform">Upload Medical Record</label>
-                                <input type="file" id="medform2" name="medform" accept=".pdf" class="inputfile">
+                            <label for="dentalform">Upload Dental Record</label>
+                            <input type="file" id="dentalform2" name="dentalform" accept=".pdf" class="inputfile">
                         </div>
-                        
+
                     </div>
-                
-                    
-                
+
+
+
                     <button class="submitp">Submit</button>
                 </form>
 
-                <form id="insertstaffmedform" class="uploadmedform3 hidden">
+                <form id="insertstaffdentalform" class="uploadmedform3 hidden">
                     <h2>Staff Information:</h2>
-                
+
                     <div class="entries1">
                         <div class="entry01a">
                             <h2>PERSONAL INFORMATION</h2>
@@ -375,14 +384,14 @@
                                     <tr>
                                         <td>
                                             <label for="staffname">NAME:</label>
-                
+
                                         </td>
                                         <td>
                                             <input type="text" id="staffname" placeholder="Staff's Name...">
-                
-                                        </td>                                    
+
+                                        </td>
                                     </tr>
-                
+
                                     <tr>
                                         <td>
                                             <label for="">ID:</label>
@@ -391,7 +400,7 @@
                                             <input type="number" id="staffid" placeholder="Staff's ID...">
                                         </td>
                                     </tr>
-                                        
+
                                 </table>
                             </div>
                             <div class="location1">
@@ -403,26 +412,20 @@
                                     <option value="SHS Clinic">SHS Clinic</option>
                                 </select>
                             </div>
-                
                             <hr>
-                                <label for="medform">Upload Medical Record</label>
-                                <input type="file" id="medform3" name="medform" accept=".pdf" class="inputfile">
+                            <label for="dentalform">Upload Dental Record</label>
+                            <input type="file" id="dentalform3" name="dentalform" accept=".pdf" class="inputfile">
                         </div>
-                        
                     </div>
-                
-                    
-                
                     <button class="submitp">Submit</button>
                 </form>
             </div>
         </div>
-</div>
-    <script src="/files/pagefunc/medicalrec-admin.js"></script>
-    <script src="/files/pagefunc/ui.js"></script>
+    </div>
     <script src="/files/pagefunc/inputs.js"></script>
+    <script src="/files/pagefunc/ui.js"></script>
     <script src="/files/connfunc/app.js"></script>
-    <script src="/files/connfunc/server.js"></script>
+    <script src="/files/pagefunc/dentalrec-admin.js"></script>
 </body>
 
 </html>

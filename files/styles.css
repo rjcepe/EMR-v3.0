@@ -1268,7 +1268,7 @@
   .uploadmedform1 input[type="text"],
   .uploadmedform2 input[type="text"],
   .uploadmedform3 input[type="text"] {
-      width: 80%;
+      width: 300px;
       height: 30px;
       border-radius: 10px;
       border: none;
@@ -1292,7 +1292,7 @@
       position: relative;
       /* background-color: blue; */
       /* border: 1px solid white; */
-      width: 80%;
+      width: 60%;
       height: 90%;
       display: flex;
       justify-content: center;
@@ -1300,7 +1300,9 @@
       align-items: center;
       border-radius: 10px;
   }
-
+  .idint{
+    width: 300px;
+  }
   .headbar {
       /* border: var(--gborder); */
       width: 100%;
@@ -1441,6 +1443,7 @@
   .inputfile {
       background-color: var(--green50);
       border-radius: 10px;
+      margin-bottom: 20px;
   }
 
   .input-group {
@@ -1823,9 +1826,7 @@
       width: 200px;
   }
 
-  .topt td {
-      width: 75px;
-  }
+
 
   .input-group1 {
       /* border: var(--gborder); */
@@ -1834,6 +1835,50 @@
       padding-left: 5px;
       padding-right: 5px;
   }
+
+
+  .input-group1a {
+    /* border: var(--gborder); */
+    width: 100%;
+    margin-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: center;
+}
+.input-group1a select {
+    width: auto;
+    height: 30px;
+    border: 1px solid rgb(130, 130, 130);
+    border-radius: 10px;
+    outline: none;
+    padding-left: 5px;
+    font-weight: 700;
+    color: white;
+    background-color: var(--green50);
+    backdrop-filter: var(--blur);
+    padding-left: 10px;
+    /* margin-left: 5px; */
+}
+
+.input-group1a option {
+    background-color: var(--green50);
+    font-weight: 700;
+}
+
+.input-group1a table {
+    /* background-color: var(--lgreen50); */
+    width: 80%;
+}
+
+.input-group1a th,
+.input-group1a td {
+    padding-left: 5px;
+}
+
+.input-group1a td {
+    width: 200px;
+}
 
   .entries1 {
       border-radius: 10px;
@@ -1908,9 +1953,11 @@
           0px 16px 32px 0px rgba(0, 0, 0, 0.07),
           0px 32px 64px 0px rgba(0, 0, 0, 0.07);
   }
-
-  .topt input[type="number"] {
-      width: 130px;
+  .topt td {
+    width: 75px;
+}
+  .topt input[type="number"]{
+      width: 300px;
       height: 30px;
       border-radius: 10px;
       border: none;
