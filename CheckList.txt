@@ -75,9 +75,9 @@ Level of access:
 REVISIONS ==============================
 
 - Try Long Text in Autocrat
-- SHS
+- SHS////
 - Edit
-- Archive
+- Archive ///
 - Remove Buttons for Access
 - Dashboard
 

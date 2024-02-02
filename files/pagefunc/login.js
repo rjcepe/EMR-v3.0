@@ -41,11 +41,18 @@ loginForm.addEventListener("submit", async function (event) {
 
         if (user.password === passwordInput) {
             console.log("Login successful");
-            // Redirect to the desired webpage upon successful login
-            window.location.href = "/webpages/medicalrecords.html";
+           
 
             var zz = user.access_level;
             sessionStorage.setItem('z', zz);
+
+             // Redirect to the desired webpage upon successful login
+            if (zz == "Admin"){
+              window.location.href = "/webpages/medicalrecords-admin.html";
+            }
+            else{
+              window.location.href = "/webpages/medicalrecords.html";
+            }
 
             const token = generateRandomString(64);
             sessionStorage.setItem('accstoken', token);
