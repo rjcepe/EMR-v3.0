@@ -47,7 +47,7 @@ loginForm.addEventListener("submit", async function (event) {
             sessionStorage.setItem('z', zz);
 
              // Redirect to the desired webpage upon successful login
-            if (zz == "Admin"){
+            if (zz === "Admin"){
               window.location.href = "/webpages/medicalrecords-admin.html";
             }
             else{

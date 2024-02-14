@@ -1673,7 +1673,7 @@
   }
 
   .res1:hover {
-      .row1 {
+      .row, .row1 {
           background-color: var(--green);
           color: white;
           text-shadow: var(--txtshadow);
@@ -2352,6 +2352,22 @@
       -webkit-animation: bounce-in-right 1.1s both;
       animation: bounce-in-right 1.1s both
   }
+
+  /* dashboard */
+
+  .dashb-cont {
+    position: relative;
+    height: 80%;
+    width: 100%;
+    backdrop-filter: var(--blur);
+    background-color: var(--green50);
+    border-radius: 10px;
+    padding: 20px 25px 20px 25px;
+    color: var(--darkgreen);
+    border-spacing: 4px;
+    border: var(--blurborder);
+}
+
 
   /* animations */
   @keyframes bounceIn {
