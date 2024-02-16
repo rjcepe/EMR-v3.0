@@ -70,10 +70,6 @@ async function fetchUsername() {
   fetchUserPic();
   fetchUsername();
 
-  
-
-
-
 function addDataset(label, count) {
 
  // random color generator

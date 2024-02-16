@@ -46,13 +46,8 @@ loginForm.addEventListener("submit", async function (event) {
             var zz = user.access_level;
             sessionStorage.setItem('z', zz);
 
-             // Redirect to the desired webpage upon successful login
-            if (zz === "Admin"){
-              window.location.href = "/webpages/medicalrecords-admin.html";
-            }
-            else{
-              window.location.href = "/webpages/medicalrecords.html";
-            }
+          
+              window.location.href = "/webpages/home.html";
 
             const token = generateRandomString(64);
             sessionStorage.setItem('accstoken', token);
