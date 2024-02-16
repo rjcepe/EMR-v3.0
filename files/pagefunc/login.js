@@ -47,7 +47,7 @@ loginForm.addEventListener("submit", async function (event) {
             sessionStorage.setItem('z', zz);
 
           
-              window.location.href = "/webpages/home.html";
+            window.location.href = "/webpages/home.html";
 
             const token = generateRandomString(64);
             sessionStorage.setItem('accstoken', token);
