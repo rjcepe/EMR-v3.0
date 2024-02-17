@@ -10,7 +10,6 @@ const SUPABASE_ANON_KEY =
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-
 getusername();
 
 ////////////////////////////// fetch username
@@ -148,13 +147,124 @@ function hidev() {
   vfile.classList.remove("showv");
 }
 
-access();
+//////////get current month
 
-////////////// access initialization
-function access() {
-  var type = sessionStorage.getItem("y");
+// Specify the target timezone as "Asia/Manila"
+const targetTimezone = "Asia/Manila";
 
-  if (type == "Doctor") {
-    document.getElementById("addrecbutt").disabled = true;
+// Get the current date and time in the target timezone
+const today = new Date();
+const month = today.toLocaleString("en-US", {
+  timeZone: targetTimezone,
+  month: "2-digit",
+});
+
+// Define an array of student types
+const studentTypes = ["coll", ];
+
+// Combine student types with the current month
+const studentTypesWithMonth = [...studentTypes, month];
+
+fetchStudData()
+
+// fetch ALL data from consultation records (based on current month)
+async function fetchStudData() {
+  const { data } = await _supabase.from("cons_rec").select("*").contains("misc", [month]);
+
+  console.log(data);
+  console.log(studentTypesWithMonth);
+
+  const xx = { "coll": 0, "shs": 0, "Staff": 0, "Faculty": 0 };
+
+  if (data && data.length > 0) {
+    data.forEach(data1 => {
+
+      if (data1.archived === false){
+        console.log(data1);
+        data1.misc.forEach(dis => {
+          if (xx[dis]) {
+            xx[dis]++;
+          }
+        });
+      }
+    });
+
+    addDataset("Students", xx["coll"] + xx["shs"]);
+    addDataset("Staff", xx["Staff"]);
+    addDataset("Faculty", xx["Faculty"]);
   }
 }
+
+function addDataset(label, count) {
+
+  // random color generator
+  const red = Math.floor(Math.random() * 156);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 156);
+
+  // Combine them into an rgba string with 0.5 opacity
+  const randomColor = `rgba(${red},${green},${blue},0.5)`;
+
+  var newDataset = {
+
+    label: label,
+    data: [count], // Initial values set to zero
+    backgroundColor: [randomColor],
+    borderColor: ['white'],
+    borderWidth: 1
+
+  };
+
+  // Add the new dataset to the chart
+  initialDiseaseCountData.datasets.push(newDataset);
+  diseaseCountChart.update();
+}
+
+////////////// CHART INITIALIZATION
+var ctxDiseaseCount = document
+  .getElementById("diseaseCountChart")
+  .getContext("2d");
+
+// Define initial data for the bar chart with zero counts
+var initialDiseaseCountData = {
+  labels: ["Students", "Staff", "Faculty"],
+  datasets: [],
+};
+
+var diseaseCountChart = new Chart(ctxDiseaseCount, {
+  type: "bar",
+  data: initialDiseaseCountData,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          color: "white", // Y-axis label colors
+        },
+      },
+      x: {
+        ticks: {
+          color: "white", // X-axis label colors
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: true,
+        position: "right",
+        labels: {
+          color: "white",
+        },
+      },
+      title: {
+        display: true,
+        text: "Consultation Records by Category",
+        color: "white",
+        font: {
+          size: 18,
+        },
+      },
+    },
+  },
+});
+
