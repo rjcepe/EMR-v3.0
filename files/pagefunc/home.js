@@ -159,14 +159,10 @@ const month = today.toLocaleString("en-US", {
   month: "2-digit",
 });
 
-// Define an array of student types
-const studentTypes = ["coll", "shs"];
-
-// Combine student types with the current month
-const studentTypesWithMonth = [...studentTypes, month];
-
 fetchAllData();
+fetchAllData1();
 
+///////////////////////////////// BAR GRAPH (patient count) /////////////////////////////////////
 // fetch ALL data from consultation records (based on current month)
 async function fetchAllData() {
   const { data } = await _supabase.from("cons_rec").select("*").contains("misc", [month]);
@@ -198,16 +194,15 @@ async function fetchAllData() {
   addDataset("Faculty", facultyCount);
 }
 
-
 function addDataset(label, count) {
 
   // random color generator
-  const red = Math.floor(Math.random() * 156);
+  const red = Math.floor(Math.random() * 256);
   const green = Math.floor(Math.random() * 256);
-  const blue = Math.floor(Math.random() * 156);
+  const blue = Math.floor(Math.random() * 256);
 
   // Combine them into an rgba string with 0.5 opacity
-  const randomColor = `rgba(${red},${green},${blue},0.5)`;
+  const randomColor = `rgba(${red},${green},${blue},0.8)`;
 
   var newDataset = {
 
@@ -220,8 +215,8 @@ function addDataset(label, count) {
   };
 
   // Add the new dataset to the chart
-  initialDiseaseCountData.datasets.push(newDataset);
-  diseaseCountChart.update();
+  initialPatientCountData.datasets.push(newDataset);
+  patientCountChart.update();
 }
 function addLabel(month, patient){
 
@@ -233,28 +228,32 @@ function addLabel(month, patient){
   var title = `${month} Patient Count | (${patient})`;
 
   // diseaseCountChart.options.plugins.title.text.push(title);
-  initialDiseaseCountData.labels.push(title);
-  diseaseCountChart.update();
+  initialPatientCountData.labels.push(title);
+  patientCountChart.update();
 
 }
 
 ////////////// CHART INITIALIZATION
-var ctxDiseaseCount = document
-  .getElementById("diseaseCountChart")
+var ctxPatientCount = document
+  .getElementById("PatientCountChart")
   .getContext("2d");
 
 // Define initial data for the bar chart with zero counts
-var initialDiseaseCountData = {
+var initialPatientCountData = {
   labels: [],
   datasets: [],
 };
 
-var diseaseCountChart = new Chart(ctxDiseaseCount, {
+var patientCountChart = new Chart(ctxPatientCount, {
   type: "bar",
-  data: initialDiseaseCountData,
+  data: initialPatientCountData,
   options: {
     scales: {
       y: {
+        grid: {
+          display: false,
+          color: 'rgba(255,255,255,1)' // Color of grid lines for x-axis
+        },
         beginAtZero: true,
         ticks: {
           color: "white", // Y-axis label colors
@@ -269,7 +268,7 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
     plugins: {
       legend: {
         display: true,
-        position: "right",
+        position: "bottom",
         labels: {
           color: "white",
         },
@@ -285,4 +284,114 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
     },
   },
 });
+
+///////////////////////////////// --------- /////////////////////////////////////
+
+
+
+///////////////////////////////// PIE GRAPH (top diseases count) /////////////////////////////////////
+// fetch ALL data from consultation records (based on current month)
+async function fetchAllData1() {
+  const { data } = await _supabase.from("cons_rec").select("*").contains("misc", [month]);
+
+  // Filter data where "archived" is false
+  const filteredData = data.filter(record => record.archived === false);
+  const patients = filteredData.length;
+
+  // Count the number of students, staff, and faculty
+  let studentsCount = 0;
+  let staffCount = 0;
+  let facultyCount = 0;
+  addLabel1(month, patients);
+
+  filteredData.forEach(record => {
+    if (record.misc.includes("coll") || record.misc.includes("shs")) {
+      studentsCount++;
+    } else if (record.misc.includes("Staff")) {
+      staffCount++;
+    } else if (record.misc.includes("Faculty")) {
+      facultyCount++;
+    }
+  });
+
+  // Add datasets to the chart
+  addDataset1("Students", studentsCount);
+  addDataset1("Staff", staffCount);
+  addDataset1("Faculty", facultyCount);
+}
+
+function addDataset1(label, count) {
+  // random color generator
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+
+  // Combine them into an rgba string with 0.5 opacity
+  const randomColor = `rgba(${red},${green},${blue},0.8)`;
+
+  var newDataset1 = {
+    label: label,
+    data: [count],
+    backgroundColor: [randomColor],
+    borderColor: ['white'],
+    borderWidth: 1
+  };
+
+  // Add the new dataset to the chart
+  initialPatientCountData1.datasets.push(newDataset1);
+  patientCountChart1.update();
+}
+
+function addLabel1(month, patient) {
+  if (month == "01") { month = "January"; } if (month == "02") { month = "February"; } if (month == "03") { month = "March"; }
+  if (month == "04") { month = "April"; } if (month == "05") { month = "May"; } if (month == "6") { month = "June"; }
+  if (month == "07") { month = "July"; } if (month == "08") { month = "August"; } if (month == "9") { month = "September"; }
+  if (month == "10") { month = "October"; } if (month == "11") { month = "November"; } if (month == "12") { month = "December"; }
+
+  var title = `${month} Patient Count | (${patient})`;
+
+  initialPatientCountData1.labels.push(title);
+  patientCountChart1.update();
+}
+
+
+////////////// CHART INITIALIZATION
+var ctxPatientCount1 = document
+  .getElementById("TopdCountChart")
+  .getContext("2d");
+
+// Define initial data for the bar chart with zero counts
+var initialPatientCountData1 = {
+  labels: [],
+  datasets: [],
+};
+
+var patientCountChart1 = new Chart(ctxPatientCount1, {
+  type: "doughnut",
+  data: initialPatientCountData1,
+  options: {
+  
+    plugins: {
+      legend: {
+        display: true,
+        position: "bottom",
+        labels: {
+          color: "white",
+        },
+      },
+      title: {
+        display: true,
+        text: "",
+        color: "white",
+        font: {
+          size: 18,
+        },
+      },
+    },
+  },
+});
+
+///////////////////////////////// --------- /////////////////////////////////////
+
+
 

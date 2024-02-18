@@ -1046,11 +1046,12 @@
       /* background-color: var(--lightgreen); */
       transition: 0.3s;
       margin-right: 4px;
-      
+
   }
+
   .admincol {
-       /* border: 1px solid blue; */
-       min-width: 100px;
+      /* border: 1px solid blue; */
+      min-width: 100px;
   }
 
   .admnbutt {
@@ -1069,14 +1070,16 @@
       justify-content: center;
       margin: 3px;
   }
-  .admnbutt img{
-    height: 25px;
+
+  .admnbutt img {
+      height: 25px;
   }
 
   .admnbutt:hover {
       background-color: var(--lgreen50);
 
   }
+
   .admnbutt1 {
       cursor: pointer;
       background-color: rgb(51, 51, 51);
@@ -1093,8 +1096,9 @@
       justify-content: center;
       margin: 3px;
   }
-  .admnbutt1 img{
-    height: 20px;
+
+  .admnbutt1 img {
+      height: 20px;
   }
 
   .admnbutt1:hover {
@@ -1104,6 +1108,7 @@
           text-shadow: none;
       }
   }
+
   .viewbutt {
       cursor: pointer;
       background-color: var(--lightgreen);
@@ -1122,9 +1127,10 @@
   .viewbutt:hover {
       background-color: var(--lgreen50);
   }
-  .viewbutt img{
-    height: 20px;
-    margin-left: 3px;
+
+  .viewbutt img {
+      height: 20px;
+      margin-left: 3px;
   }
 
   .txt,
@@ -1300,9 +1306,11 @@
       align-items: center;
       border-radius: 10px;
   }
-  .idint{
-    width: 300px;
+
+  .idint {
+      width: 300px;
   }
+
   .headbar {
       /* border: var(--gborder); */
       width: 100%;
@@ -1374,7 +1382,7 @@
   .entry1 input[type="text"],
   .entry2 input[type="text"],
   .entry3 input[type="text"],
-  .uploadmedform2 input[type="number"], 
+  .uploadmedform2 input[type="number"],
   .uploadmedform3 input[type="number"] {
       width: auto;
       height: 30px;
@@ -1673,7 +1681,9 @@
   }
 
   .res1:hover {
-      .row, .row1 {
+
+      .row,
+      .row1 {
           background-color: var(--green);
           color: white;
           text-shadow: var(--txtshadow);
@@ -1838,47 +1848,48 @@
 
 
   .input-group1a {
-    /* border: var(--gborder); */
-    width: 100%;
-    margin-top: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    display: flex;
-    justify-content: center;
-}
-.input-group1a select {
-    width: auto;
-    height: 30px;
-    border: 1px solid rgb(130, 130, 130);
-    border-radius: 10px;
-    outline: none;
-    padding-left: 5px;
-    font-weight: 700;
-    color: white;
-    background-color: var(--green50);
-    backdrop-filter: var(--blur);
-    padding-left: 10px;
-    /* margin-left: 5px; */
-}
+      /* border: var(--gborder); */
+      width: 100%;
+      margin-top: 3px;
+      padding-left: 5px;
+      padding-right: 5px;
+      display: flex;
+      justify-content: center;
+  }
 
-.input-group1a option {
-    background-color: var(--green50);
-    font-weight: 700;
-}
+  .input-group1a select {
+      width: auto;
+      height: 30px;
+      border: 1px solid rgb(130, 130, 130);
+      border-radius: 10px;
+      outline: none;
+      padding-left: 5px;
+      font-weight: 700;
+      color: white;
+      background-color: var(--green50);
+      backdrop-filter: var(--blur);
+      padding-left: 10px;
+      /* margin-left: 5px; */
+  }
 
-.input-group1a table {
-    /* background-color: var(--lgreen50); */
-    width: 80%;
-}
+  .input-group1a option {
+      background-color: var(--green50);
+      font-weight: 700;
+  }
 
-.input-group1a th,
-.input-group1a td {
-    padding-left: 5px;
-}
+  .input-group1a table {
+      /* background-color: var(--lgreen50); */
+      width: 80%;
+  }
 
-.input-group1a td {
-    width: 200px;
-}
+  .input-group1a th,
+  .input-group1a td {
+      padding-left: 5px;
+  }
+
+  .input-group1a td {
+      width: 200px;
+  }
 
   .entries1 {
       border-radius: 10px;
@@ -1900,10 +1911,11 @@
       position: absolute;
       border-radius: 10px;
       display: flex;
-      flex-direction:column ;
+      flex-direction: column;
       justify-content: space-between;
       align-items: center;
   }
+
   .entry01,
   .entry02,
   .entry03 {
@@ -1953,10 +1965,12 @@
           0px 16px 32px 0px rgba(0, 0, 0, 0.07),
           0px 32px 64px 0px rgba(0, 0, 0, 0.07);
   }
+
   .topt td {
-    width: 75px;
-}
-  .topt input[type="number"]{
+      width: 75px;
+  }
+
+  .topt input[type="number"] {
       width: 300px;
       height: 30px;
       border-radius: 10px;
@@ -2243,11 +2257,12 @@
       color: white;
   }
 
-  .restab{
-    margin-top: 20px ;
-    width: 100%;
-}
-.restab th{
+  .restab {
+      margin-top: 20px;
+      width: 100%;
+  }
+
+  .restab th {
       border: 1px solid rgb(0, 0, 0);
       border-radius: 5px;
   }
@@ -2356,17 +2371,39 @@
   /* dashboard */
 
   .dashb-cont {
-    position: relative;
-    height: 80%;
-    width: 100%;
-    backdrop-filter: var(--blur);
-    background-color: var(--green50);
-    border-radius: 10px;
-    padding: 20px 25px 20px 25px;
-    color: var(--darkgreen);
-    border-spacing: 4px;
-    border: var(--blurborder);
+      position: relative;
+      height: 80%;
+      width: 100%;
+      backdrop-filter: var(--blur);
+      background-color: var(--green50);
+      border-radius: 10px;
+      padding: 20px 25px 20px 25px;
+      color: var(--darkgreen);
+      border-spacing: 4px;
+      border: var(--blurborder);
+      /* display: flex; */
+  }
+  .dashb-header{
+    height: 10%;
+    border: var(--gborder);
+  }
+  .dashb-subcont{
+    height: 90%;
+    border: var(--gborder);  
+    display: flex;  
+    /* justify-content: space-around; */
+  }
+  .allP{
+    height: 300px;
+    width: 50%;
+    border: var(--gborder);
 }
+.topD{
+    border: var(--gborder);
+    height: 300px;
+  }
+
+
 
 
   /* animations */
