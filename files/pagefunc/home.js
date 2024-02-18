@@ -160,40 +160,44 @@ const month = today.toLocaleString("en-US", {
 });
 
 // Define an array of student types
-const studentTypes = ["coll", ];
+const studentTypes = ["coll", "shs"];
 
 // Combine student types with the current month
 const studentTypesWithMonth = [...studentTypes, month];
 
-fetchStudData()
+fetchAllData();
 
 // fetch ALL data from consultation records (based on current month)
-async function fetchStudData() {
+async function fetchAllData() {
   const { data } = await _supabase.from("cons_rec").select("*").contains("misc", [month]);
 
-  console.log(data);
-  console.log(studentTypesWithMonth);
+  // Filter data where "archived" is false
+  const filteredData = data.filter(record => record.archived === false);
+  const patients = filteredData.length;
 
-  const xx = { "coll": 0, "shs": 0, "Staff": 0, "Faculty": 0 };
+  // Count the number of students, staff, and faculty
+  let studentsCount = 0;
+  let staffCount = 0;
+  let facultyCount = 0;
+  addLabel(month, patients);
 
-  if (data && data.length > 0) {
-    data.forEach(data1 => {
+  filteredData.forEach(record => {
+    if (record.misc.includes("coll") || record.misc.includes("shs")) {
+      studentsCount++;
+    } else if (record.misc.includes("Staff")) {
+      staffCount++;
+    } else if (record.misc.includes("Faculty")) {
+      facultyCount++;
+    }
+    
+  });
 
-      if (data1.archived === false){
-        console.log(data1);
-        data1.misc.forEach(dis => {
-          if (xx[dis]) {
-            xx[dis]++;
-          }
-        });
-      }
-    });
-
-    addDataset("Students", xx["coll"] + xx["shs"]);
-    addDataset("Staff", xx["Staff"]);
-    addDataset("Faculty", xx["Faculty"]);
-  }
+  // Add datasets to the chart
+  addDataset("Students", studentsCount);
+  addDataset("Staff", staffCount);
+  addDataset("Faculty", facultyCount);
 }
+
 
 function addDataset(label, count) {
 
@@ -219,6 +223,20 @@ function addDataset(label, count) {
   initialDiseaseCountData.datasets.push(newDataset);
   diseaseCountChart.update();
 }
+function addLabel(month, patient){
+
+  if(month == "01"){month = "January";} if(month == "02"){month = "February";} if(month == "03"){month = "March";}
+  if(month == "04"){month = "April";} if(month == "05"){month = "May";} if(month == "6"){month = "June";}
+  if(month == "07"){month = "July";} if(month == "08"){month = "August";} if(month == "9"){month = "September";}
+  if(month == "10"){month = "October";} if(month == "11"){month = "November";} if(month == "12"){month = "December";}
+
+  var title = `${month} Patient Count | (${patient})`;
+
+  // diseaseCountChart.options.plugins.title.text.push(title);
+  initialDiseaseCountData.labels.push(title);
+  diseaseCountChart.update();
+
+}
 
 ////////////// CHART INITIALIZATION
 var ctxDiseaseCount = document
@@ -227,7 +245,7 @@ var ctxDiseaseCount = document
 
 // Define initial data for the bar chart with zero counts
 var initialDiseaseCountData = {
-  labels: ["Students", "Staff", "Faculty"],
+  labels: [],
   datasets: [],
 };
 
@@ -258,7 +276,7 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
       },
       title: {
         display: true,
-        text: "Consultation Records by Category",
+        text: "",
         color: "white",
         font: {
           size: 18,
