@@ -367,7 +367,7 @@ var initialPatientCountData1 = {
 };
 
 var patientCountChart1 = new Chart(ctxPatientCount1, {
-  type: "doughnut",
+  type: "pie",
   data: initialPatientCountData1,
   options: {
   
