@@ -291,6 +291,7 @@ var patientCountChart = new Chart(ctxPatientCount, {
 
 ///////////////////////////////// PIE GRAPH (top diseases count) /////////////////////////////////////
 // fetch ALL data from consultation records (based on current month)
+/*
 async function fetchAllData1() {
   const { data } = await _supabase.from("cons_rec").select("*").contains("misc", [month]);
 
@@ -366,8 +367,9 @@ var initialPatientCountData1 = {
   datasets: [],
 };
 
+
 var patientCountChart1 = new Chart(ctxPatientCount1, {
-  type: "pie",
+  type: "bar",
   data: initialPatientCountData1,
   options: {
   
@@ -390,6 +392,84 @@ var patientCountChart1 = new Chart(ctxPatientCount1, {
     },
   },
 });
+*/
+
+async function fetchAllData1() {
+  const { data } = await _supabase.from("cons_rec").select("*").contains("misc", [month]);
+
+  // Filter data where "archived" is false
+  const filteredData = data.filter(record => record.archived === false);
+
+  // Count the number of students, staff, and faculty
+  let studentsCount = 0;
+  let staffCount = 0;
+  let facultyCount = 0;
+
+  filteredData.forEach(record => {
+    if (record.misc.includes("coll") || record.misc.includes("shs")) {
+      studentsCount++;
+    } else if (record.misc.includes("Staff")) {
+      staffCount++;
+    } else if (record.misc.includes("Faculty")) {
+      facultyCount++;
+    }
+  });
+
+  // Update chart
+  updateChartData1([studentsCount, staffCount, facultyCount]);
+}
+
+function updateChartData1(counts) {
+  const colors = counts.map(() => `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},0.8)`);
+
+  var newDataset1 = {
+    data: counts,
+    backgroundColor: colors,
+    borderColor: 'white',
+    borderWidth: 1
+  };
+
+  // Replace the existing dataset with the new one
+  initialPatientCountData1.datasets = [newDataset1];
+  patientCountChart1.update();
+}
+
+// Chart Initialization
+var ctxPatientCount1 = document.getElementById("TopdCountChart").getContext("2d");
+
+// Define initial data structure for the pie chart
+var initialPatientCountData1 = {
+  labels: ['Students', 'Staff', 'Faculty'], // Labels for the pie slices
+  datasets: [] // This will be populated by updateChartData1
+};
+
+// Create the pie chart with the initial data
+var patientCountChart1 = new Chart(ctxPatientCount1, {
+  type: "pie", // Specifies the chart type
+  data: initialPatientCountData1,
+  options: {
+    plugins: {
+      legend: {
+        display: true,
+        position: "bottom",
+        labels: {
+          color: "white",
+        },
+      },
+      title: {
+        display: true,
+        text: "", // You can set this to be a dynamic title if needed
+        color: "white",
+        font: {
+          size: 18,
+        },
+      },
+    },
+  },
+});
+
+// Make sure to call fetchAllData1 to initialize the chart with data
+fetchAllData1();
 
 ///////////////////////////////// --------- /////////////////////////////////////
 
