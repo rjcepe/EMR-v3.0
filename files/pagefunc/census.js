@@ -174,22 +174,28 @@ async function fetchAllData(type){
 
       const stat = {};
 
-      var patients = data.length;
+      // Filter the data array to count only the records where "archived" is false
+      const filteredData = data.filter(record => record.archived === false);
+
+      // Count the number of records where "archived" is false
+      const patients = filteredData.length;
       
       if (data && data.length > 0){
         addLabel(type, year, location, month, patients);
         
         
           data.forEach(data1 => {
-            data1.diagchex.forEach(dis =>{
-              
-              if(stat[dis]){
-                stat[dis]++;
-              }
-              else {
-                stat[dis] = 1;
-              }
-            })
+            if (data1.archived === false){
+              data1.diagchex.forEach(dis =>{
+                
+                if(stat[dis]){
+                  stat[dis]++;
+                }
+                else {
+                  stat[dis] = 1;
+                }
+              })
+            }
           });
         }
         const diseaseDiv = document.getElementById('printFrame');
@@ -205,7 +211,7 @@ async function fetchAllData(type){
 
         content += '</table></body>';
         iframeDoc.write(content);
-        console.log(content);
+        // console.log(content);
   }
 
 
