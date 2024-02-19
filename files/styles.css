@@ -2394,15 +2394,26 @@
     /* justify-content: space-around; */
   }
   .allP{
-    height: 300px;
-    width: 50%;
+    height: 70%;
+    width: 70%;
     border: var(--gborder);
 }
-.topD{
+  .topD{
     border: var(--gborder);
-    height: 300px;
+    height: 40%;
+    width: 30%;
+    display: flex;
   }
-
+  .topDcanvas{
+    border: var(--gborder);
+    height: 100%;
+    width: 100%;
+  }
+  .topC{
+    border: var(--gborder);
+    height: 100%;
+    width: 100%;
+  }
 
 
 

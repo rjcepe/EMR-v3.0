@@ -158,6 +158,10 @@ const month = today.toLocaleString("en-US", {
   timeZone: targetTimezone,
   month: "2-digit",
 });
+const year = today.toLocaleString("en-US", {
+  timeZone: targetTimezone,
+  year: "numeric",
+});
 
 fetchAllData();
 fetchAllData1();
@@ -175,7 +179,7 @@ async function fetchAllData() {
   let studentsCount = 0;
   let staffCount = 0;
   let facultyCount = 0;
-  addLabel(month, patients);
+  addLabel();
 
   filteredData.forEach(record => {
     if (record.misc.includes("coll") || record.misc.includes("shs")) {
@@ -218,19 +222,24 @@ function addDataset(label, count) {
   initialPatientCountData.datasets.push(newDataset);
   patientCountChart.update();
 }
-function addLabel(month, patient){
+function addLabel(){
 
+  const title1 = ``;
+
+  initialPatientCountData.labels.push(title1);
+  patientCountChart.update();
+}
+
+let monthAlpha = "";
+monthToAlpha(month);
+
+function monthToAlpha (month){
   if(month == "01"){month = "January";} if(month == "02"){month = "February";} if(month == "03"){month = "March";}
   if(month == "04"){month = "April";} if(month == "05"){month = "May";} if(month == "6"){month = "June";}
   if(month == "07"){month = "July";} if(month == "08"){month = "August";} if(month == "9"){month = "September";}
   if(month == "10"){month = "October";} if(month == "11"){month = "November";} if(month == "12"){month = "December";}
 
-  var title = `${month} Patient Count | (${patient})`;
-
-  // diseaseCountChart.options.plugins.title.text.push(title);
-  initialPatientCountData.labels.push(title);
-  patientCountChart.update();
-
+  monthAlpha = month;
 }
 
 ////////////// CHART INITIALIZATION
@@ -248,14 +257,16 @@ var patientCountChart = new Chart(ctxPatientCount, {
   type: "bar",
   data: initialPatientCountData,
   options: {
+    responsive: true,
     scales: {
       y: {
         grid: {
-          display: false,
-          color: 'rgba(255,255,255,1)' // Color of grid lines for x-axis
+          // display: false,
+          color: 'rgba(255,255,255,0.3)' // Color of grid lines for x-axis
         },
         beginAtZero: true,
         ticks: {
+          // display: false,
           color: "white", // Y-axis label colors
         },
       },
@@ -275,7 +286,7 @@ var patientCountChart = new Chart(ctxPatientCount, {
       },
       title: {
         display: true,
-        text: "",
+        text: `${monthAlpha} ${year} Patient Count`,
         color: "white",
         font: {
           size: 18,
@@ -326,34 +337,39 @@ async function fetchAllData1() {
   const top3Object = Object.fromEntries(top3);
     
   let Top3List = '';
+  let disC = [];
+  let disC1 = [];
 
   for (const [disease, count] of Object.entries(top3Object)) {
       Top3List += `<li>${disease}: ${count}</li>`;
-  }
-
-  const top3listcont = document.getElementById("topD1");
+      disC.push(disease);  
+      disC1.push(count);  
+      // addDataset1(disease, count);
+    }
+    
+  addDataset1(disC, disC1);
+  addLabel1(month, disC);
+  console.log(disC);
+  console.log(disC1);
+    
+  const top3listcont = document.getElementById("topC");
 
   const ul = document.createElement("ul");
   ul.innerHTML = `${Top3List}`;
 
   top3listcont.appendChild(ul);
+
+  
 }
 
 function addDataset1(label, count) {
-  // random color generator
-  const red = Math.floor(Math.random() * 256);
-  const green = Math.floor(Math.random() * 256);
-  const blue = Math.floor(Math.random() * 256);
-
-  // Combine them into an rgba string with 0.5 opacity
-  const randomColor = `rgba(${red},${green},${blue},0.8)`;
 
   var newDataset1 = {
-    label: label,
-    data: [count],
-    backgroundColor: [randomColor],
+    data: count,
+    backgroundColor: ["rgb(209, 17, 17)", "rgb(209, 145, 17)", "rgb(151, 209, 17)"],
     borderColor: ['white'],
-    borderWidth: 1
+    borderWidth: 1,
+    hoverOffset: 4
   };
 
   // Add the new dataset to the chart
@@ -361,15 +377,16 @@ function addDataset1(label, count) {
   patientCountChart1.update();
 }
 
-function addLabel1(month, patient) {
+function addLabel1(month, dis) {
   if (month == "01") { month = "January"; } if (month == "02") { month = "February"; } if (month == "03") { month = "March"; }
   if (month == "04") { month = "April"; } if (month == "05") { month = "May"; } if (month == "6") { month = "June"; }
   if (month == "07") { month = "July"; } if (month == "08") { month = "August"; } if (month == "9") { month = "September"; }
   if (month == "10") { month = "October"; } if (month == "11") { month = "November"; } if (month == "12") { month = "December"; }
 
-  var title = `${month} Patient Count | (${patient})`;
+  var title = `Top 3 Leading Cases This Month`;
 
-  initialPatientCountData1.labels.push(title);
+  console.log(dis);
+  initialPatientCountData1.labels = dis;
   patientCountChart1.update();
 }
 
@@ -386,21 +403,40 @@ var initialPatientCountData1 = {
 };
 
 var patientCountChart1 = new Chart(ctxPatientCount1, {
-  type: "doughnut",
+  type: "pie",
   data: initialPatientCountData1,
   options: {
-  
+    responsive: true,
+    scales: {
+      y: {
+        grid: {
+          display: false,
+          color: 'rgba(255,255,255,1)' // Color of grid lines for x-axis
+        },
+        beginAtZero: true,
+        ticks: {
+          display: false,
+          color: "white", // Y-axis label colors
+        },
+      },
+      x: {
+        ticks: {
+          display: false,
+          color: "white", // X-axis label colors
+        },
+      },
+    },
     plugins: {
       legend: {
-        display: true,
-        position: "bottom",
+        display: false,
+        position: "right",
         labels: {
           color: "white",
         },
       },
       title: {
         display: true,
-        text: "",
+        text: "Top 3 Leading Cases",
         color: "white",
         font: {
           size: 18,
