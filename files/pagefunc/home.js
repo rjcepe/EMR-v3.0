@@ -292,32 +292,42 @@ var patientCountChart = new Chart(ctxPatientCount, {
 ///////////////////////////////// PIE GRAPH (top diseases count) /////////////////////////////////////
 // fetch ALL data from consultation records (based on current month)
 async function fetchAllData1() {
-  const { data } = await _supabase.from("cons_rec").select("*").contains("misc", [month]);
+  const { data } = await _supabase.from("cons_rec").select("*");
 
   // Filter data where "archived" is false
   const filteredData = data.filter(record => record.archived === false);
   const patients = filteredData.length;
-
+  
   // Count the number of students, staff, and faculty
-  let studentsCount = 0;
-  let staffCount = 0;
-  let facultyCount = 0;
-  addLabel1(month, patients);
-
+  const stat = {};
   filteredData.forEach(record => {
-    if (record.misc.includes("coll") || record.misc.includes("shs")) {
-      studentsCount++;
-    } else if (record.misc.includes("Staff")) {
-      staffCount++;
-    } else if (record.misc.includes("Faculty")) {
-      facultyCount++;
-    }
-  });
 
-  // Add datasets to the chart
-  addDataset1("Students", studentsCount);
-  addDataset1("Staff", staffCount);
-  addDataset1("Faculty", facultyCount);
+    record.diagchex.forEach(dis => {
+      if(stat[dis]){
+        stat[dis]++;
+      }
+      else {
+        stat[dis] = 1;
+      }
+    })
+    
+  });
+  // console.log(stat);
+
+  const dataArray = Object.entries(stat);
+
+  // Sort the array based on the second element (the values) in descending order
+  dataArray.sort((a, b) => b[1] - a[1]);
+
+  // Get the top 3 items with the most counts
+  const top3 = dataArray.slice(0, 3);
+
+  // Convert the top 3 items back to an object
+  const top3Object = Object.fromEntries(top3);
+
+  console.log(top3Object);
+
+
 }
 
 function addDataset1(label, count) {
