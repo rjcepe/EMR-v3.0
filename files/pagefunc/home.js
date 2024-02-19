@@ -324,24 +324,12 @@ async function fetchAllData1() {
 
   // Convert the top 3 items back to an object
   const top3Object = Object.fromEntries(top3);
-
-  const top1 = top3[0];
     
-  const top1String = JSON.stringify(top1);
-  
-  const top3List = top3.map(item => `${item[0]}: ${item[1]}`);
-  
-  console.log(top3Object);
-  console.log(top1);
-  console.log(top1String);
-  console.log(top3List);
-
   let Top3List = '';
 
   for (const [disease, count] of Object.entries(top3Object)) {
       Top3List += `<li>${disease}: ${count}</li>`;
   }
-  console.log(Top3List);
 
   const top3listcont = document.getElementById("topD1");
 
