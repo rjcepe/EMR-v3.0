@@ -158,39 +158,52 @@ const month = today.toLocaleString("en-US", {
   timeZone: targetTimezone,
   month: "2-digit",
 });
+const year = today.toLocaleString("en-US", {
+  timeZone: targetTimezone,
+  year: "numeric",
+});
 
-// Define an array of student types
-const studentTypes = ["coll", "shs"];
-
-// Combine student types with the current month
-const studentTypesWithMonth = [...studentTypes, month];
 
 fetchAllData();
+fetchAllData1();
 
+///////////////////////////////// BAR GRAPH (patient count) /////////////////////////////////////
 // fetch ALL data from consultation records (based on current month)
 async function fetchAllData() {
-  const { data } = await _supabase.from("cons_rec").select("*").contains("misc", [month]);
+  const { data } = await _supabase
+    .from("cons_rec")
+    .select("*")
+    .contains("misc", [month]);
 
   // Filter data where "archived" is false
-  const filteredData = data.filter(record => record.archived === false);
+  const filteredData = data.filter((record) => record.archived === false);
   const patients = filteredData.length;
 
   // Count the number of students, staff, and faculty
   let studentsCount = 0;
   let staffCount = 0;
   let facultyCount = 0;
-  addLabel(month, patients);
+  let shsCount = 0;
+  let collCount = 0;
+  addLabel();
 
-  filteredData.forEach(record => {
-    if (record.misc.includes("coll") || record.misc.includes("shs")) {
+  filteredData.forEach((record) => {
+    if (record.misc.includes("coll")) {
+      collCount ++;
+      studentsCount++;
+    }else if (record.misc.includes("shs")) {
+      shsCount ++;
       studentsCount++;
     } else if (record.misc.includes("Staff")) {
       staffCount++;
     } else if (record.misc.includes("Faculty")) {
       facultyCount++;
     }
-    
   });
+  
+  const totalCount = studentsCount + facultyCount + staffCount;
+
+  brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount);
 
   // Add datasets to the chart
   addDataset("Students", studentsCount);
@@ -198,85 +211,174 @@ async function fetchAllData() {
   addDataset("Faculty", facultyCount);
 }
 
+function brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount){
+
+  const allpLabel = document.getElementById("allPlabel");
+  // allpLabel.innerHTML = `${monthAlpha} ${year} Patient Count`;
+  allpLabel.innerHTML = `This Month's Patient Count`;
+  
+  // for breakdown container
+  const brkdwn = document.getElementById("brkdwn");
+
+  const totalC = document.createElement("span");
+  totalC.innerHTML = `Total Patients: <br><b>${totalCount}</b>`
+  
+  const studbrk = document.createElement("div")
+  studbrk.classList.add("studbrk");
+  
+  const studbrktxt1 = document.createElement("div")
+  const studbrktxt2 = document.createElement("div")
+  studbrktxt1.classList.add("brktxt");
+  studbrktxt2.classList.add("brktxt");
+  
+  studbrktxt1.innerHTML = `<p>SHS Students:</p><b>${shsCount}</b>`
+  studbrktxt2.innerHTML = `<p>College Students:</p><b>${collCount}</b>`
+  
+  const empbrk = document.createElement("div")
+  empbrk.classList.add("empbrk");
+  
+  const empbrktxt1 = document.createElement("div")
+  const empbrktxt2 = document.createElement("div")
+  empbrktxt1.classList.add("brktxt");
+  empbrktxt2.classList.add("brktxt");
+  
+  empbrktxt1.innerHTML = `<p>Faculty Members:</p><b>${facultyCount}</b>`
+  empbrktxt2.innerHTML = `<p>Staff Members:</p><b>${staffCount}</b>`
+  
+  brkdwn.appendChild(totalC);
+  
+  studbrk.appendChild(studbrktxt1);
+  studbrk.appendChild(studbrktxt2);
+  brkdwn.appendChild(studbrk);
+
+  empbrk.appendChild(empbrktxt1);
+  empbrk.appendChild(empbrktxt2);
+  brkdwn.appendChild(empbrk);
+
+}
+
+let z = 0;
 
 function addDataset(label, count) {
+  // Define the colors for the bars
+  const barColors = ["rgb(40, 88, 73)", "rgb(72, 158, 131)", "rgb(202, 231, 222)"];
 
-  // random color generator
-  const red = Math.floor(Math.random() * 156);
-  const green = Math.floor(Math.random() * 256);
-  const blue = Math.floor(Math.random() * 156);
-
-  // Combine them into an rgba string with 0.5 opacity
-  const randomColor = `rgba(${red},${green},${blue},0.5)`;
-
+  // Create a new dataset with the specified color
   var newDataset = {
-
     label: label,
     data: [count], // Initial values set to zero
-    backgroundColor: [randomColor],
-    borderColor: ['white'],
-    borderWidth: 1
-
+    backgroundColor: barColors[z],
+    borderColor: ["white"],
+    borderWidth: 0,
   };
 
+  z++;
   // Add the new dataset to the chart
-  initialDiseaseCountData.datasets.push(newDataset);
-  diseaseCountChart.update();
+  initialPatientCountData.datasets.push(newDataset);
+  patientCountChart.update();
 }
-function addLabel(month, patient){
 
-  if(month == "01"){month = "January";} if(month == "02"){month = "February";} if(month == "03"){month = "March";}
-  if(month == "04"){month = "April";} if(month == "05"){month = "May";} if(month == "6"){month = "June";}
-  if(month == "07"){month = "July";} if(month == "08"){month = "August";} if(month == "9"){month = "September";}
-  if(month == "10"){month = "October";} if(month == "11"){month = "November";} if(month == "12"){month = "December";}
+function addLabel() {
+  const title1 = ``;
 
-  var title = `${month} Patient Count | (${patient})`;
-
-  // diseaseCountChart.options.plugins.title.text.push(title);
-  initialDiseaseCountData.labels.push(title);
-  diseaseCountChart.update();
-
+  initialPatientCountData.labels.push(title1);
+  patientCountChart.update();
 }
+
+let monthAlpha = "";
+monthToAlpha(month);
+
+function monthToAlpha(month) {
+  if (month == "01") {
+    month = "January";
+  }
+  if (month == "02") {
+    month = "February";
+  }
+  if (month == "03") {
+    month = "March";
+  }
+  if (month == "04") {
+    month = "April";
+  }
+  if (month == "05") {
+    month = "May";
+  }
+  if (month == "6") {
+    month = "June";
+  }
+  if (month == "07") {
+    month = "July";
+  }
+  if (month == "08") {
+    month = "August";
+  }
+  if (month == "9") {
+    month = "September";
+  }
+  if (month == "10") {
+    month = "October";
+  }
+  if (month == "11") {
+    month = "November";
+  }
+  if (month == "12") {
+    month = "December";
+  }
+
+  monthAlpha = month;
+}
+const dbhl = document.getElementById("dashb-hl");
+dbhl.innerText = `${monthAlpha} ${year} | Dashboard`;
 
 ////////////// CHART INITIALIZATION
-var ctxDiseaseCount = document
-  .getElementById("diseaseCountChart")
+var ctxPatientCount = document
+  .getElementById("PatientCountChart")
   .getContext("2d");
 
 // Define initial data for the bar chart with zero counts
-var initialDiseaseCountData = {
+var initialPatientCountData = {
   labels: [],
   datasets: [],
 };
 
-var diseaseCountChart = new Chart(ctxDiseaseCount, {
+var patientCountChart = new Chart(ctxPatientCount, {
   type: "bar",
-  data: initialDiseaseCountData,
+  data: initialPatientCountData,
   options: {
+    responsive: true,
+    maintainAspectRatio: false, // Add this line to prevent aspect ratio adjustment
+    aspectRatio: 1,
     scales: {
       y: {
+        grid: {
+          display: false,
+          color: "rgba(255,255,255,0.1)", // Color of grid lines for x-axis
+        },
         beginAtZero: true,
         ticks: {
+          display: false,
           color: "white", // Y-axis label colors
         },
       },
       x: {
         ticks: {
+          display: false,
           color: "white", // X-axis label colors
         },
       },
     },
     plugins: {
       legend: {
-        display: true,
+        display: false,
         position: "right",
         labels: {
           color: "white",
         },
       },
       title: {
-        display: true,
-        text: "",
+        display: false,
+        text: `${monthAlpha} ${year} Patient Count`,
         color: "white",
         font: {
           size: 18,
@@ -286,3 +388,195 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
   },
 });
 
+///////////////////////////////// --------- /////////////////////////////////////
+
+///////////////////////////////// PIE GRAPH (top diseases count) /////////////////////////////////////
+// fetch ALL data from consultation records (based on current month)
+async function fetchAllData1() {
+  const { data } = await _supabase
+    .from("cons_rec")
+    .select("*")
+    .contains("misc", [month]);
+
+  // Filter data where "archived" is false
+  const filteredData = data.filter((record) => record.archived === false);
+  const patients = filteredData.length;
+
+  // Count the number of students, staff, and faculty
+  const stat = {};
+  filteredData.forEach((record) => {
+    record.diagchex.forEach((dis) => {
+      if (stat[dis]) {
+        stat[dis]++;
+      } else {
+        stat[dis] = 1;
+      }
+    });
+  });
+
+  const dataArray = Object.entries(stat);
+
+  // Sort the array based on the second element (the values) in descending order
+  dataArray.sort((a, b) => b[1] - a[1]);
+
+  // Get the top 3 items with the most counts
+  const top3 = dataArray.slice(0, 5);
+
+  // Convert the top 3 items back to an object
+  const top3Object = Object.fromEntries(top3);
+
+  let Top3List = "";
+  let disC = [];
+  let disC1 = [];
+  let counter = 1;
+  let total = 0;
+
+  for (const [disease, count] of Object.entries(top3Object)) {
+    Top3List += `<li>${disease}: <b>${count}</b></li>`;
+    disC.push(disease);
+    disC1.push(count);
+    counter++;
+    // addDataset1(disease, count);
+  }
+
+  for (let i = 0; i < disC1.length; i++) {
+    total += disC1[i];
+  }
+  console.log(total);
+
+  addDataset1(disC, disC1);
+  addLabel1(month, disC);
+
+  const top3listcont = document.getElementById("topC");
+  const doughnut = document.getElementById("totaldogs");
+
+  const ul = document.createElement("ul");
+  ul.innerHTML = `${Top3List}`;
+
+  const totalC = document.createElement("h5");
+  totalC.innerHTML = `${total}`;
+
+  top3listcont.appendChild(ul);
+  doughnut.appendChild(totalC);
+}
+
+function addDataset1(label, count) {
+  var newDataset1 = {
+    data: count,
+    backgroundColor: [
+      "rgb(97, 183, 156)",
+      "rgb(40, 88, 73)",
+      "rgb(72, 158, 131)",
+      "rgb(202, 231, 222)",
+      "rgb(24, 53, 44)",
+    ],
+    borderColor: ["rgb(255,255,255,0.4)"],
+    borderWidth: 0,
+  };
+
+  // Add the new dataset to the chart
+  initialPatientCountData1.datasets.push(newDataset1);
+  patientCountChart1.update();
+}
+
+function addLabel1(month, dis) {
+  if (month == "01") {
+    month = "January";
+  }
+  if (month == "02") {
+    month = "February";
+  }
+  if (month == "03") {
+    month = "March";
+  }
+  if (month == "04") {
+    month = "April";
+  }
+  if (month == "05") {
+    month = "May";
+  }
+  if (month == "6") {
+    month = "June";
+  }
+  if (month == "07") {
+    month = "July";
+  }
+  if (month == "08") {
+    month = "August";
+  }
+  if (month == "9") {
+    month = "September";
+  }
+  if (month == "10") {
+    month = "October";
+  }
+  if (month == "11") {
+    month = "November";
+  }
+  if (month == "12") {
+    month = "December";
+  }
+
+  initialPatientCountData1.labels = dis;
+  patientCountChart1.update();
+}
+
+////////////// CHART INITIALIZATION
+var ctxPatientCount1 = document
+  .getElementById("TopdCountChart")
+  .getContext("2d");
+
+// Define initial data for the bar chart with zero counts
+var initialPatientCountData1 = {
+  labels: [],
+  datasets: [],
+};
+
+var patientCountChart1 = new Chart(ctxPatientCount1, {
+  type: "doughnut",
+  data: initialPatientCountData1,
+  options: {
+    cutout: "70%",
+    responsive: false,
+    scales: {
+      y: {
+        grid: {
+          display: false,
+          color: "rgba(255,255,255,1)", // Color of grid lines for x-axis
+        },
+        beginAtZero: true,
+        ticks: {
+          display: false,
+          color: "white", // Y-axis label colors
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          display: false,
+          color: "white", // X-axis label colors
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+        position: "bottom",
+        labels: {
+          color: "white",
+        },
+      },
+      title: {
+        display: false,
+        color: "white",
+        font: {
+          size: 18,
+        },
+      },
+    },
+  },
+});
+
+///////////////////////////////// --------- /////////////////////////////////////
