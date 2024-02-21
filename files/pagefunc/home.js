@@ -537,7 +537,9 @@ var patientCountChart1 = new Chart(ctxPatientCount1, {
   data: initialPatientCountData1,
   options: {
     cutout: "70%",
-    responsive: false,
+    responsive: true,
+    maintainAspectRatio: false, // Add this line to prevent aspect ratio adjustment
+    aspectRatio: 1,
     scales: {
       y: {
         grid: {
