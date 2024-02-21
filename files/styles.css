@@ -2521,7 +2521,7 @@
   }
 
   .topDcanvas label,
-  .brkdwn label {
+  .brkdwn label, .dashb-bott1 label {
       color: rgb(205, 205, 205);
       font-size: 0.7rem;
       font-weight: 700;
@@ -2607,9 +2607,9 @@
       width: 100%;
       margin: 5px 5px 0px 0px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: space-between;
-
       backdrop-filter: var(--blur);
       background-color: var(--green50);
       border-radius: 10px;
@@ -2618,6 +2618,14 @@
       color: var(--darkgreen);
       border-spacing: 4px;
       border: var(--blurborder);
+  }
+  .dashb-bott1-sub {
+      height: auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      /* border: var(--gborder); */
   }
   .dashb-bott2 {
       height: auto;
@@ -2653,6 +2661,7 @@
     height: 40px;
     border-radius: 10px;
     transition: 0.3s;
+    margin-bottom: 5px;
 
     text-align: left;
     padding-left: 10px;

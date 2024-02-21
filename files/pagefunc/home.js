@@ -352,18 +352,18 @@ var patientCountChart = new Chart(ctxPatientCount, {
     scales: {
       y: {
         grid: {
-          display: false,
+          display: true,
           color: "rgba(255,255,255,0.1)", // Color of grid lines for x-axis
         },
         beginAtZero: true,
         ticks: {
-          display: false,
+          display: true,
           color: "white", // Y-axis label colors
         },
       },
       x: {
         ticks: {
-          display: false,
+          display: true,
           color: "white", // X-axis label colors
         },
       },

@@ -22,7 +22,7 @@
     <div class="sidecont sidehide">
         <div class="sidenav">
             <div class="logo">
-                <img src="/files/images/logo.png" alt="DLSUD logo">
+                <img src="/files/images/logo.png" alt="DLSUD logo" onclick="ToHome()">
             </div>
             <div class="nav">
                 <div class="recs">
@@ -110,15 +110,18 @@
                 </div>
                 <div class="dashb-subcont2">
                     <div class="dashb-bott1">
-                        <div class="dashb-bott-butt-col1">
-                            <button class="dashb-butt">Medical Records <img src="/files/images/link.png" alt="" srcset=""></button>
-                            <button class="dashb-butt">Dental Records<img src="/files/images/link.png" alt="" srcset=""></button>
-                            <button class="dashb-butt">Consultation Records<img src="/files/images/link.png" alt="" srcset=""></button>
-                        </div>
-                        <div class="dashb-bott-butt-col2">
-                            <button class="dashb-butt">Accident Reports<img src="/files/images/link.png" alt="" srcset=""></button>
-                            <button class="dashb-butt">Medical Certificates<img src="/files/images/link.png" alt="" srcset=""></button>
-                            <button class="dashb-butt">Prescriptions<img src="/files/images/link.png" alt="" srcset=""></button>
+                        <label>NAVIGATION SHORTCUTS</label>
+                        <div class="dashb-bott1-sub">
+                            <div class="dashb-bott-butt-col1">
+                                <button class="dashb-butt" onclick="ToMedRec()">Medical Records <img src="/files/images/link.png" alt="" srcset=""></button>
+                                <button class="dashb-butt" onclick="ToDenRec()">Dental Records<img src="/files/images/link.png" alt="" srcset=""></button>
+                                <button class="dashb-butt" onclick="ToConRec()">Consultation Records<img src="/files/images/link.png" alt="" srcset=""></button>
+                            </div>
+                            <div class="dashb-bott-butt-col2">
+                                <button class="dashb-butt" onclick="ToAccRec()">Accident Reports<img src="/files/images/link.png" alt="" srcset=""></button>
+                                <button class="dashb-butt" onclick="ToMedCert()">Medical Certificates<img src="/files/images/link.png" alt="" srcset=""></button>
+                                <button class="dashb-butt" onclick="ToPresc()">Prescriptions<img src="/files/images/link.png" alt="" srcset=""></button>
+                            </div>
                         </div>
                     </div>
                     <div class="dashb-bott2"></div>
