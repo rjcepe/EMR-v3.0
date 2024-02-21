@@ -352,18 +352,18 @@ var patientCountChart = new Chart(ctxPatientCount, {
     scales: {
       y: {
         grid: {
-          display: false,
+          display: true,
           color: "rgba(255,255,255,0.1)", // Color of grid lines for x-axis
         },
         beginAtZero: true,
         ticks: {
-          display: false,
+          display: true,
           color: "white", // Y-axis label colors
         },
       },
       x: {
         ticks: {
-          display: false,
+          display: true,
           color: "white", // X-axis label colors
         },
       },
@@ -537,7 +537,9 @@ var patientCountChart1 = new Chart(ctxPatientCount1, {
   data: initialPatientCountData1,
   options: {
     cutout: "70%",
-    responsive: false,
+    responsive: true,
+    maintainAspectRatio: false, // Add this line to prevent aspect ratio adjustment
+    aspectRatio: 1,
     scales: {
       y: {
         grid: {
