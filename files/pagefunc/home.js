@@ -442,7 +442,7 @@ async function fetchAllData1() {
   for (let i = 0; i < disC1.length; i++) {
     total += disC1[i];
   }
-  console.log(total);
+  // console.log(total);
 
   addDataset1(disC, disC1);
   addLabel1(month, disC);

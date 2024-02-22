@@ -365,20 +365,25 @@
 
   .logout:hover {
       background-color: var(--lgreen50);
-  }
-
-  .logo {
-      margin-top: 10px;
-      height: 80px;
-      width: 90%;
-      border: var(--blurborder);
-      background-color: var(--green50);
-      backdrop-filter: var(--blur);
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
+    }
+    
+    .logo {
+        margin-top: 10px;
+        height: 80px;
+        width: 90%;
+        border: var(--blurborder);
+        background-color: var(--green50);
+        backdrop-filter: var(--blur);
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .logo:hover{
+        background-color: var(--lgreen50);  
   }
 
   .nav {
