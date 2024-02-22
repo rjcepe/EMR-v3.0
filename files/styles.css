@@ -1678,9 +1678,11 @@
   }
 
   .res1 {
+      position: relative;
       margin-bottom: 4px;
       transition: .3s;
       display: flex;
+      overflow: visible;
       /* justify-content: start; */
       /* align-items: center; */
   }
@@ -1693,8 +1695,26 @@
           color: white;
           text-shadow: var(--txtshadow);
       }
+      .rCounter{
+        background-color: white;
+        color: var(--green);
+      }
   }
-
+  .rCounter{
+    height: 15px;
+    width: 15px;
+    color: white;
+    background-color: var(--green);
+    position: absolute;
+    left: -10px;
+    top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 10px;
+    transition: 0.3s;
+  }
   .frow1 {
       height: 100%;
       /* border: var(--gborder); */
