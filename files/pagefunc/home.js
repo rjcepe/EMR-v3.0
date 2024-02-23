@@ -215,13 +215,13 @@ function brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount){
 
   const allpLabel = document.getElementById("allPlabel");
   // allpLabel.innerHTML = `${monthAlpha} ${year} Patient Count`;
-  allpLabel.innerHTML = `This Month's Patient Count`;
+  allpLabel.innerHTML = `This Month's Visit Count`;
   
   // for breakdown container
   const brkdwn = document.getElementById("brkdwn");
 
   const totalC = document.createElement("span");
-  totalC.innerHTML = `Total Patients: <br><b>${totalCount}</b>`
+  totalC.innerHTML = `Total Visits: <br><b>${totalCount}</b>`
   
   const studbrk = document.createElement("div")
   studbrk.classList.add("studbrk");
