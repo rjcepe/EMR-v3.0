@@ -177,7 +177,6 @@ async function fetchAllData() {
 
   // Filter data where "archived" is false
   const filteredData = data.filter((record) => record.archived === false);
-  const patients = filteredData.length;
 
   // Count the number of students, staff, and faculty
   let studentsCount = 0;
