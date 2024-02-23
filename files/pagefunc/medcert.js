@@ -534,12 +534,11 @@ function gcert10(){
     window.open('https://forms.gle/YJiK6hVCrEzTEBkb8', '_blank');
 }
 
-
 access();
 
 ////////////// access initialization
 function access(){
-  var type = sessionStorage.getItem("y");
+  var type = sessionStorage.getItem("z");
 
   if (type == "Doctor"){
     document.getElementById("vcert07").disabled = true;
@@ -548,7 +547,7 @@ function access(){
     document.getElementById("gcert07").disabled = true;
     document.getElementById("gcert10").disabled = true;
   }
-  if (type == "Nurse" && type == "Cert"){
+  if (type == "Nurse" || type == "Cert"){
     document.getElementById("vcert02").disabled = true;
     document.getElementById("vcert03").disabled = true;
     document.getElementById("vcert04").disabled = true;
