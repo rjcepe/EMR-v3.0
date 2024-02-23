@@ -164,12 +164,13 @@ const year = today.toLocaleString("en-US", {
 });
 
 
-fetchAllData();
-fetchAllData1();
+fetchCurrentMonthPatiens();
+fetchTop5diseases();
+fetchRecentVisits();
 
 ///////////////////////////////// BAR GRAPH (patient count) /////////////////////////////////////
 // fetch ALL data from consultation records (based on current month)
-async function fetchAllData() {
+async function fetchCurrentMonthPatiens() {
   const { data } = await _supabase
     .from("cons_rec")
     .select("*")
@@ -177,7 +178,6 @@ async function fetchAllData() {
 
   // Filter data where "archived" is false
   const filteredData = data.filter((record) => record.archived === false);
-  const patients = filteredData.length;
 
   // Count the number of students, staff, and faculty
   let studentsCount = 0;
@@ -392,7 +392,7 @@ var patientCountChart = new Chart(ctxPatientCount, {
 
 ///////////////////////////////// PIE GRAPH (top diseases count) /////////////////////////////////////
 // fetch ALL data from consultation records (based on current month)
-async function fetchAllData1() {
+async function fetchTop5diseases() {
   const { data } = await _supabase
     .from("cons_rec")
     .select("*")
@@ -400,7 +400,6 @@ async function fetchAllData1() {
 
   // Filter data where "archived" is false
   const filteredData = data.filter((record) => record.archived === false);
-  const patients = filteredData.length;
 
   // Count the number of students, staff, and faculty
   const stat = {};
@@ -582,3 +581,43 @@ var patientCountChart1 = new Chart(ctxPatientCount1, {
 });
 
 ///////////////////////////////// --------- /////////////////////////////////////
+
+
+
+
+///////////////////////////////// RECENT VISITS /////////////////////////////
+
+async function fetchRecentVisits() {
+  const { data } = await _supabase
+    .from("cons_rec")
+    .select("*")
+    .contains("misc", [month]);
+
+    data.sort((a, b) => new Number(b.row_id) - new Number(a.row_id));
+
+    // Filter data where "archived" is false
+    const filteredData = data.filter((record) => record.archived === false);
+
+    const tableBody = document.getElementById("rb-db");
+    tableBody.innerHTML = "";
+
+    for (let i = 0; i < 4 && i < filteredData.length; i++) {
+      const row = filteredData[i];
+      console.log(row);
+      const newRow = document.createElement("tr");
+      newRow.classList.add("rt-db1");
+
+      newRow.innerHTML = `
+        <th class="rcol-db1 rcol-id">${row.patient_id}</th>
+        <th class="rcol-db1">${row.patient_name}</th>
+        <th class="rcol-db1 rcol-cys">${row.course_section}</th>
+        <th class="rcol-db1">${row.created_date}</th>
+        <th class="rcol-db1">${row.added_by}</th>
+      `;
+      tableBody.appendChild(newRow);
+    }
+
+    for (i = 0; i < 3; i++){
+      console.log("hello");
+    }
+}
