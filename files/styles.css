@@ -2474,13 +2474,14 @@
   }
 
   .brkdwn span {
-      height: 150px;
+      /* height: 150px; */
+      height: 30%;
       background-color: var(--lgreen50);
       border-radius: 5px;
       color: white;
       font-size: 30px;
       transition: 0.3s;
-      margin-bottom: 3px;
+      margin-bottom: 5px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -2495,12 +2496,14 @@
       justify-content: center;
       /* flex-direction: column; */
       align-items: center;
+      height: 30%;
+      margin-bottom: 5px;
   }
 
   .brktxt {
       /* text-align: center; */
       width: 100%;
-      height: 120px;
+      height: 100%;
       margin: 3px;
       /* list-style: none; */
       background-color: var(--lgreen50);
@@ -2523,7 +2526,7 @@
   .topD {
       /* border: var(--gborder); */
       height: auto;
-      min-width: 250px;
+      min-width: 400px;
       /* margin-left: 5px; */
       /* display: flex; */
   }
@@ -2567,7 +2570,7 @@
 
   .topC {
       /* border: var(--gborder); */
-      height: auto;
+      height: 40%;
       width: 100%;
   }
 
@@ -2578,6 +2581,7 @@
       justify-content: center;
       flex-direction: column;
       align-items: center;
+      height: 100%;
   }
 
   .topC li {
@@ -2586,12 +2590,15 @@
       margin: 3px;
       list-style: none;
       background-color: var(--lgreen50);
-      padding: 5px;
+      padding: 0px 15px 0px 15px;
       border-radius: 5px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
       transition: 0.3s;
       cursor: default;
+      height: 20%;
+      font-size: 1rem;
   }
 
   .topC li:hover {
@@ -2610,14 +2617,14 @@
 
   .dognutz h5 {
       color: white;
-      font-size: 3.5rem;
+      font-size: 5.5rem;
       font-weight: 700;
   }
 
   .dognutz h6 {
       /* color: var(--lightgreen); */
       color: white;
-      font-size: .7rem;
+      font-size: 1.4rem;
       font-weight: 900;
       position: absolute;
   }
@@ -2628,7 +2635,7 @@
       align-items: center;
       position: absolute;
       /* border: var(--gborder); */
-      height: 65px;
+      height: 100px;
   }
 
   .dashb-bott1 {
@@ -2650,7 +2657,7 @@
   }
 
   .dashb-bott1-sub {
-      height: auto;
+      height: 90%;
       width: 100%;
       display: flex;
       align-items: center;
@@ -2693,7 +2700,7 @@
       border: none;
       background-color: var(--lgreen50);
       width: 100%;
-      height: 40px;
+      height: 30%;
       border-radius: 10px;
       transition: 0.3s;
       margin-bottom: 5px;
@@ -2719,11 +2726,15 @@
 
   .dashb-rt {
       font-size: 10px;
-      height: 95%;
+      height: 100px;
       width: 100%;
       margin-top: 3px;
+      overflow: hidden;
   }
-
+  .dashb-table-div{
+    height: 80%;
+    overflow-y: scroll;
+  }
   .dashb-rt thead {
       display: flex;
       align-items: center;
@@ -2736,7 +2747,7 @@
       display: flex;
       justify-content: space-around;
       width: 100%;
-      /* margin-bottom: 3px; */
+      margin-bottom: 3px;
       /* background-color: white; */
       transition: 0.3s;
       color: var(--lgreen50);
@@ -2794,8 +2805,7 @@
    /* border: var(--gborder); */
    display: flex;
    flex-direction: column;
-   height: 100px;
-  
+   height: 100%;
   }
 
   /* animations */

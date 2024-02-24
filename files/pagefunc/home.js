@@ -601,7 +601,7 @@ async function fetchRecentVisits() {
     const tableBody = document.getElementById("rb-db");
     tableBody.innerHTML = "";
 
-    for (let i = 0; i < 4 && i < filteredData.length; i++) {
+    for (let i = 0; i < 10 && i < filteredData.length; i++) {
       const row = filteredData[i];
       console.log(row);
       const newRow = document.createElement("tr");
