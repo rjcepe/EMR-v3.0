@@ -83,7 +83,7 @@ access();
 
 ////////////// access initialization
 function access(){
-  var type = sessionStorage.getItem("y");
+  var type = sessionStorage.getItem("z");
 
   if (type == "Nurse"){
     document.getElementById("mngpres").disabled = true;

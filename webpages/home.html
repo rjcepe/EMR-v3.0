@@ -22,12 +22,12 @@
     <div class="sidecont sidehide">
         <div class="sidenav">
             <div class="logo">
-                <img src="/files/images/logo.png" alt="DLSUD logo">
+                <img src="/files/images/logo.png" alt="DLSUD logo" onclick="ToHome()">
             </div>
             <div class="nav">
                 <div class="recs">
                     <h5>Records</h5>
-                    <button class="activebutt" onclick="ToMedRec()" id="mr"> <img src="/files/images/arrow.png"
+                    <button class="navbutt" onclick="ToMedRec()" id="mr"> <img src="/files/images/arrow.png"
                             alt="">Medical Records</button>
                     <button class="navbutt" onclick="ToDenRec()"><img src="/files/images/arrow.png" alt="">Dental
                         Records</button>
@@ -77,21 +77,68 @@
     <div class="main">
         <div class="cont1b">
             <div class="headline">
-                <h1>Dashboard</h1>
+                <h1 id="dashb-hl"></h1>
                 <div class="user">
                     <div class="username"></div>
                 </div>
             </div>
             <div class="dashb-cont">
-                <div class="dashb-header">
+                <!-- <div class="dashb-header">
                     <h1>February</h1>
-                </div>
+                </div> -->
                 <div class="dashb-subcont">
-                    <div class="allP">
-                        <canvas id="PatientCountChart"></canvas>
+                    <div class="brkdwn" id="brkdwn">
+                        <label id="allPlabel"></label>
                     </div>
-                    <div class="topD">
-                        <canvas id="TopdCountChart"></canvas>
+                    <div class="allP">
+                        <div class="allP-subcont">
+                            <canvas id="PatientCountChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="topD" id="topD1">   
+                        <div class="topDcanvas">
+                            <label>TOP 5 LEADING CASES</label>
+                            <div class="dognutz" id="dognutz">
+                                <canvas id="TopdCountChart"></canvas>
+                                <div class="totaldogs" id="totaldogs">
+                                    <h6>TOTAL:</h6>
+                                </div>
+                            </div>
+                            <div class="topC" id="topC"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashb-subcont2">
+                    <div class="dashb-bott1">
+                        <label>NAVIGATION SHORTCUTS</label>
+                        <div class="dashb-bott1-sub">
+                            <div class="dashb-bott-butt-col1">
+                                <button class="dashb-butt" onclick="ToMedRec()">Medical Records <img src="/files/images/link.png" alt="" srcset=""></button>
+                                <button class="dashb-butt" onclick="ToDenRec()">Dental Records<img src="/files/images/link.png" alt="" srcset=""></button>
+                                <button class="dashb-butt" onclick="ToConRec()">Consultation Records<img src="/files/images/link.png" alt="" srcset=""></button>
+                            </div>
+                            <div class="dashb-bott-butt-col2">
+                                <button class="dashb-butt" onclick="ToAccRec()">Accident Reports<img src="/files/images/link.png" alt="" srcset=""></button>
+                                <button class="dashb-butt" onclick="ToMedCert()">Medical Certificates<img src="/files/images/link.png" alt="" srcset=""></button>
+                                <button class="dashb-butt" onclick="ToPresc()">Prescriptions<img src="/files/images/link.png" alt="" srcset=""></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashb-bott2">
+                        <label>MOST RECENT VISITS OF THE MONTH</label>
+                        <table class="dashb-rt">
+                            <thead>
+                                <tr class="rt-db">
+                                    <th class="rcol-db rcol-id">ID</th>
+                                    <th class="rcol-db">Name</th>
+                                    <th class="rcol-db rcol-cys">CYS</th>
+                                    <th class="rcol-db">Date Created</th>
+                                    <th class="rcol-db">Added by</th>
+                                </tr>
+                            </thead>
+                            <tbody class="rb-db" id="rb-db">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
