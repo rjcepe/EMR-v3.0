@@ -2532,7 +2532,7 @@
       height: 100%;
       width: auto;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       flex-direction: column;
       align-items: center;
 
