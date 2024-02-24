@@ -609,7 +609,7 @@ async function fetchRecentVisits() {
 
       newRow.innerHTML = `
         <th class="rcol-db1 rcol-id">${row.patient_id}</th>
-        <th class="rcol-db1">${row.patient_name}</th>
+        <th class="rcol-db1 rcol-name">${row.patient_name}</th>
         <th class="rcol-db1 rcol-cys">${row.course_section}</th>
         <th class="rcol-db1">${row.created_date}</th>
         <th class="rcol-db1">${row.added_by}</th>

@@ -2793,7 +2793,9 @@
     .rcol-id, .rcol-cys{
         max-width: 100px;
     }
-
+    .rcol-name{
+        min-width: 200px;
+    }
   .dashb-rt tbody {
     display: flex;
     align-items: center;
