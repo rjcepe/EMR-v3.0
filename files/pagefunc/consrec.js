@@ -72,12 +72,18 @@ async function loadTableData() {
               b.patient_name.toString().localeCompare(a.patient_name)
             );
           } 
-
+    
+    let count = 1;
     tableData1.forEach((row) => {
 
       if (row.archived === false) {
         const newRow = document.createElement("tr");
         newRow.classList.add("res1");
+
+        const counter = document.createElement("p");
+        counter.classList.add("rCounter");
+        
+        counter.innerText = `${count}`;
 
         newRow.innerHTML = `
             <th class="row1 idcol1">${row.patient_id}</th>
@@ -89,8 +95,10 @@ async function loadTableData() {
             <th class="row1 timecol1">${row.location}</th>
             <th class="row1 timecol1">${row.added_by}</th>
         `;
+        count ++;
 
         tableBody.appendChild(newRow);
+        newRow.appendChild(counter);
         }
     });
   }
@@ -177,10 +185,16 @@ async function displayResults(results) {
           } 
 
       // Patient data found, update the table
+      let count = 1; 
       patientData.forEach((row) => {
         if (row.archived === false) {
           const newRow = document.createElement("tr");
           newRow.classList.add("res1");
+          
+          const counter = document.createElement("p");
+          counter.classList.add("rCounter");
+          
+          counter.innerText = `${count}`;
   
           newRow.innerHTML = `
               <th class="row1 idcol1">${row.patient_id}</th>
@@ -192,8 +206,9 @@ async function displayResults(results) {
               <th class="row1 timecol1">${row.location}</th>
               <th class="row1 timecol1">${row.added_by}</th>
           `;
-  
+          count ++;
           tableBody.appendChild(newRow);
+          newRow.appendChild(counter);
           }
       });
     } else {
@@ -264,11 +279,17 @@ async function filterEvent() {
             );
           } 
       // Patient data found, update the table
+      let count = 1; 
       patientData.forEach((row) => {
 
         if (row.archived === false) {
         const newRow = document.createElement("tr");
         newRow.classList.add("res1");
+
+        const counter = document.createElement("p");
+        counter.classList.add("rCounter");
+
+        counter.innerText = `${count}`;
 
         newRow.innerHTML = `
             <th class="row1 idcol1">${row.patient_id}</th>
@@ -280,8 +301,10 @@ async function filterEvent() {
             <th class="row1 timecol1">${row.location}</th>
             <th class="row1 timecol1">${row.added_by}</th>
         `;
+        count ++;
 
         tableBody.appendChild(newRow);
+        newRow.appendChild(counter);
         }
       });
     } else {

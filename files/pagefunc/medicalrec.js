@@ -76,7 +76,7 @@ async function loadTableData() {
 
         const counter = document.createElement("p");
         counter.classList.add("rCounter");
-sefsefsefsefsefsef
+
         counter.innerText = `${count}`;
 
         newRow.innerHTML = `
