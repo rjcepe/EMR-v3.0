@@ -2638,7 +2638,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      /* justify-content: space-between; */
       backdrop-filter: var(--blur);
       background-color: var(--green50);
       border-radius: 10px;
