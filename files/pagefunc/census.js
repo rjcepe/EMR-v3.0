@@ -230,6 +230,9 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
   type: 'bar',
   data: initialDiseaseCountData,
   options: {
+    responsive: true,
+    maintainAspectRatio: false, // Add this line to prevent aspect ratio adjustment
+    aspectRatio: 1,
       scales: {
           y: {
               beginAtZero: true,
@@ -246,7 +249,7 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
       plugins: {
           legend: {
               display: true,
-              position: 'right',
+              position: 'bottom',
               labels: {
                 color: 'white',
                 

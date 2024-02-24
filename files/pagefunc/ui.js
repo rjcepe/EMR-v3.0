@@ -274,18 +274,6 @@ function showCurrentPage() {
     pages[currentIndex].style.display = 'block';
 }
 
-// document.getElementById('nextpagebutt').addEventListener('click', function() {
-//     currentIndex = (currentIndex + 1) % pages.length; // Loop around
-//     showCurrentPage();
-// });
-
-// document.getElementById('prevpagebutt').addEventListener('click', function() {
-//     currentIndex = (currentIndex - 1 + pages.length) % pages.length; // Loop around
-//     showCurrentPage();
-// });
-
-// showCurrentPage(); // Initialize the view
-
 //search, filter, sort
 function showsearch(){
   const a = document.querySelector(".searchz");
