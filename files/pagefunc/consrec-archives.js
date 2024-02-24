@@ -74,6 +74,7 @@ async function loadTableData() {
             );
           } 
 
+    let count = 1; 
     tableData1.forEach((row) => {
 
       // check if the row is archived
@@ -81,6 +82,12 @@ async function loadTableData() {
       
         const newRow = document.createElement("tr");
       newRow.classList.add("res1");
+
+      const counter = document.createElement("p");
+      counter.classList.add("rCounter");
+
+      counter.innerText = `${count}`;
+
       newRow.innerHTML = `
           <th class="row1 idcol1">${row.patient_id}</th>
           <th class="row1 namecol1">${row.patient_name}</th>
@@ -100,7 +107,10 @@ async function loadTableData() {
           </th>
           
         `;
+        count ++;
+
       tableBody.appendChild(newRow);
+      newRow.appendChild(counter);
       }
     });
   }
@@ -243,11 +253,16 @@ async function displayResults(results) {
           } 
 
       // Patient data found, update the table
+      let count = 1; 
       patientData.forEach((row) => {
 
         if (row.archived === true) {
         const newRow = document.createElement("tr");
         newRow.classList.add("res1");
+        const counter = document.createElement("p");
+        counter.classList.add("rCounter");
+
+        counter.innerText = `${count}`;
 
         newRow.innerHTML = `
             <th class="row1 idcol1">${row.patient_id}</th>
@@ -267,8 +282,9 @@ async function displayResults(results) {
 
           </th>
         `;
-
+        count ++;
         tableBody.appendChild(newRow);
+        newRow.appendChild(counter);
         }
       });
     } else {
@@ -339,12 +355,18 @@ async function filterEvent() {
             );
           } 
       // Patient data found, update the table
+      let count = 1; 
       patientData.forEach((row) => {
 
         if (row.archived === true) {
 
         const newRow = document.createElement("tr");
         newRow.classList.add("res1");
+
+        const counter = document.createElement("p");
+        counter.classList.add("rCounter");
+        
+        counter.innerText = `${count}`;
 
         newRow.innerHTML = `
             <th class="row1 idcol1">${row.patient_id}</th>
@@ -364,8 +386,10 @@ async function filterEvent() {
 
           </th>
         `;
+        count ++;
 
         tableBody.appendChild(newRow);
+        newRow.appendChild(counter);
         }
       });
     } else {

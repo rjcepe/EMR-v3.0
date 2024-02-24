@@ -67,11 +67,18 @@ async function loadTableData() {
       );
     }
 
+    let count = 1; 
     tableData1.forEach((row) => {
 
       if (row.archived === false) {
       const newRow = document.createElement("tr");
       newRow.classList.add("res");
+
+      const counter = document.createElement("p");
+      counter.classList.add("rCounter");
+
+      counter.innerText = `${count}`;
+
       newRow.innerHTML = `
           <th class="row idcol">${row.patient_id}</th>
           <th class="row namecol">${row.patient_name}</th>
@@ -93,7 +100,10 @@ async function loadTableData() {
             </button>
           </th>
         `;
+        count ++;
+
       tableBody.appendChild(newRow);
+      newRow.appendChild(counter);
       }
     });
   }
@@ -210,10 +220,16 @@ async function displayResults(results) {
     }
 
     // Patient data found, update the table
+    let count = 1; 
     patientData.forEach((row) => {
       if (row.archived === false) {
         const newRow = document.createElement("tr");
         newRow.classList.add("res1");
+
+        const counter = document.createElement("p");
+        counter.classList.add("rCounter");
+
+        counter.innerText = `${count}`;
 
         newRow.innerHTML = `
           <th class="row idcol">${row.patient_id}</th>
@@ -236,8 +252,10 @@ async function displayResults(results) {
             </button>
           </th>
         `;
+        count ++;
 
         tableBody.appendChild(newRow);
+        newRow.appendChild(counter);
       }
     });
   } else {
@@ -307,10 +325,16 @@ async function filterEvent() {
         );
       }
       // Patient data found, update the table
+      let count = 1; 
       patientData.forEach((row) => {
         if (row.archived === false) {
           const newRow = document.createElement("tr");
           newRow.classList.add("res1");
+
+          const counter = document.createElement("p");
+          counter.classList.add("rCounter");
+
+          counter.innerText = `${count}`;
 
           newRow.innerHTML = `
           <th class="row idcol">${row.patient_id}</th>
@@ -333,8 +357,10 @@ async function filterEvent() {
             </button>
           </th>
         `;
+        count ++;
 
           tableBody.appendChild(newRow);
+          newRow.appendChild(counter);
         }
       });
     } else {
