@@ -185,8 +185,7 @@ async function fetchCurrentMonthPatiens() {
   let facultyCount = 0;
   let shsCount = 0;
   let collCount = 0;
-  addLabel();
-
+  
   filteredData.forEach((record) => {
     if (record.misc.includes("coll")) {
       collCount ++;
@@ -202,13 +201,15 @@ async function fetchCurrentMonthPatiens() {
   });
   
   const totalCount = studentsCount + facultyCount + staffCount;
-
+  
   brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount);
+  
+  const labels = ["Students", "Staff", "Faculty"];
+  const counts = [studentsCount, staffCount, facultyCount];
 
   // Add datasets to the chart
-  addDataset("Students", studentsCount);
-  addDataset("Staff", staffCount);
-  addDataset("Faculty", facultyCount);
+  addDataset(counts);
+  addLabel(labels);
 }
 
 function brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount){
@@ -257,31 +258,31 @@ function brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount){
 
 }
 
-let z = 0;
+function addDataset(count) {
+  
+const x = {Students: count[0], Staff: count[1], Faculty: count[2]};
 
-function addDataset(label, count) {
-  // Define the colors for the bars
+// Define the colors for the bars
   const barColors = ["rgb(40, 88, 73)", "rgb(72, 158, 131)", "rgb(202, 231, 222)"];
 
   // Create a new dataset with the specified color
   var newDataset = {
-    label: label,
-    data: [count], // Initial values set to zero
-    backgroundColor: barColors[z],
+    label: [],
+    data: x,
+    backgroundColor: barColors,
     borderColor: ["white"],
     borderWidth: 0,
   };
 
-  z++;
   // Add the new dataset to the chart
   initialPatientCountData.datasets.push(newDataset);
   patientCountChart.update();
 }
 
-function addLabel() {
-  const title1 = ``;
-
-  initialPatientCountData.labels.push(title1);
+function addLabel(labels) {
+  labels.forEach(data => {
+    initialPatientCountData.labels.push(data);
+  })
   patientCountChart.update();
 }
 
@@ -603,7 +604,6 @@ async function fetchRecentVisits() {
 
     for (let i = 0; i < 10 && i < filteredData.length; i++) {
       const row = filteredData[i];
-      console.log(row);
       const newRow = document.createElement("tr");
       newRow.classList.add("rt-db1");
 
@@ -617,7 +617,4 @@ async function fetchRecentVisits() {
       tableBody.appendChild(newRow);
     }
 
-    for (i = 0; i < 3; i++){
-      console.log("hello");
-    }
 }
