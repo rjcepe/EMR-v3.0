@@ -2284,6 +2284,7 @@
   }
 
   .restab {
+      font-size: 13px;
       margin-top: 20px;
       width: 100%;
   }
@@ -2291,7 +2292,7 @@
   .restab th {
       border: 1px solid rgb(0, 0, 0);
       /* border-radius: 5px; */
-      padding: 5px;
+      padding: 0px 5px 0px 5px;
   }
 
   .search p {

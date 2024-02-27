@@ -253,7 +253,7 @@ function generateGradientColors(startColor, endColor, steps) {
     color += Math.round(start['Red'] + (diff['Red'] * i / (steps - 1))) + ', ';
     color += Math.round(start['Green'] + (diff['Green'] * i / (steps - 1))) + ', ';
     color += Math.round(start['Blue'] + (diff['Blue'] * i / (steps - 1))) + ', ';
-    color += '0.5)'; // Set the alpha value to 0.5
+    color += '0.8)'; // Set the alpha value to 0.5
     gradient.push(color);
   }
 
@@ -273,7 +273,7 @@ function addDataset(stat) {
     data: stat, // Initial values set to zero
     backgroundColor: barColors,
     borderColor: ["white"],
-    borderWidth: 1,
+    borderWidth: 0,
   };
 
   // Add the new dataset to the chart
