@@ -2290,7 +2290,8 @@
 
   .restab th {
       border: 1px solid rgb(0, 0, 0);
-      border-radius: 5px;
+      /* border-radius: 5px; */
+      width: 120px;
   }
 
   .search p {

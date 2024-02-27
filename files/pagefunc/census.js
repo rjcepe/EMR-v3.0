@@ -159,182 +159,86 @@ function updateType() {
   fetchAllData(patType);
 }
 
-// fetch ALL
-async function fetchAllData(type){
-    var location = document.getElementById("location").value;
-    var year = document.getElementById("year").value;
-    var month = document.getElementById("month").value;
+async function fetchAllData(type) {
+  var location = document.getElementById("location").value;
+  var year = document.getElementById("year").value;
+  var month = document.getElementById("month").value;
 
-    var xx = [type, location, year, month];
+  var xx = [type, location, year, month];
 
-    const { data } = await _supabase
+  console.log(xx);
+
+  const { data } = await _supabase
       .from("cons_rec")
       .select("*")
       .contains("misc", [xx]);
 
-      const stat = {};
+  const diseaseCounts = {};
+  const stat = {};
+  const filteredData = data.filter(record => record.archived === false);
+  const patients = filteredData.length;
 
-      let studC = 0;
-      let shsC = 0;
-      let collC = 0;
-      let staffC = 0;
-      let facC = 0;
+  addLabel(type, year, location, month, patients);
+  filteredData.forEach(data1 => {
+          data1.diagchex.forEach(disease => {
 
-      // Filter the data array to count only the records where "archived" is false
-      const filteredData = data.filter(record => record.archived === false);
-
-      // Count the number of records where "archived" is false
-      const patients = filteredData.length;
-
-      const diseaseDiv = document.getElementById('printFrame');
-      const iframeDoc = diseaseDiv.contentDocument || diseaseIframe.contentWindow.document;
-
-      let content = '<head><link rel="stylesheet" href="/files/styles.css"></head>';
-      content += '<body><table class="restab"><tr><th><h2>DISEASE</h2></th><th><h2>STUDENTS</h2></th><th><h2>FACULTY</h2></th><th><h2>STAFF</h2></th></tr>';
-
-      if (data && data.length > 0) {
-        addLabel(type, year, location, month, patients);
-    
-        // Define an object to store counts for each disease
-        const diseaseCounts = {};
-    
-        data.forEach(data1 => {
-            if (data1.archived === false) {
-                data1.diagchex.forEach(disease => {
-                    // Initialize counts for each disease if not present
-                    if (!diseaseCounts[disease]) {
-                        diseaseCounts[disease] = {
-                            studCount: 0,
-                            staffCount: 0,
-                            facultyCount: 0
-                        };
-                    }
-    
-                    // Increment counts based on misc data
-                    data1.misc.forEach(x => {
-                        if (x === "shs" || x === "coll") {
-                            diseaseCounts[disease].studCount++;
-                        } else if (x === "Faculty") {
-                            diseaseCounts[disease].facultyCount++;
-                        } else if (x === "Staff") {
-                            diseaseCounts[disease].staffCount++;
-                        }
-                    });
-                });
+            if (stat[disease]) {
+              stat[disease]++;
+            } else {
+              stat[disease] = 1;
             }
-        });
-    
-        // Now diseaseCounts object contains counts for each disease
-        // You can log or use this object as needed
-        console.log(diseaseCounts);
+                  
+              if (!diseaseCounts[disease]) {
+                  diseaseCounts[disease] = {
+                    studCount: 0,
+                    staffCount: 0,
+                    facultyCount: 0,
+                  };
+                                
+              }
 
-        for (const [disease, a] of Object.entries(diseaseCounts)) {
+              data1.misc.forEach(x => {
+                  if (x === "shs" || x === "coll") {
+                      diseaseCounts[disease].studCount++;
+                  } else if (x === "Faculty") {
+                      diseaseCounts[disease].facultyCount++;
+                  } else if (x === "Staff") {
+                      diseaseCounts[disease].staffCount++;
+                  }
+              });
+          });   
+  });
 
-          let ccc = [];
-          for (const [x, y] of Object.entries(a)){
-            console.log(x, y);
-            ccc.push(y);
-
-          }
-          content += `<tr><th><b>${disease}</b></th><th>${ccc[0]}</th><th>${ccc[1]}</th><th>${ccc[2]}</th></tr>`;
-      }
-
-    }
-    
-
-        const allP = studC + facC + staffC;
-
-
-        content += '</table></body>';
-        iframeDoc.write(content);
+  for (const [disease, count] of Object.entries(stat)) {
+    addDataset(disease, count);
   }
 
+  // Output the counts to the console for debugging or further processing
+  console.log(diseaseCounts);
 
-// fetch ALL
-// async function fetchAllData(type){
-//     var location = document.getElementById("location").value;
-//     var year = document.getElementById("year").value;
-//     var month = document.getElementById("month").value;
+  const diseaseDiv = document.getElementById('printFrame');
+  const iframeDoc = diseaseDiv.contentDocument || diseaseIframe.contentWindow.document;
 
-//     var xx = [type, location, year, month];
+  let content = '<head><link rel="stylesheet" href="/files/styles.css"></head>';
+  content += '<body><table class="restab"><tr><th><h2>DISEASE</h2></th><th><h2>STUDENTS</h2></th><th><h2>FACULTY</h2></th><th><h2>STAFF</h2></th></tr>';
 
-//     const { data } = await _supabase
-//       .from("cons_rec")
-//       .select("*")
-//       .contains("misc", [xx]);
+  let studTotal = 0;
+  let facTotal = 0;
+  let staffTotal = 0;
 
-//       const stat = {};
+  for (const [disease, counts] of Object.entries(diseaseCounts)) {
+      content += `<tr><th><b>${disease}</b></th><th>${counts.studCount}</th><th>${counts.facultyCount}</th><th>${counts.staffCount}</th></tr>`;
 
-//       let studC = 0;
-//       let shsC = 0;
-//       let collC = 0;
-//       let staffC = 0;
-//       let facC = 0;
+    studTotal += counts.studCount;
+    facTotal += counts.facultyCount;
+    staffTotal += counts.staffCount;
+  }
 
-//       // Filter the data array to count only the records where "archived" is false
-//       const filteredData = data.filter(record => record.archived === false);
+  content += `<tr><th><b>TOTAL</b></th><th>${studTotal}</th><th>${facTotal}</th><th>${staffTotal}</th></tr>`;
 
-//       // Count the number of records where "archived" is false
-//       const patients = filteredData.length;
-
-//       if (data && data.length > 0){
-//         addLabel(type, year, location, month, patients);
-//           data.forEach(data1 => {
-//             if (data1.archived === false){
-//               data1.diagchex.forEach(dis =>{
-
-//                 if(stat[dis]){
-//                   stat[dis]++;
-//                 }
-//                 else {
-//                   stat[dis] = 1;
-//                 }
-//               })
-
-//               data1.misc.forEach(x => {
-//                 if (x === "shs"){
-//                   shsC++;
-//                   studC++;
-//                 }
-//                 else if (x === "coll"){
-//                   collC++;
-//                   studC++;
-//                 }
-//                 else if (x === "Faculty"){
-//                   facC++;
-//                 }
-//                 else if (x === "Staff"){
-//                   staffC++;
-//                 }
-//               })
-//             }
-//           });
-//         }
-
-//         const allP = studC + facC + staffC;
-//         const diseaseDiv = document.getElementById('printFrame');
-//         const iframeDoc = diseaseDiv.contentDocument || diseaseIframe.contentWindow.document;
-
-//         let content = '<head><link rel="stylesheet" href="/files/styles.css"></head>';
-//         content += '<body><table class="restab"><tr><th><h2>DISEASE</h2></th><th><h2>COUNT</h2></th></tr>';
-
-//         for (const [disease, count] of Object.entries(stat)) {
-//             addDataset(disease, count);
-//             console.log(disease, count);
-//             content += `<tr><th><b>${disease}</b></th><th>${count}</th></tr>`;
-//         }
-
-//         content += '</table>';
-//         content += `
-//                     <p>Total Patients: ${allP}</p>
-//                     <p>College Patients: ${collC}</p>
-//                     <p>SHS Patients: ${shsC}</p>
-//                     <p>Staff Patients: ${staffC}</p>
-//                     <p>Faculty Patients: ${facC}</p>
-//                     </body>
-//         `;
-//         iframeDoc.write(content);
-//   }
+  content += '</table></body>';
+  iframeDoc.write(content);
+}
 
 
 ////////////// CHART INITIALIZATION
@@ -349,22 +253,23 @@ var initialDiseaseCountData = {
 };
 
 var diseaseCountChart = new Chart(ctxDiseaseCount, {
-  type: 'bar',
+  type: 'bar', // Change type to horizontalBar
   data: initialDiseaseCountData,
   options: {
     responsive: true,
-    maintainAspectRatio: false, // Add this line to prevent aspect ratio adjustment
+    maintainAspectRatio: false,
     aspectRatio: 1,
+    indexAxis: 'y',
     scales: {
-      y: {
+      x: { // Use x for horizontalBar charts
         beginAtZero: true,
         ticks: {
-          color: 'white' // Y-axis label colors
+          color: 'white'
         }
       },
-      x: {
+      y: { // Use y for horizontalBar charts
         ticks: {
-          color: 'white' // X-axis label colors
+          color: 'white'
         }
       }
     },
@@ -373,8 +278,7 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
         display: true,
         position: 'bottom',
         labels: {
-          color: 'white',
-
+          color: 'white'
         }
       },
       title: {
@@ -384,11 +288,11 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
         font: {
           size: 18
         }
-
       }
     }
   }
 });
+
 
 updateType();
 
