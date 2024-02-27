@@ -264,7 +264,7 @@ const x = {Students: count[0], Staff: count[1], Faculty: count[2]};
 
 // Define the colors for the bars
   const barColors = ["rgb(40, 88, 73)", "rgb(72, 158, 131)", "rgb(202, 231, 222)"];
-
+  
   // Create a new dataset with the specified color
   var newDataset = {
     label: [],
