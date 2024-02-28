@@ -2496,7 +2496,7 @@
       color: white;
       font-size: 0.7rem;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       /* flex-direction: column; */
       align-items: center;
       height: 30%;
@@ -2506,9 +2506,9 @@
 
   .brktxt {
       /* text-align: center; */
-      width: 100%;
+      width: 49%;
       height: 100%;
-      margin: 3px;
+      /* margin: 3px; */
       /* list-style: none; */
       background-color: var(--lgreen50);
       padding: 10px;
