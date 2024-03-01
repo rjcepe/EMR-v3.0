@@ -881,6 +881,10 @@
       height: 500px;
       overflow-y: auto;
   }
+  .filterz1b {
+      /* height: 500px; */
+      overflow-y: auto;
+  }
 
   .filterz1 td {
       display: inline-flex;
@@ -1003,10 +1007,11 @@
   }
 
   .res {
-      /* border: var(--gborder); */
-      margin-bottom: 4px;
-      transition: .3s;
-      display: flex;
+    position: relative;
+    margin-bottom: 4px;
+    transition: .3s;
+    display: flex;
+    overflow: visible;
       /* justify-content: center; */
   }
 
@@ -2710,6 +2715,7 @@
       position: absolute;
       /* border: var(--gborder); */
       height: 100px;
+      width: 100%;
   }
 
   .dashb-bott1 {
@@ -2885,7 +2891,7 @@
   .dashb-rt tbody {
       display: flex;
       align-items: center;
-      justify-content: center;
+      /* justify-content: center; */
       width: 100%;
   }
 
