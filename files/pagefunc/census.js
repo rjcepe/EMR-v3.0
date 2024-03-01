@@ -160,6 +160,7 @@ function printFrame(type, year, location, month, patientC) {
 
   iframeDoc.write(content);
 }
+
 async function fetchAllData(type) {
   var location = document.getElementById("location").value;
   var year = document.getElementById("year").value;
@@ -332,52 +333,6 @@ function brkdwnData1(disease, shsCount, collCount, facultyCount, staffCount, typ
     brkdwn.appendChild(staffC);
   }
 }
-// function brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount){
-  
-//   // for breakdown container
-//   const brkdwn = document.getElementById("brkdwn1");
-//   brkdwn.innerHTML = "";
-  
-//   const label = document.createElement("label")
-//   label.setAttribute("id", "allPlabel1");
-
-//   const totalC = document.createElement("span");
-//   totalC.innerHTML = `Total Patients: <br><b>${totalCount}</b>`
-  
-//   const studbrk = document.createElement("div")
-//   studbrk.classList.add("studbrk1");
-  
-//   const studbrktxt1 = document.createElement("div")
-//   const studbrktxt2 = document.createElement("div")
-//   studbrktxt1.classList.add("brktxt1");
-//   studbrktxt2.classList.add("brktxt1");
-  
-//   studbrktxt1.innerHTML = `<p>SHS Students:</p><b>${shsCount}</b>`
-//   studbrktxt2.innerHTML = `<p>College Students:</p><b>${collCount}</b>`
-  
-//   const empbrk = document.createElement("div")
-//   empbrk.classList.add("empbrk1");
-  
-//   const empbrktxt1 = document.createElement("div")
-//   const empbrktxt2 = document.createElement("div")
-//   empbrktxt1.classList.add("brktxt1");
-//   empbrktxt2.classList.add("brktxt1");
-  
-//   empbrktxt1.innerHTML = `<p>Faculty Members:</p><b>${facultyCount}</b>`
-//   empbrktxt2.innerHTML = `<p>Staff Members:</p><b>${staffCount}</b>`
-  
-//   brkdwn.appendChild(label);
-//   brkdwn.appendChild(totalC);
-  
-//   studbrk.appendChild(studbrktxt1);
-//   studbrk.appendChild(studbrktxt2);
-//   brkdwn.appendChild(studbrk);
-
-//   studbrk.appendChild(empbrktxt1);
-//   studbrk.appendChild(empbrktxt2);
-//   // brkdwn.appendChild(empbrk);
-
-// }
 function generateGradientColors(startColor, endColor, steps) {
   let start = {
     'Red': parseInt(startColor.slice(1, 3), 16),
