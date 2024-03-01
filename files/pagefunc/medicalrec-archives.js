@@ -71,7 +71,7 @@ async function loadTableData() {
     tableData1.forEach((row) => {
       if (row.archived === true) {
         const newRow = document.createElement("tr");
-        newRow.classList.add("res");
+        newRow.classList.add("res1");
 
         const counter = document.createElement("p");
         counter.classList.add("rCounter");
