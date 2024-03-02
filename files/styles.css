@@ -2777,6 +2777,7 @@
       /* margin-left: 5px; */
       color: white;
       font-weight: 300;
+      font-size: 1vw;
       border: none;
       background-color: var(--lgreen50);
       width: 100%;
