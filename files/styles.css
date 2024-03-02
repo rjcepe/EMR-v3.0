@@ -2814,7 +2814,7 @@
 
   .dashb-table-div {
       height: 80%;
-      overflow-y: scroll;
+      overflow: auto;
   }
 
   .dashb-rt thead {
@@ -2858,6 +2858,7 @@
       background-color: var(--green);
       color: white;
       height: 20px;
+      min-width: 87px;
   }
 
   .rcol-db1 {
