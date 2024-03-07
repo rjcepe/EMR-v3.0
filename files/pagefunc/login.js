@@ -34,12 +34,8 @@ loginForm.addEventListener("submit", async function (event) {
   const user = data[0];
 
   if (user.password === passwordInput) {
-    if (user.active === false) {
-      var newStatus = "true";
-
-      const { data, error } = await _supabase.from('user_accs').update({ active: newStatus }).eq('id', idInput);
-
-      console.log("Login successful");
+    
+      window.alert("Login successful");
 
       window.location.href = "/webpages/home.html";
 
@@ -51,15 +47,8 @@ loginForm.addEventListener("submit", async function (event) {
 
       var zz = user.access_level;
       sessionStorage.setItem('z', zz);
-    }
-    else {
-      var newStatus = "false" ;
-
-      const { data, error } = await _supabase.from('user_accs').update({ active: newStatus }).eq('id', idInput);
-
-      console.log("asdad");
-    }
-
+    
+   
   } else {
     console.log("Password Incorrect");
     message.classList.add("loginfailed");

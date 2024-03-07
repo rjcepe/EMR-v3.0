@@ -65,7 +65,7 @@ var type = sessionStorage.getItem("z");
 
 
 function logout() {
-  localStorage.removeItem('accstoken');
+  sessionStorage.removeItem('accstoken');
   window.location.href = "../index.html";
 }
 
