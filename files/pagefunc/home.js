@@ -1,8 +1,4 @@
-var token = sessionStorage.getItem("accstoken");
 
-if (token === null) {
-  window.location.href = "../index.html";
-}
 
 const SUPABASE_URL = "https://yspyqlodogzmrqsifbww.supabase.co";
 const SUPABASE_ANON_KEY =
