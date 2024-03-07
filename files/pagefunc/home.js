@@ -157,6 +157,10 @@ const year = today.toLocaleString("en-US", {
   year: "numeric",
 });
 
+const MonthYear = [month, year];
+
+
+
 
 fetchCurrentMonthPatiens();
 fetchTop5diseases();
@@ -168,7 +172,7 @@ async function fetchCurrentMonthPatiens() {
   const { data } = await _supabase
     .from("cons_rec")
     .select("*")
-    .contains("misc", [month]);
+    .contains("misc", MonthYear);
 
   // Filter data where "archived" is false
   const filteredData = data.filter((record) => record.archived === false);
@@ -391,7 +395,7 @@ async function fetchTop5diseases() {
   const { data } = await _supabase
     .from("cons_rec")
     .select("*")
-    .contains("misc", [month]);
+    .contains("misc", MonthYear);
 
   // Filter data where "archived" is false
   const filteredData = data.filter((record) => record.archived === false);
@@ -586,7 +590,7 @@ async function fetchRecentVisits() {
   const { data } = await _supabase
     .from("cons_rec")
     .select("*")
-    .contains("misc", [month]);
+    .contains("misc", MonthYear);
 
     data.sort((a, b) => new Number(b.row_id) - new Number(a.row_id));
 
