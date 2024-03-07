@@ -482,11 +482,13 @@
       /* border: var(--gborder); */
       width: 100vw;
       transition: all 0.3s;
-      transform: translateY(0%);
+      /* transform: translateY(0%); */
+      /* background-color: blue; */
   }
 
   .bsn {
-      transform: translateY(100%);
+      /* transform: translateY(100%); */
+      display: none;
   }
 
 
