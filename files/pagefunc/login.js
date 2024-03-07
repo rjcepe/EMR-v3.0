@@ -5,64 +5,66 @@ const SUPABASE_ANON_KEY =
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const test = () => {
-    console.log(supabase);
-    console.log("Supabase Connected");
-}
-test();
-
 //Login
 const loginForm = document.getElementById("loginform");
 const message = document.getElementById("message");
 
 loginForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    const idInput = document.getElementById("uid").value;
-    const passwordInput = document.getElementById("pw").value;
+  const idInput = document.getElementById("uid").value;
+  const passwordInput = document.getElementById("pw").value;
 
-    const { data, error } = await _supabase.from('user_accs').select('*').eq('id', idInput);
+  const { data, error } = await _supabase.from('user_accs').select('*').eq('id', idInput);
+
+  if (error) {
+    console.error("Error querying the database:", error.message);
+    message.classList.add("loginfailed");
+    message.innerText = "!! User ID not found !!";
+    return;
+  }
+
+  if (data.length === 0) {
+    console.log("User ID not found");
+    message.classList.add("loginfailed");
+    message.innerText = "!! User ID not found !!";
+    return;
+  }
+
+  const user = data[0];
+
+  if (user.password === passwordInput) {
     
-        if (error) {
-            console.error("Error querying the database:", error.message);
-            message.classList.add("loginfailed");
-            message.innerText = "!! User ID not found !!";
-            return;
-        }
+      window.alert("Login successful");
 
-        if (data.length === 0) {
-            console.log("User ID not found");
-            message.classList.add("loginfailed");
-            message.innerText = "!! User ID not found !!";
-            return;
-        }
+      window.location.href = "/webpages/home.html";
 
-        const user = data[0];
+      const token = generateRandomString(64);
+      sessionStorage.setItem('accstoken', token);
 
-        if (user.password === passwordInput) {
-            console.log("Login successful");
-           
+      var gg = document.getElementById('uid').value;
+      sessionStorage.setItem('uid1', gg);
 
-            var zz = user.access_level;
-            sessionStorage.setItem('z', zz);
+      var zz = user.access_level;
+      sessionStorage.setItem('z', zz);
+    
+   
+  } else {
+    console.log("Password Incorrect");
+    message.classList.add("loginfailed");
+    message.innerText = "!! Password Incorrect !!";
+  }
+});
 
-          
-            window.location.href = "/webpages/home.html";
+async function setToken(){
 
-            const token = generateRandomString(64);
-            sessionStorage.setItem('accstoken', token);
+  const uid = sessionStorage.getItem("uid1");
+  const token = generateRandomString(64);
+     
+  const { data, error } = await _supabase.from('user_accs').update({ token: token }).eq('id', uid);
 
-            var gg =  document.getElementById('uid').value;
-            sessionStorage.setItem('uid1', gg);
-            
-
-        } else {
-            console.log("Password Incorrect");
-            message.classList.add("loginfailed");
-            message.innerText = "!! Password Incorrect !!";
-        }
-    });
-
+  
+}
 
 function generateRandomString(length) {
   let result = "";
