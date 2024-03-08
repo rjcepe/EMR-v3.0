@@ -1,5 +1,5 @@
 [[redirects]]
-  fro = "/webpages/home.html"
-  to = "/home"
+  from = "/home"
+  to = "/webpages/home.html"
   status = 200
   force = true
