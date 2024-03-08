@@ -1,15 +1,2 @@
-/accidentrec            /accidentrec.html          200
-/addpatients            /addpatients.html          200
-/consultationrec-admin  /consultationrec-admin.html  200
-/consultationrec-archives  /consultationrec-archives.html  200
-/consultationrec        /consultationrec.html      200
-/dentalrecords-archives /dentalrecords-archives.html 200
-/dentalrecords          /dentalrecords.html        200
-/home                   /home.html                 200
-/medicalrecords-admin   /medicalrecords-admin.html 200
-/medicalrecords-archives /medicalrecords-archives.html 200
-/medicalrecords         /medicalrecords.html       200
-/monthlycensus          /monthlycensus.html        200
-/patientprofile         /patientprofile.html       200
-/presc                  /presc.html                200
-/xray                   /xray.html                 200
+/home.html   /home  200
+
