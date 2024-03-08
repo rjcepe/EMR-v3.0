@@ -1,0 +1,5 @@
+[[redirects]]
+  fro = "/webpages/home.html"
+  to = "/home"
+  status = 200
+  force = true
