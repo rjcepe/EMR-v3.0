@@ -1,15 +1,3 @@
-var token = sessionStorage.getItem("accstoken");
-
-if (token === null) {
-  window.location.href = "../index.html";
-}
-
-const SUPABASE_URL = "https://yspyqlodogzmrqsifbww.supabase.co";
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
-
-const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
 getusername();
 
 ////////////////////////////// fetch username
@@ -147,22 +135,7 @@ function hidev() {
   vfile.classList.remove("showv");
 }
 
-//////////get current month
-
-// Specify the target timezone as "Asia/Manila"
-const targetTimezone = "Asia/Manila";
-
-// Get the current date and time in the target timezone
-const today = new Date();
-const month = today.toLocaleString("en-US", {
-  timeZone: targetTimezone,
-  month: "2-digit",
-});
-const year = today.toLocaleString("en-US", {
-  timeZone: targetTimezone,
-  year: "numeric",
-});
-
+const MonthYear = [month, year];
 
 fetchCurrentMonthPatiens();
 fetchTop5diseases();
@@ -174,7 +147,7 @@ async function fetchCurrentMonthPatiens() {
   const { data } = await _supabase
     .from("cons_rec")
     .select("*")
-    .contains("misc", [month]);
+    .contains("misc", MonthYear);
 
   // Filter data where "archived" is false
   const filteredData = data.filter((record) => record.archived === false);
@@ -185,13 +158,13 @@ async function fetchCurrentMonthPatiens() {
   let facultyCount = 0;
   let shsCount = 0;
   let collCount = 0;
-  
+
   filteredData.forEach((record) => {
     if (record.misc.includes("coll")) {
-      collCount ++;
+      collCount++;
       studentsCount++;
-    }else if (record.misc.includes("shs")) {
-      shsCount ++;
+    } else if (record.misc.includes("shs")) {
+      shsCount++;
       studentsCount++;
     } else if (record.misc.includes("Staff")) {
       staffCount++;
@@ -199,11 +172,11 @@ async function fetchCurrentMonthPatiens() {
       facultyCount++;
     }
   });
-  
+
   const totalCount = studentsCount + facultyCount + staffCount;
-  
+
   brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount);
-  
+
   const labels = ["Students", "Staff", "Faculty"];
   const counts = [studentsCount, staffCount, facultyCount];
 
@@ -212,42 +185,41 @@ async function fetchCurrentMonthPatiens() {
   addLabel(labels);
 }
 
-function brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount){
-
+function brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount) {
   const allpLabel = document.getElementById("allPlabel");
   // allpLabel.innerHTML = `${monthAlpha} ${year} Patient Count`;
   allpLabel.innerHTML = `This Month's Visit Count`;
-  
+
   // for breakdown container
   const brkdwn = document.getElementById("brkdwn");
 
   const totalC = document.createElement("span");
-  totalC.innerHTML = `Total Visits: <br><b>${totalCount}</b>`
-  
-  const studbrk = document.createElement("div")
+  totalC.innerHTML = `Total Visits: <br><b>${totalCount}</b>`;
+
+  const studbrk = document.createElement("div");
   studbrk.classList.add("studbrk");
-  
-  const studbrktxt1 = document.createElement("div")
-  const studbrktxt2 = document.createElement("div")
+
+  const studbrktxt1 = document.createElement("div");
+  const studbrktxt2 = document.createElement("div");
   studbrktxt1.classList.add("brktxt");
   studbrktxt2.classList.add("brktxt");
-  
-  studbrktxt1.innerHTML = `<p>SHS Students:</p><b>${shsCount}</b>`
-  studbrktxt2.innerHTML = `<p>College Students:</p><b>${collCount}</b>`
-  
-  const empbrk = document.createElement("div")
+
+  studbrktxt1.innerHTML = `<p>SHS Students:</p><b>${shsCount}</b>`;
+  studbrktxt2.innerHTML = `<p>College Students:</p><b>${collCount}</b>`;
+
+  const empbrk = document.createElement("div");
   empbrk.classList.add("empbrk");
-  
-  const empbrktxt1 = document.createElement("div")
-  const empbrktxt2 = document.createElement("div")
+
+  const empbrktxt1 = document.createElement("div");
+  const empbrktxt2 = document.createElement("div");
   empbrktxt1.classList.add("brktxt");
   empbrktxt2.classList.add("brktxt");
-  
-  empbrktxt1.innerHTML = `<p>Faculty Members:</p><b>${facultyCount}</b>`
-  empbrktxt2.innerHTML = `<p>Staff Members:</p><b>${staffCount}</b>`
-  
+
+  empbrktxt1.innerHTML = `<p>Faculty Members:</p><b>${facultyCount}</b>`;
+  empbrktxt2.innerHTML = `<p>Staff Members:</p><b>${staffCount}</b>`;
+
   brkdwn.appendChild(totalC);
-  
+
   studbrk.appendChild(studbrktxt1);
   studbrk.appendChild(studbrktxt2);
   brkdwn.appendChild(studbrk);
@@ -255,16 +227,18 @@ function brkdwnData(totalCount, shsCount, collCount, facultyCount, staffCount){
   empbrk.appendChild(empbrktxt1);
   empbrk.appendChild(empbrktxt2);
   brkdwn.appendChild(empbrk);
-
 }
 
 function addDataset(count) {
-  
-const x = {Students: count[0], Staff: count[1], Faculty: count[2]};
+  const x = { Students: count[0], Staff: count[1], Faculty: count[2] };
 
-// Define the colors for the bars
-  const barColors = ["rgb(40, 88, 73)", "rgb(72, 158, 131)", "rgb(202, 231, 222)"];
-  
+  // Define the colors for the bars
+  const barColors = [
+    "rgb(40, 88, 73)",
+    "rgb(72, 158, 131)",
+    "rgb(202, 231, 222)",
+  ];
+
   // Create a new dataset with the specified color
   var newDataset = {
     label: [],
@@ -280,9 +254,9 @@ const x = {Students: count[0], Staff: count[1], Faculty: count[2]};
 }
 
 function addLabel(labels) {
-  labels.forEach(data => {
+  labels.forEach((data) => {
     initialPatientCountData.labels.push(data);
-  })
+  });
   patientCountChart.update();
 }
 
@@ -397,7 +371,7 @@ async function fetchTop5diseases() {
   const { data } = await _supabase
     .from("cons_rec")
     .select("*")
-    .contains("misc", [month]);
+    .contains("misc", MonthYear);
 
   // Filter data where "archived" is false
   const filteredData = data.filter((record) => record.archived === false);
@@ -583,38 +557,34 @@ var patientCountChart1 = new Chart(ctxPatientCount1, {
 
 ///////////////////////////////// --------- /////////////////////////////////////
 
-
-
-
 ///////////////////////////////// RECENT VISITS /////////////////////////////
 
 async function fetchRecentVisits() {
   const { data } = await _supabase
     .from("cons_rec")
     .select("*")
-    .contains("misc", [month]);
+    .contains("misc", MonthYear);
 
-    data.sort((a, b) => new Number(b.row_id) - new Number(a.row_id));
+  data.sort((a, b) => new Number(b.row_id) - new Number(a.row_id));
 
-    // Filter data where "archived" is false
-    const filteredData = data.filter((record) => record.archived === false);
+  // Filter data where "archived" is false
+  const filteredData = data.filter((record) => record.archived === false);
 
-    const tableBody = document.getElementById("rb-db");
-    tableBody.innerHTML = "";
+  const tableBody = document.getElementById("rb-db");
+  tableBody.innerHTML = "";
 
-    for (let i = 0; i < 10 && i < filteredData.length; i++) {
-      const row = filteredData[i];
-      const newRow = document.createElement("tr");
-      newRow.classList.add("rt-db1");
+  for (let i = 0; i < 10 && i < filteredData.length; i++) {
+    const row = filteredData[i];
+    const newRow = document.createElement("tr");
+    newRow.classList.add("rt-db1");
 
-      newRow.innerHTML = `
+    newRow.innerHTML = `
         <th class="rcol-db1 rcol-id">${row.patient_id}</th>
         <th class="rcol-db1 rcol-name">${row.patient_name}</th>
         <th class="rcol-db1 rcol-cys">${row.course_section}</th>
         <th class="rcol-db1">${row.created_date}</th>
         <th class="rcol-db1">${row.added_by}</th>
       `;
-      tableBody.appendChild(newRow);
-    }
-
+    tableBody.appendChild(newRow);
+  }
 }

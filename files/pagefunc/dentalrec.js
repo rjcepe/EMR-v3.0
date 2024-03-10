@@ -1,20 +1,6 @@
-var token = sessionStorage.getItem("accstoken");
-
-if (token === null) {
-  window.location.href = "../index.html";
-}
-
-const SUPABASE_URL = "https://yspyqlodogzmrqsifbww.supabase.co";
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
-
-const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
 //// search and filter states (inactive = 0 | active = 1)
 let searchState = 0;
 let filterState = 0;
-console.log(searchState);
-console.log(filterState);
 
 ////// initial load
 loadTableData();
