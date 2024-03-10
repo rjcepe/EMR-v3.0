@@ -573,18 +573,29 @@ async function fetchRecentVisits() {
   const tableBody = document.getElementById("rb-db");
   tableBody.innerHTML = "";
 
-  for (let i = 0; i < 10 && i < filteredData.length; i++) {
-    const row = filteredData[i];
+  if (filteredData.length === 0 ){
     const newRow = document.createElement("tr");
     newRow.classList.add("rt-db1");
-
+  
     newRow.innerHTML = `
-        <th class="rcol-db1 rcol-id">${row.patient_id}</th>
-        <th class="rcol-db1 rcol-name">${row.patient_name}</th>
-        <th class="rcol-db1 rcol-cys">${row.course_section}</th>
-        <th class="rcol-db1">${row.created_date}</th>
-        <th class="rcol-db1">${row.added_by}</th>
+        <th class="rcol-db1"style="justify-content:center; height:50px;">This month's appointment log is currently empty.</th>
       `;
     tableBody.appendChild(newRow);
+  }
+  else{
+    for (let i = 0; i < 15 && i < filteredData.length; i++) {
+      const row = filteredData[i];
+      const newRow = document.createElement("tr");
+      newRow.classList.add("rt-db1");
+  
+      newRow.innerHTML = `
+          <th class="rcol-db1 rcol-id">${row.patient_id}</th>
+          <th class="rcol-db1 rcol-name">${row.patient_name}</th>
+          <th class="rcol-db1 rcol-cys">${row.course_section}</th>
+          <th class="rcol-db1">${row.created_date}</th>
+          <th class="rcol-db1">${row.added_by}</th>
+        `;
+      tableBody.appendChild(newRow);
+    }
   }
 }
