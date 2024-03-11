@@ -87,7 +87,6 @@ const iframeDoc =
   diseaseDiv.contentDocument || diseaseIframe.contentWindow.document;
 
 function printFrame(type, year, location, month, patientC) {
-
   if (type == "AllTy") {
     type = "All Patients";
   } else if (type == "shs") {
@@ -165,13 +164,12 @@ async function fetchAllData(type) {
   const stat = {};
   const filteredData = data.filter((record) => record.archived === false);
   const patients = filteredData.length;
-  
+
   let totalP = 0;
   let shsP = 0;
   let collP = 0;
   let facP = 0;
   let stffP = 0;
-
 
   filteredData.forEach((data1) => {
     data1.diagchex.forEach((disease) => {
@@ -221,7 +219,6 @@ async function fetchAllData(type) {
         totalP++;
       }
     });
-
   });
 
   // brkdwnData(totalP, shsP, collP, facP, stffP, stat);
@@ -229,16 +226,15 @@ async function fetchAllData(type) {
   const diseaseCountsArray = Object.values(stat);
   const diseaseNamesArray = Object.keys(stat);
 
-  
   addLabel(diseaseNamesArray);
   addDataset(diseaseCountsArray);
-  
+
   const brkdwn = document.getElementById("brkdwn1");
   brkdwn.innerHTML = "";
-  const label = document.createElement("label")
+  const label = document.createElement("label");
   label.setAttribute("id", "allPlabel1");
 
-  const brkcont = document.createElement("div")
+  const brkcont = document.createElement("div");
   brkcont.setAttribute("id", "brktxtcont");
   brkcont.classList.add("brkdwn1-txt-cont");
 
@@ -246,32 +242,49 @@ async function fetchAllData(type) {
   brkdwn.appendChild(brkcont);
 
   printFrame(type, year, location, month, patients);
-  
+
   let content = '<head><link rel="stylesheet" href="/files/styles.css"></head>';
 
   content +=
     '<body><table class="restab"><tr><th><h2>DISEASE</h2></th><th><h2>STUDENTS</h2></th><th><h2>FACULTY</h2></th><th><h2>STAFF</h2></th><th><h2>TOTAL</h2></th></tr>';
   let totalz = 0;
-
-  
+  let totalStud = 0;
+  let totalFac = 0;
+  let totalStaff = 0;
 
   for (const [disease, counts] of Object.entries(diseaseCounts)) {
     const subTotal = counts.studCount + counts.facultyCount + counts.staffCount;
-    
+
     content += `<tr><th><b>${disease}</b></th><th>${counts.studCount}</th><th>${counts.facultyCount}</th><th>${counts.staffCount}</th><th>${subTotal}</th></tr>`;
 
-    brkdwnData1(disease, counts.shsCount,counts.collCount,counts.facultyCount,counts.staffCount, type);
+    brkdwnData1(
+      disease,
+      counts.shsCount,
+      counts.collCount,
+      counts.facultyCount,
+      counts.staffCount,
+      type
+    );
 
     totalz += subTotal;
+    totalStud += counts.shsCount + counts.collCount;
+    totalFac += counts.facultyCount;
+    totalStaff += counts.staffCount;
   }
-  content += `<tr><th><b>TOTAL</b></th><th colspan="3"></th><th>${totalz}</th></tr>`;
+  content += `<tr><th><b>TOTAL</b></th><th>${totalStud}</th><th>${totalFac}</th><th>${totalStaff}</th><th>${totalz}</th></tr>`;
 
   content += "</table></body>";
   iframeDoc.write(content);
 }
 
-function brkdwnData1(disease, shsCount, collCount, facultyCount, staffCount, type){
-  
+function brkdwnData1(
+  disease,
+  shsCount,
+  collCount,
+  facultyCount,
+  staffCount,
+  type
+) {
   const totalC = shsCount + collCount + facultyCount + staffCount;
 
   // for breakdown container
@@ -297,55 +310,53 @@ function brkdwnData1(disease, shsCount, collCount, facultyCount, staffCount, typ
   staffC.classList.add("brkdwn1-txt-sub-label");
   staffC.innerHTML = `Staff Members: <b>${staffCount}</b>`;
 
-  if (type === "AllTy"){
+  if (type === "AllTy") {
     brkdwn.appendChild(disLabel);
     brkdwn.appendChild(shsC);
     brkdwn.appendChild(collC);
     brkdwn.appendChild(facP);
     brkdwn.appendChild(staffC);
-  } 
-  else if (type === "shs"){
+  } else if (type === "shs") {
     brkdwn.appendChild(disLabel);
     brkdwn.appendChild(shsC);
-  }
-  else if (type === "coll"){
+  } else if (type === "coll") {
     brkdwn.appendChild(disLabel);
     brkdwn.appendChild(collC);
-  }
-  else if (type === "Faculty"){
+  } else if (type === "Faculty") {
     brkdwn.appendChild(disLabel);
     brkdwn.appendChild(facP);
-  }
-  else if (type === "Staff"){
+  } else if (type === "Staff") {
     brkdwn.appendChild(disLabel);
     brkdwn.appendChild(staffC);
   }
 }
 function generateGradientColors(startColor, endColor, steps) {
   let start = {
-    'Red': parseInt(startColor.slice(1, 3), 16),
-    'Green': parseInt(startColor.slice(3, 5), 16),
-    'Blue': parseInt(startColor.slice(5, 7), 16)
+    Red: parseInt(startColor.slice(1, 3), 16),
+    Green: parseInt(startColor.slice(3, 5), 16),
+    Blue: parseInt(startColor.slice(5, 7), 16),
   };
   let end = {
-    'Red': parseInt(endColor.slice(1, 3), 16),
-    'Green': parseInt(endColor.slice(3, 5), 16),
-    'Blue': parseInt(endColor.slice(5, 7), 16)
+    Red: parseInt(endColor.slice(1, 3), 16),
+    Green: parseInt(endColor.slice(3, 5), 16),
+    Blue: parseInt(endColor.slice(5, 7), 16),
   };
   let diff = {
-    'Red': end['Red'] - start['Red'],
-    'Green': end['Green'] - start['Green'],
-    'Blue': end['Blue'] - start['Blue']
+    Red: end["Red"] - start["Red"],
+    Green: end["Green"] - start["Green"],
+    Blue: end["Blue"] - start["Blue"],
   };
 
   let gradient = [];
 
   for (let i = 0; i < steps; i++) {
-    let color = 'rgba(';
-    color += Math.round(start['Red'] + (diff['Red'] * i / (steps - 1))) + ', ';
-    color += Math.round(start['Green'] + (diff['Green'] * i / (steps - 1))) + ', ';
-    color += Math.round(start['Blue'] + (diff['Blue'] * i / (steps - 1))) + ', ';
-    color += '0.8)'; // Set the alpha value to 0.5
+    let color = "rgba(";
+    color += Math.round(start["Red"] + (diff["Red"] * i) / (steps - 1)) + ", ";
+    color +=
+      Math.round(start["Green"] + (diff["Green"] * i) / (steps - 1)) + ", ";
+    color +=
+      Math.round(start["Blue"] + (diff["Blue"] * i) / (steps - 1)) + ", ";
+    color += "0.8)"; // Set the alpha value to 0.5
     gradient.push(color);
   }
 
@@ -353,12 +364,15 @@ function generateGradientColors(startColor, endColor, steps) {
 }
 
 function addDataset(stat) {
-
-  const startColor = '#19d89f80'; 
-  const endColor = '#28584980'; 
+  const startColor = "#19d89f80";
+  const endColor = "#28584980";
   const numberOfColors = stat.length;
 
-  const barColors = generateGradientColors(startColor, endColor, numberOfColors);
+  const barColors = generateGradientColors(
+    startColor,
+    endColor,
+    numberOfColors
+  );
 
   var newDataset = {
     label: [],
@@ -399,7 +413,7 @@ var diseaseCountChart = new Chart(ctxDiseaseCount, {
     responsive: true,
     maintainAspectRatio: false,
     aspectRatio: 1,
-    indexAxis: "y", 
+    indexAxis: "y",
     scales: {
       x: {
         ticks: {
