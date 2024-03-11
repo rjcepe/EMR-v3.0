@@ -33,6 +33,7 @@ function getusername1(username) {
 async function fetchUsername() {
   var id1 = sessionStorage.getItem("uid1");
   var type = sessionStorage.getItem("z");
+  console.log(type);
 
   const { data, error } = await _supabase
     .from("user_accs")
@@ -393,24 +394,23 @@ async function fetchTop5diseases() {
   // Sort the array based on the second element (the values) in descending order
   dataArray.sort((a, b) => b[1] - a[1]);
 
-  // Get the top 3 items with the most counts
-  const top3 = dataArray.slice(0, 5);
+  // Get the top 5 items with the most counts
+  const top5 = dataArray.slice(0, 5);
 
-  // Convert the top 3 items back to an object
-  const top3Object = Object.fromEntries(top3);
+  // Convert the top 5 items back to an object
+  const top5Object = Object.fromEntries(top5);
 
-  let Top3List = "";
+  let Top5List = "";
   let disC = [];
   let disC1 = [];
   let counter = 1;
   let total = 0;
 
-  for (const [disease, count] of Object.entries(top3Object)) {
-    Top3List += `<li>${disease}: <b>${count}</b></li>`;
+  for (const [disease, count] of Object.entries(top5Object)) {
+    Top5List += `<li>${disease}: <b>${count}</b></li>`;
     disC.push(disease);
     disC1.push(count);
     counter++;
-    // addDataset1(disease, count);
   }
 
   for (let i = 0; i < disC1.length; i++) {
@@ -421,16 +421,16 @@ async function fetchTop5diseases() {
   addDataset1(disC, disC1);
   addLabel1(month, disC);
 
-  const top3listcont = document.getElementById("topC");
+  const Top5Listcont = document.getElementById("topC");
   const doughnut = document.getElementById("totaldogs");
 
   const ul = document.createElement("ul");
-  ul.innerHTML = `${Top3List}`;
+  ul.innerHTML = `${Top5List}`;
 
   const totalC = document.createElement("h5");
   totalC.innerHTML = `${total}`;
 
-  top3listcont.appendChild(ul);
+  Top5Listcont.appendChild(ul);
   doughnut.appendChild(totalC);
 }
 
