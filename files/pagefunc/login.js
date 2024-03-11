@@ -15,7 +15,10 @@ loginForm.addEventListener("submit", async function (event) {
   const idInput = document.getElementById("uid").value;
   const passwordInput = document.getElementById("pw").value;
 
-  const { data, error } = await _supabase.from('user_accs').select('*').eq('id', idInput);
+  const { data, error } = await _supabase
+    .from("user_accs")
+    .select("*")
+    .eq("id", idInput);
 
   if (error) {
     console.error("Error querying the database:", error.message);
@@ -33,11 +36,10 @@ loginForm.addEventListener("submit", async function (event) {
 
   const user = data[0];
 
-  if (user.password === passwordInput) {  
-      window.alert("Login successful");
-      window.location.href = "/webpages/home.html";
-      setToken(user.access_level);
-    
+  if (user.password === passwordInput) {
+    window.alert("Login successful");
+    window.location.href = "/webpages/home.html";
+    setToken(user.access_level);
   } else {
     console.log("Password Incorrect");
     message.classList.add("loginfailed");
@@ -45,17 +47,15 @@ loginForm.addEventListener("submit", async function (event) {
   }
 });
 
-function setToken(access_level){
-
+function setToken(access_level) {
   const token = generateRandomString(64);
-  sessionStorage.setItem('accstoken', token);
+  sessionStorage.setItem("accstoken", token);
 
-  var UserId = document.getElementById('uid').value;
-  sessionStorage.setItem('uid1', UserId);
+  var UserId = document.getElementById("uid").value;
+  sessionStorage.setItem("uid1", UserId);
 
   var UserAccess = access_level;
-  sessionStorage.setItem('z', UserAccess);
-
+  sessionStorage.setItem("z", UserAccess);
 }
 
 function generateRandomString(length) {

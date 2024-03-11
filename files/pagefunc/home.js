@@ -573,21 +573,20 @@ async function fetchRecentVisits() {
   const tableBody = document.getElementById("rb-db");
   tableBody.innerHTML = "";
 
-  if (filteredData.length === 0 ){
+  if (filteredData.length === 0) {
     const newRow = document.createElement("tr");
     newRow.classList.add("rt-db1");
-  
+
     newRow.innerHTML = `
         <th class="rcol-db1"style="justify-content:center; height:50px;">This month's appointment log is currently empty.</th>
       `;
     tableBody.appendChild(newRow);
-  }
-  else{
+  } else {
     for (let i = 0; i < 15 && i < filteredData.length; i++) {
       const row = filteredData[i];
       const newRow = document.createElement("tr");
       newRow.classList.add("rt-db1");
-  
+
       newRow.innerHTML = `
           <th class="rcol-db1 rcol-id">${row.patient_id}</th>
           <th class="rcol-db1 rcol-name">${row.patient_name}</th>

@@ -27,46 +27,42 @@ async function loadTableData() {
     newRow.innerHTML = `<th class="row" colspan="7">No data available</td>`;
     tableBody.appendChild(newRow);
     console.log("No data");
-  }  
-  else {
-
+  } else {
     const selectedOption = document.getElementById("sort1").value;
     // Sort the data based on the selected option
     if (selectedOption === "IDasc") {
       tableData1.sort(
         (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
       );
-    }
-    else if (selectedOption === "IDdesc") {
+    } else if (selectedOption === "IDdesc") {
       tableData1.sort(
         (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
       );
     } else if (selectedOption === "TimeLate") {
-            tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "TimeOld") {
-            tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
-          } else if (selectedOption === "def") {
-            tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "Nameaz") {
-            tableData1.sort((a, b) =>
-              a.patient_name.toString().localeCompare(b.patient_name)
-            );
-          } else if (selectedOption === "Nameza") {
-            tableData1.sort((a, b) =>
-              b.patient_name.toString().localeCompare(a.patient_name)
-            );
-          } 
-    
+      tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+    } else if (selectedOption === "TimeOld") {
+      tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+    } else if (selectedOption === "def") {
+      tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+    } else if (selectedOption === "Nameaz") {
+      tableData1.sort((a, b) =>
+        a.patient_name.toString().localeCompare(b.patient_name)
+      );
+    } else if (selectedOption === "Nameza") {
+      tableData1.sort((a, b) =>
+        b.patient_name.toString().localeCompare(a.patient_name)
+      );
+    }
+
     let count = 1;
     tableData1.forEach((row) => {
-
       if (row.archived === false) {
         const newRow = document.createElement("tr");
         newRow.classList.add("res1");
 
         const counter = document.createElement("p");
         counter.classList.add("rCounter");
-        
+
         counter.innerText = `${count}`;
 
         newRow.innerHTML = `
@@ -79,108 +75,102 @@ async function loadTableData() {
             <th class="row1 timecol1">${row.location}</th>
             <th class="row1 timecol1">${row.added_by}</th>
         `;
-        count ++;
+        count++;
 
         tableBody.appendChild(newRow);
         newRow.appendChild(counter);
-        }
+      }
     });
   }
 }
 
 // Add an event listener to the select element to detect changes
 document.getElementById("sort1").addEventListener("change", function () {
-  if (searchState != 1 && filterState !=1){
+  if (searchState != 1 && filterState != 1) {
     loadTableData(); // Reload the table data when the sorting option changes
   }
-  if (searchState == 1){
-    searchEvent.call(document.getElementById('searchInput'));
+  if (searchState == 1) {
+    searchEvent.call(document.getElementById("searchInput"));
   }
-  if (filterState == 1){
-    filterEvent.call(document.getElementById('filterz-val'));
+  if (filterState == 1) {
+    filterEvent.call(document.getElementById("filterz-val"));
   }
-
 });
 
-document.getElementById('searchInput').addEventListener('keyup', searchEvent);
-
+document.getElementById("searchInput").addEventListener("keyup", searchEvent);
 
 //////// search while typing
 async function searchEvent() {
-      var results = this.value;
-      
-      if(results){
-        searchState = 1;
-        displayResults(results);
-      }
+  var results = this.value;
 
-      else{
-        loadTableData();
-      }
-      
-    };
+  if (results) {
+    searchState = 1;
+    displayResults(results);
+  } else {
+    loadTableData();
+  }
+}
 
 async function displayResults(results) {
-    
-    // Fetch the patient data based on the search ID
-    const { data: patientData, error } = await _supabase
-      .from("cons_rec")
-      .select("*")
-      .or(`patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`);
+  // Fetch the patient data based on the search ID
+  const { data: patientData, error } = await _supabase
+    .from("cons_rec")
+    .select("*")
+    .or(
+      `patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`
+    );
 
-    if (error) {
-      console.error("Error fetching patient data:", error.message);
-      alert("Invalid Input")
-      return;
-    }
+  if (error) {
+    console.error("Error fetching patient data:", error.message);
+    alert("Invalid Input");
+    return;
+  }
 
-    const tableBody = document.querySelector("#cons_table tbody");
+  const tableBody = document.querySelector("#cons_table tbody");
 
-    // Clear the current table
-    tableBody.innerHTML = "";
+  // Clear the current table
+  tableBody.innerHTML = "";
 
-    if (patientData && patientData.length > 0) {
-
-      const selectedOption = document.getElementById("sort1").value;
+  if (patientData && patientData.length > 0) {
+    const selectedOption = document.getElementById("sort1").value;
     // Sort the data based on the selected option
     if (selectedOption === "IDasc") {
       tableData1.sort(
         (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
       );
-    }
-    else if (selectedOption === "IDdesc") {
+    } else if (selectedOption === "IDdesc") {
       tableData1.sort(
         (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
       );
     } else if (selectedOption === "TimeLate") {
-            patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "TimeOld") {
-            patientData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
-          } else if (selectedOption === "def") {
-            patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "Nameaz") {
-            patientData.sort((a, b) =>
-              a.patient_name.toString().localeCompare(b.patient_name)
-            );
-          } else if (selectedOption === "Nameza") {
-            patientData.sort((a, b) =>
-              b.patient_name.toString().localeCompare(a.patient_name)
-            );
-          } 
+      patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+    } else if (selectedOption === "TimeOld") {
+      patientData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+    } else if (selectedOption === "def") {
+      patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+    } else if (selectedOption === "Nameaz") {
+      patientData.sort((a, b) =>
+        a.patient_name.toString().localeCompare(b.patient_name)
+      );
+    } else if (selectedOption === "Nameza") {
+      patientData.sort((a, b) =>
+        b.patient_name.toString().localeCompare(a.patient_name)
+      );
+    }
 
-      // Patient data found, update the table
-      let count = 1; 
-      patientData.forEach((row) => {
-        if (row.archived === false) {
-          const newRow = document.createElement("tr");
-          newRow.classList.add("res1");
-          
-          const counter = document.createElement("p");
-          counter.classList.add("rCounter");
-          
-          counter.innerText = `${count}`;
-  
-          newRow.innerHTML = `
+    // Patient data found, update the table
+    let count = 1;
+    patientData.forEach((row) => {
+      if (row.archived === false) {
+        const newRow = document.createElement("tr");
+        newRow.classList.add("res1");
+
+        const counter = document.createElement("p");
+        counter.classList.add("rCounter");
+
+        counter.innerText = `${count}`;
+
+        newRow.innerHTML = `
               <th class="row1 idcol1">${row.patient_id}</th>
               <th class="row1 namecol1">${row.patient_name}</th>
               <th class="row1 timecol1">${row.created_date}</th>
@@ -190,39 +180,40 @@ async function displayResults(results) {
               <th class="row1 timecol1">${row.location}</th>
               <th class="row1 timecol1">${row.added_by}</th>
           `;
-          count ++;
-          tableBody.appendChild(newRow);
-          newRow.appendChild(counter);
-          }
-      });
-    } else {
-      // Patient not found
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
+        count++;
+        tableBody.appendChild(newRow);
+        newRow.appendChild(counter);
+      }
+    });
+  } else {
+    // Patient not found
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
         <th class="row" colspan="7">Patient not found</td>
       `;
-      tableBody.appendChild(newRow);
-    }
-
-    
-  };
+    tableBody.appendChild(newRow);
+  }
+}
 
 // Add an event listener to the checkboxes container
-document.getElementById('filterz-val').addEventListener('change', filterEvent);
+document.getElementById("filterz-val").addEventListener("change", filterEvent);
 
 // Filter function, onchange
 async function filterEvent() {
   filterState = 1;
 
   const form1 = document.getElementById("filterz-val");
-  const checkedCheckboxes = form1.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+  const checkedCheckboxes = form1.querySelectorAll(
+    'input[type="checkbox"]:checked:not([name="others"])'
+  );
 
   if (checkedCheckboxes.length === 0) {
-      // No checkboxes are selected, load default table data
-      loadTableData();
+    // No checkboxes are selected, load default table data
+    loadTableData();
   } else {
-    const checkedValues = Array.from(checkedCheckboxes).map(checkbox => checkbox.value);
-    
+    const checkedValues = Array.from(checkedCheckboxes).map(
+      (checkbox) => checkbox.value
+    );
 
     const { data: patientData, error } = await _supabase
       .from("cons_rec")
@@ -235,47 +226,44 @@ async function filterEvent() {
     tableBody.innerHTML = ""; // Clear the current table
 
     if (patientData && patientData.length > 0) {
-
       const selectedOption = document.getElementById("sort1").value;
-        // Sort the data based on the selected option
-        if (selectedOption === "IDasc") {
-          tableData1.sort(
-            (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
-          );
-        }
-        else if (selectedOption === "IDdesc") {
-          tableData1.sort(
-            (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
-          );
-        } else if (selectedOption === "TimeLate") {
-            patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "TimeOld") {
-            patientData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
-          } else if (selectedOption === "def") {
-            patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "Nameaz") {
-            patientData.sort((a, b) =>
-              a.patient_name.toString().localeCompare(b.patient_name)
-            );
-          } else if (selectedOption === "Nameza") {
-            patientData.sort((a, b) =>
-              b.patient_name.toString().localeCompare(a.patient_name)
-            );
-          } 
+      // Sort the data based on the selected option
+      if (selectedOption === "IDasc") {
+        tableData1.sort(
+          (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
+        );
+      } else if (selectedOption === "IDdesc") {
+        tableData1.sort(
+          (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
+        );
+      } else if (selectedOption === "TimeLate") {
+        patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+      } else if (selectedOption === "TimeOld") {
+        patientData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+      } else if (selectedOption === "def") {
+        patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+      } else if (selectedOption === "Nameaz") {
+        patientData.sort((a, b) =>
+          a.patient_name.toString().localeCompare(b.patient_name)
+        );
+      } else if (selectedOption === "Nameza") {
+        patientData.sort((a, b) =>
+          b.patient_name.toString().localeCompare(a.patient_name)
+        );
+      }
       // Patient data found, update the table
-      let count = 1; 
+      let count = 1;
       patientData.forEach((row) => {
-
         if (row.archived === false) {
-        const newRow = document.createElement("tr");
-        newRow.classList.add("res1");
+          const newRow = document.createElement("tr");
+          newRow.classList.add("res1");
 
-        const counter = document.createElement("p");
-        counter.classList.add("rCounter");
+          const counter = document.createElement("p");
+          counter.classList.add("rCounter");
 
-        counter.innerText = `${count}`;
+          counter.innerText = `${count}`;
 
-        newRow.innerHTML = `
+          newRow.innerHTML = `
             <th class="row1 idcol1">${row.patient_id}</th>
             <th class="row1 namecol1">${row.patient_name}</th>
             <th class="row1 timecol1">${row.created_date}</th>
@@ -285,10 +273,10 @@ async function filterEvent() {
             <th class="row1 timecol1">${row.location}</th>
             <th class="row1 timecol1">${row.added_by}</th>
         `;
-        count ++;
+          count++;
 
-        tableBody.appendChild(newRow);
-        newRow.appendChild(counter);
+          tableBody.appendChild(newRow);
+          newRow.appendChild(counter);
         }
       });
     } else {
@@ -326,7 +314,6 @@ async function getusername() {
   }
 }
 
-
 function getusername1(username) {
   var bb = username;
   sessionStorage.setItem("x", bb);
@@ -348,13 +335,14 @@ $("#insertstudconsform").submit(async function (event) {
 
   // Function to get the value of a textbox if it is filled
   function getFilledValue(selector) {
-      var value = $(selector).val();
-      if (value) { // Checks if the value is not empty, null, or undefined
-          filledValues.push(value);
+    var value = $(selector).val();
+    if (value) {
+      // Checks if the value is not empty, null, or undefined
+      filledValues.push(value);
 
-          var other1 = "Others";
-          otherArr.push(other1);
-      }
+      var other1 = "Others";
+      otherArr.push(other1);
+    }
   }
   // Get values of all textboxes if they are filled
   getFilledValue("#othersTextDermatological");
@@ -369,13 +357,14 @@ $("#insertstudconsform").submit(async function (event) {
   getFilledValue("#othersTextTrauma");
   getFilledValue("#othersTextMiscellaneous");
 
-
   // get values of the checked boxes
-  const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+  const checkboxes = form.querySelectorAll(
+    'input[type="checkbox"]:checked:not([name="others"])'
+  );
 
-  const checkedValues = Array.from(checkboxes).map((checkbox) => checkbox.value);
-
-
+  const checkedValues = Array.from(checkboxes).map(
+    (checkbox) => checkbox.value
+  );
 
   // get cys
   const college = $("#college").val();
@@ -389,57 +378,52 @@ $("#insertstudconsform").submit(async function (event) {
 
   const loc1 = $("#locsel").val();
   const note1 = $("#notes").val();
-  
+
   var diagchex = [...checkedValues, ...filledValues];
 
-  if (college == "shs"){
+  if (college == "shs") {
     var ptype = "shs";
-  }
-  else{
+  } else {
     var ptype = "coll";
   }
 
   ///get current date
-    // Specify the target timezone as "Asia/Manila"
-    const targetTimezone = "Asia/Manila";
+  // Specify the target timezone as "Asia/Manila"
+  const targetTimezone = "Asia/Manila";
 
-    // Get the current date and time in the target timezone
-    const today = new Date();
+  // Get the current date and time in the target timezone
+  const today = new Date();
 
-    const year = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      year: "numeric",
-    });
-    const month = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      month: "2-digit",
-    });
-    const day = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      day: "2-digit",
-    });
+  const year = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    year: "numeric",
+  });
+  const month = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    month: "2-digit",
+  });
+  const day = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    day: "2-digit",
+  });
 
-    const CurrentDate = `${year}-${month}-${day}`;
-    const DateArr = [year, month, day];
-    var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
-  
-  if (otherArr != null){
+  const CurrentDate = `${year}-${month}-${day}`;
+  const DateArr = [year, month, day];
+  var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
+
+  if (otherArr != null) {
     var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
     var allArr = [...checkedValues, ...filledValues, ...otherArr, ...miscArr];
-  }
-  else{
+  } else {
     var diagchex2 = [...checkedValues, ...filledValues];
     var allArr = [...checkedValues, ...filledValues, ...miscArr];
- }
-  
+  }
 
   const diag1 = diagchex.join(", ");
 
   var username = sessionStorage.getItem("x");
 
   try {
-    
-
     const formInfo = {
       patient_id: id1,
       patient_name: name,
@@ -462,7 +446,7 @@ $("#insertstudconsform").submit(async function (event) {
 
     if (insertError) {
       console.error("Error inserting data:", insertError.message);
-      alert("Missing Input Field")
+      alert("Missing Input Field");
     } else {
       console.log("Data inserted successfully:", insertData);
       // location.reload();
@@ -481,8 +465,8 @@ $("#insertstudconsform").submit(async function (event) {
 /////////////////////////////////////////// Upload faculty info
 $("#insertempconsform").submit(async function (event) {
   event.preventDefault();
-  
-    // get checkbox values
+
+  // get checkbox values
   const form = document.getElementById("insertempconsform");
 
   // get values of all others textbox
@@ -492,13 +476,14 @@ $("#insertempconsform").submit(async function (event) {
 
   // Function to get the value of a textbox if it is filled
   function getFilledValue(selector) {
-      var value = $(selector).val();
-      if (value) { // Checks if the value is not empty, null, or undefined
-          filledValues.push(value);
+    var value = $(selector).val();
+    if (value) {
+      // Checks if the value is not empty, null, or undefined
+      filledValues.push(value);
 
-          var other1 = "Others";
-          otherArr.push(other1);
-      }
+      var other1 = "Others";
+      otherArr.push(other1);
+    }
   }
   // Get values of all textboxes if they are filled
   getFilledValue("#othersTextDermatological1");
@@ -513,11 +498,14 @@ $("#insertempconsform").submit(async function (event) {
   getFilledValue("#othersTextTrauma1");
   getFilledValue("#othersTextMiscellaneous1");
 
-
   // get values of the checked boxes
-  const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+  const checkboxes = form.querySelectorAll(
+    'input[type="checkbox"]:checked:not([name="others"])'
+  );
 
-  const checkedValues = Array.from(checkboxes).map((checkbox) => checkbox.value);
+  const checkedValues = Array.from(checkboxes).map(
+    (checkbox) => checkbox.value
+  );
 
   // get cys
   const course = $("#course1").val();
@@ -528,50 +516,47 @@ $("#insertempconsform").submit(async function (event) {
 
   const loc1 = $("#locsel1").val();
   const note1 = $("#notes1").val();
-  
+
   var diagchex = [...checkedValues, ...filledValues];
 
   const ptype = "Faculty";
   ///get current date
-    // Specify the target timezone as "Asia/Manila"
-    const targetTimezone = "Asia/Manila";
+  // Specify the target timezone as "Asia/Manila"
+  const targetTimezone = "Asia/Manila";
 
-    // Get the current date and time in the target timezone
-    const today = new Date();
+  // Get the current date and time in the target timezone
+  const today = new Date();
 
-    const year = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      year: "numeric",
-    });
-    const month = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      month: "2-digit",
-    });
-    const day = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      day: "2-digit",
-    });
+  const year = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    year: "numeric",
+  });
+  const month = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    month: "2-digit",
+  });
+  const day = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    day: "2-digit",
+  });
 
-    const CurrentDate = `${year}-${month}-${day}`;
-    const DateArr = [year, month, day];
-    var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
- 
-  if (otherArr != null){
+  const CurrentDate = `${year}-${month}-${day}`;
+  const DateArr = [year, month, day];
+  var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
+
+  if (otherArr != null) {
     var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
     var allArr = [...checkedValues, ...filledValues, ...otherArr, ...miscArr];
-  }
-  else{
+  } else {
     var diagchex2 = [...checkedValues, ...filledValues];
     var allArr = [...checkedValues, ...filledValues, ...miscArr];
- }
-  
+  }
+
   const diag1 = diagchex.join(", ");
 
   var username = sessionStorage.getItem("x");
 
   try {
-    
-
     const formInfo = {
       patient_id: id1,
       patient_name: name,
@@ -594,7 +579,7 @@ $("#insertempconsform").submit(async function (event) {
 
     if (insertError) {
       console.error("Error inserting data:", insertError.message);
-      alert("Missing Input Field")
+      alert("Missing Input Field");
     } else {
       console.log("Data inserted successfully:", insertData);
       // location.reload();
@@ -613,7 +598,7 @@ $("#insertempconsform").submit(async function (event) {
 $("#insertstaffconsform").submit(async function (event) {
   event.preventDefault();
 
-    // get checkbox values
+  // get checkbox values
   const form = document.getElementById("insertstaffconsform");
 
   // get values of all others textbox
@@ -623,13 +608,14 @@ $("#insertstaffconsform").submit(async function (event) {
 
   // Function to get the value of a textbox if it is filled
   function getFilledValue(selector) {
-      var value = $(selector).val();
-      if (value) { // Checks if the value is not empty, null, or undefined
-          filledValues.push(value);
+    var value = $(selector).val();
+    if (value) {
+      // Checks if the value is not empty, null, or undefined
+      filledValues.push(value);
 
-          var other1 = "Others";
-          otherArr.push(other1);
-      }
+      var other1 = "Others";
+      otherArr.push(other1);
+    }
   }
   // Get values of all textboxes if they are filled
   getFilledValue("#othersTextDermatological2");
@@ -644,12 +630,14 @@ $("#insertstaffconsform").submit(async function (event) {
   getFilledValue("#othersTextTrauma2");
   getFilledValue("#othersTextMiscellaneous2");
 
-
   // get values of the checked boxes
-  const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+  const checkboxes = form.querySelectorAll(
+    'input[type="checkbox"]:checked:not([name="others"])'
+  );
 
-  const checkedValues = Array.from(checkboxes).map((checkbox) => checkbox.value);
-
+  const checkedValues = Array.from(checkboxes).map(
+    (checkbox) => checkbox.value
+  );
 
   // Get form field values
   const name = $("#stffname").val();
@@ -657,51 +645,48 @@ $("#insertstaffconsform").submit(async function (event) {
 
   const loc1 = $("#locsel2").val();
   const note1 = $("#notes2").val();
-  
+
   var diagchex = [...checkedValues, ...filledValues];
 
   const ptype = "Staff";
 
-   ///get current date
-    // Specify the target timezone as "Asia/Manila"
-    const targetTimezone = "Asia/Manila";
+  ///get current date
+  // Specify the target timezone as "Asia/Manila"
+  const targetTimezone = "Asia/Manila";
 
-    // Get the current date and time in the target timezone
-    const today = new Date();
+  // Get the current date and time in the target timezone
+  const today = new Date();
 
-    const year = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      year: "numeric",
-    });
-    const month = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      month: "2-digit",
-    });
-    const day = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      day: "2-digit",
-    });
+  const year = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    year: "numeric",
+  });
+  const month = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    month: "2-digit",
+  });
+  const day = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    day: "2-digit",
+  });
 
-    const CurrentDate = `${year}-${month}-${day}`;
-    const DateArr = [year, month, day];
-    var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
+  const CurrentDate = `${year}-${month}-${day}`;
+  const DateArr = [year, month, day];
+  var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
 
-  if (otherArr != null){
+  if (otherArr != null) {
     var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
     var allArr = [...checkedValues, ...filledValues, ...otherArr, ...miscArr];
-  }
-  else{
+  } else {
     var diagchex2 = [...checkedValues, ...filledValues];
     var allArr = [...checkedValues, ...filledValues, ...miscArr];
- }
-  
+  }
+
   const diag1 = diagchex.join(", ");
 
   var username = sessionStorage.getItem("x");
 
   try {
-   
-
     const formInfo = {
       patient_id: id1,
       patient_name: name,
@@ -796,4 +781,3 @@ async function fetchUserPic() {
 
 fetchUserPic();
 fetchUsername();
-
