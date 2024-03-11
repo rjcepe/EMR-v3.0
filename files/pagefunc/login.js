@@ -33,22 +33,11 @@ loginForm.addEventListener("submit", async function (event) {
 
   const user = data[0];
 
-  if (user.password === passwordInput) {
-    
+  if (user.password === passwordInput) {  
       window.alert("Login successful");
-
       window.location.href = "/webpages/home.html";
-
-      const token = generateRandomString(64);
-      sessionStorage.setItem('accstoken', token);
-
-      var gg = document.getElementById('uid').value;
-      sessionStorage.setItem('uid1', gg);
-
-      var zz = user.access_level;
-      sessionStorage.setItem('z', zz);
+      setToken();
     
-   
   } else {
     console.log("Password Incorrect");
     message.classList.add("loginfailed");
@@ -56,14 +45,17 @@ loginForm.addEventListener("submit", async function (event) {
   }
 });
 
-async function setToken(){
+function setToken(){
 
-  const uid = sessionStorage.getItem("uid1");
   const token = generateRandomString(64);
-     
-  const { data, error } = await _supabase.from('user_accs').update({ token: token }).eq('id', uid);
+  sessionStorage.setItem('accstoken', token);
 
-  
+  var UserId = document.getElementById('uid').value;
+  sessionStorage.setItem('uid1', UserId);
+
+  var UserAccess = user.access_level;
+  sessionStorage.setItem('z', UserAccess);
+
 }
 
 function generateRandomString(length) {
