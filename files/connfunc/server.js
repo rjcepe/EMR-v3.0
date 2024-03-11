@@ -7,7 +7,14 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 var token = sessionStorage.getItem("accstoken");
 
 if (token === null) {
-  window.location.href = "../index.html";
+    window.location.href = "../index.html";
+}
+
+function AdminOnly() {
+    const access_level = sessionStorage.getItem("z");
+    if (access_level != "Admin") {
+        window.location.href = "/webpages/home.html";
+    }
 }
 
 // Function to handle user activity
