@@ -53,7 +53,6 @@ async function fetchUsername() {
   // Check if data is not empty
   if (data && data.length > 0) {
     const username = data[0].username;
-    console.log(username);
 
     const usertab = document.querySelector(".username");
 
@@ -80,14 +79,11 @@ async function fetchUsername() {
 async function fetchUserPic() {
   var id1 = sessionStorage.getItem("uid1");
   const piclink = id1 + ".png";
-  console.log(piclink);
 
   const userpiclink = `${SUPABASE_URL}/storage/v1/object/public/userimages/${piclink}`;
 
   const userTab = document.querySelector(".user");
   const usernameDiv = document.querySelector(".username");
-
-  console.log(userpiclink);
 
   const img = document.createElement("img");
   img.setAttribute("src", userpiclink);

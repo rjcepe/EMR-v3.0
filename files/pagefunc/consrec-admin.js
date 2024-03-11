@@ -175,7 +175,6 @@ document.getElementById("sort1").addEventListener("change", function () {
 
 document.getElementById('searchInput').addEventListener('keyup', searchEvent);
 
-
 //////// search while typing
 async function searchEvent() {
       var results = this.value;
@@ -416,7 +415,6 @@ async function getusername() {
     console.log("User not found with ID:", id);
   }
 }
-
 
 function getusername1(username) {
   var bb = username;
