@@ -36,7 +36,7 @@ loginForm.addEventListener("submit", async function (event) {
   if (user.password === passwordInput) {  
       window.alert("Login successful");
       window.location.href = "/webpages/home.html";
-      setToken();
+      setToken(user.access_level);
     
   } else {
     console.log("Password Incorrect");
@@ -45,7 +45,7 @@ loginForm.addEventListener("submit", async function (event) {
   }
 });
 
-function setToken(){
+function setToken(access_level){
 
   const token = generateRandomString(64);
   sessionStorage.setItem('accstoken', token);
@@ -53,7 +53,7 @@ function setToken(){
   var UserId = document.getElementById('uid').value;
   sessionStorage.setItem('uid1', UserId);
 
-  var UserAccess = user.access_level;
+  var UserAccess = access_level;
   sessionStorage.setItem('z', UserAccess);
 
 }
