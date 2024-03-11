@@ -33,7 +33,6 @@ function getusername1(username) {
 async function fetchUsername() {
   var id1 = sessionStorage.getItem("uid1");
   var type = sessionStorage.getItem("z");
-  console.log(type);
 
   const { data, error } = await _supabase
     .from("user_accs")
