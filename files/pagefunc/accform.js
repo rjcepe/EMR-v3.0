@@ -1,11 +1,5 @@
-const SUPABASE_URL = "https://yspyqlodogzmrqsifbww.supabase.co";
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcHlxbG9kb2d6bXJxc2lmYnd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTMxNTYsImV4cCI6MjAxMzY2OTE1Nn0.YjQ-8W-UKbg5JPOO0q3aWT2eXjXe593IlxhkZVSAqkk";
-
-const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-function GenAcc(){
-  window.open('https://forms.gle/ZhHvWKZhZcVA4M5bA', '_blank');
+function GenAcc() {
+  window.open("https://forms.gle/ZhHvWKZhZcVA4M5bA", "_blank");
 }
 
 ////////////////////////////// fetch username
@@ -39,9 +33,7 @@ function getusername1(username) {
   sessionStorage.setItem("x", bb);
 }
 
-
 getusername();
-
 
 //////////////////////////////////// user display
 async function fetchUsername() {
@@ -105,4 +97,3 @@ async function fetchUserPic() {
 
 fetchUserPic();
 fetchUsername();
-

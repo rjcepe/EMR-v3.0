@@ -6,7 +6,8 @@
     "jsonwebtoken": "^9.0.2",
     "jspdf": "^2.5.1",
     "node": "^21.0.0",
-    "pdf-lib": "^1.17.1"
+    "pdf-lib": "^1.17.1",
+    "uglify-js": "^3.17.4"
   },
   "scripts": {
     "start": "node server.js"
