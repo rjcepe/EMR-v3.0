@@ -231,7 +231,7 @@
 
   .main-filter {
       filter: brightness(70%) saturate(80%) blur(4px);
-      scale: 1.1;
+      scale: 1.03;
   }
 
   /* side nav */
