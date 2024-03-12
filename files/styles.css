@@ -71,16 +71,17 @@
   .loginfailed {
       border-radius: 10px;
       text-align: center;
-      margin-top: 100px;
+      margin-top: 50px;
       background-color: rgb(211, 89, 89);
-      width: 250px;
+      width: 200px;
+      padding: 10px;
       color: white;
-      font-size: .7rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      padding: 5px;
       text-transform: uppercase;
       letter-spacing: 1px;
       animation: bounceIn .4s both;
+      transition: .1s;
   }
 
   .login-cont {
@@ -231,7 +232,7 @@
 
   .main-filter {
       filter: brightness(70%) saturate(80%) blur(4px);
-      scale: 1.1;
+      scale: 1.03;
   }
 
   /* side nav */
