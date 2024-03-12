@@ -22,15 +22,12 @@ loginForm.addEventListener("submit", async function (event) {
 
   if (error) {
     console.error("Error querying the database:", error.message);
-    message.classList.add("loginfailed");
-    message.innerText = "!! User ID not found !!";
+    errorMsg();
     return;
   }
 
   if (data.length === 0) {
-    console.log("User ID not found");
-    message.classList.add("loginfailed");
-    message.innerText = "!! User ID not found !!";
+    errorMsg();
     return;
   }
 
@@ -41,12 +38,23 @@ loginForm.addEventListener("submit", async function (event) {
     window.location.href = "/webpages/home.html";
     setToken(user.access_level);
   } else {
-    console.log("Password Incorrect");
-    message.classList.add("loginfailed");
-    message.innerText = "!! Password Incorrect !!";
+    errorMsg();
   }
 });
 
+
+function errorMsg(){
+  const message = document.getElementById("message");
+
+  // Remove the class and re-add it after a brief timeout
+  message.classList.remove("loginfailed");
+  message.innerText = "";
+  setTimeout(() => {
+    message.classList.add("loginfailed");
+    message.innerText = "Incorrect Credentials";
+    // message.innerText = "Username or Password is Incorrect";
+  }, 10);
+}
 function setToken(access_level) {
   const token = generateRandomString(64);
   sessionStorage.setItem("accstoken", token);
