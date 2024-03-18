@@ -9,6 +9,9 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const loginForm = document.getElementById("loginform");
 const message = document.getElementById("message");
 
+let AttemptsCount = 5;
+initializeLoginAttempts();
+
 loginForm.addEventListener("submit", async function (event) {
   event.preventDefault();
 
@@ -42,18 +45,73 @@ loginForm.addEventListener("submit", async function (event) {
   }
 });
 
+AttemptsCount === 1 && errorMsg();
 
-function errorMsg(){
-  const message = document.getElementById("message");
-
+function errorMsg() {
   // Remove the class and re-add it after a brief timeout
   message.classList.remove("loginfailed");
   message.innerText = "";
+  const submessage = document.getElementById("loginattmpts");
+  submessage.classList.remove("attemptscount");
+  submessage.innerText = "";
+
+  if (AttemptsCount === 1) {
+    localStorage.setItem('AttemptsCount', AttemptsCount);
+    localStorage.setItem('LastAttemptTime', Date.now());
+
+    document.getElementById("loginbutt").disabled = true;
+    setTimeout(() => {
+      message.classList.add("loginfailed");
+      message.innerHTML = `<img src="/files/images/error.png" alt="" srcset="">
+      <p>Login attempt limit reached. Please wait 3 minutes before trying to log in again.</p>`;
+    }, 10);
+
+    setTimeout(() => {
+      resetLoginAttempts();
+    }, 180000); //3 minutes timeout
+  } else {
+    AttemptsCount--;
+    localStorage.setItem('AttemptsCount', AttemptsCount);
+
+    setTimeout(() => {
+      message.classList.add("loginfailed");
+      message.innerHTML = `<img src="/files/images/warning.png" alt="" srcset="">
+      <p>Invalid username or password. Please try again. <br></p>`;
+
+      submessage.classList.add("attemptscount");
+      submessage.innerHTML = `${AttemptsCount} Attempts Remaining`;
+    }, 10);
+  }
+}
+
+function initializeLoginAttempts() {
+  const savedAttempts = parseInt(localStorage.getItem('AttemptsCount'));
+  const savedTimestamp = parseInt(localStorage.getItem('LastAttemptTime'));
+  const currentTime = Date.now();
+
+  if (savedAttempts > 0 && savedTimestamp && currentTime - savedTimestamp < 180000) {
+    AttemptsCount = savedAttempts;
+    const remainingTime = 180000 - (currentTime - savedTimestamp);
+    disableLoginForTimeout(remainingTime);
+  } else {
+    resetLoginAttempts();
+  }
+}
+
+function disableLoginForTimeout(duration) {
+  document.getElementById("loginbutt").disabled = true;
   setTimeout(() => {
-    message.classList.add("loginfailed");
-    message.innerText = "Incorrect Credentials";
-    // message.innerText = "Username or Password is Incorrect";
-  }, 10);
+    resetLoginAttempts();
+  }, duration);
+}
+
+function resetLoginAttempts() {
+  document.getElementById("loginbutt").disabled = false;
+  localStorage.removeItem('AttemptsCount');
+  localStorage.removeItem('LastAttemptTime');
+  message.classList.remove("loginfailed");
+  message.innerText = "";
+  AttemptsCount = 5;
 }
 function setToken(access_level) {
   const token = generateRandomString(64);
