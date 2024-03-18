@@ -40,6 +40,7 @@
       --gborder: 1px solid white;
       --blurborder: 3px solid rgba(14, 83, 61, 0.2);
       --headlinebg: linear-gradient(90deg, rgba(40, 88, 73, 0.5) 0%, rgba(25, 216, 159, 0) 40%);
+      --error: rgb(211, 89, 89);
   }
 
   /* BASIC STYLING */
@@ -64,26 +65,42 @@
 
   button:disabled {
       cursor: not-allowed;
+    }
+    
+    /* login page */
+    .attemptscount{
+        color: var(--error);
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-top: 10px;
   }
-
-  /* login page */
-
   .loginfailed {
       border-radius: 10px;
-      text-align: center;
       margin-top: 50px;
-      background-color: rgb(211, 89, 89);
-      width: 200px;
+      /* background-color: #d35959; */
+      width: 250px;
       padding: 10px;
-      color: white;
-      font-size: 0.7rem;
-      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       animation: bounceIn .4s both;
       transition: .1s;
+      border: 2px solid var(--error);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
   }
-
+  .loginfailed img{
+    height: 30px;
+    min-width: 30px;
+  }
+  .loginfailed p{
+    text-align: left;
+    color: var(--error);
+    font-size: 1vh;
+    font-weight: 800;
+    width: 190px;
+}
   .login-cont {
       /* background-color: #126638; */
       background-image: url("/files/images/samplebg.jpg");
@@ -110,7 +127,7 @@
       /* border: 1px solid black; */
   }
 
-  .cont1 img {
+  .dlsud-logo {
       margin: 50px 0px 50px 0px;
       min-height: 100px;
       max-height: 100px;

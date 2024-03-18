@@ -11,7 +11,7 @@
 <body>
     <div class="login-cont">
         <div class="cont1">
-            <img src="/files/images/logo2.png" alt="dlsud logo">
+            <img src="/files/images/logo2.png" alt="dlsud logo" class="dlsud-logo">
             <div class="intz">
                 <h4>Sign in</h4>
                 <form id="loginform" class="logform">
@@ -23,9 +23,10 @@
                         <i class="icon fas fa-lock"></i>
                         <input type="password" id="pw" placeholder="Enter Password..." required>
                     </div>
-                    <button class="loginbutt">LOGIN</button>
+                    <button class="loginbutt" id="loginbutt">LOGIN</button>
                 </form>
-                    <p id="message"></p>
+                    <div id="message"></div>
+                    <div id="loginattmpts"></div>
             </div>
             <div class="botlog">
                 <p>@ Copyright 2023 <b>CGR</b> All Rights Reserved   </p>
