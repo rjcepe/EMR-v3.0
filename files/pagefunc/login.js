@@ -63,7 +63,7 @@ function errorMsg() {
     setTimeout(() => {
       message.classList.add("loginfailed");
       message.innerHTML = `<img src="/files/images/error.png" alt="" srcset="">
-      <p>Login attempt limit reached. Please wait 3 minutes before trying to log in again.</p>`;
+      <p>Login attempt limit reached. Please wait for 3 minutes before trying to log in again.</p>`;
     }, 10);
 
     setTimeout(() => {
