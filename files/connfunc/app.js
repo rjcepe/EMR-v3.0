@@ -66,7 +66,7 @@ var type = sessionStorage.getItem("z");
 
 function logout() {
   sessionStorage.removeItem('accstoken');
-  window.location.href = "../Login";
+  window.location.href = "/Login";
 }
 
 
