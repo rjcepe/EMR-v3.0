@@ -7,7 +7,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 var token = sessionStorage.getItem("accstoken");
 
 if (token === null) {
-    window.location.href = "../Login";
+    window.location.href = "/Login";
 }
 
 function AdminOnly() {
