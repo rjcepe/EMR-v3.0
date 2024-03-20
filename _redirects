@@ -1,5 +1,5 @@
-http://https://dlsud-emr.netlify.app/*  https://dlsud-emr.app.ph/:splat  301
-https://https://dlsud-emr.netlify.app/* https://dlsud-emr.app.ph/:splat  200
+http://https://dlsud-emr.com/  https://dlsud-emr.netlify.app/  301
+https://https://dlsud-emr.com/ https://dlsud-emr.netlify.app/  200
 
 /accidentrecords          /webpages/accidentrec.html             301
 /consultationrecords-admin /webpages/consultationrec-admin.html   301
