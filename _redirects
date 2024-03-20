@@ -1,8 +1,4 @@
-# Redirects for Pretty URLs (without the .html extension)
-# These rules should be placed in your `_redirects` file in the root of your publish directory.
-
 /accidentrecords          /webpages/accidentrec.html             301
-/addpatients              /webpages/addpatients.html              301
 /consultationrecords-admin /webpages/consultationrec-admin.html   301
 /consultationrecords-archives /webpages/consultationrec-archives.html 301
 /consultationrecords      /webpages/consultationrec.html          301
@@ -15,25 +11,22 @@
 /medicalrecords-archives  /webpages/medicalrecords-archives.html  301
 /medicalrecords           /webpages/medicalrecords.html           301
 /monthlycensus            /webpages/monthlycensus.html            301
-/patientprofile           /webpages/patientprofile.html           301
 /prescriptions            /webpages/presc.html                    301
-/xray                     /webpages/xray.html                     301
+
 
 # Rewrites to serve the content without changing the URL in the address bar
-/webpages/accidentrec /webpages/accidentrec.html 200
-/webpages/addpatients /webpages/addpatients.html 200
-/webpages/consultationrec-admin /webpages/consultationrec-admin.html 200
-/webpages/consultationrec-archives /webpages/consultationrec-archives.html 200
-/webpages/consultationrec /webpages/consultationrec.html 200
-/webpages/dentalrecords-admin /webpages/dentalrecords-admin.html 200
-/webpages/dentalrecords-archives /webpages/dentalrecords-archives.html 200
-/webpages/dentalrecords /webpages/dentalrecords.html 200
-/webpages/home /webpages/home.html 200
-/webpages/medcerts /webpages/medcerts.html 200
-/webpages/medicalrecords-admin /webpages/medicalrecords-admin.html 200
-/webpages/medicalrecords-archives /webpages/medicalrecords-archives.html 200
-/webpages/medicalrecords /webpages/medicalrecords.html 200
-/webpages/monthlycensus /webpages/monthlycensus.html 200
-/webpages/patientprofile /webpages/patientprofile.html 200
-/webpages/presc /webpages/presc.html 200
-/webpages/xray /webpages/xray.html 200
+/Accident-Records /webpages/accidentrec.html 200
+/Consultation-Records-Admin /webpages/consultationrec-admin.html 200
+/Consultation-Records-Archives /webpages/consultationrec-archives.html 200
+/Consultation-Records /webpages/consultationrec.html 200
+/Dental-Records-Admin /webpages/dentalrecords-admin.html 200
+/Dental-Records-Aechives /webpages/dentalrecords-archives.html 200
+/Dental-Records /webpages/dentalrecords.html 200
+/Home /webpages/home.html 200
+/Medical-Certificates /webpages/medcerts.html 200
+/Medical-Records-Admin /webpages/medicalrecords-admin.html 200
+/Medical-Records-Archives /webpages/medicalrecords-archives.html 200
+/Medical-Records /webpages/medicalrecords.html 200
+/Monthly-Census /webpages/monthlycensus.html 200
+/Prescriptions /webpages/presc.html 200
+
