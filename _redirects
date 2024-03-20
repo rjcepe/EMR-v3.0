@@ -1,1 +1,5 @@
-/*    /:splat  200
+# Root directory index page
+/index.html  /
+
+# HTML files inside the webpages directory
+/webpages/*  /webpages/:splat.html
