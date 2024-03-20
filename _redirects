@@ -1,7 +1,5 @@
-https://dlsud-emr.netlify.app/index.html https://dlsud-emr.netlify.app/Login 301
-https://dlsud-emr.netlify.app/webpages/home.html https://dlsud-emr.netlify.app/webpages/Home  200
-https://dlsud-emr.netlify.app/webpages/medicalrecords.html   https://dlsud-emr.netlify.app/webpages/medicalrecords 200
-https://dlsud-emr.netlify.app/webpages/dentalrecords.html    https://dlsud-emr.netlify.app/webpages/dentalrecords   200
-https://dlsud-emr.netlify.app/webpages/medicalrecords.html   https://dlsud-emr.netlify.app/webpages/medicalrecords 200
-https://dlsud-emr.netlify.app/webpages/dentalrecords.html    https://dlsud-emr.netlify.app/webpages/dentalrecords   200
-https://dlsud-emr.netlify.app/webpages/medcerts.html    https://dlsud-emr.netlify.app/webpages/medicalcertificates   200
+/Login  /index.html  301
+/webpages/Home  /webpages/home.html  200
+/webpages/medicalrecords  /webpages/medicalrecords.html  200
+/webpages/dentalrecords  /webpages/dentalrecords.html  200
+/webpages/medicalcertificates   /webpages/medcerts.html  200
