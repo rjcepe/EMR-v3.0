@@ -1,5 +1,5 @@
 /Login  /index.html  301
-/webpages/Home  /webpages/home.html  200
-/webpages/medicalrecords  /webpages/medicalrecords.html  200
-/webpages/dentalrecords  /webpages/dentalrecords.html  200
-/webpages/medicalcertificates   /webpages/medcerts.html  200
+/webpages/Home  /webpages/home.html  301
+/webpages/medicalrecords  /webpages/medicalrecords.html  301
+/webpages/dentalrecords  /webpages/dentalrecords.html  301
+/webpages/medicalcertificates   /webpages/medcerts.html  301
