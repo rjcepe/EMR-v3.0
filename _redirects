@@ -1,5 +1,2 @@
-# Root directory index page
 /index.html  /  301
-
-# HTML files inside the webpages directory
 /webpages/home.html  /webpages/home  200
