@@ -3,62 +3,62 @@ var type = sessionStorage.getItem("z");
 //nav functions
   // home
     function ToHome(){
-      window.location.href = "/Home";
+      window.location.href = "/webpages/home.html";
     }
   // records
     function ToMedRec() {
       
       if (type == "Admin"){
-        window.location.href = "/Medical-Records-Admin";
+        window.location.href = "/webpages/medicalrecords-admin.html";
       }
       else{
-        window.location.href = "/Medical-Records";
+        window.location.href = "/webpages/medicalrecords.html";
       }
     }
     function ToDenRec() {
       if (type == "Admin"){
-        window.location.href = "/Dental-Records-Admin";
+        window.location.href = "/webpages/dentalrecords-admin.html";
       }
       else{
-        window.location.href = "/Dental-Records";
+        window.location.href = "/webpages/dentalrecords.html";
       }
     }
 
     function ToConRec() {
 
       if (type == "Admin"){
-        window.location.href = "/Consultation-Records-Admin";
+        window.location.href = "/webpages/consultationrec-admin.html";
       }
       else{
-        window.location.href = "/Consultation-Records";
+        window.location.href = "/webpages/consultationrec.html";
       }
     }
 
   // reports
     function ToAccRec() {
-      window.location.href = "/Accident-Records";
+      window.location.href = "/webpages/accidentrec.html";
     }
     function ToMedCert() {
-      window.location.href = "/Medical-Certificates";
+      window.location.href = "/webpages/medcerts.html";
     }
     function ToPresc() {
-      window.location.href = "/Prescriptions";
+      window.location.href = "/webpages/presc.html";
     }
 
   // Analytics
     function ToConsOvw() {
-      window.location.href = "/Monthly-Census";
+      window.location.href = "/webpages/monthlycensus.html";
     }
     
     // Admin
     function ToConsRecArchives() {
-      window.location.href = "/Consultation-Records-Archives";
+      window.location.href = "/webpages/consultationrec-archives.html";
     }
     function ToMedRecArchives() {
-      window.location.href = "/Medical-Records-Archives";
+      window.location.href = "/webpages/medicalrecords-archives.html";
     }
     function ToDentalRecArchives() {
-      window.location.href = "/Dental-Records-Archives";
+      window.location.href = "/webpages/dentalrecords-archives.html";
     }
     
     
@@ -66,7 +66,7 @@ var type = sessionStorage.getItem("z");
 
 function logout() {
   sessionStorage.removeItem('accstoken');
-  window.location.href = "/Login";
+  window.location.href = "../index.html";
 }
 
 
