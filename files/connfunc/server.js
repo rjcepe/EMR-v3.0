@@ -7,13 +7,13 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 var token = sessionStorage.getItem("accstoken");
 
 if (token === null) {
-    window.location.href = "../index";
+    window.location.href = "../Login";
 }
 
 function AdminOnly() {
     const access_level = sessionStorage.getItem("z");
     if (access_level != "Admin") {
-        window.location.href = "/webpages/home";
+        window.location.href = "/Home";
     }
 }
 
@@ -28,7 +28,7 @@ function handleUserActivity() {
         window.alert("Logged Out Due To Inactivity");
         sessionStorage.removeItem('accstoken');
 
-        window.location.href = "../index";
+        window.location.href = "../Login";
 
 
     }, 600000); // Consider user inactive after 10 minutes of no activity

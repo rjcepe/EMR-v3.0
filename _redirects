@@ -1,3 +1,6 @@
+https://dlsud-emr.netlify.app https://dlsud-emr.netlify.app 301
+https://dlsud-emr.ph/ https://dlsud-emr.netlify.app/* 200
+
 /accidentrecords          /webpages/accidentrec.html             301
 /consultationrecords-admin /webpages/consultationrec-admin.html   301
 /consultationrecords-archives /webpages/consultationrec-archives.html 301
@@ -12,6 +15,7 @@
 /medicalrecords           /webpages/medicalrecords.html           301
 /monthlycensus            /webpages/monthlycensus.html            301
 /prescriptions            /webpages/presc.html                    301
+/Login                    /index.html                             301
 
 
 # Rewrites to serve the content without changing the URL in the address bar
@@ -20,7 +24,7 @@
 /Consultation-Records-Archives /webpages/consultationrec-archives.html 200
 /Consultation-Records /webpages/consultationrec.html 200
 /Dental-Records-Admin /webpages/dentalrecords-admin.html 200
-/Dental-Records-Aechives /webpages/dentalrecords-archives.html 200
+/Dental-Records-Archives /webpages/dentalrecords-archives.html 200
 /Dental-Records /webpages/dentalrecords.html 200
 /Home /webpages/home.html 200
 /Medical-Certificates /webpages/medcerts.html 200
@@ -29,4 +33,5 @@
 /Medical-Records /webpages/medicalrecords.html 200
 /Monthly-Census /webpages/monthlycensus.html 200
 /Prescriptions /webpages/presc.html 200
+/Login /index.html 200
 

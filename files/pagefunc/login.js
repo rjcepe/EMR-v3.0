@@ -38,7 +38,7 @@ loginForm.addEventListener("submit", async function (event) {
 
   if (user.password === passwordInput) {
     window.alert("Login successful");
-    window.location.href = "/webpages/home.html";
+    window.location.href = "Home";
     setToken(user.access_level);
   } else {
     errorMsg();
