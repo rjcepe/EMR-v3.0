@@ -28,7 +28,7 @@ function handleUserActivity() {
         window.alert("Logged Out Due To Inactivity");
         sessionStorage.removeItem('accstoken');
 
-        window.location.href = "../Login";
+        window.location.href = "/Login";
 
 
     }, 600000); // Consider user inactive after 10 minutes of no activity
