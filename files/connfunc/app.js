@@ -61,6 +61,10 @@ var type = sessionStorage.getItem("z");
       window.location.href = "/webpages/dentalrecords-archives.html";
     }
     
+    // Mobile
+    function NoMobile() {
+      window.location.href = "/webpages/non-mobile.html";
+    }
     
 
 
