@@ -148,12 +148,16 @@ function printFrame(type, year, location, month, patientC) {
   iframeDoc.write(content);
 }
 
+document.getElementById("year").value = year;
+document.getElementById("month").value = month; 
+
 async function fetchAllData(type) {
   var location = document.getElementById("location").value;
-  var year = document.getElementById("year").value;
-  var month = document.getElementById("month").value;
+  var selectedYear = document.getElementById("year").value;
+  var selectedMonth = document.getElementById("month").value;
 
-  var xx = [type, location, year, month];
+
+  var xx = [type, location, selectedYear, selectedMonth];
 
   const { data } = await _supabase
     .from("cons_rec")
