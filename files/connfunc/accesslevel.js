@@ -41,3 +41,13 @@ function medcert_access(){
       document.getElementById("consrecaddbutt").disabled = true;
     }
   }
+  function medrec_access(){
+    if (type == "Doctor"){
+      document.getElementById("medrecaddbutt").disabled = true;
+    }
+  }
+  function dentalrec_access(){
+    if (type == "Doctor"){
+      document.getElementById("dentalrecaddbutt").disabled = true;
+    }
+  }
