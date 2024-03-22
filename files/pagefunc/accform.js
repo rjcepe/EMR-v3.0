@@ -1,3 +1,5 @@
+accrec_access();
+
 function GenAcc() {
   window.open("https://forms.gle/ZhHvWKZhZcVA4M5bA", "_blank");
 }

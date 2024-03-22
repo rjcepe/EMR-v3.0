@@ -1,3 +1,5 @@
+presc_access();
+
 function GenPresc(){
   window.open('https://forms.gle/beEhKTxHmzSQUSGB9', '_blank');
 }
