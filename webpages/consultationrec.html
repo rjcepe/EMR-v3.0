@@ -293,7 +293,7 @@
                     </div>
 
                 </div>
-                <button class="addrecbutt" onclick="showp1()">Add Record +</button>
+                <button class="addrecbutt" id="consrecaddbutt" onclick="showp1()">Add Record +</button>
             </div>
 
             <div class="results1">
@@ -834,6 +834,7 @@
                                     <td>
                                         <select id="college1" onchange="updateCourses()">
                                             <option disabled selected>--Select a College--</option>
+                                            <option value="shs">Senior High School</option>
                                             <option value="cbaa">CBAA</option>
                                             <option value="ccje">CCJE</option>
                                             <option value="coe">COED</option>
@@ -1735,6 +1736,7 @@
             </div>
         </div>
     </div>
+    <script src="/files/connfunc/accesslevel.js"></script>
     <script src="/files/connfunc/server.js"></script>
     <script src="/files/pagefunc/consrec.js"></script>
     <script src="/files/pagefunc/ui.js"></script>

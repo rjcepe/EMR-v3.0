@@ -1,5 +1,3 @@
-var type = sessionStorage.getItem("z");
-
 //nav functions
   // home
     function ToHome(){

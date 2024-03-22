@@ -1,3 +1,4 @@
+medrec_access();
 //// search and filter states (inactive = 0 | active = 1)
 let searchState = 0;
 let filterState = 0;
