@@ -11,7 +11,7 @@ function medcert_access(){
       document.getElementById("gcert07").disabled = true;
       document.getElementById("gcert10").disabled = true;
     }
-    if (type == "Nurse" || type == "Clerk"){
+    if (type == "Nurse"){
       document.getElementById("vcert02").disabled = true;
       document.getElementById("vcert03").disabled = true;
       document.getElementById("vcert04").disabled = true;
@@ -34,6 +34,10 @@ function medcert_access(){
   
       document.getElementById('manageform').setAttribute('href', 'https://docs.google.com/spreadsheets/d/1IJb6Xl4GwP-Xmym8FBdpJTWr50-f83nli4laaxnNpFY/edit?usp=sharing');
     }
+    if (type == "Clerk"){
+      document.getElementById("manageform").removeAttribute('href');
+      document.getElementById("medcertaddrecbutt").disabled = true;
+    }
   }
 
   function consrec_access(){
@@ -49,5 +53,17 @@ function medcert_access(){
   function dentalrec_access(){
     if (type == "Doctor"){
       document.getElementById("dentalrecaddbutt").disabled = true;
+    }
+  }
+  function accrec_access(){
+    if (type == "Clerk"){
+      document.getElementById("accrecmanage").removeAttribute('href');
+      document.getElementById("accrecaddbutt").disabled = true;
+    }
+  }
+  function presc_access(){
+    if (type == "Clerk"){
+      document.getElementById("mngpres").removeAttribute('href');
+      document.getElementById("genpres").disabled = true;
     }
   }
