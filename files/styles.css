@@ -1576,7 +1576,7 @@
 
   /* add patient (type) */
   .cont1a {
-      border-radius: 0px 10px 10px 10px;
+      border-radius: 10px;
       /* border: 1px solid white; */
       height: 90%;
       width: 90%;
@@ -1640,8 +1640,6 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-
-
   }
 
   .results1 {
@@ -1890,8 +1888,6 @@
       width: 200px;
   }
 
-
-
   .input-group1 {
       /* border: var(--gborder); */
       width: 100%;
@@ -1899,7 +1895,6 @@
       padding-left: 5px;
       padding-right: 5px;
   }
-
 
   .input-group1a {
       /* border: var(--gborder); */
@@ -2032,14 +2027,6 @@
       padding-left: 10px;
   }
 
-  /* .input-group1 input[type="number"]{
-    width: 100px;
-    height: 30px;
-    border-radius: 10px;
-    border: none;
-    padding-left: 10px;
-  } */
-
   .uploadconsform1 input[type="text"],
   .uploadconsform3 input[type="text"],
   .uploadconsform2 input[type="text"] {
@@ -2049,8 +2036,6 @@
       border: none;
       padding-left: 10px;
   }
-
-
 
   .uploadconsform3 hr,
   .uploadconsform1 hr,
@@ -2075,6 +2060,9 @@
       text-shadow: var(--txtshadow);
       box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   }
+
+  /* dropdown cons rec */
+ 
 
   /* Medical Certificate */
   .addp-cont {
