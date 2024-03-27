@@ -422,15 +422,76 @@ function getusername1(username) {
 }
 getusername();
 
-async function myFunction() {
-  const {data, error} = await _supabase.from("med_forms")
-  .select("*"); 
+let dropsearchState = 0;
 
-  const filteredData = data.filter((record) => record.archived === false);
-
-  console.log(filteredData);
+async function selectDropResult(row_id){
+  const { data, error } = await _supabase.from("med_forms").select("*").eq("row_id", row_id);
+  
+  const patientData = data[0];
+  console.log(row_id);
+  console.log(patientData.patient_name); 
+  console.log(patientData.patient_id); 
 }
-myFunction();
+const resultsContainer = document.getElementById("dropDownResP");
+document.getElementById("dropSearchBar").addEventListener("keyup", dropSearchEvent);
+
+async function dropSearchEvent() {
+  var results = this.value;
+
+  if (results) {
+    dropsearchState = 1;
+    loadDropSearchResults(results);
+  } else {
+    loadDropResults();
+  }
+}
+
+async function loadDropResults(){
+  const { data, error } = await _supabase.from("med_forms").select("*"); 
+  
+  const filteredData = data.filter((record) => record.archived === false).sort((a, b) =>
+  a.patient_name.toString().localeCompare(b.patient_name));
+  
+  document.getElementById('dropDownResP').classList.add("showRes");
+  
+  filteredData.forEach((row) => {
+    const result = document.createElement("div");
+    result.setAttribute('class', 'dropdownP-results');
+    result.setAttribute('onmousedown', `selectDropResult(${row.row_id})`);
+  
+    result.innerHTML = `<p class="dropResID">${row.patient_id}</p><p class="dropResName">${row.patient_name}</p><p>${row.course_section}</p>`;
+    resultsContainer.appendChild(result);
+  });
+}
+async function loadDropSearchResults(results){
+  const { data, error } = await _supabase.from("med_forms").select("*").or(
+    `patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`
+  ); 
+  
+  const filteredData = data.filter((record) => record.archived === false).sort((a, b) =>
+  a.patient_name.toString().localeCompare(b.patient_name));
+
+  document.getElementById('dropDownResP').innerHTML = "";
+  document.getElementById('dropDownResP').classList.add("showRes");
+  
+  filteredData.forEach((row) => {
+    const result = document.createElement("div");
+    result.setAttribute('class', 'dropdownP-results');
+    result.setAttribute('onmousedown', `selectDropResult(${row.row_id})`);
+  
+    result.innerHTML = `<p class="dropResID">${row.patient_id}</p><p class="dropResName">${row.patient_name}</p><p>${row.course_section}</p>`;
+    resultsContainer.appendChild(result);
+  });
+}
+document.getElementById('dropSearchBar').addEventListener('focusin', async function() {
+  loadDropResults();
+});
+
+document.getElementById('dropSearchBar').addEventListener('focusout', function() {
+  document.getElementById('dropDownResP').classList.remove("showRes");
+  resultsContainer.innerHTML = "";
+});
+
 /////////////////////////////////// Upload student info
 $("#insertstudconsform").submit(async function (event) {
   event.preventDefault();

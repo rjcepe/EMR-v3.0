@@ -2032,7 +2032,6 @@
   .uploadconsform2 input[type="text"] {
       min-width: 300px;
       height: 30px;
-      border-radius: 10px;
       border: none;
       padding-left: 10px;
   }
@@ -2062,7 +2061,67 @@
   }
 
   /* dropdown cons rec */
- 
+  .dropdownP{
+    border: 1px solid blue;
+
+  }
+  .dropDownResP{
+    display: none;
+    /* border: 1px solid yellow; */
+    position: absolute;
+    height: 200px;
+    overflow-y: scroll;
+  }
+  .dropPbtn{
+    background-color: var(--lgreen50);
+    color: white;
+    max-width: 300px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    cursor: pointer;
+    transition: .3s;
+  }
+  .dropPbtn:hover{
+    background-color: var(--green50);
+    color: white;
+  }
+  .dropdownP-results{
+    display: flex;
+    align-items: center;
+    min-width: 290px;
+    height: 30px;
+    /* border-radius: 10px; */
+    border: none;
+    padding-left: 10px;
+    background-color: rgb(219, 219, 219);
+    color: rgb(82, 80, 80);
+    font-size: 10px;
+    cursor: pointer;
+    transition: .3s;
+  }
+  .dropdownP-results:hover{
+    background-color: var(--green);
+    color: white;
+  }
+  .showRes{
+    display: block
+  }
+  .dropResID, .dropResName{
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin-right: 7px;
+    border-right: 1px solid rgb(82, 80, 80);
+  }
+  .dropResID{
+    width: 70px;
+}
+.dropResName{
+    width: 100px;
+  }
+
 
   /* Medical Certificate */
   .addp-cont {
