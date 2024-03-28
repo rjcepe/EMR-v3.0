@@ -2034,6 +2034,8 @@
       height: 30px;
       border: none;
       padding-left: 10px;
+      border-radius: 5px;
+      outline: none;
   }
 
   .uploadconsform3 hr,
@@ -2062,7 +2064,7 @@
 
   /* dropdown cons rec */
   .dropdownP{
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 
   }
   .dropDownResP{
@@ -2070,22 +2072,7 @@
     /* border: 1px solid yellow; */
     position: absolute;
     height: 200px;
-    overflow-y: scroll;
-  }
-  .dropPbtn{
-    background-color: var(--lgreen50);
-    color: white;
-    max-width: 300px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    cursor: pointer;
-    transition: .3s;
-  }
-  .dropPbtn:hover{
-    background-color: var(--green50);
-    color: white;
+    overflow-y: auto;
   }
   .dropdownP-results{
     display: flex;
@@ -2100,6 +2087,7 @@
     font-size: 10px;
     cursor: pointer;
     transition: .3s;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   }
   .dropdownP-results:hover{
     background-color: var(--green);
@@ -2123,7 +2111,27 @@
   }
 .selectedDropCont{
     display: flex;
-    background-color: black;
+    /* background-color: black; */
+}
+.selectedDropCount-label{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-around;
+    /* background-color: blue; */
+    margin: 5px 0px 0px 0px;
+}
+.selectedDropCount-label p{
+    padding: 5px 15px 5px 15px;
+    margin-right: 5px;
+    border-radius: 5px;
+    background-color: var(--lgreen50);
+    font-size: 12px;
+    transition: .3s;
+    cursor: pointer;
+}
+.selectedDropCount-label p:hover{
+    background-color: var(--lightgreen);
+    text-shadow: var(--txtshadow);
 }
 
   /* Medical Certificate */

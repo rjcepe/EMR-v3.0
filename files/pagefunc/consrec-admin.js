@@ -158,7 +158,6 @@ async function archive(id, stat) {
   }
 }
 
-
 // Add an event listener to the select element to detect changes
 document.getElementById("sort1").addEventListener("change", function () {
   if (searchState != 1 && filterState !=1){
@@ -422,15 +421,51 @@ function getusername1(username) {
 }
 getusername();
 
+////////////////////// drop down patient info
 let dropsearchState = 0;
+let pSelectID = "";
+let pSelectName = "";
+let pSelectCYS = "";
+let pSelectType = "";
 
+function clearSelectCont(){
+  const selectCont = document.getElementById("dropcontis");
+  selectCont.innerHTML = ``;
+}
 async function selectDropResult(row_id){
   const { data, error } = await _supabase.from("med_forms").select("*").eq("row_id", row_id);
   
   const patientData = data[0];
-  console.log(row_id);
-  console.log(patientData.patient_name); 
-  console.log(patientData.patient_id); 
+  const selectCont = document.getElementById("dropcontis");
+  selectCont.innerHTML = ``;
+
+  const selectedDropCountlabel = document.createElement("div");
+  selectedDropCountlabel.setAttribute('class', 'selectedDropCount-label');
+
+  selectedDropCountlabel.innerHTML = `
+  <p>ID: <b>${patientData.patient_id}</b></p>
+  <p>NAME: <b>${patientData.patient_name}</b></p>
+  <p>CYS: <b>${patientData.course_section}</b></p>`;
+
+  selectCont.appendChild(selectedDropCountlabel);
+
+  pSelectID = patientData.patient_id;
+  pSelectName = patientData.patient_name;
+  pSelectCYS = patientData.course_section;
+
+  if (patientData.allArr.includes("shs")){
+    pSelectType = "shs";
+  }
+  else if (patientData.allArr.includes("coll")){
+    pSelectType = "coll";
+  }
+  else if (patientData.allArr.includes("staff")){
+    pSelectType = "Staff";
+  }
+  else if (patientData.allArr.includes("faculty")){
+    pSelectType = "Faculty";
+  }
+  console.log(pSelectType);
 }
 const resultsContainer = document.getElementById("dropDownResP");
 document.getElementById("dropSearchBar").addEventListener("keyup", dropSearchEvent);
@@ -533,29 +568,11 @@ $("#insertstudconsform").submit(async function (event) {
 
   const checkedValues = Array.from(checkboxes).map((checkbox) => checkbox.value);
 
-
-
-  // get cys
-  const college = $("#college").val();
-  const course = $("#course").val();
-  const section = $("#studcs").val();
-
   // Get form field values
-  const name = $("#studname").val();
-  const id1 = $("#studid").val();
-  const cys = course + " " + section;
-
   const loc1 = $("#locsel").val();
   const note1 = $("#notes").val();
   
   var diagchex = [...checkedValues, ...filledValues];
-
-  if (college == "shs"){
-    var ptype = "shs";
-  }
-  else{
-    var ptype = "coll";
-  }
 
   ///get current date
     // Specify the target timezone as "Asia/Manila"
@@ -579,7 +596,7 @@ $("#insertstudconsform").submit(async function (event) {
 
     const CurrentDate = `${year}-${month}-${day}`;
     const DateArr = [year, month, day];
-    var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
+    var miscArr = [year, month, loc1, pSelectType, "AllTy", "AllLoc", "AllYr", "AllMn"];
   
   if (otherArr != null){
     var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
@@ -599,10 +616,10 @@ $("#insertstudconsform").submit(async function (event) {
     
 
     const formInfo = {
-      patient_id: id1,
-      patient_name: name,
+      patient_id: pSelectID,
+      patient_name: pSelectName,
       created_date: CurrentDate,
-      course_section: cys,
+      course_section: pSelectCYS,
       location: loc1,
       added_by: username,
       diagnosis: diag1,
@@ -626,7 +643,7 @@ $("#insertstudconsform").submit(async function (event) {
       // location.reload();
       loadTableData();
       hidep1();
-
+      clearSelectCont();
 
       shownotif();
 

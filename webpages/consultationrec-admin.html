@@ -305,7 +305,7 @@
                         <th class="idcol1">ID</th>
                         <th class="namecol1">Name</th>
                         <th class="timecol1">Date Created</th>
-                        <th class="coursecol1">Course & Section</th>
+                        <th class="coursecol1">CYS</th>
                         <th class="diagcol1">Reason for visit</th>
                         <th class="notescol1">Notes</th>
                         <th class="timecol1">Location</th>
@@ -327,7 +327,7 @@
         <div class="adders1">
             <div class="headbar">
                 <h1>Add Record</h1>
-                <button class="hideaddp" onclick="hidep1()">Go Back</button>
+                <button class="hideaddp" onclick="hidep1(); clearSelectCont();">Go Back</button>
             </div>
             <div class="cont1a">
                 <form id="insertstudconsform" class="uploadconsform1">
@@ -341,17 +341,7 @@
                                     <input type="text" id="dropSearchBar" placeholder="Search Patient via ID, Name, or CYS...">
                                     <div id="dropDownResP" class="dropDownResP">
                                     </div>
-                                    <div class="selectedDropCont">
-                                        <div class="selectedDropCount-label">
-                                         <p>ID</p>
-                                         <p>Name</p>
-                                         <p>CYS</p>
-                                        </div>
-                                        <div class="selectedDropCount-info">
-                                         <p>9102123</p>
-                                         <p>LOrem</p>
-                                         <p>abdkjabd</p>
-                                        </div>
+                                    <div class="selectedDropCont" id="dropcontis">
                                     </div>
                                 </div>
 
