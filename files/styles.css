@@ -2121,7 +2121,10 @@
 .dropResName{
     width: 100px;
   }
-
+.selectedDropCont{
+    display: flex;
+    background-color: black;
+}
 
   /* Medical Certificate */
   .addp-cont {
