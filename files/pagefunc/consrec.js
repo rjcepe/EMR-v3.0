@@ -12,7 +12,7 @@ async function loadTableData() {
   filterState = 0;
   searchState = 0;
 
-  const { data: tableData1, error } = await _supabase
+  const { data: patientData, error } = await _supabase
     .from("cons_rec")
     .select("*");
 
@@ -20,11 +20,11 @@ async function loadTableData() {
     console.log("Error loading table data:", error.message);
     return;
   }
-
+  const filteredData = patientData.filter((record) => record.archived === false);
   const tableBody = document.querySelector("#cons_table tbody");
   tableBody.innerHTML = ""; // Clear the current table
 
-  if (tableData1.length === 0) {
+  if (filteredData.length === 0) {
     const newRow = document.createElement("tr");
     newRow.innerHTML = `<th class="row" colspan="7">No data available</td>`;
     tableBody.appendChild(newRow);
@@ -33,31 +33,32 @@ async function loadTableData() {
     const selectedOption = document.getElementById("sort1").value;
     // Sort the data based on the selected option
     if (selectedOption === "IDasc") {
-      tableData1.sort(
+      filteredData.sort(
         (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
       );
     } else if (selectedOption === "IDdesc") {
-      tableData1.sort(
+      filteredData.sort(
         (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
       );
     } else if (selectedOption === "TimeLate") {
-      tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+      filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
     } else if (selectedOption === "TimeOld") {
-      tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+      filteredData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
     } else if (selectedOption === "def") {
-      tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+      filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
     } else if (selectedOption === "Nameaz") {
-      tableData1.sort((a, b) =>
+      filteredData.sort((a, b) =>
         a.patient_name.toString().localeCompare(b.patient_name)
       );
     } else if (selectedOption === "Nameza") {
-      tableData1.sort((a, b) =>
+      filteredData.sort((a, b) =>
         b.patient_name.toString().localeCompare(a.patient_name)
       );
     }
 
     let count = 1;
-    tableData1.forEach((row) => {
+    filteredData.forEach((row) => {
+      // check if the row is archived
       if (row.archived === false) {
         const newRow = document.createElement("tr");
         newRow.classList.add("res1");
@@ -68,15 +69,25 @@ async function loadTableData() {
         counter.innerText = `${count}`;
 
         newRow.innerHTML = `
-            <th class="row1 idcol1">${row.patient_id}</th>
-            <th class="row1 namecol1">${row.patient_name}</th>
-            <th class="row1 timecol1">${row.created_date}</th>
-            <th class="row1 coursecol1">${row.course_section}</th>
-            <th class="row1 diagcol1">${row.diagnosis}</th>
-            <th class="row1 notescol">${row.notes}</th>
-            <th class="row1 timecol1">${row.location}</th>
-            <th class="row1 timecol1">${row.added_by}</th>
+          <th class="row1 idcol1">${row.patient_id}</th>
+          <th class="row1 namecol1">${row.patient_name}</th>
+          <th class="row1 timecol1">${row.created_date}</th>
+          <th class="row1 coursecol1">${row.course_section}</th>
+          <th class="row1 diagcol1">${row.diagnosis}</th>
+          <th class="row1 notescol">${row.notes}</th>
+          <th class="row1 timecol1">${row.location}</th>
+          <th class="row1 timecol1">${row.added_by}</th>
+
+          <th class="buttscol">
+            <button class="viewbutt" onclick="archive(${row.row_id}, '${row.archived}')">    
+            <p class="txt">Archive</p>
+            <img src="/files/images/archive1.png" alt="archive" srcset="">
+              </button>
+
+          </th>
+          
         `;
+
         count++;
 
         tableBody.appendChild(newRow);
@@ -127,65 +138,73 @@ async function displayResults(results) {
     alert("Invalid Input");
     return;
   }
-
+  const filteredData = patientData.filter(
+    (record) => record.archived === false
+  );
   const tableBody = document.querySelector("#cons_table tbody");
 
   // Clear the current table
   tableBody.innerHTML = "";
 
-  if (patientData && patientData.length > 0) {
+  if (filteredData && filteredData.length > 0) {
     const selectedOption = document.getElementById("sort1").value;
     // Sort the data based on the selected option
     if (selectedOption === "IDasc") {
-      tableData1.sort(
+      filteredData.sort(
         (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
       );
     } else if (selectedOption === "IDdesc") {
-      tableData1.sort(
+      filteredData.sort(
         (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
       );
     } else if (selectedOption === "TimeLate") {
-      patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+      filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
     } else if (selectedOption === "TimeOld") {
-      patientData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+      filteredData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
     } else if (selectedOption === "def") {
-      patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+      filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
     } else if (selectedOption === "Nameaz") {
-      patientData.sort((a, b) =>
+      filteredData.sort((a, b) =>
         a.patient_name.toString().localeCompare(b.patient_name)
       );
     } else if (selectedOption === "Nameza") {
-      patientData.sort((a, b) =>
+      filteredData.sort((a, b) =>
         b.patient_name.toString().localeCompare(a.patient_name)
       );
     }
 
     // Patient data found, update the table
     let count = 1;
-    patientData.forEach((row) => {
-      if (row.archived === false) {
-        const newRow = document.createElement("tr");
-        newRow.classList.add("res1");
 
-        const counter = document.createElement("p");
-        counter.classList.add("rCounter");
+    filteredData.forEach((row) => {
+      const newRow = document.createElement("tr");
+      newRow.classList.add("res1");
 
-        counter.innerText = `${count}`;
+      const counter = document.createElement("p");
+      counter.classList.add("rCounter");
 
-        newRow.innerHTML = `
-              <th class="row1 idcol1">${row.patient_id}</th>
-              <th class="row1 namecol1">${row.patient_name}</th>
-              <th class="row1 timecol1">${row.created_date}</th>
-              <th class="row1 coursecol1">${row.course_section}</th>
-              <th class="row1 diagcol1">${row.diagnosis}</th>
-              <th class="row1 notescol">${row.notes}</th>
-              <th class="row1 timecol1">${row.location}</th>
-              <th class="row1 timecol1">${row.added_by}</th>
+      counter.innerText = `${count}`;
+      newRow.innerHTML = `
+            <th class="row1 idcol1">${row.patient_id}</th>
+            <th class="row1 namecol1">${row.patient_name}</th>
+            <th class="row1 timecol1">${row.created_date}</th>
+            <th class="row1 coursecol1">${row.course_section}</th>
+            <th class="row1 diagcol1">${row.diagnosis}</th>
+            <th class="row1 notescol">${row.notes}</th>
+            <th class="row1 timecol1">${row.location}</th>
+            <th class="row1 timecol1">${row.added_by}</th>
+  
+            <th class="buttscol">
+            <button class="viewbutt" onclick="archive(${row.row_id}, '${row.archived}')">    
+            <p class="txt">Archive</p>
+            <img src="/files/images/archive1.png" alt="archive" srcset="">
+              </button>
+
+          </th>
           `;
-        count++;
-        tableBody.appendChild(newRow);
-        newRow.appendChild(counter);
-      }
+      count++;
+      tableBody.appendChild(newRow);
+      newRow.appendChild(counter);
     });
   } else {
     // Patient not found
@@ -222,50 +241,51 @@ async function filterEvent() {
       .select("*")
       .contains("allArr", [checkedValues]);
 
-    console.log(patientData);
-
     const tableBody = document.querySelector("#cons_table tbody");
     tableBody.innerHTML = ""; // Clear the current table
 
-    if (patientData && patientData.length > 0) {
+    const filteredData = patientData.filter(
+      (record) => record.archived === false
+    );
+
+    if (filteredData && filteredData.length > 0) {
       const selectedOption = document.getElementById("sort1").value;
       // Sort the data based on the selected option
       if (selectedOption === "IDasc") {
-        tableData1.sort(
+        filteredData.sort(
           (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
         );
       } else if (selectedOption === "IDdesc") {
-        tableData1.sort(
+        filteredData.sort(
           (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
         );
       } else if (selectedOption === "TimeLate") {
-        patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+        filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
       } else if (selectedOption === "TimeOld") {
-        patientData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+        filteredData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
       } else if (selectedOption === "def") {
-        patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+        filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
       } else if (selectedOption === "Nameaz") {
-        patientData.sort((a, b) =>
+        filteredData.sort((a, b) =>
           a.patient_name.toString().localeCompare(b.patient_name)
         );
       } else if (selectedOption === "Nameza") {
-        patientData.sort((a, b) =>
+        filteredData.sort((a, b) =>
           b.patient_name.toString().localeCompare(a.patient_name)
         );
       }
       // Patient data found, update the table
       let count = 1;
-      patientData.forEach((row) => {
-        if (row.archived === false) {
-          const newRow = document.createElement("tr");
-          newRow.classList.add("res1");
+      filteredData.forEach((row) => {
+        const newRow = document.createElement("tr");
+        newRow.classList.add("res1");
 
-          const counter = document.createElement("p");
-          counter.classList.add("rCounter");
+        const counter = document.createElement("p");
+        counter.classList.add("rCounter");
 
-          counter.innerText = `${count}`;
+        counter.innerText = `${count}`;
 
-          newRow.innerHTML = `
+        newRow.innerHTML = `
             <th class="row1 idcol1">${row.patient_id}</th>
             <th class="row1 namecol1">${row.patient_name}</th>
             <th class="row1 timecol1">${row.created_date}</th>
@@ -274,12 +294,19 @@ async function filterEvent() {
             <th class="row1 notescol">${row.notes}</th>
             <th class="row1 timecol1">${row.location}</th>
             <th class="row1 timecol1">${row.added_by}</th>
-        `;
-          count++;
+  
+            <th class="buttscol">
+            <button class="viewbutt" onclick="archive(${row.row_id}, '${row.archived}')">    
+            <p class="txt">Archive</p>
+            <img src="/files/images/archive1.png" alt="archive" srcset="">
+              </button>
 
-          tableBody.appendChild(newRow);
-          newRow.appendChild(counter);
-        }
+          </th>
+            
+          `;
+        count++;
+        tableBody.appendChild(newRow);
+        newRow.appendChild(counter);
       });
     } else {
       // Patient not found
@@ -322,6 +349,129 @@ function getusername1(username) {
 }
 
 getusername();
+
+////////////////////// drop down patient info
+let dropsearchState = 0;
+let pSelectID = "";
+let pSelectName = "";
+let pSelectCYS = "";
+let pSelectType = "";
+
+function clearSelectCont() {
+  const selectCont = document.getElementById("dropcontis");
+  selectCont.innerHTML = ``;
+}
+async function selectDropResult(row_id) {
+  const { data, error } = await _supabase
+    .from("med_forms")
+    .select("*")
+    .eq("row_id", row_id);
+
+  const patientData = data[0];
+  const selectCont = document.getElementById("dropcontis");
+  selectCont.innerHTML = ``;
+
+  const selectedDropCountlabel = document.createElement("div");
+  selectedDropCountlabel.setAttribute("class", "selectedDropCount-label");
+
+  selectedDropCountlabel.innerHTML = `
+  <p>ID: <b>${patientData.patient_id}</b></p>
+  <p>NAME: <b>${patientData.patient_name}</b></p>
+  <p>CYS: <b>${patientData.course_section}</b></p>`;
+
+  selectCont.appendChild(selectedDropCountlabel);
+
+  pSelectID = patientData.patient_id;
+  pSelectName = patientData.patient_name;
+  pSelectCYS = patientData.course_section;
+
+  if (patientData.allArr.includes("shs")) {
+    pSelectType = "shs";
+  } else if (patientData.allArr.includes("coll")) {
+    pSelectType = "coll";
+  } else if (patientData.allArr.includes("staff")) {
+    pSelectType = "Staff";
+  } else if (patientData.allArr.includes("faculty")) {
+    pSelectType = "Faculty";
+  }
+}
+const resultsContainer = document.getElementById("dropDownResP");
+document
+  .getElementById("dropSearchBar")
+  .addEventListener("keyup", dropSearchEvent);
+
+async function dropSearchEvent() {
+  var results = this.value;
+  if (results) {
+    dropsearchState = 1;
+    loadDropSearchResults(results);
+  } else {
+    loadDropResults();
+  }
+}
+
+async function loadDropResults() {
+  const { data, error } = await _supabase.from("med_forms").select("*");
+
+  const filteredData = data
+    .filter((record) => record.archived === false)
+    .sort((a, b) => a.patient_name.toString().localeCompare(b.patient_name));
+
+  document.getElementById("dropDownResP").classList.add("showRes");
+  document.getElementById("dropDownResP").innerHTML = "";
+
+  filteredData.forEach((row) => {
+    const result = document.createElement("div");
+    result.setAttribute("class", "dropdownP-results");
+    result.setAttribute("onmousedown", `selectDropResult(${row.row_id})`);
+
+    result.innerHTML = `<p class="dropResID">${row.patient_id}</p><p class="dropResName">${row.patient_name}</p><p>${row.course_section}</p>`;
+    resultsContainer.appendChild(result);
+  });
+}
+async function loadDropSearchResults(results) {
+  const { data, error } = await _supabase
+    .from("med_forms")
+    .select("*")
+    .or(
+      `patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`
+    );
+
+  const filteredData = data
+    .filter((record) => record.archived === false)
+    .sort((a, b) => a.patient_name.toString().localeCompare(b.patient_name));
+
+  document.getElementById("dropDownResP").innerHTML = "";
+  document.getElementById("dropDownResP").classList.add("showRes");
+
+  filteredData.forEach((row) => {
+    const result = document.createElement("div");
+    result.setAttribute("class", "dropdownP-results");
+    result.setAttribute("onmousedown", `selectDropResult(${row.row_id})`);
+
+    result.innerHTML = `<p class="dropResID">${row.patient_id}</p><p class="dropResName">${row.patient_name}</p><p>${row.course_section}</p>`;
+    resultsContainer.appendChild(result);
+  });
+  if (filteredData.length == 0) {
+    const result = document.createElement("div");
+    result.setAttribute("class", "dropdownP-results");
+
+    result.innerHTML = `<p>Patient Not Found</p>`;
+    resultsContainer.appendChild(result);
+  }
+}
+document
+  .getElementById("dropSearchBar")
+  .addEventListener("focusin", async function () {
+    loadDropResults();
+  });
+
+document
+  .getElementById("dropSearchBar")
+  .addEventListener("focusout", function () {
+    document.getElementById("dropDownResP").classList.remove("showRes");
+    resultsContainer.innerHTML = "";
+  });
 
 /////////////////////////////////// Upload student info
 $("#insertstudconsform").submit(async function (event) {
@@ -368,27 +518,12 @@ $("#insertstudconsform").submit(async function (event) {
     (checkbox) => checkbox.value
   );
 
-  // get cys
-  const college = $("#college").val();
-  const course = $("#course").val();
-  const section = $("#studcs").val();
-
   // Get form field values
-  const name = $("#studname").val();
-  const id1 = $("#studid").val();
-  const cys = course + " " + section;
-
   const loc1 = $("#locsel").val();
   const note1 = $("#notes").val();
 
   var diagchex = [...checkedValues, ...filledValues];
 
-  if (college == "shs") {
-    var ptype = "shs";
-  } else {
-    var ptype = "coll";
-  }
-
   ///get current date
   // Specify the target timezone as "Asia/Manila"
   const targetTimezone = "Asia/Manila";
@@ -411,7 +546,16 @@ $("#insertstudconsform").submit(async function (event) {
 
   const CurrentDate = `${year}-${month}-${day}`;
   const DateArr = [year, month, day];
-  var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
+  var miscArr = [
+    year,
+    month,
+    loc1,
+    pSelectType,
+    "AllTy",
+    "AllLoc",
+    "AllYr",
+    "AllMn",
+  ];
 
   if (otherArr != null) {
     var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
@@ -427,18 +571,18 @@ $("#insertstudconsform").submit(async function (event) {
 
   try {
     const formInfo = {
-      patient_id: id1,
-      patient_name: name,
+      patient_id: pSelectID,
+      patient_name: pSelectName,
       created_date: CurrentDate,
-      course_section: cys,
+      course_section: pSelectCYS,
       location: loc1,
       added_by: username,
       diagnosis: diag1,
       diagchex: diagchex2,
       notes: note1,
+      DateArr: DateArr,
       misc: miscArr,
       allArr: allArr,
-      DateArr: DateArr,
       archived: false,
     };
 
@@ -450,275 +594,16 @@ $("#insertstudconsform").submit(async function (event) {
       console.error("Error inserting data:", insertError.message);
       alert("Missing Input Field");
     } else {
-      console.log("Data inserted successfully:", insertData);
+      console.log("Data inserted successfully.");
       // location.reload();
       loadTableData();
       hidep1();
+      clearSelectCont();
+
       shownotif();
 
       // remove input after submission
       document.getElementById("insertstudconsform").reset();
-    }
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-});
-
-/////////////////////////////////////////// Upload faculty info
-$("#insertempconsform").submit(async function (event) {
-  event.preventDefault();
-
-  // get checkbox values
-  const form = document.getElementById("insertempconsform");
-
-  // get values of all others textbox
-  // Initialize an array to hold the values of the filled textboxes
-  var filledValues = [];
-  var otherArr = [];
-
-  // Function to get the value of a textbox if it is filled
-  function getFilledValue(selector) {
-    var value = $(selector).val();
-    if (value) {
-      // Checks if the value is not empty, null, or undefined
-      filledValues.push(value);
-
-      var other1 = "Others";
-      otherArr.push(other1);
-    }
-  }
-  // Get values of all textboxes if they are filled
-  getFilledValue("#othersTextDermatological1");
-  getFilledValue("#othersTextMusculoskeletal1");
-  getFilledValue("#othersTextHeadNeck1");
-  getFilledValue("#othersTextRespiratory1");
-  getFilledValue("#othersTextCardiovascular1");
-  getFilledValue("#othersTextGastrointestinal1");
-  getFilledValue("#othersTextGenitourinary1");
-  getFilledValue("#othersTextInfectious1");
-  getFilledValue("#othersTextNeurology1");
-  getFilledValue("#othersTextTrauma1");
-  getFilledValue("#othersTextMiscellaneous1");
-
-  // get values of the checked boxes
-  const checkboxes = form.querySelectorAll(
-    'input[type="checkbox"]:checked:not([name="others"])'
-  );
-
-  const checkedValues = Array.from(checkboxes).map(
-    (checkbox) => checkbox.value
-  );
-
-  // get cys
-  const course = $("#course1").val();
-
-  // Get form field values
-  const name = $("#empname").val();
-  const id1 = $("#empid").val();
-
-  const loc1 = $("#locsel1").val();
-  const note1 = $("#notes1").val();
-
-  var diagchex = [...checkedValues, ...filledValues];
-
-  const ptype = "Faculty";
-  ///get current date
-  // Specify the target timezone as "Asia/Manila"
-  const targetTimezone = "Asia/Manila";
-
-  // Get the current date and time in the target timezone
-  const today = new Date();
-
-  const year = today.toLocaleString("en-US", {
-    timeZone: targetTimezone,
-    year: "numeric",
-  });
-  const month = today.toLocaleString("en-US", {
-    timeZone: targetTimezone,
-    month: "2-digit",
-  });
-  const day = today.toLocaleString("en-US", {
-    timeZone: targetTimezone,
-    day: "2-digit",
-  });
-
-  const CurrentDate = `${year}-${month}-${day}`;
-  const DateArr = [year, month, day];
-  var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
-
-  if (otherArr != null) {
-    var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
-    var allArr = [...checkedValues, ...filledValues, ...otherArr, ...miscArr];
-  } else {
-    var diagchex2 = [...checkedValues, ...filledValues];
-    var allArr = [...checkedValues, ...filledValues, ...miscArr];
-  }
-
-  const diag1 = diagchex.join(", ");
-
-  var username = sessionStorage.getItem("x");
-
-  try {
-    const formInfo = {
-      patient_id: id1,
-      patient_name: name,
-      created_date: CurrentDate,
-      course_section: "Faculty - " + course,
-      location: loc1,
-      added_by: username,
-      diagnosis: diag1,
-      diagchex: diagchex2,
-      notes: note1,
-      DateArr: DateArr,
-      misc: miscArr,
-      allArr: allArr,
-      archived: false,
-    };
-
-    const { data: insertData, error: insertError } = await _supabase
-      .from("cons_rec")
-      .insert(formInfo);
-
-    if (insertError) {
-      console.error("Error inserting data:", insertError.message);
-      alert("Missing Input Field");
-    } else {
-      console.log("Data inserted successfully:", insertData);
-      // location.reload();
-      loadTableData();
-      hidep1();
-      shownotif();
-
-      document.getElementById("insertempconsform").reset();
-    }
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-});
-
-/////////////////////////////////////////// Upload staff info
-$("#insertstaffconsform").submit(async function (event) {
-  event.preventDefault();
-
-  // get checkbox values
-  const form = document.getElementById("insertstaffconsform");
-
-  // get values of all others textbox
-  // Initialize an array to hold the values of the filled textboxes
-  var filledValues = [];
-  var otherArr = [];
-
-  // Function to get the value of a textbox if it is filled
-  function getFilledValue(selector) {
-    var value = $(selector).val();
-    if (value) {
-      // Checks if the value is not empty, null, or undefined
-      filledValues.push(value);
-
-      var other1 = "Others";
-      otherArr.push(other1);
-    }
-  }
-  // Get values of all textboxes if they are filled
-  getFilledValue("#othersTextDermatological2");
-  getFilledValue("#othersTextMusculoskeletal2");
-  getFilledValue("#othersTextHeadNeck2");
-  getFilledValue("#othersTextRespiratory2");
-  getFilledValue("#othersTextCardiovascular2");
-  getFilledValue("#othersTextGastrointestinal2");
-  getFilledValue("#othersTextGenitourinary2");
-  getFilledValue("#othersTextInfectious2");
-  getFilledValue("#othersTextNeurology2");
-  getFilledValue("#othersTextTrauma2");
-  getFilledValue("#othersTextMiscellaneous2");
-
-  // get values of the checked boxes
-  const checkboxes = form.querySelectorAll(
-    'input[type="checkbox"]:checked:not([name="others"])'
-  );
-
-  const checkedValues = Array.from(checkboxes).map(
-    (checkbox) => checkbox.value
-  );
-
-  // Get form field values
-  const name = $("#stffname").val();
-  const id1 = $("#stffid").val();
-
-  const loc1 = $("#locsel2").val();
-  const note1 = $("#notes2").val();
-
-  var diagchex = [...checkedValues, ...filledValues];
-
-  const ptype = "Staff";
-
-  ///get current date
-  // Specify the target timezone as "Asia/Manila"
-  const targetTimezone = "Asia/Manila";
-
-  // Get the current date and time in the target timezone
-  const today = new Date();
-
-  const year = today.toLocaleString("en-US", {
-    timeZone: targetTimezone,
-    year: "numeric",
-  });
-  const month = today.toLocaleString("en-US", {
-    timeZone: targetTimezone,
-    month: "2-digit",
-  });
-  const day = today.toLocaleString("en-US", {
-    timeZone: targetTimezone,
-    day: "2-digit",
-  });
-
-  const CurrentDate = `${year}-${month}-${day}`;
-  const DateArr = [year, month, day];
-  var miscArr = [year, month, loc1, ptype, "AllTy", "AllLoc", "AllYr", "AllMn"];
-
-  if (otherArr != null) {
-    var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
-    var allArr = [...checkedValues, ...filledValues, ...otherArr, ...miscArr];
-  } else {
-    var diagchex2 = [...checkedValues, ...filledValues];
-    var allArr = [...checkedValues, ...filledValues, ...miscArr];
-  }
-
-  const diag1 = diagchex.join(", ");
-
-  var username = sessionStorage.getItem("x");
-
-  try {
-    const formInfo = {
-      patient_id: id1,
-      patient_name: name,
-      created_date: CurrentDate,
-      course_section: "Staff",
-      location: loc1,
-      added_by: username,
-      diagnosis: diag1,
-      diagchex: diagchex2,
-      notes: note1,
-      DateArr: DateArr,
-      misc: miscArr,
-      allArr: allArr,
-      archived: false,
-    };
-
-    const { data: insertData, error: insertError } = await _supabase
-      .from("cons_rec")
-      .insert(formInfo);
-
-    if (insertError) {
-      console.error("Error inserting data:", insertError.message);
-    } else {
-      console.log("Data inserted successfully:", insertData);
-      // location.reload();
-      loadTableData();
-      hidep1();
-      shownotif();
-
-      document.getElementById("insertstaffconsform").reset();
     }
   } catch (error) {
     console.error("Error:", error.message);

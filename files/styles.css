@@ -1576,7 +1576,7 @@
 
   /* add patient (type) */
   .cont1a {
-      border-radius: 0px 10px 10px 10px;
+      border-radius: 10px;
       /* border: 1px solid white; */
       height: 90%;
       width: 90%;
@@ -1640,8 +1640,6 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-
-
   }
 
   .results1 {
@@ -1890,8 +1888,6 @@
       width: 200px;
   }
 
-
-
   .input-group1 {
       /* border: var(--gborder); */
       width: 100%;
@@ -1899,7 +1895,6 @@
       padding-left: 5px;
       padding-right: 5px;
   }
-
 
   .input-group1a {
       /* border: var(--gborder); */
@@ -2032,25 +2027,16 @@
       padding-left: 10px;
   }
 
-  /* .input-group1 input[type="number"]{
-    width: 100px;
-    height: 30px;
-    border-radius: 10px;
-    border: none;
-    padding-left: 10px;
-  } */
-
   .uploadconsform1 input[type="text"],
   .uploadconsform3 input[type="text"],
   .uploadconsform2 input[type="text"] {
       min-width: 300px;
       height: 30px;
-      border-radius: 10px;
       border: none;
       padding-left: 10px;
+      border-radius: 5px;
+      outline: none;
   }
-
-
 
   .uploadconsform3 hr,
   .uploadconsform1 hr,
@@ -2075,6 +2061,78 @@
       text-shadow: var(--txtshadow);
       box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   }
+
+  /* dropdown cons rec */
+  .dropdownP{
+    /* border: 1px solid blue; */
+
+  }
+  .dropDownResP{
+    display: none;
+    /* border: 1px solid yellow; */
+    position: absolute;
+    height: 200px;
+    overflow-y: auto;
+  }
+  .dropdownP-results{
+    display: flex;
+    align-items: center;
+    min-width: 290px;
+    height: 30px;
+    /* border-radius: 10px; */
+    border: none;
+    padding-left: 10px;
+    background-color: rgb(219, 219, 219);
+    color: rgb(82, 80, 80);
+    font-size: 10px;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  }
+  .dropdownP-results:hover{
+    background-color: var(--green);
+    color: white;
+  }
+  .showRes{
+    display: block
+  }
+  .dropResID, .dropResName{
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin-right: 7px;
+    /* border-right: 1px solid rgb(82, 80, 80); */
+  }
+  .dropResID{
+    width: 70px;
+}
+.dropResName{
+    width: 100px;
+  }
+.selectedDropCont{
+    display: flex;
+    /* background-color: black; */
+}
+.selectedDropCount-label{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-around;
+    /* background-color: blue; */
+    margin: 5px 0px 0px 0px;
+}
+.selectedDropCount-label p{
+    padding: 5px 15px 5px 15px;
+    margin-right: 5px;
+    border-radius: 5px;
+    background-color: var(--lgreen50);
+    font-size: 12px;
+    transition: .3s;
+    cursor: pointer;
+}
+.selectedDropCount-label p:hover{
+    background-color: var(--lightgreen);
+    text-shadow: var(--txtshadow);
+}
 
   /* Medical Certificate */
   .addp-cont {
