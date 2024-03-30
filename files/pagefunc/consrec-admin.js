@@ -465,14 +465,13 @@ async function selectDropResult(row_id){
   else if (patientData.allArr.includes("faculty")){
     pSelectType = "Faculty";
   }
-  console.log(pSelectType);
+  
 }
 const resultsContainer = document.getElementById("dropDownResP");
 document.getElementById("dropSearchBar").addEventListener("keyup", dropSearchEvent);
 
 async function dropSearchEvent() {
   var results = this.value;
-
   if (results) {
     dropsearchState = 1;
     loadDropSearchResults(results);
@@ -488,7 +487,8 @@ async function loadDropResults(){
   a.patient_name.toString().localeCompare(b.patient_name));
   
   document.getElementById('dropDownResP').classList.add("showRes");
-  
+  document.getElementById('dropDownResP').innerHTML = "";
+
   filteredData.forEach((row) => {
     const result = document.createElement("div");
     result.setAttribute('class', 'dropdownP-results');
@@ -517,6 +517,13 @@ async function loadDropSearchResults(results){
     result.innerHTML = `<p class="dropResID">${row.patient_id}</p><p class="dropResName">${row.patient_name}</p><p>${row.course_section}</p>`;
     resultsContainer.appendChild(result);
   });
+  if (filteredData.length == 0){
+    const result = document.createElement("div");
+    result.setAttribute('class', 'dropdownP-results');
+  
+    result.innerHTML = `<p>Patient Not Found</p>`;
+    resultsContainer.appendChild(result);
+  }
 }
 document.getElementById('dropSearchBar').addEventListener('focusin', async function() {
   loadDropResults();
