@@ -12,7 +12,7 @@ async function loadTableData() {
   filterState = 0;
   searchState = 0;
 
-  const { data: tableData1, error } = await _supabase
+  const { data: patientData, error } = await _supabase
     .from("cons_rec")
     .select("*");
 
@@ -20,61 +20,55 @@ async function loadTableData() {
     console.log("Error loading table data:", error.message);
     return;
   }
-
+  const filteredData = patientData.filter((record) => record.archived === false);
   const tableBody = document.querySelector("#cons_table tbody");
   tableBody.innerHTML = ""; // Clear the current table
 
-  if (tableData1.length === 0) {
+  if (filteredData.length === 0) {
     const newRow = document.createElement("tr");
     newRow.innerHTML = `<th class="row" colspan="7">No data available</td>`;
     tableBody.appendChild(newRow);
     console.log("No data");
-  } 
-  
-  else {
-
+  } else {
     const selectedOption = document.getElementById("sort1").value;
     // Sort the data based on the selected option
     if (selectedOption === "IDasc") {
-      tableData1.sort(
+      filteredData.sort(
         (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
       );
-    }
-    else if (selectedOption === "IDdesc") {
-      tableData1.sort(
+    } else if (selectedOption === "IDdesc") {
+      filteredData.sort(
         (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
       );
     } else if (selectedOption === "TimeLate") {
-            tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "TimeOld") {
-            tableData1.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
-          } else if (selectedOption === "def") {
-            tableData1.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "Nameaz") {
-            tableData1.sort((a, b) =>
-              a.patient_name.toString().localeCompare(b.patient_name)
-            );
-          } else if (selectedOption === "Nameza") {
-            tableData1.sort((a, b) =>
-              b.patient_name.toString().localeCompare(a.patient_name)
-            );
-          } 
+      filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+    } else if (selectedOption === "TimeOld") {
+      filteredData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+    } else if (selectedOption === "def") {
+      filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+    } else if (selectedOption === "Nameaz") {
+      filteredData.sort((a, b) =>
+        a.patient_name.toString().localeCompare(b.patient_name)
+      );
+    } else if (selectedOption === "Nameza") {
+      filteredData.sort((a, b) =>
+        b.patient_name.toString().localeCompare(a.patient_name)
+      );
+    }
 
     let count = 1;
-    tableData1.forEach((row) => {
-
+    filteredData.forEach((row) => {
       // check if the row is archived
       if (row.archived === false) {
-      
-      const newRow = document.createElement("tr");
-      newRow.classList.add("res1");
+        const newRow = document.createElement("tr");
+        newRow.classList.add("res1");
 
-      const counter = document.createElement("p");
-      counter.classList.add("rCounter");
+        const counter = document.createElement("p");
+        counter.classList.add("rCounter");
 
-      counter.innerText = `${count}`;
+        counter.innerText = `${count}`;
 
-      newRow.innerHTML = `
+        newRow.innerHTML = `
           <th class="row1 idcol1">${row.patient_id}</th>
           <th class="row1 namecol1">${row.patient_name}</th>
           <th class="row1 timecol1">${row.created_date}</th>
@@ -94,164 +88,138 @@ async function loadTableData() {
           
         `;
 
-      count ++;
+        count++;
 
-      tableBody.appendChild(newRow);
-      newRow.appendChild(counter);
+        tableBody.appendChild(newRow);
+        newRow.appendChild(counter);
       }
     });
   }
 }
 
-//edit data in row
-async function deleteData(id) {
-  try {
-          // Delete the data from the table
-          const { data: deletedData, error: deleteError } = await _supabase.from('cons_rec').delete().eq('row_id', id);
-
-          if (deleteError) {
-              console.log('Error deleting data:', deleteError.message);
-          } else {
-              console.log('Data deleted successfully:', deletedData);
-              location.reload();
-          }
-
-
-          loadTableData();
-  } catch (error) {
-      console.error('Error deleting data:', error.message);
-  }
-}
-
 //add to archives
 async function archive(id, stat) {
-  try {   
+  try {
+    if (stat == "false") {
+      var newStatus = "true";
+    } else {
+      var newStatus = "false";
+    }
 
-          if (stat == "false"){
-            var newStatus = "true";
-          }
-          else{
-            var newStatus = "false"; 
-          }
+    // archive the data from the table
+    const { data: archiveData, error: archiveDataError } = await _supabase
+      .from("cons_rec")
+      .update({ archived: newStatus })
+      .eq("row_id", id);
 
-          // archive the data from the table
-          const { data: archiveData, error: archiveDataError } = await _supabase.from('cons_rec').update({archived: newStatus}).eq('row_id', id);
+    if (archiveDataError) {
+      console.log("Error archiving data:", archiveDataError.message);
+    } else {
+      console.log("Data archived successfully:", archiveData);
+    }
 
-          if (archiveDataError) {
-              console.log('Error archiving data:', archiveDataError.message);
-          } else {
-              console.log('Data archived successfully:', archiveData);
-              
-          }
-
-          if (searchState != 1 && filterState != 1) {
-            loadTableData(); // Reload the table data when the sorting option changes
-          }
-          if (searchState == 1) {
-            searchEvent.call(document.getElementById("searchInput"));
-          } // Reload the table data when the sorting option changes
-          if (filterState == 1) {
-            filterEvent.call(document.getElementById("filterz-val"));
-          }
+    if (searchState != 1 && filterState != 1) {
+      loadTableData(); // Reload the table data when the sorting option changes
+    }
+    if (searchState == 1) {
+      searchEvent.call(document.getElementById("searchInput"));
+    } // Reload the table data when the sorting option changes
+    if (filterState == 1) {
+      filterEvent.call(document.getElementById("filterz-val"));
+    }
   } catch (error) {
-      console.error('Error archiving data:', error.message);
+    console.error("Error archiving data:", error.message);
   }
 }
 
 // Add an event listener to the select element to detect changes
 document.getElementById("sort1").addEventListener("change", function () {
-  if (searchState != 1 && filterState !=1){
+  if (searchState != 1 && filterState != 1) {
     loadTableData(); // Reload the table data when the sorting option changes
   }
-  if (searchState == 1){
-    searchEvent.call(document.getElementById('searchInput'));
+  if (searchState == 1) {
+    searchEvent.call(document.getElementById("searchInput"));
   }
-  if (filterState == 1){
-    filterEvent.call(document.getElementById('filterz-val'));
+  if (filterState == 1) {
+    filterEvent.call(document.getElementById("filterz-val"));
   }
-
 });
 
-document.getElementById('searchInput').addEventListener('keyup', searchEvent);
+document.getElementById("searchInput").addEventListener("keyup", searchEvent);
 
 //////// search while typing
 async function searchEvent() {
-      var results = this.value;
-      
-      if(results){
-        searchState = 1;
-        displayResults(results);
-      }
+  var results = this.value;
 
-      else{
-        loadTableData();
-      }
-      
-    };
+  if (results) {
+    searchState = 1;
+    displayResults(results);
+  } else {
+    loadTableData();
+  }
+}
 
 async function displayResults(results) {
-    
-    // Fetch the patient data based on the search ID
-    const { data: patientData, error } = await _supabase
-      .from("cons_rec")
-      .select("*")
-      .or(`patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`);
+  // Fetch the patient data based on the search ID
+  const { data: patientData, error } = await _supabase
+    .from("cons_rec")
+    .select("*")
+    .or(
+      `patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`
+    );
 
-    if (error) {
-      console.error("Error fetching patient data:", error.message);
-      alert("Invalid Input")
-      return;
-    }
+  if (error) {
+    console.error("Error fetching patient data:", error.message);
+    alert("Invalid Input");
+    return;
+  }
+  const filteredData = patientData.filter(
+    (record) => record.archived === false
+  );
+  const tableBody = document.querySelector("#cons_table tbody");
 
-    const tableBody = document.querySelector("#cons_table tbody");
+  // Clear the current table
+  tableBody.innerHTML = "";
 
-    // Clear the current table
-    tableBody.innerHTML = "";
-
-    if (patientData && patientData.length > 0) {
-
-      const selectedOption = document.getElementById("sort1").value;
+  if (filteredData && filteredData.length > 0) {
+    const selectedOption = document.getElementById("sort1").value;
     // Sort the data based on the selected option
     if (selectedOption === "IDasc") {
-      patientData.sort(
+      filteredData.sort(
         (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
       );
-    }
-    else if (selectedOption === "IDdesc") {
-      patientData.sort(
+    } else if (selectedOption === "IDdesc") {
+      filteredData.sort(
         (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
       );
     } else if (selectedOption === "TimeLate") {
-            patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "TimeOld") {
-            patientData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
-          } else if (selectedOption === "def") {
-            patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "Nameaz") {
-            patientData.sort((a, b) =>
-              a.patient_name.toString().localeCompare(b.patient_name)
-            );
-          } else if (selectedOption === "Nameza") {
-            patientData.sort((a, b) =>
-              b.patient_name.toString().localeCompare(a.patient_name)
-            );
-          } 
+      filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+    } else if (selectedOption === "TimeOld") {
+      filteredData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+    } else if (selectedOption === "def") {
+      filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+    } else if (selectedOption === "Nameaz") {
+      filteredData.sort((a, b) =>
+        a.patient_name.toString().localeCompare(b.patient_name)
+      );
+    } else if (selectedOption === "Nameza") {
+      filteredData.sort((a, b) =>
+        b.patient_name.toString().localeCompare(a.patient_name)
+      );
+    }
 
-      // Patient data found, update the table
-      let count = 1;
+    // Patient data found, update the table
+    let count = 1;
 
-      patientData.forEach((row) => {
-        if (row.archived === false) {
-      
-          const newRow = document.createElement("tr");
-        newRow.classList.add("res1");
+    filteredData.forEach((row) => {
+      const newRow = document.createElement("tr");
+      newRow.classList.add("res1");
 
-        const counter = document.createElement("p");
-        counter.classList.add("rCounter");
+      const counter = document.createElement("p");
+      counter.classList.add("rCounter");
 
-
-        counter.innerText = `${count}`;
-        newRow.innerHTML = `
+      counter.innerText = `${count}`;
+      newRow.innerHTML = `
             <th class="row1 idcol1">${row.patient_id}</th>
             <th class="row1 namecol1">${row.patient_name}</th>
             <th class="row1 timecol1">${row.created_date}</th>
@@ -268,87 +236,83 @@ async function displayResults(results) {
               </button>
 
           </th>
-            
           `;
-
-          count ++;
-        tableBody.appendChild(newRow);
-        newRow.appendChild(counter);
-        }
-      });
-    } else {
-      // Patient not found
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
+      count++;
+      tableBody.appendChild(newRow);
+      newRow.appendChild(counter);
+    });
+  } else {
+    // Patient not found
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
         <th class="row" colspan="7">Patient not found</td>
       `;
-      tableBody.appendChild(newRow);
-    }
-
-    
-  };
+    tableBody.appendChild(newRow);
+  }
+}
 
 // Add an event listener to the checkboxes container
-document.getElementById('filterz-val').addEventListener('change', filterEvent);
+document.getElementById("filterz-val").addEventListener("change", filterEvent);
 
 // Filter function, onchange
 async function filterEvent() {
   filterState = 1;
 
   const form1 = document.getElementById("filterz-val");
-  const checkedCheckboxes = form1.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+  const checkedCheckboxes = form1.querySelectorAll(
+    'input[type="checkbox"]:checked:not([name="others"])'
+  );
 
   if (checkedCheckboxes.length === 0) {
-      // No checkboxes are selected, load default table data
-      loadTableData();
+    // No checkboxes are selected, load default table data
+    loadTableData();
   } else {
-    const checkedValues = Array.from(checkedCheckboxes).map(checkbox => checkbox.value);
-    
+    const checkedValues = Array.from(checkedCheckboxes).map(
+      (checkbox) => checkbox.value
+    );
 
     const { data: patientData, error } = await _supabase
       .from("cons_rec")
       .select("*")
       .contains("allArr", [checkedValues]);
 
-    console.log(patientData);
-
     const tableBody = document.querySelector("#cons_table tbody");
     tableBody.innerHTML = ""; // Clear the current table
 
-    if (patientData && patientData.length > 0) {
+    const filteredData = patientData.filter(
+      (record) => record.archived === false
+    );
 
+    if (filteredData && filteredData.length > 0) {
       const selectedOption = document.getElementById("sort1").value;
-        // Sort the data based on the selected option
-        if (selectedOption === "IDasc") {
-          patientData.sort(
-            (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
-          );
-        }
-        else if (selectedOption === "IDdesc") {
-          patientData.sort(
-            (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
-          );
-        } else if (selectedOption === "TimeLate") {
-            patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "TimeOld") {
-            patientData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
-          } else if (selectedOption === "def") {
-            patientData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
-          } else if (selectedOption === "Nameaz") {
-            patientData.sort((a, b) =>
-              a.patient_name.toString().localeCompare(b.patient_name)
-            );
-          } else if (selectedOption === "Nameza") {
-            patientData.sort((a, b) =>
-              b.patient_name.toString().localeCompare(a.patient_name)
-            );
-          } 
+      // Sort the data based on the selected option
+      if (selectedOption === "IDasc") {
+        filteredData.sort(
+          (a, b) => new Number(a.patient_id) - new Number(b.patient_id)
+        );
+      } else if (selectedOption === "IDdesc") {
+        filteredData.sort(
+          (a, b) => new Number(b.patient_id) - new Number(a.patient_id)
+        );
+      } else if (selectedOption === "TimeLate") {
+        filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+      } else if (selectedOption === "TimeOld") {
+        filteredData.sort((a, b) => new Date(a.row_id) - new Date(b.row_id));
+      } else if (selectedOption === "def") {
+        filteredData.sort((a, b) => new Date(b.row_id) - new Date(a.row_id));
+      } else if (selectedOption === "Nameaz") {
+        filteredData.sort((a, b) =>
+          a.patient_name.toString().localeCompare(b.patient_name)
+        );
+      } else if (selectedOption === "Nameza") {
+        filteredData.sort((a, b) =>
+          b.patient_name.toString().localeCompare(a.patient_name)
+        );
+      }
       // Patient data found, update the table
-      let count = 1; 
-      patientData.forEach((row) => {
-        if (row.archived === false) {
-      
-          const newRow = document.createElement("tr");
+      let count = 1;
+      filteredData.forEach((row) => {
+        const newRow = document.createElement("tr");
         newRow.classList.add("res1");
 
         const counter = document.createElement("p");
@@ -375,10 +339,9 @@ async function filterEvent() {
           </th>
             
           `;
-          count ++;
+        count++;
         tableBody.appendChild(newRow);
         newRow.appendChild(counter);
-        }
       });
     } else {
       // Patient not found
@@ -414,7 +377,6 @@ async function getusername() {
     console.log("User not found with ID:", id);
   }
 }
-
 function getusername1(username) {
   var bb = username;
   sessionStorage.setItem("x", bb);
@@ -428,19 +390,22 @@ let pSelectName = "";
 let pSelectCYS = "";
 let pSelectType = "";
 
-function clearSelectCont(){
+function clearSelectCont() {
   const selectCont = document.getElementById("dropcontis");
   selectCont.innerHTML = ``;
 }
-async function selectDropResult(row_id){
-  const { data, error } = await _supabase.from("med_forms").select("*").eq("row_id", row_id);
-  
+async function selectDropResult(row_id) {
+  const { data, error } = await _supabase
+    .from("med_forms")
+    .select("*")
+    .eq("row_id", row_id);
+
   const patientData = data[0];
   const selectCont = document.getElementById("dropcontis");
   selectCont.innerHTML = ``;
 
   const selectedDropCountlabel = document.createElement("div");
-  selectedDropCountlabel.setAttribute('class', 'selectedDropCount-label');
+  selectedDropCountlabel.setAttribute("class", "selectedDropCount-label");
 
   selectedDropCountlabel.innerHTML = `
   <p>ID: <b>${patientData.patient_id}</b></p>
@@ -453,22 +418,20 @@ async function selectDropResult(row_id){
   pSelectName = patientData.patient_name;
   pSelectCYS = patientData.course_section;
 
-  if (patientData.allArr.includes("shs")){
+  if (patientData.allArr.includes("shs")) {
     pSelectType = "shs";
-  }
-  else if (patientData.allArr.includes("coll")){
+  } else if (patientData.allArr.includes("coll")) {
     pSelectType = "coll";
-  }
-  else if (patientData.allArr.includes("staff")){
+  } else if (patientData.allArr.includes("staff")) {
     pSelectType = "Staff";
-  }
-  else if (patientData.allArr.includes("faculty")){
+  } else if (patientData.allArr.includes("faculty")) {
     pSelectType = "Faculty";
   }
-  
 }
 const resultsContainer = document.getElementById("dropDownResP");
-document.getElementById("dropSearchBar").addEventListener("keyup", dropSearchEvent);
+document
+  .getElementById("dropSearchBar")
+  .addEventListener("keyup", dropSearchEvent);
 
 async function dropSearchEvent() {
   var results = this.value;
@@ -480,59 +443,68 @@ async function dropSearchEvent() {
   }
 }
 
-async function loadDropResults(){
-  const { data, error } = await _supabase.from("med_forms").select("*"); 
-  
-  const filteredData = data.filter((record) => record.archived === false).sort((a, b) =>
-  a.patient_name.toString().localeCompare(b.patient_name));
-  
-  document.getElementById('dropDownResP').classList.add("showRes");
-  document.getElementById('dropDownResP').innerHTML = "";
+async function loadDropResults() {
+  const { data, error } = await _supabase.from("med_forms").select("*");
+
+  const filteredData = data
+    .filter((record) => record.archived === false)
+    .sort((a, b) => a.patient_name.toString().localeCompare(b.patient_name));
+
+  document.getElementById("dropDownResP").classList.add("showRes");
+  document.getElementById("dropDownResP").innerHTML = "";
 
   filteredData.forEach((row) => {
     const result = document.createElement("div");
-    result.setAttribute('class', 'dropdownP-results');
-    result.setAttribute('onmousedown', `selectDropResult(${row.row_id})`);
-  
+    result.setAttribute("class", "dropdownP-results");
+    result.setAttribute("onmousedown", `selectDropResult(${row.row_id})`);
+
     result.innerHTML = `<p class="dropResID">${row.patient_id}</p><p class="dropResName">${row.patient_name}</p><p>${row.course_section}</p>`;
     resultsContainer.appendChild(result);
   });
 }
-async function loadDropSearchResults(results){
-  const { data, error } = await _supabase.from("med_forms").select("*").or(
-    `patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`
-  ); 
-  
-  const filteredData = data.filter((record) => record.archived === false).sort((a, b) =>
-  a.patient_name.toString().localeCompare(b.patient_name));
+async function loadDropSearchResults(results) {
+  const { data, error } = await _supabase
+    .from("med_forms")
+    .select("*")
+    .or(
+      `patient_id.ilike.%${results}%, patient_name.ilike.%${results}%, course_section.ilike.%${results}%`
+    );
 
-  document.getElementById('dropDownResP').innerHTML = "";
-  document.getElementById('dropDownResP').classList.add("showRes");
-  
+  const filteredData = data
+    .filter((record) => record.archived === false)
+    .sort((a, b) => a.patient_name.toString().localeCompare(b.patient_name));
+
+  document.getElementById("dropDownResP").innerHTML = "";
+  document.getElementById("dropDownResP").classList.add("showRes");
+
   filteredData.forEach((row) => {
     const result = document.createElement("div");
-    result.setAttribute('class', 'dropdownP-results');
-    result.setAttribute('onmousedown', `selectDropResult(${row.row_id})`);
-  
+    result.setAttribute("class", "dropdownP-results");
+    result.setAttribute("onmousedown", `selectDropResult(${row.row_id})`);
+
     result.innerHTML = `<p class="dropResID">${row.patient_id}</p><p class="dropResName">${row.patient_name}</p><p>${row.course_section}</p>`;
     resultsContainer.appendChild(result);
   });
-  if (filteredData.length == 0){
+  if (filteredData.length == 0) {
     const result = document.createElement("div");
-    result.setAttribute('class', 'dropdownP-results');
-  
+    result.setAttribute("class", "dropdownP-results");
+
     result.innerHTML = `<p>Patient Not Found</p>`;
     resultsContainer.appendChild(result);
   }
 }
-document.getElementById('dropSearchBar').addEventListener('focusin', async function() {
-  loadDropResults();
-});
+document
+  .getElementById("dropSearchBar")
+  .addEventListener("focusin", async function () {
+    loadDropResults();
+  });
 
-document.getElementById('dropSearchBar').addEventListener('focusout', function() {
-  document.getElementById('dropDownResP').classList.remove("showRes");
-  resultsContainer.innerHTML = "";
-});
+document
+  .getElementById("dropSearchBar")
+  .addEventListener("focusout", function () {
+    document.getElementById("dropDownResP").classList.remove("showRes");
+    resultsContainer.innerHTML = "";
+  });
 
 /////////////////////////////////// Upload student info
 $("#insertstudconsform").submit(async function (event) {
@@ -548,13 +520,14 @@ $("#insertstudconsform").submit(async function (event) {
 
   // Function to get the value of a textbox if it is filled
   function getFilledValue(selector) {
-      var value = $(selector).val();
-      if (value) { // Checks if the value is not empty, null, or undefined
-          filledValues.push(value);
+    var value = $(selector).val();
+    if (value) {
+      // Checks if the value is not empty, null, or undefined
+      filledValues.push(value);
 
-          var other1 = "Others";
-          otherArr.push(other1);
-      }
+      var other1 = "Others";
+      otherArr.push(other1);
+    }
   }
   // Get values of all textboxes if they are filled
   getFilledValue("#othersTextDermatological");
@@ -569,59 +542,67 @@ $("#insertstudconsform").submit(async function (event) {
   getFilledValue("#othersTextTrauma");
   getFilledValue("#othersTextMiscellaneous");
 
-
   // get values of the checked boxes
-  const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked:not([name="others"])');
+  const checkboxes = form.querySelectorAll(
+    'input[type="checkbox"]:checked:not([name="others"])'
+  );
 
-  const checkedValues = Array.from(checkboxes).map((checkbox) => checkbox.value);
+  const checkedValues = Array.from(checkboxes).map(
+    (checkbox) => checkbox.value
+  );
 
   // Get form field values
   const loc1 = $("#locsel").val();
   const note1 = $("#notes").val();
-  
+
   var diagchex = [...checkedValues, ...filledValues];
 
   ///get current date
-    // Specify the target timezone as "Asia/Manila"
-    const targetTimezone = "Asia/Manila";
+  // Specify the target timezone as "Asia/Manila"
+  const targetTimezone = "Asia/Manila";
 
-    // Get the current date and time in the target timezone
-    const today = new Date();
+  // Get the current date and time in the target timezone
+  const today = new Date();
 
-    const year = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      year: "numeric",
-    });
-    const month = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      month: "2-digit",
-    });
-    const day = today.toLocaleString("en-US", {
-      timeZone: targetTimezone,
-      day: "2-digit",
-    });
+  const year = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    year: "numeric",
+  });
+  const month = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    month: "2-digit",
+  });
+  const day = today.toLocaleString("en-US", {
+    timeZone: targetTimezone,
+    day: "2-digit",
+  });
 
-    const CurrentDate = `${year}-${month}-${day}`;
-    const DateArr = [year, month, day];
-    var miscArr = [year, month, loc1, pSelectType, "AllTy", "AllLoc", "AllYr", "AllMn"];
-  
-  if (otherArr != null){
+  const CurrentDate = `${year}-${month}-${day}`;
+  const DateArr = [year, month, day];
+  var miscArr = [
+    year,
+    month,
+    loc1,
+    pSelectType,
+    "AllTy",
+    "AllLoc",
+    "AllYr",
+    "AllMn",
+  ];
+
+  if (otherArr != null) {
     var diagchex2 = [...checkedValues, ...filledValues, ...otherArr];
     var allArr = [...checkedValues, ...filledValues, ...otherArr, ...miscArr];
-  }
-  else{
+  } else {
     var diagchex2 = [...checkedValues, ...filledValues];
     var allArr = [...checkedValues, ...filledValues, ...miscArr];
- }
-  
+  }
 
   const diag1 = diagchex.join(", ");
 
   var username = sessionStorage.getItem("x");
 
   try {
-    
-
     const formInfo = {
       patient_id: pSelectID,
       patient_name: pSelectName,
@@ -644,7 +625,7 @@ $("#insertstudconsform").submit(async function (event) {
 
     if (insertError) {
       console.error("Error inserting data:", insertError.message);
-      alert("Missing Input Field")
+      alert("Missing Input Field");
     } else {
       console.log("Data inserted successfully.");
       // location.reload();
@@ -720,4 +701,3 @@ async function fetchUserPic() {
 
 fetchUserPic();
 fetchUsername();
-
