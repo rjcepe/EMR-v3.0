@@ -279,7 +279,7 @@ function monthToAlpha(month) {
   if (month == "05") {
     month = "May";
   }
-  if (month == "6") {
+  if (month == "06") {
     month = "June";
   }
   if (month == "07") {
@@ -288,7 +288,7 @@ function monthToAlpha(month) {
   if (month == "08") {
     month = "August";
   }
-  if (month == "9") {
+  if (month == "09") {
     month = "September";
   }
   if (month == "10") {
