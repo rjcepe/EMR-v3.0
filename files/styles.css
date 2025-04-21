@@ -103,7 +103,7 @@
 }
   .login-cont {
       /* background-color: #126638; */
-      background-image: url("/files/images/samplebg.jpg");
+      background: url("/files/images/samplebg.jpg");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: 200px 0px;
@@ -181,7 +181,7 @@
       position: relative;
       margin-bottom: 15px;
   }
-
+  
   .icon {
       display: flex;
       justify-content: center;

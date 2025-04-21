@@ -479,6 +479,8 @@ $("#insertempmedform").submit(async function (event) {
       .split(".")
       .pop()}`;
 
+    console.log(medformFile);
+
     // Upload the file to Supabase storage with the modified filename
     const { data, error: uploadError } = await _supabase.storage
       .from("medicalrecords")
@@ -576,7 +578,7 @@ $("#insertstaffmedform").submit(async function (event) {
 
   var username = sessionStorage.getItem("x");
 
-  const medformInput = document.getElementById("medform3");
+  const medformInput = document.getElementById("medf orm3");
   const medformFile = medformInput.files[0];
 
   var fileName;
@@ -589,7 +591,7 @@ $("#insertstaffmedform").submit(async function (event) {
     // Change the filename to "(name inputted)_medform"
     fileName = `${id1}_medform_${year}(${staffmedfilecount}).${medformFile.name
       .split(".")
-      .pop()}`;
+      .pop()}`;      
 
     // Upload the file to Supabase storage with the modified filename
     const { data, error: uploadError } = await _supabase.storage
